@@ -1,26 +1,48 @@
-# _config.yml
-title: Cyber O͘-hîm ki-tē
-description: Taigi AI playground
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://cyberoohim.github.io" # your site's URL
+# Site settings
+title: "Cyber O͘-hîm ki-tē"
+description: "Taigi AI playground"
+baseurl: ""
+url: "https://cyberoohim.github.io"
+encoding: utf-8
+lang: zh-TW
+
+# Build settings
 markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge
+
+# Plugin settings
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Collections
 collections:
   posts:
     output: true
+    permalink: /posts/:year/:month/:day/:title/
 
 # Time zone setting
-#timezone: Asia/Taipei
+timezone: Asia/Taipei
 
 # Exclude files from processing
 exclude:
   - README.md
-  #- Gemfile
   - Gemfile.lock
+  - .git
+  - .github
+  - .gitignore
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
 
 # Default front matter for posts
 defaults:
@@ -31,15 +53,37 @@ defaults:
     values:
       layout: "post"
       author: "Cyber O͘-hîm"
+      lang: zh-TW
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      lang: zh-TW
 
-# Custom variables you can use throughout your site
+# Custom variables
 author:
-  name: Cyber O͘-hîm
-  #twitter: your-twitter-handle
+  name: "Cyber O͘-hîm"
+  email: "" # Optional
+  # twitter: your-twitter-handle # Uncomment if needed
 
-# Show future posts
+# Site features
 future: true
-
-# Show drafts
 show_drafts: false
+show_excerpts: true
 
+# Pagination
+paginate: 10
+paginate_path: "/blog/page:num/"
+
+# Search
+search: true
+
+# Sass
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# URLs
+permalink: /posts/:year/:month/:day/:title/
