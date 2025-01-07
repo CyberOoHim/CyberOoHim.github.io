@@ -1,1 +1,33 @@
+# _config.yml
+title: Cyber O͘-hîm ki-tē
+description: Taigi AI playground
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://your-username.github.io" # your site's URL
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
 
+# Time zone setting
+timezone: Asia/Taipei
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Default front matter for posts
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Cyber O͘-hîm"
+
+# Custom variables you can use throughout your site
+author:
+  name: Cyber O͘-hîm
+  #twitter: your-twitter-handle
