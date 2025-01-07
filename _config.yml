@@ -2,11 +2,16 @@
 title: Cyber O͘-hîm ki-tē
 description: Taigi AI playground
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://your-username.github.io" # your site's URL
+url: "https://cyberoohim.github.io/" # your site's URL
 markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# Collections
+collections:
+  posts:
+    output: true
 
 # Time zone setting
 timezone: Asia/Taipei
@@ -31,3 +36,10 @@ defaults:
 author:
   name: Cyber O͘-hîm
   #twitter: your-twitter-handle
+
+# Show future posts
+future: true
+
+# Show drafts
+show_drafts: false
+
