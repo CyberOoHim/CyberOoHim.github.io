@@ -6,7 +6,7 @@ title: Home
 <div class="home">
     <h1>Welcome to {{ site.title }}</h1>
     <div class="posts">
-        {% for post in site.posts %}
+        {% for post in paginator.posts %}
             <article>
                 <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
                 <div class="post-meta">{{ post.date | date: "%B %d, %Y" }}</div>
@@ -14,4 +14,10 @@ title: Home
             </article>
         {% endfor %}
     </div>
+
+    <!-- Pagination Links (if you have them) -->
+    {% if paginator.total_pages > 1 %}
+    <div class="pagination">
+      </div>
+    {% endif %}
 </div>
