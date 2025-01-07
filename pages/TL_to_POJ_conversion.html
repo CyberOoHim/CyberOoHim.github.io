@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIP to POJ Converter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    #container {
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+      font-size: 1.2em; /* Same font size as output */
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em; /* Same font size as output */
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>KIP to POJ Converter</h1>
+    <textarea id="inputText" placeholder="Enter TL text here..."></textarea>
+    <button onclick="convertText()">Convert</button>
+    <div id="output"></div>
+  </div>
+<script>
+	/*
+    Ùi 潘科元 先 GitHub TL_POJ 家私：https://github.com/taicrypt/POJ_TL，轉--過來--ê，請按伊原底个 license 要求。
+	*/
+    function tlt_pojt(text) {
+      const tone_map = {
+        'á': 'a2', 'à': 'a3', 'â': 'a5', 'ǎ': 'a6', 'ā': 'a7', 'a̍': 'a8', 'a̋': 'a9',
+        'é': 'e2', 'è': 'e3', 'ê': 'e5', 'ě': 'e6', 'ē': 'e7', 'e̍': 'e8', 'e̋': 'e9',
+        'í': 'i2', 'ì': 'i3', 'î': 'i5', 'ǐ': 'i6', 'ī': 'i7', 'i̍': 'i8', 'i̋': 'i9',
+        'ó͘': 'oo2', 'ò͘': 'oo3', 'ô͘': 'oo5', 'ǒ͘': 'oo6', 'ō͘': 'oo7', 'o̍͘': 'oo8', 'ő͘': 'oo9',
+        'ó': 'o2', 'ò': 'o3', 'ô': 'o5', 'ǒ': 'o6', 'ō': 'o7', 'o̍': 'o8', 'ő': 'o9',
+        'ú': 'u2', 'ù': 'u3', 'û': 'u5', 'ǔ': 'u6', 'ū': 'u7', 'u̍': 'u8', 'ű': 'u9',
+        'ḿ': 'm2', 'm̀': 'm3', 'm̂': 'm5', 'm̌': 'm6', 'm̄': 'm7', 'm̍': 'm8', 'm̋': 'm9',
+        'ń': 'n2', 'ǹ': 'n3', 'n̂': 'n5', 'ň': 'n6', 'n̄': 'n7', 'n̍': 'n8', 'n̋': 'n9',
+        'Á': 'A2', 'À': 'A3', 'Â': 'A5', 'Ǎ': 'A6', 'Ā': 'A7', 'A̍': 'A8', 'A̋': 'A9',
+        'É': 'E2', 'È': 'E3', 'Ê': 'E5', 'Ě': 'E6', 'Ē': 'E7', 'E̍': 'E8', 'E̋': 'E9',
+        'Í': 'I2', 'Ì': 'I3', 'Î': 'I5', 'Ǐ': 'I6', 'Ī': 'I7', 'I̍': 'I8', 'I̋': 'I9',
+        'Ó͘': 'Oo2', 'Ò͘': 'Oo3', 'Ô͘': 'Oo5', 'Ǒ͘': 'Oo6', 'Ō͘': 'Oo7', 'O̍͘': 'Oo8', 'Ő͘': 'Oo9',
+        'Ó': 'O2', 'Ò': 'O3', 'Ô': 'O5', 'Ǒ': 'O6', 'Ō': 'O7', 'O̍': 'O8', 'Ő': 'O9',
+        'Ú': 'U2', 'Ù': 'U3', 'Û': 'U5', 'Ǔ': 'U6', 'Ū': 'U7', 'U̍': 'U8', 'Ű': 'U9',
+        'Ḿ': 'M2', 'M̀': 'M3', 'M̂': 'M5', 'M̌': 'M6', 'M̄': 'M7', 'M̍': 'M8', 'M̋': 'M9',
+        'Ń': 'N2', 'Ǹ': 'N3', 'N̂': 'N5', 'Ň': 'N6', 'N̄': 'N7', 'N̍': 'N8', 'N̋': 'N9'
+      };
+
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        let char = text[i];
+        if (tone_map[char]) {
+          result += tone_map[char];
+        } else {
+          result += char;
+        }
+      }
+    
+      const tl_poj_map = {
+        'ts': 'ch',
+        'Ts': 'Ch',
+        'oo': 'ou',
+        'Oo': 'Ou',
+        'ua': 'oa',
+        'Ua': 'Oa',
+        'ue': 'oe',
+        'Ue': 'Oe',
+        'ing': 'eng',
+        'Ing': 'Eng',
+        'ik': 'ek',
+        'Ik': 'Ek',
+      };
+    
+      for (const tl in tl_poj_map) {
+        const poj = tl_poj_map[tl];
+        const regex = new RegExp(tl, 'g');
+        result = result.replace(regex, poj);
+      }
+    
+      result = result.replace(/nn/g, 'ⁿ');
+      //result = result.replace(/([aeiouAEIOU])ⁿ/g, '$1N');
+      
+      const s_t_map = {
+        'a1': 'a', 'A1': 'A', 'a2': 'á', 'A2': 'Á', 'a3': 'à', 'A3': 'À', 'a4': 'a', 'A4': 'A',
+        'a5': 'â', 'A5': 'Â', 'a6': 'ǎ', 'A6': 'Ǎ', 'a7': 'ā', 'A7': 'Ā', 'a8': 'a̍', 'A8': 'A̍',
+        'a9': 'a̋', 'A9': 'A̋', 'e1': 'e', 'E1': 'E', 'e2': 'é', 'E2': 'É', 'e3': 'è', 'E3': 'È',
+        'e4': 'e', 'E4': 'E', 'e5': 'ê', 'E5': 'Ê', 'e6': 'ě', 'E6': 'Ě', 'e7': 'ē', 'E7': 'Ē',
+        'e8': 'e̍', 'E8': 'E̍', 'e9': 'e̋', 'E9': 'E̋', 'i1': 'i', 'I1': 'I', 'i2': 'í', 'I2': 'Í',
+        'i3': 'ì', 'I3': 'Ì', 'i4': 'i', 'I4': 'I', 'i5': 'î', 'I5': 'Î', 'i6': 'ǐ', 'I6': 'Ǐ',
+        'i7': 'ī', 'I7': 'Ī', 'i8': 'i̍', 'I8': 'I̍', 'i9': 'i̋', 'I9': 'I̋', 'oo1': 'o͘', 'Oo1': 'O͘',
+        'oo2': 'ó͘', 'Oo2': 'Ó͘', 'oo3': 'ò͘', 'Oo3': 'Ò͘', 'oo4': 'o͘', 'Oo4': 'O͘', 'oo5': 'ô͘', 'Oo5': 'Ô͘',
+        'oo6': 'ǒ͘', 'Oo6': 'Ǒ͘', 'oo7': 'ō͘', 'Oo7': 'Ō͘', 'oo8': 'o̍͘', 'Oo8': 'O̍͘', 'oo9': 'ő͘', 'Oo9': 'Ő͘',
+        'o1': 'o', 'O1': 'O', 'o2': 'ó', 'O2': 'Ó', 'o3': 'ò', 'O3': 'Ò', 'o4': 'o', 'O4': 'O',
+        'o5': 'ô', 'O5': 'Ô', 'o6': 'ǒ', 'O6': 'Ǒ', 'o7': 'ō', 'O7': 'Ō', 'o8': 'o̍', 'O8': 'O̍',
+        'o9': 'ő', 'O9': 'Ő', 'u1': 'u', 'U1': 'U', 'u2': 'ú', 'U2': 'Ú', 'u3': 'ù', 'U3': 'Ù',
+        'u4': 'u', 'U4': 'U', 'u5': 'û', 'U5': 'Û', 'u6': 'ǔ', 'U6': 'Ǔ', 'u7': 'ū', 'U7': 'Ū',
+        'u8': 'u̍', 'U8': 'U̍', 'u9': 'ű', 'U9': 'Ű', 'm1': 'm', 'M1': 'M', 'm2': 'ḿ', 'M2': 'Ḿ',
+        'm3': 'm̀', 'M3': 'M̀', 'm4': 'm', 'M4': 'M', 'm5': 'm̂', 'M5': 'M̂', 'm6': 'm̌', 'M6': 'M̌',
+        'm7': 'm̄', 'M7': 'M̄', 'm8': 'm̍', 'M8': 'M̍', 'm9': 'm̋', 'M9': 'M̋', 'ng1': 'ng', 'Ng1': 'Ng',
+        'ng2': 'ńg', 'Ng2': 'Ńg', 'ng3': 'ǹg', 'Ng3': 'Ǹg', 'ng4': 'ng', 'Ng4': 'Ng', 'ng5': 'n̂g', 'Ng5': 'N̂g',
+        'ng6': 'ňg', 'Ng6': 'Ňg', 'ng7': 'n̄g', 'Ng7': 'N̄g', 'ng8': 'n̍g', 'Ng8': 'N̍g', 'ng9': 'n̋g', 'Ng9': 'N̋'
+      };
+    
+      for (const s in s_t_map) {
+        const t = s_t_map[s];
+        const regex = new RegExp(s, 'g');
+        result = result.replace(regex, t);
+      }
+
+      result = result.replace(/([aeiouAEIOU])([1-9])/g, (match, p1, p2) => {
+          const tone = parseInt(p2);
+          if (tone === 1) return p1;
+          if (tone === 2) return {a: 'á', e: 'é', i: 'í', o: 'ó', u: 'ú', m: 'ḿ'}[p1.toLowerCase()] || p1;
+          if (tone === 3) return {a: 'à', e: 'è', i: 'ì', o: 'ò', u: 'ù', m: 'm̀'}[p1.toLowerCase()] || p1;
+          if (tone === 4) return p1;
+          if (tone === 5) return {a: 'â', e: 'ê', i: 'î', o: 'ô', u: 'û', m: 'm̂'}[p1.toLowerCase()] || p1;
+          if (tone === 6) return {a: 'ǎ', e: 'ě', i: 'ǐ', o: 'ǒ', u: 'ǔ', m: 'm̌'}[p1.toLowerCase()] || p1;
+          if (tone === 7) return {a: 'ā', e: 'ē', i: 'ī', o: 'ō', u: 'ū', m: 'm̄'}[p1.toLowerCase()] || p1;
+          if (tone === 8) return {a: 'a̍', e: 'e̍', i: 'i̍', o: 'o̍', u: 'u̍', m: 'm̍'}[p1.toLowerCase()] || p1;
+          if (tone === 9) return {a: 'a̋', e: 'e̋', i: 'i̋', o: 'ő', u: 'ű', m: 'm̋'}[p1.toLowerCase()] || p1;
+      });
+
+      return result;
+    }
+
+    function convertText() {
+      const inputText = document.getElementById("inputText").value;
+      const convertedText = tlt_pojt(inputText);
+      document.getElementById("output").innerHTML = convertedText.replace(/\n/g, "<br>");
+    }
+  </script>
+</body>
+</html>
