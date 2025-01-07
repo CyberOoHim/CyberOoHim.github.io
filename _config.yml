@@ -37,7 +37,7 @@ exclude:
   - .gitignore
   - .sass-cache
   - .jekyll-cache
-  - gemfiles
+  #- gemfiles
   - node_modules
   - vendor/bundle/
   - vendor/cache/
