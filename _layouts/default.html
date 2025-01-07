@@ -15,17 +15,3 @@
     {% include footer.html %}
 </body>
 </html>
-
-<!-- _includes/header.html -->
-<header>
-    <nav>
-        <a href="{{ '/' | relative_url }}">Home</a>
-        <a href="{{ '/pages/about.html' | relative_url }}">About</a>
-        <a href="{{ '/pages/projects.html' | relative_url }}">Projects</a>
-    </nav>
-</header>
-
-<!-- _includes/footer.html -->
-<footer>
-    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
-</footer>
