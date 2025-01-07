@@ -2,7 +2,7 @@
 title: Cyber O͘-hîm ki-tē
 description: Taigi AI playground
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://cyberoohim.github.io/" # your site's URL
+url: "https://cyberoohim.github.io" # your site's URL
 markdown: kramdown
 plugins:
   - jekyll-feed
@@ -14,12 +14,12 @@ collections:
     output: true
 
 # Time zone setting
-timezone: Asia/Taipei
+#timezone: Asia/Taipei
 
 # Exclude files from processing
 exclude:
   - README.md
-  - Gemfile
+  #- Gemfile
   - Gemfile.lock
 
 # Default front matter for posts
