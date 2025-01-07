@@ -1,48 +1,45 @@
+<!-- /pages/projects.html -->
 ---
 layout: default
-title: My Projects
-permalink: /projects/
+title: Projects
+permalink: /pages/projects.html
 ---
+
 <div class="projects-container">
-    <!-- Project 1 -->
-    <section class="project-card">
-        <h2>Project Name 1</h2>
-        <img src="{{ site.baseurl }}/assets/images/project1.jpg" alt="Project 1 Screenshot" class="project-image">
-        <div class="project-details">
-            <p class="project-description">
-                This is a detailed description of your first project. Explain what it does,
-                what technologies you used, and what problems it solves.
-            </p>
-            <div class="tech-stack">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">JavaScript</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/yourusername/project1" class="button">View Code</a>
-                <a href="https://project1-demo.com" class="button">Live Demo</a>
-            </div>
-        </div>
+    <h1>Our Projects</h1>
+
+    <p>Here's a showcase of our current and past projects, including web apps, tools, and research related to Taigi AI.</p>
+
+    <section class="project-list">
+        {% for item in site.pages %}
+            {% if item.url contains '/pages/' or item.url contains '/apps/' %}
+                {% if item.path contains '.html' or item.path contains '.md' %}
+                    <article class="project-card">
+                        <h2>
+                            <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
+                        </h2>
+                        {% if item.path contains '.html' %}
+                            <p>Type: Web App/Page</p>
+                        {% elsif item.path contains '.md' %}
+                            <p>Type: Document/Article</p>
+                        {% endif %}
+
+                        {% if item.excerpt %}
+                            <div class="project-excerpt">
+                                {{ item.excerpt | strip_html | truncatewords: 25 }}
+                            </div>
+                        {% endif %}
+                    </article>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </section>
 
-    <!-- Project 2 -->
-    <section class="project-card">
-        <h2>Project Name 2</h2>
-        <img src="{{ site.baseurl }}/assets/images/project2.jpg" alt="Project 2 Screenshot" class="project-image">
-        <div class="project-details">
-            <p class="project-description">
-                Description of your second project. Make it engaging and informative.
-                Highlight the key features and achievements.
-            </p>
-            <div class="tech-stack">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">MongoDB</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/yourusername/project2" class="button">View Code</a>
-                <a href="https://project2-demo.com" class="button">Live Demo</a>
-            </div>
-        </div>
-    </section>
+    <h2>Future Projects</h2>
+    <p>We have many exciting projects planned for the future, including:</p>
+    <ul>
+        <li>[Add a list of your planned projects here]</li>
+        <li>[e.g., A Taigi speech recognition system]</li>
+        <li>[e.g., An interactive Taigi language learning app]</li>
+    </ul>
 </div>
