@@ -1,4 +1,3 @@
-<!-- /pages/projects.html -->
 ---
 layout: default
 title: Projects
@@ -18,6 +17,7 @@ permalink: /pages/projects.html
                         <h2>
                             <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
                         </h2>
+
                         {% if item.path contains '.html' %}
                             <p>Type: Web App/Page</p>
                         {% elsif item.path contains '.md' %}
@@ -26,7 +26,7 @@ permalink: /pages/projects.html
 
                         {% if item.excerpt %}
                             <div class="project-excerpt">
-                                {{ item.excerpt | strip_html | truncatewords: 25 }}
+                                <p>{{ item.excerpt | strip_html | truncatewords: 25 }}</p>
                             </div>
                         {% endif %}
                     </article>
