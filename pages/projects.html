@@ -24,7 +24,7 @@ permalink: /pages/projects.html
 
                         {% if item.type %}
                             <p>Type: {{ item.type }}</p>
-                        {% else %}
+                        {% elsif item_extension == 'md' %}
                             <p>Type: Document/Article</p>
                         {% endif %}
 
