@@ -2,7 +2,7 @@
 layout: default
 title: Taigi Dictionary Web App
 permalink: /pages/taigi-dictionary-app.html
-type: Web App/Page
+type: Ducument/Article
 excerpt: An online dictionary for looking up Taigi words and phrases, including audio pronunciations and example sentences.
 image: /assets/images/taigi-dictionary-app-screenshot.png
 tech_stack:
