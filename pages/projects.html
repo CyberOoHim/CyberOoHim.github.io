@@ -13,7 +13,7 @@ permalink: /pages/projects.html
         {% for item in site.pages %}
             {% assign item_path_parts = item.path | split: '.' %}
             {% assign item_extension = item_path_parts | last %}
-            {% if item.url contains '/pages/' and item_extension == 'md' or item_extension == 'html' %}
+            {% if item.url contains '/pages/' and item_extension == 'md' or item.url contains '/pages/' and item_extension == 'html' %}
                 <article class="project-card">
                     <h2>
                         <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
