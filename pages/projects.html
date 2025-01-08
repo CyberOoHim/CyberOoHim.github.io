@@ -11,26 +11,28 @@ permalink: /pages/projects.html
 
     <section class="project-list">
         {% for item in site.pages %}
-            {% if item.url contains '/pages/' or item.url contains '/apps/' %}
-                {% if item.path contains '.html' or item.path contains '.md' %}
-                    <article class="project-card">
-                        <h2>
-                            <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
-                        </h2>
+            {% assign item_path_parts = item.path | split: '.' %}
+            {% assign item_extension = item_path_parts | last %}
+            {% if item.url contains '/pages/' and item_extension == 'md' or item_extension == 'html' %}
+                <article class="project-card">
+                    <h2>
+                        <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
+                    </h2>
 
-                        {% if item.path contains '.html' %}
-                            <p>Type: Web App/Page</p>
-                        {% elsif item.path contains '.md' %}
-                            <p>Type: Document/Article</p>
-                        {% endif %}
+                    {% if item.type %}
+                        <p>Type: {{ item.type }}</p>
+                    {% elsif item_extension == 'html' %}
+                        <p>Type: Web App/Page</p>
+                    {% elsif item_extension == 'md' %}
+                        <p>Type: Document/Article</p>
+                    {% endif %}
 
-                        {% if item.excerpt %}
-                            <div class="project-excerpt">
-                                <p>{{ item.excerpt | strip_html | truncatewords: 25 }}</p>
-                            </div>
-                        {% endif %}
-                    </article>
-                {% endif %}
+                    {% if item.excerpt %}
+                        <div class="project-excerpt">
+                            <p>{{ item.excerpt | strip_html | truncatewords: 25 }}</p>
+                        </div>
+                    {% endif %}
+                </article>
             {% endif %}
         {% endfor %}
     </section>
