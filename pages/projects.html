@@ -13,9 +13,9 @@ permalink: /pages/projects.html
         {% for item in site.pages %}
             {% assign item_path_parts = item.path | split: '.' %}
             {% assign item_extension = item_path_parts | last %}
-            {% assign item_base_name = item.path | split: '/' | last | replace: '.html', '' | replace: '.md', '' %}
+            {% assign item_base_name = item.path | split: '/' | last | replace: '.md', '' %}
 
-            {% if item.url contains '/pages/' and item_extension == 'md' or item.url contains '/pages/' and item_extension == 'html' %}
+            {% if item.url contains '/pages/' and item_extension == 'md' %}
                 {% unless item_base_name == 'about' or item_base_name == 'projects' %}
                     <article class="project-card">
                         <h2>
@@ -24,9 +24,7 @@ permalink: /pages/projects.html
 
                         {% if item.type %}
                             <p>Type: {{ item.type }}</p>
-                        {% elsif item_extension == 'html' %}
-                            <p>Type: Web App/Page</p>
-                        {% elsif item_extension == 'md' %}
+                        {% else %}
                             <p>Type: Document/Article</p>
                         {% endif %}
 
