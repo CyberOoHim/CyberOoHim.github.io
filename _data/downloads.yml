@@ -7,5 +7,13 @@ datasets:
     download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_art_style_terms_v0.1.txt
     category: datasets
     updated: 2025-01-09
-    
+
+#tools:
+  #- name: "Example Tool"
+    #description: "This is a placeholder for an example tool."
+    #version: 1.0
+    #filename: "example-tool.zip" # Replace with actual filename
+    #download_url: "https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/tools/example-tool.zip" # Replace with the correct URL
+    #category: "tools"
+    #updated: "2024-01-10" # Replace with the actual date
 # ... more entries for other tools, models, and documentation
