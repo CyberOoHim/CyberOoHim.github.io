@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 台語-AI-Studio
-permalink: /pages/台語-AI-Studio.md
+permalink: /pages/台語-AI-Studio.html
 type: Ducument/Article
 ---
 # 台語 AI Studio
