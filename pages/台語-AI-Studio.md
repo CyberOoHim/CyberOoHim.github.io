@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Taigi Dictionary Web App
+title: 台語-AI-Studio.md
 permalink: /pages/台語-AI-Studio.md
 type: Ducument/Article
 ---
