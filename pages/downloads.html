@@ -1,0 +1,27 @@
+---
+layout: default
+title: Downloads
+permalink: /pages/downloads.html
+---
+
+<h1>Downloads</h1>
+
+<p>Here you can find datasets, tools, models, and documentation related to the Taigi AI project.</p>
+
+{% for category, items in site.data.downloads %}
+  <h2>{{ category | capitalize }}</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        <h3>{{ item.name }} (v{{ item.version }})</h3>
+        <p>{{ item.description }}</p>
+        {% if item.download_url %}
+          <a href="{{ item.download_url }}" class="button">Download {{ item.filename }}</a>
+        {% elsif item.link %}
+          <a href="{{ item.link }}" class="button">Go to Web App</a>
+        {% endif %}
+        <p>Last Updated: {{ item.updated }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
