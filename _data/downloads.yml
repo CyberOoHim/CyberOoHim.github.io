@@ -1,0 +1,11 @@
+# _data/downloads.yml
+datasets:
+  - name: Taigi art style terms
+    description: A example corpus of Taigi art style terms .
+    version: 0.1
+    filename: Taigi art style terms_v0.1.txt
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/downloads/datasets/taigi_art_style_terms_v0.1.txt
+    category: datasets
+    updated: 2025-01-09
+    
+# ... more entries for other tools, models, and documentation
