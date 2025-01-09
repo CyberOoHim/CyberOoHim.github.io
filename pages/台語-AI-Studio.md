@@ -1,10 +1,12 @@
 ---
 layout: default
-title: 台語 AI Studio
-permalink: /pages/台語-AI-Studio.html
+title: Taigi Dictionary Web App
+permalink: /pages/taigi-dictionary-app.html
 type: Ducument/Article
 ---
 # 台語 AI Studio
+* 共 台語 AI workshop - Google AI Studio 系列，整理--一下，逐家多多來參與，用 AI 科技个力頭來助台語💪
+
 ## 台語 AI workshop - Google AI Studio
 0. [《 台語 AI workshop 》 Google AI Studio 代先 chhoân(攢)](https://www.facebook.com/groups/2361817230821829/permalink/2381170902219795/)
 
