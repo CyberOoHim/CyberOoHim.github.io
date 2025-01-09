@@ -8,9 +8,9 @@ type: Ducument/Article
 * 共 台語 AI workshop - Google AI Studio 系列，整理--一下，逐家多多來參與，用 AI 科技个力頭來助台語💪
 
 ## 台語 AI workshop - Google AI Studio
-0. [《 台語 AI workshop 》 Google AI Studio 代先 chhoân(攢)](https://www.facebook.com/groups/2361817230821829/permalink/2381170902219795/)
+o. [《 台語 AI workshop 》 Google AI Studio 代先 chhoân(攢)](https://www.facebook.com/groups/2361817230821829/permalink/2381170902219795/)
 
-0-1. [《 台語 AI workshop 》 補充：申請 Google AI Studio ê API key](https://www.facebook.com/groups/2361817230821829/permalink/2383893535280865/)
+o-1. [《 台語 AI workshop 》 補充：申請 Google AI Studio ê API key](https://www.facebook.com/groups/2361817230821829/permalink/2383893535280865/)
 
 1. [《 台語 AI workshop 》 Google AI Studio 基本設定佮功能](https://www.facebook.com/groups/2361817230821829/permalink/2384695205200698/)
 
