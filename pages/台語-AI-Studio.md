@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Taigi Dictionary Web App
-permalink: /pages/taigi-dictionary-app.html
+permalink: /pages/台語-AI-Studio.md
 type: Ducument/Article
 ---
 # 台語 AI Studio
