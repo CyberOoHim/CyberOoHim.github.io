@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 台語-AI-Studio.md
+title: 台語-AI-Studio
 permalink: /pages/台語-AI-Studio.md
 type: Ducument/Article
 ---
