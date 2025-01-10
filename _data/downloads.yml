@@ -8,7 +8,7 @@ datasets:
     category: datasets
     updated: 2025-01-09
 
-  - name: Taigi-English AI terms
+  - name: Taigi-English AI terms 113
     description: An example corpus of Taigi-English AI terms.
     version: 0.1
     filename: taigi_english_AI_terms_113_v0.1.txt
