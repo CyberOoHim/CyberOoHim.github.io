@@ -3,16 +3,16 @@ datasets:
   - name: Taigi-English art style terms
     description: An example corpus of Taigi-English art style terms.
     version: 0.1
-    filename: Taigi_English_art_style_terms_v0.1.txt
-    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_art_style_terms_v0.1.txt
+    filename: taigi_english_art_style_terms_v0.1.txt
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_english_art_style_terms_v0.1.txt
     category: datasets
     updated: 2025-01-09
 
   - name: Taigi-English AI terms
     description: An example corpus of Taigi-English AI terms.
     version: 0.1
-    filename: Taigi_English_AI_terms_113_v0.1.txt
-    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/Taigi_English_AI_terms_113_v0.1.txt
+    filename: taigi_english_AI_terms_113_v0.1.txt
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_english_AI_terms_113_v0.1.txt
     category: datasets
     updated: 2025-01-09
 
