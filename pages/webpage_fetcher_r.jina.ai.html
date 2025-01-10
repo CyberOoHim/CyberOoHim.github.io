@@ -103,15 +103,15 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
 </head>
 <body>
     <div id="container">
-        <h1>URL to Text Extractor</h1>
+        <h1>網頁轉 LLM 好用 ê 文字</h1>
         <p id="description">
-            This tool uses <a href="https://r.jina.ai/" target="_blank">r.jina.ai</a> (click it to see the usage), a free service to convert any URL to an LLM-friendly text format. Just paste the URL you want to process below, click on "Fetch Text," and then the "Download Text" or "Copy Text" buttons to download or copy the extracted text.
+        這支工具內𥚃用--ê 是 <a href="https://r.jina.ai/" target="_blank">r.jina.ai</a> (點入去看本底按怎用)，這个免費服務，會使 kā 任何網鏈(URL) 轉做 LLM 會用--得 ê 文字格式。咱 kā 欲處理 ê 網鏈貼 tī 下跤，chhi̍h(揤)「Lia̍h 文字(Fetch Text)」，了後 chhi̍h「Táng-ló͘ 文字(Táng-ló͘ 文字)」抑是「Khó͘-phih 文字(Copy Text)」，就會當 kā thiu(抽)--出來 ê 文字 táng-ló͘，抑是 ka khó͘-phih--起來，貼去別位用。
         </p>
-        <input type="text" id="url-input" placeholder="Enter URL">
+        <input type="text" id="url-input" placeholder="輸入網鏈">
          <div id="action-row">
-             <button id="fetch-button">Fetch Text</button>
-             <button id="download-button" style="display: none;">Download Text</button>
-            <button id="copy-button" style="display: none;">Copy Text</button>
+             <button id="fetch-button">Lia̍h 文字</button>
+             <button id="download-button" style="display: none;">Táng-ló͘ 文字</button>
+            <button id="copy-button" style="display: none;">Khó͘-phih 文字</button>
          </div>
 
         <div id="loading">Loading...</div>
@@ -131,7 +131,7 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
         fetchButton.addEventListener('click', async () => {
             const url = urlInput.value.trim();
             if (!url) {
-                textOutput.textContent = "Please enter a URL.";
+                textOutput.textContent = "請咱先輸入網鏈.";
                  downloadButton.style.display = 'none';
                 copyButton.style.display = 'none';
                 return;
@@ -156,7 +156,7 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
                 downloadButton.style.display = 'inline-block';
                 copyButton.style.display = 'inline-block';
             } catch (error) {
-              textOutput.textContent = 'Failed to fetch the URL:' + error.message;
+              textOutput.textContent = '網頁 lia̍h 袂着:' + error.message;
                 downloadButton.style.display = 'none';
                  copyButton.style.display = 'none';
 
@@ -169,7 +169,7 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
         downloadButton.addEventListener('click', () => {
             const text = textOutput.textContent;
             if (!text) {
-                 alert('No text to download!');
+                 alert('無文字 thang táng-ló͘!');
                 return;
              }
 
@@ -177,7 +177,7 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'extracted_doc.txt';
+            a.download = '掠--着个文字.txt';
              a.style.display = 'none';
             document.body.appendChild(a);
             a.click();
@@ -189,7 +189,7 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
         copyButton.addEventListener('click', () => {
             const text = textOutput.textContent;
               if (!text) {
-                  alert('No text to copy!');
+                  alert('無文字 thang khó͘-phih!');
                    return;
               }
 
@@ -198,8 +198,8 @@ permalink: /pages/webpage_fetcher_r.jina.ai.html
                     alert('Text copied to clipboard!');
                 })
                 .catch(err => {
-                     console.error('Failed to copy text:', err);
-                    alert('Failed to copy text: ' + err.message);
+                     console.error('無法度 khó͘-phih:', err);
+                    alert('無法度 khó͘-phih: ' + err.message);
                 });
         });
     </script>
