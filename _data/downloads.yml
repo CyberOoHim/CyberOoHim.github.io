@@ -16,5 +16,14 @@ web-apps:
     download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/tools/Taigi_word_game_a_v0.1.html
     category: web-apps
     updated: 2025-01-10
+
+#tools:
+  #- name: Example Tool
+    #description: This is a placeholder for an example tool.
+    #version: 1.0
+    #filename: example-tool.zip
+    #download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/tools/example-tool.zip
+    #category: tools
+    #updated: 2024-01-10
     
 
