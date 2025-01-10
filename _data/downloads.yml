@@ -13,7 +13,7 @@ web-apps:
     description: An example web Apps of Taigi-English word game.
     version: 1.0
     filename: Taigi_word_game_01_v0.1.html
-    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/tools/Taigi_word_game_a_v0.1.html
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/web-apps/Taigi_word_game_a_v0.1.html
     category: web-apps
     updated: 2025-01-10
 
