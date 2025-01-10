@@ -1,0 +1,1525 @@
+《 AI 相關台語語詞 kap 例句 1-3 》 （罔參考）
+
+1. 機器學習 (POJ: Ki-khì ha̍k-si̍p, 英: Machine Learning, 日: 機械学習、きかいがくしゅう)
+
+定義：AI ê 一部份，hō͘ 系統 ē-tàng ùi 經驗學習 kap 進步，毋免經由特定 ê 程式設定。
+
+例：我愈捷用我巧手機仔 ê 語音助手，就愈感覺伊 ê 機器學習功能 kā 認捌我腔口 kap 講話 khùi-kháu(氣口) ê 才調改善誠濟，hō͘ 互動 koh-khah 自然而且有效率。
+---
+Definition: A subset of AI that enables systems to learn and improve from experience without being explicitly programmed. 
+
+Ex: As I use my smartphone's voice assistant more frequently, I've noticed that its machine learning capabilities have significantly improved its ability to understand my accent and speech patterns, making our interactions much more natural and efficient.
+
+-----
+
+2. 神經網路 (POJ: Sîn-keng-bāng-lō͘, 英: Neural Network, 日: ニューラルネットワーク)
+
+定義：模仿生物神經網路 ê 電腦系統，設計來認捌模式，tùi 大量資料學習。
+
+例：我 leh 用新 ê 生產力軟體寫電子批 ê 時，伊 ê 神經網路建議 看--起來有 kā 我 ê 寫作風格 kap 語氣 sa(捎)--tio̍h，定定會提議我 tng 欲家己拍--落去 ê 語詞，hō͘ 人感覺有 gâu。
+---
+Definition: A computing system inspired by biological neural networks, designed to recognize patterns and learn from large amounts of data. 
+
+Ex: When I'm writing emails using my new productivity software, I'm impressed by how its neural network-based suggestions seem to capture my writing style and tone, often proposing phrases that I was just about to type myself.
+
+-----
+
+3. 深層學習 (POJ: Chhim-chân ha̍k-si̍p, 英: Deep Learning, 日: 深層学習、しんそうがくしゅう)
+
+定義：機器學習 ê 一部份，用濟沿結構 ê 人工神經網路來做，有法度 ùi 無結構 iah-sī 無標籤 ê 資料來學習。
+
+例：Gún(阮) 這站仔試用一款相片編輯 App，伊有用深度學習，hō͘ 阮驚--tio̍h，伊煞巧 kah 會 ùi 阮 ê 度假相片，kā 無愛--ê 物件徒 hìⁿ-sak，koh kā 背景順順添--轉去，kan-ta chhi̍h(揤)--幾下仔，就 kā 阮 ê 相片編輯 kah 袂輸專業--ê 仝款。
+---
+Definition: A subset of machine learning based on artificial neural networks with multiple layers, capable of learning from unstructured or unlabeled data.
+
+Ex: I recently tried a photo editing App that uses deep learning, and I was amazed at how it could intelligently remove unwanted objects from my vacation photos while seamlessly filling in the background, making my images look professionally edited with just a few taps.
+
+-----
+
+《 AI 相關台語語詞 kap 例句 4-6 》 （罔參考）
+
+4. AI / 人工智能 (POJ: Jîn-kang-tì-lêng, 英: Artificial Intelligence, 日: 人工知能、じんこうちのう)
+
+定義：用機器模擬人類 ê 智力，kā 程式設定 ho͘ 親像人類 án-ne 思考 kap 學習。
+
+例 1：我駛車拄著窒車，用車--ni̍h AI 接(chih)力 ê 駕駛輔助，看伊 kā 可能 ê 危險先料算好，koh 隨建議較安全 ê 路線，ho͘ 我有較放輕鬆，án-ne hō͘ 通勤 khah 袂食力，效率 mā 較有。 
+
+例 2：我欲去日本東京𨑨迌，用 AI 旅遊規劃 App，kā 我 ê 興趣、預算、kap 行程時間輸入--落去，AI 就生成一个行程建議，包括景點、旅館、餐廳、kap 交通方式，koh kā 價數、時間、kap 評價 遮个因素 lóng 考慮--入去。我照 AI ê 建議，規逝行程順順，m̄-nā 體驗著上讚 ê 東京，koh 省錢省時間，hō͘ 我足夠滿意。
+---
+Definition: The simulation of human intelligence in machines programmed to think and learn like humans.
+
+Ex 1: As I navigate through heavy traffic using my car's AI-powered driving assistance, I'm relieved to see it anticipating potential hazards and suggesting safer routes in real-time, making my commute less stressful and more efficient.
+Ex 2: I'm planning a trip to Tokyo, Japan, and I'm using an AI travel planning app. I input my interests, budget, and trip duration, and the AI generates a detailed itinerary with suggested attractions, accommodations, restaurants, and transportation options, taking into account factors like cost, time, and reviews. Following the AI's recommendations, my entire trip went smoothly, allowing me to experience the best of Tokyo while saving both time and money, leaving me extremely satisfied.
+
+-----
+
+5. LLM / 大型語言 má-to͘h (POJ: Tōa-hêng-gí-giân má-to͘h, 英: Large Language Model, 日: 大規模言語モデル、だいきぼげんごモデル)
+
+定義：一款 AI má-to͘h，用極大量 ê 文字資料訓練，有才調理解 kap 生成 (seng-sêng) 袂輸人類 ê 文字。
+
+例：我 tī-leh 寫研究論文 ê 時陣，LLM 接(chih)力 ê 寫作助手 m̄-nā 鬥相共 kā 論點改 hō͘ khah 好，koh 會提議相關 ê 引用文獻，而且 kā 我推理可能 ê 破空點--出來，有影是 hō͘ 我 ê 論文品質 kap 深度提升誠濟。
+---
+Definition: A type of AI model trained on vast amounts of text data, capable of understanding and generating human-like text.
+
+Ex: While drafting my research paper, I'm amazed at how the LLM-powered writing assistant not only helps me refine my arguments but also suggests relevant citations and points out potential gaps in my reasoning, significantly enhancing the quality and depth of my work.
+
+-----
+
+6. 開講機器人 (POJ: Khai-káng ki-khì-lâng, 英: Chatbot, 日: チャットボット)
+
+定義：一款電腦程式，設計來模擬人類 ê 對話，用文字 iah-sī 語音互動。
+
+例：我半暝仔罕得 tī 線頂買物件 ê 時，電子商務網站 ê 開講機器人 hō͘ 我四序 kah 有意外，伊足有耐心 kā 我問--ê 產品規格 lóng 詳細應--出來，kā 我鬥比較無仝款 ê 型番，甚至 koh 鬥揣著一項罕見--ê 物件，hō͘ 我感覺若成 24 點鐘不時有一位內行 ê 業務 tī 我邊仔服務--leh。
+---
+Definition: A computer program designed to simulate human conversation through text or voice interactions.
+
+Ex: During my late-night online shopping spree, I found myself pleasantly surprised by the e-commerce site's chatbot, which patiently answered my detailed questions about product specifications, helped me compare different models, and even assisted in tracking down a rare item, making me feel like I had a knowledgeable sales assistant at my disposal 24/7.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 7-9 》 （罔參考）
+
+7. NLP / 自然語言處理 (POJ: Chū-jiân-gí-giân chhú-lí, 英: Natural Language Processing, 日: 自然言語処理、しぜんげんごしょり)
+
+定義：AI ê 分支，注重電腦 kap 人類語言之間 ê 互動，hō͘ 機器有才調理解、解說、hām 生成人類語言。
+
+例：我 kā 想法唸 hō͘ gún(阮)兜巧厝裝置聽，伊連紲 hō͘ 我印象不止仔深，伊 ê NLP 功能 hō͘ 伊 ē-tàng kā 我 ê 話無精差聽寫--落來，了解我欲創啥，甚至 koh 會紲 leh 問相關 ê 問題 iah-sī 提建議，鬥相共 hō͘ 我 khah 好勢來整理想法。
+---
+Definition: A branch of AI that focuses on the interaction between computers and human language, enabling machines to understand, interpret, and generate human language.
+
+Ex: As I dictate my thoughts into my smart home device, I'm continuously impressed by how its natural language processing capabilities allow it to accurately transcribe my words, understand my intent, and even follow up with relevant questions or suggestions to help me organize my ideas more effectively.
+
+-----
+
+8. 電腦視覺 (POJ: Tiān-náu sī-kak, 英: Computer Vision, 日: コンピュータビジョン)
+
+定義：AI ê 一个領域，hō͘ 電腦有法度 ùi 數位影像、影片 kap 其他視覺輸入，kā 有意義 ê 資訊抽--出來。
+
+例：我 leh 用新 ê 擴張現實(AR) 買物 App，伊電腦視覺技術 hō͘ 我有迷--著，m̄-nā ē-tàng 隨認捌我房間內底 ê 家具，精確度量空間，koh 密密 kā 虛擬物仔鬥--起去，hō͘ 我看新膨椅囥 tī 我客廳看--起來啥款，是會(hah)合袂合。
+---
+Definition: A field of AI that enables computers to derive meaningful information from digital images, videos, and other visual inputs.
+
+Ex: While using my new augmented reality shopping app, I'm fascinated by how its computer vision technology can instantly recognize furniture in my room, accurately measure spaces, and seamlessly overlay virtual items to show me exactly how that new sofa would look and fit in my living room.
+
+-----
+
+9. 強化學習 (POJ: Kiông-hòa ha̍k-si̍p, 英: Reinforcement Learning, 日: 強化学習、きょうかがくしゅう)
+
+定義：一款機器學習，é-jinh (代理人/agent) tī 某物環境，用行動來學習做決定，來 kā 粒積 ê 獎賞上大化。這 sian é-jinh ná 試著毋著 ná 學習，chham 四篐圍互動來致到有可能上好 ê 結果。
+
+例：我 tī 電動機仔 leh 耍新 ê 策略遊戲，有感覺挑戰 kap 好玄，AI 對手 kán-ná leh 適應我耍 ê 手路，用強化學習發展愈來愈幼路 ê 策略，hō͘ 遊戲直直 lóng chhiⁿ(鮮) koh 會siâⁿ(唌)--人，耍幾點鐘猶是按呢。
+---
+Definition: A type of machine learning where an agent learns to make decisions by taking actions in an environment to maximize a cumulative reward. The agent learns through trial and error, interacting with its surroundings to achieve the best possible outcome.​​​​​​​​​​​​​​​​
+
+Ex: As I play this new strategy game on my console, I'm both challenged and intrigued by how the AI opponents seem to adapt to my playstyle over time, using reinforcement learning to develop increasingly sophisticated strategies that keep the gameplay fresh and engaging, even after hours of play.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 10-12 》 （罔參考）
+
+10. 資料集 (POJ: Chu-liāu-chi̍p, 英: Dataset, 日: データセット)
+
+定義：一組資料，用來訓練 kap 評估機器學習 má-to͘h (model)。
+
+例：假使欲 chhoân(攢) 一个客戶情緒分析計畫 ê 多元資料集，著愛包括闊範圍 ê 濟款語言、產業 kap 寫作風格。這款路數才有度確保 má-to͘h 有法度發落現實世界內底，客戶回饋 ê 多變化 kap 幼路差。
+---
+Definition: A collection of data used to train and evaluate machine learning models.
+
+Ex: If a diverse dataset of customer reviews is curated for a sentiment analysis project, it should include a wide range of languages, industries, and writing styles. This approach ensures the model can handle real-world variability and nuance in customer feedback.​​​​​​​​​​​​​​​​
+
+-----
+
+11. 訓練 (POJ: Hùn-liān, 英: Training, 日: トレーニング)
+
+定義：Kā 機器學習 má-to͘h 教來做料算 iah-sī 做決定 ê 過程，hō͘ 伊接觸大量資料來學習。
+
+例：Tī 訓練新 ê 推薦 iăn-jín 當中，ē-tàng 觀察著伊寸寸仔學會曉認捌使用者行為內底幼路 ê 模式。má-to͘h 逐輪重走 to̍h 會 koh 改善伊 ê 建議，終其尾 hō͘ 客戶 ê 買物經驗 koh-khah 個人化。
+---
+Definition: The process of teaching a machine learning model to make predictions or decisions by exposing it to large amounts of data.
+
+Ex: During the training process of a new recommendation engine, one can observe how it gradually learns to identify subtle patterns in user behavior. The model improves its suggestions with each iteration, ultimately leading to a more personalized shopping experience for customers.
+
+-----
+
+12. Si-á-geh / 微調整 (POJ: Si-á-geh、Bî-tiâu-chéng, 英: Fine-tuning, 日: 微調整、ファインチューニング)
+
+定義：Kā 已經代先訓練--過 ê má-to͘h (model)，用特定 ê 資料集 koh-chài 訓練，hō͘ 伊 tàu-tah(鬥搭) 特定 ê 工課 iah-sī 領域。
+
+例：提一般用語言 má-to͘h 用公司 ê 技術書類 kap 客戶服務單來 ka si-á-geh，伊正確應答產品相關問題 ê 才調，定定會有顯明 ê 改善。如此就 ē-tàng kā chham 公司獨特 ê 生態系統 tàu-tah(鬥搭) ê 故障排除指南 seng-sêng (生成)--出來。
+---
+Definition: The process of further training a pre-trained model on a specific dataset to adapt it for a particular task or domain.
+
+Ex: After fine-tuning a general-purpose language model with a company's technical documentation and support tickets, there's often a significant improvement in its ability to accurately answer product-specific queries. This results in the generation of helpful troubleshooting guides tailored to the company's unique ecosystem.​​​​​​​​​​​​​​​​
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 13-15 》 （罔參考）
+
+13. 計算法 (POJ: Kè-sǹg-hoat, 英: Algorithm, 日: アルゴリズム)
+
+定義：一組一步一步 ê 詳細指令，hō͘ 電腦 ē-tàng 照行來解決問題 iah-sī 完成工課。
+
+例：這款推薦 iăn-jín ê 計算法，是 kā 用者往過 ê 瀏覽記錄 kap 買物偏 hèng(興) 考慮--入去，來 hō͘ 產品建議 正實 hah(合) in ê khùi-kháu(氣口)。
+---
+Definition: A set of step-by-step instructions that a computer can follow to solve a problem or complete a task.
+
+Ex: The algorithm powering this recommendation engine takes into account the user's past browsing history and purchasing preferences to accurately suggest products that align with their tastes.
+
+-----
+
+14. AI 倫理 (POJ: AI lûn-lí, 英: AI Ethics, 日: AI倫理、エーアイりんり)
+
+定義：探討 AI 發展 kap 應用 ê 道德原則 kap 價值觀 ê 研究領域，注重 AI 對社會 kah 個人 ê 影響。
+
+例：自動駕駛車 ê 發展--ni̍h，AI 倫理是一項誠要緊 ê 問題，咱著愛細膩酙酌，假使 tn̄g(搪)著車禍，AI 應該 án-chóaⁿ 做決定，才有法度保護所有牽連--tio̍h ê 人 ê 安全 kap 權益。
+---
+Definition: The field of study that examines the moral principles and values involved in the development and application of AI, focusing on the societal and individual impacts of AI.
+
+Ex: AI ethics is a crucial consideration in the development of self-driving cars, as we need to carefully consider how AI should make decisions in the event of an accident to protect the safety and rights of all involved.
+
+-----
+
+15. AI 偏見 (POJ: AI phian-kiàn, 英: AI Bias, 日: AIバイアス)
+
+定義：AI 系統 ê 訓練資料內底，因為有偏見 iah-sī 帶重躭，煞致使伊有偏見 he̍k-chiá 落無公平 ê 決定，這款偏見會反映 tī 濟濟面向，包括性別、種族、宗教、社會經濟地位等等。
+
+例 1：有人掛意講，用 tī 招募流程 ê AI 系統，假使訓練資料內底有性別 iah-sī 種族 ê 偏見，凡勢會 kā 已經 tī 遐 ê 偏見延紲--落去，hō͘ túi 引頭路者 ê 篩揀無公平。
+
+例 2：假使一个設計來評估信用風險 ê AI 系統，伊 ê 訓練資料主要是 ùi 高收入族群來--ê，伊就無的確會 kā 低收入族群 ê 信用度估 khah 低，致使無公平 ê 結果，hō͘ 低收入族群 khah oh(僫) 申請著貸款 iah-sī 其他金融服務。
+---
+Definition: When an AI system exhibits bias or makes unfair decisions due to biased or flawed training data. This bias can manifest in various aspects, including gender, race, religion, and socioeconomic status.
+
+Ex 1: Some people are concerned that AI systems used in hiring processes may perpetuate existing gender or racial biases if the training data reflects those biases, leading to unfair screening of candidates
+
+Ex 2: If an AI system designed to assess credit risk is primarily trained on data from high-income individuals, it may underestimate the creditworthiness of low-income individuals, leading to unfair outcomes where they have difficulty obtaining loans or other financial services.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 16-18 》 （罔參考）
+16. AI má-to͘h / AI 模型 (POJ: AI má-to͘h, 英: AI Model, 日: AI モデル)
+
+定義：一款電腦內底 ê 表示法，用資料訓練來完成特定 ê 工課，iah-sī 做料算，是 AI 系統 ê 核心。
+例：設使放射科醫生用 AI má-to͘h 來分析胸坎電光片，伊就會當緊緊 kā 可能 ê 無正常標示--出來，hō͘ AI 鬥相共 來 hō͘ 診斷 khah 緊 khah 精確。這款 má-to͘h ùi 幾若千張醫學影像訓練--出來，ē-tàng 偵測人 ê 目睭無的確會看精差--去 ê 幼路模式。AI kap 人類專家 án-ne 做伙合作，會當 kā 診斷才調提升，有機會 kā 病症 khah 早揣--出來，hō͘ 病人較好 ê 看顧。
+---
+Definition: A computational representation trained on data to perform specific tasks or make predictions, serving as the core of artificial intelligence systems.
+
+Ex: If a radiologist uses an AI model to analyze chest X-rays, it can quickly highlight potential abnormalities, assisting in faster and more accurate diagnoses. The model, trained on thousands of medical images, detects subtle patterns that might be missed by the human eye. This collaboration between AI and human expertise enhances diagnostic capabilities, potentially leading to earlier detection of diseases and improved patient care.​​​​​​​​​​​​​​​​
+
+-----
+
+17. É-jinh / 代理人 (POJ: É-jinh, 英: Agent, 日: エージェント)
+
+定義：一款自動 ê AI 系統，設計 ho͘ 認知四圍環境 [ 註：現此時是 tī 電腦 kap 網路--ni̍h ]，koh 會發動行動來致到特定 ê 目標。
+
+例：假使開發一个 AI é-jinh 來自動買賣股票，伊就會相連紲分析市場資料、經濟指標 kap 公司 ê 表現。根據遮个分析，é-jinh 會隨做決定，欲買、欲賣、 iah-sī 欲 kā 股票 phō(抱)--leh，目標是欲 kā 利純上大化，koh 愛按代先設定 ê 參數來管理風險。
+---
+Definition: An autonomous AI system designed to perceive its environment and take actions to achieve specific goals.
+
+Ex: If an AI agent is developed for automated stock trading, it would continuously analyze market data, economic indicators, and company performances. Based on this analysis, the agent would make decisions to buy, sell, or hold stocks in real-time, aiming to maximize returns while managing risk according to predefined parameters.
+
+-----
+
+18. AI 副手、AI 二手 (POJ: AI hù-chhiú、AI jī-chhiú, 英: AI Copilot, 日: AI コパイロット)
+
+定義：AI 接(chih)力 ê 助手，kap 人類鬥陣做工課，來 tī 特定 ê 工課 iah-sī 領域，kā 生產力 hām 做決定 ê 品質提升。
+
+例：若準軟體開發團隊 tī in ê 整合開發環境 (IDE) 內底用 AI 副手，伊就會提議 khó͘(code) án-chóaⁿ 接全、掠可能 ê 蟲(bug)，甚至 ē-tàng 根據自然語言 ê 描述，來 seng-sêng(生成規个函數)。AI kap 人類程式設計師這款合作，會當大大 kā 寫 khó͘ ê 過程加速，koh hō͘ 錯誤減少。
+---
+Definition: An AI-powered assistant that works alongside humans to enhance productivity and decision-making in specific tasks or domains.
+
+Ex: If a software development team implements an AI copilot in their integrated development environment (IDE), it would suggest code completions, identify potential bugs, and even generate entire functions based on natural language descriptions. This collaboration between the AI and the human programmer can significantly speed up the coding process and reduce errors.
+
+-----
+# 台語AI
+
+《 AI 相關台語語詞 kap 例句 19-21 》 （罔參考）
+
+19. 應答 LLM (POJ: Ìn-tap LLM, 英: Conversational LLM, 日: 会話型 LLM、かいわがたエルエルエム)
+
+定義：一款大型語言 má-to͘h，訓練來行自然 koh 有互動 ê 對話，ē-tàng 理解 hām 生成(seng-sêng) 袂輸人類 ê 語文，hō͘ 人若成 leh chham 正實 ê 人開講 ê 體驗。
+
+例： 彼間公司開發一支應答 LLM 接(chih)力 ê 客服開講機器人，伊 ē-tàng ùi 客戶 遐 khêng(窮) 問題，kā 關連 ê 資訊 khe̍h(挈)--出來，而且用自然 koh 得人緣 ê 語氣來應答，hō͘ 客戶感覺著自在 kap 親切。這款技術規暝透日提供 khah 快速、khah 個人化 ê 服務，kā 客服體驗大大提升。
+---
+Definition: A type of large language model trained to engage in natural and interactive conversations, understanding and generating human-like text to provide a conversational experience similar to interacting with a real person.
+
+Ex: The company developed a conversational LLM-powered customer service chatbot that could retrieve relevant information from customer queries and respond in a natural and engaging tone, making customers feel at ease and cared for. This technology significantly enhances the customer service experience by offering faster and more personalized support around the clock.
+
+-----
+
+20. 視覺 LLM (POJ: Sī-kak LLM, 英: Visual LLM, 日: 視覚型 LLM、しかくがたエルエルエム)
+
+定義：一款大型語言 má-to͘h，ē-tàng 理解 kap 生成 (seng-sêng) chham 視覺資訊有關 ê 文字，譬論講 kā 圖像 iah-sī 影片描述--出來，iah-sī 應答 hām 圖像有關 ê 問題。
+
+例：博物館用視覺 LLM 來做展覽品 ê 語音導覽，參觀者 ē-sái kā 藝術品翕--起來，LLM 就會 kā 作品 ê 詳細、歷史背景、kap 藝術家 ê 故事，用 hō͘ 人佮意 ê 方式講--出來。這款技術 hō͘ 參觀者對藝術品有 khah 深 ê 認捌 kap 欣賞，mā hō͘ 人有 khah 豐沛、khah 互動性較有 ê 博物館體驗。
+---
+Definition: A type of large language model that can understand and generate text related to visual information, such as describing images or videos and answering questions about images.
+
+Ex: Museums are using visual LLMs to provide audio guides for their exhibits. Visitors can take a picture of an artwork, and the LLM will describe its details, historical context, and the artist’s story in an engaging way. This technology enhances visitors’ understanding and appreciation of the artwork and provides a richer and more interactive museum experience.
+
+-----
+
+21. 多模 LLM (POJ: To-bô͘ LLM, 英: Multi-modal LLM, 日: マルチモーダル LLM)
+
+定義：一款大型語言 má-to͘h，ē-tàng ùi 濟款無仝 ê 輸入模式學習 kap 互動，若親像字、影像、音聲等等，hō͘ 伊 ē-tàng 處理 kah 生成 (seng-sêng) kah 複雜、khah 多元 ê 資訊。
+
+例：電影製片人有 leh 用多模 LLM，in kā 劇本、分鏡圖、kap 音樂草稿輸入--落去，AI 就會生成 (seng-sêng) 短片仔，內底有建議 ê 鏡頭角度、燈光效果、hām 配樂，hō͘ 人看會著 in 電影 ê 潛力。這款 AI 工具 kā 電影製作 ê 過程加速，hō͘ 導演會用--tit ùi khah 濟選擇 hām 可能性--ni̍h，kā 上好 ê 步數探揣--出來，來 hō͘ in ê 創作理念活--起來。
+---
+Definition: A type of large language model that can learn and interact with multiple input modalities, such as text, images, audio, and more, allowing it to process and generate more complex and diverse information.
+
+Ex: Filmmakers are using multi-modal LLMs by inputting scripts, storyboards, and music drafts, having the AI generate short trailers with suggested camera angles, lighting effects, and soundtracks to visualize the film's potential. These AI tools accelerate the filmmaking process, giving directors more options and possibilities to explore the best way to bring their creative vision to life.
+
+-----
+# 台語AI
+
+《 AI 相關台語語詞 kap 例句 22-24 》 （罔參考）
+
+22. 文生圖 má-to͘h / 文生圖模型 (POJ: Bûn seⁿ tô͘ má-to͘h, 英: Text-to-Image Model, 日: テキスト画像生成モデル)
+
+ 定義：一款 AI má-to͘h (模型)，ē-tàng 根據文字描述來生成圖像。
+
+例：彼个設計師 kā 未來都市景觀 ê 詳細描述輸入--loeh(落去) 文生圖 má-to͘h，má-to͘h to̍h 生成真實 kah 驚--人 ê 概念藝術圖，ē-tàng 用 tī 紲--落來 ê 科幻電影，就按呢省--落來幾若禮拜人工畫圖 ê 工課。
+---
+Definition: An AI model that generates images based on textual descriptions.
+
+Ex: The graphic designer inputs detailed descriptions of futuristic cityscapes into the text-to-image model, which then generates stunningly realistic concept art for the upcoming sci-fi film, saving weeks of manual illustration work.
+
+-----
+
+23. 文生影片 má-to͘h / 文生影片模型 (POJ: Bûn seⁿ iáⁿ-phìⁿ má-to͘h, 英: Text-to-Video Model, 日: テキスト動画生成モデル)
+
+定義：一款 AI 系統， ē-tàng 根據文字輸入 iah-sī 劇本來製作影片內容。
+
+例：行銷團隊用文生影片 má-to͘h，kā 無仝客戶群 ê 個人化產品展示緊緊就製作--出來。In kā 劇本轉做迷人 ê 影片，內底有客製化 ê 視覺效果 kap 配音，lóng 按逐个目標受眾 ê 需要來完成。
+---
+Definition: An AI system that creates video content based on textual input or scripts.
+
+Ex: The marketing team uses a text-to-video model to rapidly produce personalized product demos for different customer segments, transforming their scripts into engaging videos complete with custom visuals and voiceovers tailored to each target audience.
+
+-----
+
+24. AI 轉寫、話音生文 (POJ: AI choán-siá、Ōe-im seⁿ bûn, 英: AI Transcription、Speech-to-Text, 日: AI 文字起こし、音声テキスト化)
+
+定義：Kō͘(怙) 人工智慧 kā 語音自動轉做文字 ê 過程。
+
+例：Podcast 節目主持人用 AI 轉寫軟體， kā 伊逐集 ê 錄音無精差轉做字稿。Án-ne 就會用--得較輕可 kā 內容 tī 社群媒體分享，koh ē-sái ùi 字稿--ni̍h kā 重點取--出來，用來製作節目要點 kap 行銷材料。
+---
+Definition: The process of automatically converting speech to text using artificial intelligence.
+
+Ex: The podcast host uses AI transcription software to accurately convert their audio recordings into text transcripts for each episode. This allows them to easily share their content on social media and to create show notes and marketing materials by extracting key points from the transcripts.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 25-27 》 （罔參考）
+
+25. 語料庫 (POJ: Gí-liāu-khò͘, 英: Corpus, 日: コーパス)
+
+定義：一組大型 koh 結構化 ê 文字 iah-sī 語音資料集，用來訓練語言 má-to͘h hām 做語言學研究。
+
+例：欲訓練一个有才調無精差 kā 台語翻譯做英語 ê 大型語言 má-to͘h，著愛一个極大 ê 台語語料庫，總包各種文體、腔口、kap 無仝領域 ê 資料。這款語料庫愈大愈好，才 ē-tàng hō͘ má-to͘h ùi 濟濟無仝款 ê 語言模式 kap 文脈--ni̍h 學習。
+---
+Definition: A large and structured collection of text or speech data used for training language models and conducting linguistic research.
+
+Ex: To train a large language model that can accurately translate Taiwanese into English, a vast Taiwanese corpus is needed, encompassing diverse writing styles, dialects, and domains. The larger the corpus, the better the model can learn from a variety of linguistic patterns and contexts.
+
+-----
+
+26. 平行語料庫 (POJ: Pêng-hêng gí-liāu-khò͘, 英: Parallel Corpus, 日: 並列コーパス)
+
+定義：一个語料庫，內底有兩種 iah-sī 較濟種語言 ê 文本，而且遮个文本互相有成對，若像仝款 ê 文章 iah-sī 冊，翻譯做無仝款語言。
+
+例：AI 翻譯系統 ê 訓練定著愛有平行語料庫，才有法度 hō͘ má-to͘h (模型) ùi 遮个相對應 ê 文本--ni̍h 學習，來 kā 一種語言 ê 句型 kap 話意無精差對去另外一種語言。
+---
+Definition: A corpus containing texts in two or more languages that are aligned with each other, such as the same articles or books translated into different languages.
+
+Ex: Parallel corpora are essential for training AI translation systems, as they allow the model to learn from aligned texts and accurately map sentence structures and meanings from one language to another.
+
+-----
+
+27. 撨徙學習 (POJ: Chhiâu-sóa ha̍k-si̍p, 英: Transfer Learning, 日: 転移学習、てんいがくしゅう)
+
+定義：一款機器學習技術，kā ùi 一个工課 iah-sī 領域學--tio̍h ê 智識，應用 tī 另外一个無相像，m̄-koh 有關連 ê 工課 iah-sī 領域。
+
+例：假使欲 hō͘ AI 語音辨識系統 ē-tàng 認捌資源較少 ê 語言，譬論講台語，ē-tàng 用資源較濟 ê 語言，可比英語，先來 kā má-to͘h (模型) 訓練好勢，了後才 koh 用台語 ê 資料來 kā má-to͘h si-á-geh(微調整 )。這款 chhiâu-sóa(撨徙) 學習 ê 步數，ē-sái ùi 已經有 ê 語言 má-to͘h chia 利益--tio̍h，hō͘ 新語言 ê 訓練效率 khah 有，mā 較免 hiah 濟資料。
+---
+Definition: A machine learning technique where knowledge gained from one task or domain is applied to a different but related task or domain.
+
+Ex: To enable an AI speech recognition system to understand a low-resource language like Taigi, one can first train the model on a high-resource language like English and then fine-tune it with Taigi data. This transfer learning approach leverages the knowledge gained from the existing language model, making the training process for the new language more efficient and requiring less data.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 28-30 》
+
+28. 生成 AI (POJ: Seng-sêng AI, 英: Generative AI, 日: 生成 AI、せいせいエーアイ)
+
+定義：一款 AI，會曉創作新 ê 內容，包括文字、影像、音樂、khó͘(code) 等等。
+
+例：音樂家 kā 生成 AI 用來激伊作曲 ê 新靈感，in kā in ê 音樂風格 kap 偏 hèng(興) 輸入去 AI，AI 就會生成 (seng-sêng) 濟濟旋律或者和聲，hō͘ in ē-tàng 用遮--ê 來 kap(合)入去發展 in 家己 ê 創作。
+---
+Definition: A type of AI that can create new content, including text, images, music, code, and more.
+
+Ex: A musician uses generative AI to spark new ideas for their compositions. By inputting their musical style and preferences into the AI, it generates various melodies or harmonies that the musician can then incorporate and develop into their own creations.
+
+-----
+
+29. AI 擴張 (POJ: AI khok-tiuⁿ, 英: AI Augmentation, 日: AI 拡張、エーアイかくちょう)
+
+定義：用 AI 工具 kap 技術來 kā 人類 ê 能力加強，比論講生產力、創意、iah-sī 落決策 ê 品質。
+
+例：建築師用 AI 擴張設計軟體，kā 伊 ê 設計圖 ùi 2D 變做 3D  má-to͘h，而且 ē-tàng 模擬無仝 ê 燈光效果、材料、kap 空間成格。這款 AI 工具 hō͘ 建築師 有法度 khah 輕可 kā 複雜 ê 設計概念視覺化，koh ùi 濟濟可能性--ni̍h，kā 上妥當 ê 設計方案探揣--出來。
+---
+Definition: The use of AI tools and technologies to enhance human capabilities, such as productivity, creativity, or decision-making.
+
+Ex: An architect utilizes AI-augmented design software to transform their 2D sketches into 3D models and simulate various lighting effects, materials, and spatial arrangements. This AI tool allows the architect to easily visualize complex design concepts and explore a range of possibilities to arrive at the optimal design solution.
+
+-----
+
+30. 負責 AI (POJ: Hū-chek AI, 英: Responsible AI, 日: 責任ある AI、せきにんあるエーアイ)
+
+定義：AI 發展 kap 應用 ê 一款路數，注重道德原則、公平性、透明度、kap 究責性，確保 AI ē-tàng hō͘ 社會正面 ê 影響。
+
+例：彼間科技公司 tī 開發人面辨識系統 ê 時，堅心欲實踐負責任 AI 原則。In ùi 多元 ê 資料集訓練 in ê má-to͘h (模型)，來避免計算法 ê 偏見，koh kā 使用準則設定清楚 ，確保技術袂 hông(予人) lām-sám(濫摻) 用，mā hō͘ in AI 系統 án-chóaⁿ 做決定 ê 資訊透明化，hō͘ 大家 thang 好了解 hām 監督。
+---
+Definition: An approach to AI development and deployment that emphasizes ethical considerations, fairness, transparency, and accountability to ensure AI has a positive impact on society.
+
+Ex: The tech company is committed to responsible AI principles in developing their facial recognition system. They train their models on diverse datasets to mitigate algorithmic bias, establish clear usage guidelines to prevent misuse of the technology, and provide transparency into how their AI system makes decisions for public understanding and oversight.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 31-33 》 （罔參考）
+
+31. LLM 參數 (POJ: LLM chham-sò͘, 英: LLM Parameter, 日: LLM パラメータ)
+
+定義：LLM 內底 ē-sái 調整 ê 變數，控制 má-to͘h (模型) ê 行為 kap 學習模式，參數數量愈濟，表示 má-to͘h 愈複雜，理論上有才調處理 khah 幼路 ê 語言模式。
+
+例：LLM má-to͘h ê 大細，定定用參數數量來表示，若親像 137B、540B、iah-sī 1.5T，遮个「B」是代表幾 ê 十億，「T」是代表偌濟兆。一般來講，參數數量愈濟 ê má-to͘h，有才調生成 khah 複雜、khah 幼路 ê 文字，m̄-koh mā 著愛 khah 濟計算資源來訓練 kap 運作。
+---
+Definition: Adjustable variables within an LLM that govern the model's behavior and learning patterns. A higher number of parameters indicates a more complex model, theoretically capable of handling more nuanced language patterns.
+
+Ex: The size of an LLM model is often expressed in terms of its parameter count, such as 137B, 540B, or 1.5T, where "B" stands for billions and "T" for trillions. Generally, models with a larger parameter count can generate more complex and nuanced text but also require more computational resources for training and operation.
+
+-----
+
+32. Thó͘-khunh (POJ: Thó͘-khunh, 英: Token, 日: トークン) [ 註：漢字名 khan 鬥 to̍h 假假 koh 勉強，規氣莫 ]
+
+定義：LLM 處理文字 ê 基本單位，ē-tàng 代表一个字、詞、Emoji iah-sī 標點符號。
+
+例：LLM kā 文字拆做 thó͘-khunh (token)，才來發落，若像講「我愛食飯」這句話，ē-tàng 拆做四个 thó͘-khunh：「我」、「愛」、「食」、「飯」。LLM ê 文脈窗大細，定定用 thó͘-khunh 數量來度量，表示 má-to͘h一擺有法度發落偌濟文字。
+---
+Definition: The fundamental unit of text processed by an LLM, representing a word, subword, Emoji, or punctuation mark.
+
+Ex: LLMs break down text into tokens for processing. For example, the sentence "I love to eat" would be divided into four tokens: "I", "love", "to", "eat". The context window size of an LLM, often measured in tokens, determines how much text the model can process at a time.
+
+-----
+
+33. 文脈窗 (POJ: Bûn-me̍h-thang, 英: Context Window, 日: コンテキストウィンドウ)
+
+定義：LLM 一擺有法度考慮--入去 ê 文字數量，表示 má-to͘h(模型) ē-tàng ùi 偌濟前後文來理解 kap 生成 (seng-sêng) 文字。
+
+例：LLM ê 文脈窗長短，會影響伊生成文字 ê 品質 kap chiap-it(接一) 程度。文脈窗愈長，má-to͘h 就 ē-tàng ùi 較濟背景資訊來學習，hō͘ 伊 ê 應答 khah 無精差 mā khah ha̍h(合) 文脈。
+---
+Definition: The amount of text that an LLM can consider at a time, determining how much context the model can use to understand and generate text.
+
+Ex: The context window size of an LLM impacts the quality and coherence of its generated text. A larger context window allows the model to learn from more background information, leading to more accurate and contextually relevant responses.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 34-36 》
+
+34. RAG / 檢索擴張生成 (POJ: Kiám-sek khok-tiuⁿ seng-sêng, 英: Retrieval Augmented Generation, 日: 検索拡張生成、けんさくかくちょうせいせい)
+
+定義：AI 技術，鬥搭資訊檢索 kap 生成 AI，hō͘ LLM ē-sái ùi 外部資料庫 iah-sī 線頂資訊提著相關 ê 資訊，來 hō͘ 應答 khah 精確、khah 詳細。
+
+例：彼間公司 tī in ê 開講機器人內底用 RAG 技術，hō͘ 客戶 ē-tàng 問產品規格、保固資訊、iah-sī 故障排除 ê 步數。開講機器人會去公司 ê 產品資料庫 kap 線頂論壇搜揀相關 ê 文件，才 koh kā 遮个資訊用自然語言整理 hō͘ 客戶，hō͘ in 提會著 khah 完整 而且 khah 有路用 ê 答案。
+---
+Definition: An AI technique that combines information retrieval with generative AI, enabling LLMs to access relevant information from external databases or online sources to provide more accurate and comprehensive responses.
+
+Ex: The company implements RAG technology in their chatbot to allow customers to inquire about product specifications, warranty information, or troubleshooting steps. The chatbot retrieves relevant documents from the company's product database and online forums and then summarizes this information in natural language for the customer, providing them with more complete and helpful answers.
+
+-----
+
+35. 文脈內訓練 (POJ: Bûn-me̍h-lāi hùn-liān, 英: In-Context Training, 日: 文脈内学習、ぶんみゃくないがくしゅう)
+
+定義：一款技術，hō͘ LLM 會用--得 ùi 一寡例 iah-sī 示範--ni̍h 學習，毋免 koh-chài 訓練 má-to͘h(模型) 。
+
+例：假使欲 hō͘ LLM ē-tàng kā 英文句子翻譯做台語，ē-tàng tī 落指示 ê 時，chham(摻) 幾个仔 英文 hām 台語相對應 ê 句例 hō͘ 伊。LLM 就會 ùi 遮个文脈內資訊來學習，kā 新 ê 英文語句正確翻譯做台語，毋免另外 koh 訓練。
+---
+Definition: A technique that enables LLMs to learn from a few examples or demonstrations without requiring further training of the model.
+
+Ex: To enable an LLM to translate English sentences into Taigi, one can provide a few example pairs of English and Taigi sentences as part of the prompt. The LLM will learn from this in-context information and accurately translate new English sentences into Taigi without additional training.
+
+-----
+
+36. X 發學習 (POJ: X hoat ha̍k-si̍p, 英: X-shot Learning, 日: X ショット学習)
+
+定義：一款機器學習 ê 設定，má-to͘h ùi 特定數量 (X) ê 例來學習，X 一般是 0、1、8、12 等等，表示má-to͘h 看偌濟例來 kā 工課完成。
+
+例：X 發學習包括零發學習 (zero-shot)、一發學習 (one-shot)、濟發學習 (multi-shot) 等等。零發學習是講 má-to͘h 無看任何例，就按呢 kā 工課完成。一發學習是講 má-to͘h kan-ta 看一个例。八發學習 (eight-shot) 是講 má-to͘h 看八个例，àn-ni-siⁿ。
+---
+Definition: A machine learning setting where a model learns from a specific number (X) of examples. X is typically 0, 1, 8, 12, and so on, indicating how many examples the model sees to complete a task.
+
+Ex: X-shot learning encompasses zero-shot learning, one-shot learning, multi-shot learning, and so on. Zero-shot learning refers to a model completing a task without seeing any examples. One-shot learning refers to a model seeing only one example. Eight-shot learning refers to a model seeing eight examples, and so on.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 37-39 》
+
+37. AI 掠齊 (POJ: AI lia̍h-chê, 英: AI Alignment, 日: AI アラインメント)
+
+定義：AI 研究 ê 一个領域，是欲來確保 AI 系統 ê 目標 kap 人類 ê 價值觀 kap 目標相像，防止 AI hō͘人類負面 ê 影響。
+
+例：AI 掠齊 tī 開發人工超級智能 ê 時陣，是誠要緊 ê 問題，咱著愛 kā AI 程式設定 hō͘ 伊了解而且尊重人類 ê 價值觀，hō͘ 伊 ê 行為 ē-tàng 受人類監督 kap 控制，來避免 AI 發展 kah 無法度控制，煞致使人類危機。
+---
+Definition: A field of AI research that aims to ensure AI systems' goals are aligned with human values and objectives, preventing AI from having negative impacts on humanity.
+
+Ex: AI alignment is a crucial concern in developing superintelligent AI, as we need to program AI to understand and respect human values and ensure its actions are subject to human oversight and control to prevent AI from becoming uncontrollable and posing risks to humanity.
+
+-----
+
+38. 可說明 AI (POJ: Khó-soeh-bêngbAI, 英: Explainable AI, 日: 説明可能な AI、せつめいかのうなエーアイ)
+
+定義：AI 研究 ê 一个領域，目標是欲 hō͘ AI 系統 án-chóaⁿ 做決定 ê 過程 khah 透明化，hō͘ 人類會了解--tit。
+
+例：Tī 醫學診斷遮个領域，可說明 AI 誠要緊，因為醫生著愛了解 AI 系統 án-chóaⁿ ùi 病人 ê 資料--ni̍h kā 診斷做出來，才有法度確定 AI ê 建議會信用--tit ，而且 ē-tàng kā 遮个資訊用來幫贊治療方案。
+---
+Definition: A field of AI research that aims to make AI systems' decision-making processes more transparent and understandable to humans.
+
+Ex: Explainable AI is crucial in areas like medical diagnosis, as doctors need to understand how an AI system arrived at a diagnosis based on a patient's data to ensure the AI's recommendations are reliable and can be used to inform treatment decisions.
+
+-----
+
+39. AI 安全 (POJ: AI an-choân, 英: AI Safety, 日: AI 安全性、エーアイあんぜんせい)
+
+定義：AI 研究 ê 一个領域，注重 kā AI 發展 kap 應用 ê 風險節 hō͘ 低，確保 AI 袂 hō͘ 人類威脅。
+
+例：AI 安全研究者 leh 探討濟濟可能 ê 風險，包括 AI 系統 ê 重耽、惡意使用、kap 無法度控制 ê 自我改良。In ê 目標是欲發展技術 hām 策略，來預防遮个風險，hō͘ AI ē-tàng 安全 koh 利益人類。
+---
+Definition: A field of AI research that focuses on mitigating the risks associated with AI development and deployment, ensuring AI does not pose a threat to humanity.
+
+Ex: AI safety researchers are investigating various potential risks, including AI system errors, malicious use, and uncontrolled self-improvement. Their goal is to develop techniques and strategies to prevent these risks and ensure AI can be used safely and beneficially for humanity.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 40-42 》
+
+40. AGI / 人工通用智能 (POJ: Jîn-kang thong-iōng tì-lêng, 英: Artificial General Intelligence, 日: 人工汎用知能、じんこうはんようちのう)
+
+定義：AI 研究 ê 終尾目標，欲創造 chham 人類仝款 iah-sī khah 厲害 ê 智力，ē-tàng ùi 濶範圍無仝 ê 工課 kap 領域學習 kap 解決問題。
+
+例：若準 AGI 成功發展--出來，伊就會當 tī 濟濟領域超越人類，包括科學研究、藝術創作、商業決策等等。這款智力 ê 出現，無的確會 hō͘ 人類社會 kap 文明深遠 ê 影響，kā 咱 ê 生活方式、工課內容、kap 價值觀轉變--去。
+---
+Definition: The ultimate goal of AI research, aiming to create intelligence that is equal to or surpasses human intelligence, capable of learning and solving problems across a wide range of tasks and domains.
+
+Ex: If AGI is successfully developed, it could surpass human capabilities in numerous fields, including scientific research, artistic creation, and business decision-making. The emergence of such intelligence could have profound implications for human society and civilization, transforming our way of life, work, and values.
+
+-----
+
+41. ASI / 人工超級智能 (POJ: Jîn-kang tì-lêng, 英: Artificial Superintelligence, 日: 人工超知能、じんこうちょうちのう)
+
+定義：比人類智力 koh-khah gâu ê AI，所有認知能力 lóng khah 贏人類，包括學習、解難題、創意等等。
+
+例：ASI ê 出現，檢采會 hō͘ 人類文明無法度想像 ê 影響。有人認為講，ASI ē-tàng kā 濟濟世界性 ê 問題解決，若親像氣候變遷、疾病、hām 散赤。M̄-koh，mā 有人煩惱講，ASI 凡勢會對人類有威脅，若是伊 ê 目標 kap 咱 ê 價值觀無相像，iah-sī 咱無法度 kā 伊控制 hō͘ 好勢。
+---
+Definition: AI that surpasses human intelligence in all cognitive abilities, including learning, problem-solving, and creativity.
+
+Ex: The emergence of ASI could have unimaginable consequences for human civilization. Some believe that ASI could solve many global challenges, such as climate change, disease, and poverty. However, others are concerned that ASI could pose a threat to humanity if its goals are not aligned with our values or if we are unable to control it effectively.
+
+-----
+
+42. AI 特異點 (POJ: AI te̍k-ī-tiám, 英: AI Singularity, 日: 技術的特異点、ぎじゅつてきとくいてん)
+
+定義：未來一个假設 ê 時間點，AI ê 智力會 chhèng(衝)過人類，而且會 tī 足短 ê 時間內底，kā 家己改良，致使科技快速進步，煞 hō͘ 人類無法度料算 iah-sī 控制。
+
+例：AI 特異點 ê 概念 hō͘ 人濟濟猜想 kap 議論。有人相信講，特異點會 hō͘ 人類文明大大步 liòng(躘) 前，hō͘ 咱入去一个豐沛 kap 進步 ê 新時代。M̄-koh，mā 有人掛心講，奇點會 hō͘ 人類對 AI 失控制，hō͘ AI 統治 iah-sī 甚至顛倒頭 kā 人類消滅。
+---
+Definition: A hypothetical future point in time when AI surpasses human intelligence and rapidly self-improves, leading to an explosion of technological advancements that are beyond human prediction or control.
+
+Ex: The concept of the AI singularity has sparked much speculation and debate. Some believe that the singularity will lead to a great leap forward for human civilization, ushering in a new era of abundance and progress. However, some people worry that the singularity could lead to humans losing control over AI, resulting in AI dominance or even, conversely, the annihilation of humanity.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 43-45 》
+
+43. RLHF / 人類回饋強化學習 (POJ: Jîn-lūi hôe-khùi kiông-hòa ha̍k-si̍p, 英: Reinforcement Learning from Human Feedback, 日: 人間フィードバックによる強化学習、にんげんフィードバックによるきょうかがくしゅう)
+
+定義：一款訓練 AI má-to͘h (模型) ê 步數，用人類 ê 回饋來 kā 獎賞訊號調整，hō͘ má-to͘h 會生成 (seng-sêng) khah hah(合) 人類期待 ê 結果。
+
+例：彼間研究團隊 tī leh 用 RLHF 來訓練一 sian 開講機器人，hō͘ 伊 ē-tàng hō͘ 人 有路用 koh 無害 ê 資訊。In 招募一寡人，根據開講機器人 ê 反應偌有幫贊、偌正確、偌安全來 kā 拍分數。開講機器人 to̍h 會 ùi 遮个人類回饋來學習，勻勻仔 kā 伊 ê 應答品質改良。
+---
+Definition: A method of training AI models that uses human feedback to shape the reward signal, enabling the model to generate outputs that are more aligned with human preferences.
+
+Ex: The research team is using RLHF to train a chatbot to provide helpful and harmless information. They recruit human evaluators to rate the chatbot's responses based on their helpfulness, accuracy, and safety. The chatbot learns from this human feedback and gradually improves the quality of its responses.
+
+-----
+
+44. AI 評估基準 (POJ: AI phêng-kó͘ hoan7ki-chún, 英: AI Benchmark, 日: AI ベンチマーク、AI 評価基準
+)
+
+定義：一套標準化 ê 測驗 iah-sī 工課，用來評估無仝 AI 系統 iah-sī má-to͘h (模型) ê 表現。
+
+例：AI 研究者發展一款 AI 評估基準，來比較無仝 LLM má-to͘h (模型) tī 語言理解、翻譯、kap 文字生成遮个工課 ê 表現。遮个基準包括濟項無相像 ê 語言工課，譬論講問答、概要、kap 文章分類。一支一支 má-to͘h hō͘ 人指定 kā 工課完成，in ê 表現就按呢按正確率、輾轉程度、kap 創造性來評估。
+---
+Definition: A set of standardized tests or tasks used to evaluate the performance of different AI systems or models.
+
+Ex: AI researchers develop an AI benchmark to compare the performance of different LLM models in tasks such as language understanding, translation, and text generation. The benchmark includes a variety of language tasks, such as question answering, summarization, and text classification. Each model is tasked with completing these tasks, and their performance is evaluated based on their accuracy, fluency, and creativity.
+
+-----
+
+45. AI 幻覺 (POJ: AI hoàn-kak, 英: AI Hallucination, 日: AI の幻覚、エーアイのげんかく)
+
+定義：AI 系統生成 (seng-sêng) 出來 ê 資訊，m̄-koh 有毋著，he̍k-chiá chham 現實無對同，表示 AI 系統 tī 理解 iah-sī 生成資訊 ê 時陣，重躭--去。
+
+例：彼个學生用 AI 寫作工具來寫歷史報告，煞拄著 AI 幻覺 ê 問題。AI 工具 tī 報告--ni̍h 包一寡無影無跡 ê 歷史事件，koh kā 濟濟歷史人物 ê 名 kap 行止烏白鬥。這 kā 學生提醒講，AI 工具雖然有路用，m̄-koh 咱 iáu-koh 是愛 kā 伊生成--出來 ê 資訊細膩斟酌，來保障伊 ê 正確。
+---
+Definition: When an AI system generates information that is factually incorrect or inconsistent with reality, indicating errors in the AI system's understanding or generation of information.
+
+Ex: A student using an AI writing tool to generate a history report encounters AI hallucinations. The AI tool includes fabricated historical events and mixes up the names and actions of various historical figures in the report. This highlights the need to carefully review and verify the information generated by AI tools, even though they can be helpful, to ensure its accuracy.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 46-48 》 （罔參考）
+
+46. GPU / 圖像處理單元 (POJ: GPU、Tô͘-siōng chhú-lí tan-goân, 英: Graphics Processing Unit, 日: GPU、ジーピーユー)
+
+定義：一款專工設計來 kā 圖像處理加速 ê 電子電器，這馬 mā 大四界用 tī AI 領域，因為伊有才調發落大量 ê 平行計算。
+例：AI 研究者 kā GPU 列群用來訓練大型語言 má-to͘h，hō͘ 訓練速度緊不止仔濟。遮个 GPU ē-tàng kā 大量資料來平行做處理，hō͘ má-to̍͘h 會用--tit ùi 遮个資料 khah 緊學習，就按呢 kā AI 發展 ê 跤步愈加速。
+---
+Definition: An electronic circuit specialized for accelerating graphics rendering, now widely used in AI due to its ability to handle massive parallel computations.
+
+Ex: AI researchers utilize GPU clusters to train large language models, significantly speeding up the training process. These GPUs can process vast amounts of data in parallel, allowing the models to learn from this data more quickly, thus accelerating the pace of AI development.
+
+-----
+
+47. GAN / 生成捙拼網路 (POJ: Seng-sêng chhia-piàⁿ bāng-lō͘, 英: Generative Adversarial Network, 日: 敵対的生成ネットワーク、てきたいてきせいせいネットワーク)
+
+定義：一款機器學習框骨，內底有兩組神經網路，一組是生成器，一組是判別器，in 互相捙拼，生成器生成新 ê 資料，鑑別器判別遮个資料是正實 iah-sī 假--ê，Án-ne 落去，生成器就會生成愈成正實 ê 資料。
+
+例：藝術家 kā GAN 用來創作奇巧 ê 藝術作品。生成器會創作圖像，判別器 to̍h 評估遮个圖像 ê 真實度 kap 藝術性。走這號互相捙拼 ê程序，落尾生成--出來圖像 ê 真實度 kap 獨獨有 ê 藝術風格，定定會 hō͘ 人驚--tio̍h 。
+---
+Definition: A class of machine learning frameworks where two neural networks, a generator and a discriminator, compete against each other. The generator creates new data, and the discriminator tries to distinguish between real and generated data, leading to the generator producing more realistic data over time.
+
+Ex: Artists are using GANs to create novel artworks. The generator creates images, while the discriminator evaluates their realism and artistic quality. Through this adversarial process, the generated images often surprise viewers with their realism and unique artistic styles.
+
+-----
+
+48. Transformer / Tho͘-làng-suh (POJ: Tho͘-làng-suh, 英: Transformer, 日: Transformer、トランスフォーマー)
+
+定義：一款神經網路框骨，專工設計來處理序列資料，親像文字 iah-sī 語音，伊用「自我注意機制」來 kā 序列內底無仝部份 ê 關連性揣--出來，hō͘ 伊有法度理解 kah 生成 (seng-sêng) khah 長 而且 khah 複雜 ê 序列。
+
+例：語言學家用 Tho͘-làng-suh(Transformer) 框骨來分析濟濟無仝款 ê 語言，in kā 大量 ê 文字資料輸入去 Transformer má-to͘h (模型)，má-to͘h 就有法度 kā 遮个語言 ê 文法結構、話意關連、kap 語言演變模式揣--出來，hō͘ 咱對語言 ê 認捌 koh-khah 深。
+---
+Definition: A neural network architecture specifically designed for processing sequential data, such as text or speech. It utilizes a "self-attention mechanism" to identify relationships between different parts of a sequence, enabling it to understand and generate longer and more complex sequences.
+
+Ex: Linguists are using the transformer architecture to analyze various languages. By feeding large amounts of text data into a transformer model, it can uncover grammatical structures, semantic relationships, and language evolution patterns, deepening our understanding of languages.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 49-51 》 （罔參考）
+
+49. 指示工程 / Prompt Engineering (POJ: Chí-sī kang-thêng, 日: プロンプトエンジニアリング)
+
+定義：設計 hām 調整輸入指示(prompt) ê 步數，hō͘ 語言 má-to͘h ē-tàng 生成(seng-sêng) 咱欲愛 ê 應答，kā in ê 表現針對特定 ê 工課 iah-sī 應用來上適化。
+
+例 1：行銷團隊用指示工程，kō͘(怙) 大型語言 má-to͘h來寫產品描述。In 細膩 kā 指示 chhiâu(撨) hō͘ 好勢，包括產品 ê 主要功能、目標受眾資訊，kap 品牌 ê khùi-kháu(氣口) 準則，按呢來大量生成 (seng-sêng) 迷人 koh 有品牌風格 ê 內容。這款做法 m̄-nā 效率愈有，mā 確保電子商務平台 ê 內容 lóng 接一，hō͘ 客戶較欲來鬥陣，mā 較會成交。
+
+例 2：彼間法律科技新創公司用指示工程，來開發一支 AI chih(接)力 ê 合約分析工具。In kā 精確 ê 指示 chhiâu(撨)--出來，內底 kap(合) 法律用語 kap 合約結構，hō AI 有法度 kā 重要條款 kap 可能 ê 風險精確標示--出來。Tī 一層購併案--ni̍h，這款工具幾點鐘仔 to̍h kā 500 份合約分析了，kā 人類律師無的確會漏勾關要問題掠--出來。這款創新 ê 步數，kā 盡責致心調查 ê 過程簡化，hō͘ 客戶省時間、省錢，mā kā 法律評估 ê 正確度改善。
+---
+Definition: The practice of designing and refining input prompts to elicit desired responses from language models, optimizing their performance for specific tasks or applications.
+
+Ex 1: The marketing team employed prompt engineering to leverage a large language model for creating product descriptions. By carefully crafting prompts that included key product features, target audience information, and brand voice guidelines, they were able to generate compelling and on-brand content at scale. This approach not only increased efficiency but also ensured consistency across their e-commerce platform, leading to improved customer engagement and higher conversion rates.
+
+Ex 2: A legal tech startup used prompt engineering to create an AI-powered contract analysis tool. By crafting precise prompts that incorporated legal terminology and contract structure, they enabled the AI to accurately identify key clauses and potential risks. During a recent merger, the tool analyzed 500 contracts in hours, flagging critical issues that human lawyers might have missed. This innovative approach streamlined due diligence processes, saving clients both time and money while improving the accuracy of legal assessments.
+
+-----
+
+50. 圖生文 生成 (POJ: Tô͘ seⁿ bûn seng-sêng, 英: Image-to-Text Generation, 日: 画像からテキスト生成、がぞうからテキストせいせい)
+
+定義：一款 AI 技術，會當分析圖像內容，來生文字描述 iah-sī 字幕，kā 圖像內底 ê 元素、動作、kap 文脈解說--出來。
+
+例：一位青盲 ê 攝影師 tī 伊最近 ê 展覽--ni̍h，用 AI 圖生文 App。參觀者 leh 欣賞伊作品 ê 時陣，AI 就會生成逐張相片 ê 詳細描述，kā 構圖、色水、kap 感情 ê 幼路差 lóng 有掠--tio̍h。有一位人客 tī AI kā 一張日落 ê 相片描述 kah 夭壽精彩 ê 時陣，感動 kah 流目屎，因為伊 ē-tàng ùi 文字--ni̍h「看」著相片。這款技術 m̄-nā hō͘ 藝術 khah 好鬥陣，mā hō͘ 藝術家 ê 創作理念 kap 觀者 ê 體驗，連結 khah 深，無論 in 看會著 iah-sī 看袂著。
+---
+Definition: An AI technique that analyzes visual content and produces textual descriptions or captions, interpreting the elements, actions, and context present in the image.
+
+Ex: A visually impaired photographer employed an image-to-text AI app during her latest exhibition. As visitors explored her work, the AI generated detailed descriptions of each photograph, capturing nuances of composition, color, and emotion. One guest was moved to tears when the AI eloquently described a sunset image, allowing her to "see" the photo through words. This technology not only made art more accessible but also fostered a deeper connection between the artist's vision and the audience's experience, regardless of visual ability.​​​​​​​​​​​​​​​​
+
+-----
+
+51. 自我注意機制 (POJ: Chū-ngó͘ chù-ì ki-chè, 英: Self-Attention Mechanism, 日: 自己注意機構、じこちゅういきこう)
+
+定義： 神經網路 ê 一個組件，序列內底 ê 逐个元素會去注意其他 ê 元素，hō͘ 伊有法度把握無仝元素之間 ê 牽連，無論 in tī 輸入 he̍k-chiá 輸出序列有離偌遠。
+
+例：彼間金融分析公司 tī in ê 市場預測 má-to͘h (模型) 內底，有 kā 自我注意機制做--入去，用來把握全球經濟指標之間複雜 ê 關係。最近經濟 tōng-hàiⁿ(盪幌) 彼時陣，這款 má-to͘h 精確料算著市場趨勢，因為伊智覺著無仝國家 kap 產業看--起來無治代 ê 事件當中幼微 ê 牽連。這款先進 ê 分析，hō͘ 投資者 ē-tàng 做明智 ê 決定，表現贏傳統 ê 線性 má-to͘h 贏 thiám-thiám，證明自我注意機制 tī 理解複雜 ê 全球金融動態這搭，有偌強 ê 力頭。
+---
+Definition: A neural network component that allows each element in a sequence to attend to other elements, capturing dependencies regardless of their distance in the input or output sequences.
+
+Ex: A financial analytics firm implemented a self-attention mechanism in their market prediction model to capture complex relationships between global economic indicators. During the recent economic turbulence, the model accurately forecasted market trends by identifying subtle connections between seemingly unrelated events across different countries and sectors. This advanced analysis helped investors make informed decisions, outperforming traditional linear models by a significant margin and demonstrating the power of self-attention in understanding intricate global financial dynamics.​​​​​​​​​​​​​​​​
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 52-54 》 （罔參考）
+
+52. 感情分析 (POJ: Kám-chêng hun-sek, 英: Sentiment Analysis, 日: 感情分析、かんじょうぶんせき)
+
+定義：一款自然語言處理技術，會當辨識而且 kā 文字資料內底主觀 ê 資訊 thiu(抽)--出來，來判斷作者 ê 態度 iah-sī 情緒狀態。
+
+例 1 (新聞監控)：一个政治陣營用感情分析來 tòe-jiok(綴逐) 新聞媒體對 in ê 看法。AI ùi 新聞報導--ni̍h 揣著講，對候選人最近彼場演講，負面 ê 情緒有 chhèng(衝) 懸--起來，hō͘ 團隊有 thang 緊 kā 誤解澄清，而且調整 in ê 宣傳策略，上落尾候選人 ê 正面支持度 to̍h 有改善。
+
+例 2 (行銷回饋)：一个電子商務平台 kā 客戶評論 用情感分析--落去。系統智覺著講，客戶 tī 退貨程序普遍有受 tōng-thu̍t(撞突)，提醒公司緊 kā 政策改 hō͘ 順序。這款積極 ê 手路，tī 一個月內，hō͘ 客戶滿意度 chhèng(衝) 25%。
+---
+Definition: A natural language processing technique that identifies and extracts subjective information from text data to determine the writer's attitude or emotional state.
+
+Ex 1 (News Monitoring): A political campaign used sentiment analysis to track public opinion across news outlets. The AI flagged a surge in negative sentiment surrounding a candidate's recent speech, allowing the team to quickly address misconceptions and adjust their messaging strategy, ultimately improving the candidate's approval ratings.
+
+Ex 2 (Marketing Feedback): An e-commerce platform implemented sentiment analysis on customer reviews. The system identified a pattern of frustration with the return process, prompting the company to streamline their policy. This proactive approach led to a 25% increase in customer satisfaction scores within a month.
+
+-----
+
+53. 溫度參數 (POJ: Un-tō͘ chham-sò͘, 英: Temperature Parameter, 日: 温度パラメータ、おんどパラメータ)
+
+定義：語言 má-to͘h 內底 ê 一項設定，ē-tàng 控制生成文字 ê 隨機性 kap 創造性，數值愈懸，生成--出來 ê 輸出 to̍h 愈多元、愈歹料算。
+
+例：一支創意寫作 App，會 kā AI ê 溫度參數按無仝 ê 文類來調整。寫推理小說 ê 時陣，溫度較低，生成--出來 ê 情景 to̍h khah chiap-it(接一) mā khah 照理路。若準寫超現實主義 ê 詩，溫度 khah 懸，生成--出來 ê 詩句 to̍h 較牽山絆林，想像力飽滇。這款 chhun-kiu(伸勼) 會用--tit 激寫作 ê 人去探揣濟濟款風格，tī 無仝 ê 文學形式--ni̍h，kā 創造力 tháu-pàng(敨pàng)--出來。
+---
+Definition: A setting in language models that controls the randomness and creativity of the generated text, with higher values producing more diverse and unpredictable outputs.
+
+Ex: A creative writing app adjusted its AI's temperature parameter for different genres. For mystery novels, a lower temperature produced coherent, logical plots. For surrealist poetry, a higher temperature generated wildly imaginative verses. This flexibility allowed aspiring writers to explore various styles and unleash their creativity across different literary forms.
+
+-----
+
+54. 量子化 (POJ: Liōng-chú-hòa, 英: Quantization, 日: 量子化、りょうしか)
+
+定義：一款技術，會當 kā 神經網路內底數值表示 ê 精確度放 hō͘ 低，hō͘ má-to͘h ê 寸尺 kap 計算需求減少，m̄-koh iáu-koh 有維持表現。
+
+例：一間新創公司 kā in ê 人面辨識 AI 量子化，hō͘ 伊 ē-tàng tī 巧手機仔頂頭走。這款壓縮--過 ê má-to͘h，佔 ê 保存空間減 75%，而且走--起來速度比原底--ê 加 khah 緊三倍，m̄-koh 正確度 iáu-koh 有 98%。這款上適化 hō͘ khah 俗 ê 裝置 mā ē-tàng 有現時人面開鎖 ê 功能，hō͘ 愈濟人用會著前沿 ê 保全技術。
+---
+Definition: A technique to reduce the precision of the numerical representations in a neural network, decreasing model size and computational requirements while maintaining performance.
+
+Ex: A startup developed a quantized version of their facial recognition AI for deployment on smartphones. The compressed model occupied 75% less storage space and ran 3 times faster than the original, while maintaining 98% accuracy. This optimization enabled real-time face unlock features on budget devices, democratizing access to advanced security technology.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 55-57 》 （罔參考）
+
+55. Īm-pé-tinh、楔入 (POJ: Īm-pé-tinh、Seh-ji̍p, 英: Embedding, 日: 埋め込み、うめこみ)
+
+定義：一款技術，kā 字詞、片語、iah-sī 其他資料，表示做連紲向量空間內底 ê 密向量，kā 話意關係掠--出來，hō͘ 機器學習 má-to͘h (模型) ē-tàng 處理了有效率。
+
+例：一間專門做專利分析 ê 科技公司，用 īm-pé-tinh 技術來 kā in ê AI 系統訓練 hō͘ 理解專利文件 ê 技術內容。Kā 幾若百萬份專利說明書做 īm-pé-tinh--了後，系統有法度 ùi 遮个向量--ni̍h 揣著話意上倚 ê 專利，hō͘ 專利工程師有法度較緊 kā 進前 ê 相關技術 kap 判例揣--出來，án-ne 來 kā 專利申請 ê 過程加速，mā hō͘ 侵權 ê 風險落低。
+---
+Definition: A technique that represents words, phrases, or other data as dense vectors in a continuous vector space, capturing semantic relationships and enabling efficient processing in machine learning models.
+
+Ex: A tech company specializing in patent analysis uses embedding techniques to train their AI system to understand the technical content of patent documents. By embedding millions of patent specifications, the system can identify semantically similar patents from these vectors, allowing patent engineers to quickly find relevant prior art and precedents, thus speeding up the patent application process and reducing the risk of infringement.
+
+-----
+
+56. 話意搜揣 (POJ: Ōe-ì chhiau-chhōe, 英: Semantic Search, 日: 意味検索、いみけんさく)
+
+定義：一款資訊檢索 ê 方法，用 AI 來理解搜揣 查詢 ê 意圖 kap 文脈話意，m̄-sī kan-ta kā 關要字詞鬥--起來 niā-niā。
+
+例：一間數位圖書館用話意搜揣，來 kā 使用者體驗提升。有一个學生 tī–leh 揣「工業化對都市發展 ê 影響」ê 時陣，系統了解伊 ê 文脈，就按呢 kā 相關 ê 結果，包括污染、人口成長、kap 社會經濟轉變，lóng 傳--轉來。這款聰明搜揣，m̄-nā 省時間，koh hō͘ 用者接觸著 khah 濟相關 ê 資訊，kā 研究 kap 學習 ê 品質大大改善。
+---
+Definition: An information retrieval method that uses AI to understand the intent and contextual meaning behind a search query, rather than just matching keywords.
+
+Ex: A digital library implemented semantic search to enhance user experience. When a student searched for "impact of industrialization on urban development," the system understood the context and returned relevant results about pollution, population growth, and socioeconomic changes. This intelligent search not only saved time but also exposed users to a broader range of pertinent information, significantly improving the quality of research and learning outcomes.
+
+-----
+
+57. 思考鏈 (POJ: Su-khó-liān, 英: Chain of Thought, 日:思考の連鎖、しこうのれんさ)
+
+定義：AI 內底解決問題 ê 一款路數，má-to͘h (模型) kā 複雜 ê 工課拆做相連紲 ê 內坎，模仿人類 ê 推理過程。
+
+例：一 sian AI 家教老師用思考鏈推理，來 kā 學生鬥相共解數學題。解一項複雜 ê 幾何題 ê 時陣，AI kā 問題分拆做有邏則 ê 坎，koh kā 逐个坎解說清楚。這款做法 m̄-nā ē-tàng 揣著正確答案，mā 幫贊學生了解內𥚃 ê 概念。結局，考試分數加 khah 好 30%，學生 mā 講 in 家己獨立解決困難問題 ê 信心愈有。
+---
+Definition: A problem-solving approach in AI where the model breaks down complex tasks into a series of intermediate steps, mimicking human reasoning processes.
+
+Ex: An AI tutor employed chain of thought reasoning to help students with math problems. When solving a complex geometry question, the AI broke down the problem into logical steps, explaining each one. This approach not only led to correct answers but also helped students understand the underlying concepts. As a result, test scores improved by 30%, and students reported increased confidence in tackling difficult problems independently.​​​​​​​​​​​​​​​​
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 58-60 》 （罔參考）
+
+58. 文字補全、文字接全 (POJ: Bûn-jī pó͘-choân、Bûn-jī chiap-choân, 英: Text Completion, 日: テキスト補完、テキストほかん)
+
+定義：一款 AI 技術，ē-tàng 根據輸入 ê 文字，來預測 kap 生成(seng-sêng) 紲--落來 ê 文字，定定用 tī 自動補全功能 kap 創意寫作助手 。
+
+例：一位頭殼 tng-leh kún-ká(滾絞) ê 小說家，用 AI 文字補全工具來 kā 文思 ta-khó(焦洘) 渡 hō͘ 過。伊 kā「彼个探長行入去無人蹛 ê 倉庫…」拍--落去，AI 就提議幾若款有意思 ê 接紲。內底一个，雄雄 hō͘ 故事有想袂著 ê 轉斡，牽涉著一跡藏塗跤 ê 實驗室。小說家 hō͘ 開破--tio̍h，kā 這層想法發展做一 kōaⁿ(綰) 迷人 ê 故事線，hō͘ 伊規本小說 choăn(就按呢) 活--起來。AI 鬥相共激靈感，m̄-nā 鬥相共伊 kā 小說寫 kah 煞，mā hō͘ 搶市，koh hō͘ 評論家呵咾。
+---
+Definition: An AI technique that predicts and generates subsequent text based on given input, often used in autocomplete features and creative writing assistance.
+
+Ex: A struggling novelist employed an AI text completion tool to overcome writer's block. As he typed "The detective entered the abandoned warehouse...", the AI offered multiple intriguing continuations. One suggestion sparked an unexpected plot twist involving a hidden underground laboratory. Inspired, the author developed this idea into a compelling narrative thread that revitalized his entire story. The AI-assisted brainstorming not only helped him finish the novel but also contributed to its commercial success and critical acclaim.
+
+-----
+
+59. 文字分類 (POJ: Bûn-jī hun-lūi, 英: Text Classification, 日: テキスト分類、テキストぶんるい)
+
+定義：一款自然語言處理 ê 工課，AI má-to͘h (模型) ē-tàng kā 文字文件，根據 in ê 內容，分做代先定義--好 ê 類別 iah-sī 分類。
+
+例：一間濟國客服中心，用 AI 接(chih)力 ê 文字分類系統，來 kā 收--tio̍h ê 客戶電子批自動分--出去。AI 會分析逐 pang(封) 批 ê 內容，koh ka 精確分類去無仝部門，譬論講數單、技術支援、iah-sī 產品詢問。這站仔 in 公司發表新產品 ê 時陣，系統成功發落 200% 電子批量 ê 增加，kā 應答時間減 40%，koh hō͘ 客戶滿意度改善。Án-ne 分派有效率，hō͘ 人類客服 ē-tàng 注心 tī 較複雜 ê 問題，kā 客戶支援 ê 品質規个大提升。
+---
+Definition: A natural language processing task where AI models categorize text documents into predefined classes or categories based on their content.
+
+Ex: A multinational customer service center implemented an AI-powered text classification system to automatically route incoming customer emails. The AI analyzed the content of each message and accurately categorized them into departments such as billing, technical support, or product inquiries. During a recent product launch, the system successfully handled a 200% increase in email volume, reducing response times by 40% and improving customer satisfaction scores. This efficient triage allowed human agents to focus on complex issues, significantly enhancing the overall quality of customer support.
+
+-----
+
+60. 文字概要 (POJ: Bûn-jī khài-iàu, 英: Text Summarization, 日: テキスト要約、テキストようやく)
+
+定義：一款 AI 技術，ē-tàng kā lò-lò長 ê 文字，濃縮做較短 ê 版本，m̄-koh iáu-sī 會 kā 上要緊 ê 資訊 kap 重點留牢--leh。
+
+例：一間有名 ê 律師事務所，用 AI 文字概要工具，來 kā in 審查文件 ê 過程簡化。系統 kā 一份複雜 ê 100 頁購併合約，有效率濃縮做完整 ê 2 頁概要，kā 重要條款、潛在風險，kap 特殊 ê 條件 lóng 標示--出來。這款工具 hō͘ 律師省落來濟濟點鐘 ê 閱讀時間，koh 大大 kā in 攢辦案件 ê 效率改善。效率提升了後，律師事務所 ē-tàng 接較濟案件，而且提供 khah 緊、khah 省錢 ê 服務 hō͘ 客戶，終其尾 tī 競爭激烈 ê 法律市場，hō͘ in 名聲愈 chhèng(衝)。
+---
+Definition: An AI technique that condenses long texts into shorter versions while retaining the most important information and key points.
+
+Ex: A prestigious law firm adopted an AI text summarization tool to streamline their document review process. The system efficiently condensed a complex 100-page merger agreement into a comprehensive 2-page summary, highlighting key clauses, potential risks, and unusual terms. This tool saved lawyers countless hours of reading time and significantly improved their case preparation efficiency. The enhanced productivity allowed the firm to take on more cases and provide faster, more cost-effective services to clients, ultimately boosting their reputation in the competitive legal market.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 61-63 》 （罔參考）
+
+61. AI 道德風險 (POJ: AI tō-tek hong-hiám, 英: AI Moral Hazard, 日: AI モラルハザード)
+
+定義：因為倚靠 AI 系統來落決定 iah-sī 做工課，hō͘ 人類 khah 無責任感，he̍k-chiá khah 無頂真，煞致使負面後果 ê 可能性。
+
+例：彼間航空公司 tī 飛行機頂頭 設 AI 自動駕駛系統，ō͘ 機師倚靠 AI 傷過頭，in 對訓練 kap 保持飛行技術 ê 責任意識 choăn(就按呢) 落低--去。有一擺，AI 系統 tn̄g(搪)--著罕見 ê 技術問題，機師因為反應無夠緊，煞 hō͘ 飛機險險仔 to̍h 發生意外。這層事件 kā 航空公司提醒講，就準講 有 AI 技術 leh 輔助，m̄-koh iáu-koh 是愛確保人類維持應變 ê 才調 kap 負責任 ê 態度，才 ē-tàng kā 飛安風險減到上低。
+---
+Definition: The potential for increased recklessness or reduced diligence in human behavior due to reliance on AI systems for decision-making or task execution, leading to negative consequences.
+
+Ex: An airline implemented an AI autopilot system in their aircraft, leading to overreliance on AI by pilots and a decline in their sense of responsibility for maintaining their flying skills. During one instance, the AI system encountered a rare technical issue, and the pilots' delayed response nearly resulted in an accident. This incident highlighted the importance of ensuring that human operators remain vigilant and accountable, even with the assistance of AI, to minimize risks to flight safety.
+
+-----
+
+62. AI sái-poh 安全、 AI 網路安全 (POJ: AI sái-poh an-choân,、AI bāng-lō͘ an-choân, 英: AI Cybersecurity, 日: AI サイバーセキュリティ)
+
+定義：用 AI 技術來 kā 網路安全加強，包括偵測、預防、kap 應付網路攻擊。
+
+例：彼間銀行用 AI 網路安全系統來保護 in ê 客戶資料。AI 系統會相連紲分析網路流量，kā 可疑 ê 活動模式分別--出來，若親像無授權 ê 讀寫 iah-sī 資料漏洩。AI 系統 ē-tàng 自動 kā 遮个威脅擋--落來，koh 通知安全團隊來做進一步 ê 調查 kap 處理。這款 AI 接(chih)力 ê 步數，hō͘ 銀行 ē-tàng khah 有效率 kā 網路攻擊擋--落來，mā kā 客戶資料保護 kah khah 安全。
+---
+Definition: The application of AI technologies to enhance cybersecurity, including detecting, preventing, and responding to cyberattacks.
+
+Ex: The bank implemented an AI cybersecurity system to protect its customer data. The AI system continuously analyzed network traffic, identifying suspicious activity patterns such as unauthorized access attempts or data exfiltration. The AI system could automatically block these threats and alert the security team for further investigation and response. This AI-powered approach enabled the bank to more effectively defend against cyberattacks and safeguard customer data.
+
+-----
+
+63. 聯合學習 (POJ: Liân-hap ha̍k-si̍p, 英: Federated Learning, 日: 連合学習、れんごうがくしゅう)
+
+定義：一款分散式機器學習技術，允準濟濟裝置 iah-sī 資料中心，tī 無 kā 資料集中 tī 仝一个所在 ê 狀況--ni̍h，鬥陣訓練一支共同 ê má-to͘h (模型)。
+
+例：濟間病院鬥陣用聯合學習，訓練一支 ùi 醫學影像來診斷罕見疾病 ê AI má-to͘h。逐間病院 kō͘(怙) 家己 ê 資料訓練 má-to͘h ê 一部份，了後才 kā 更新過 ê má-to͘h 參數傳去一个中央 só-boh(server)。中央 só-boh 會 kā 遮个參數綜合--起來，成做一个 khah 好 ê 共用 má-to͘h。這款做法 hō͘ 逐間病院 會用--tit ùi 其他病院 ê 資料來利益--tio̍h，而且 m̄-bián kā 病人 ê 隱私資料分享--出去，就按呢 kā 合作研究 ê 可能性大大提升，koh ē-tàng hō͘ 醫療 AI 發展 khah 緊。
+---
+Definition: A distributed machine learning technique that enables multiple devices or data centers to collaboratively train a shared model without needing to centralize the data.
+
+Ex: Several hospitals collaborated using federated learning to train an AI model for diagnosing rare diseases from medical images. Each hospital trained a portion of the model on its own data and then sent the updated model parameters to a central server. The central server aggregated these parameters to create an improved global model. This approach allowed each hospital to benefit from the data of other hospitals without sharing sensitive patient information, significantly enhancing collaborative research opportunities and accelerating the development of medical AI.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 64-66 》 （罔參考）
+
+64. AI 化身 (POJ: AI hòa-sin, 英: AI Avatar, 日: AI アバター)
+
+定義：AI 接(chih)力 ê 數位代表 iah-sī kioh-siàu(腳數)，ē-tàng chham 用者 kō͘(怙) 親像人類 án-ne 互動。
+
+例：新聞台最近發表講 in 欲開始用 AI 化身來報新聞，這款 AI 主播有度規暝透日無歇睏來更新新聞，而且 ē-tàng 用濟種語言放送，hō͘ 觀眾 khah 利便提著上新 ê 資訊。觀眾反應 chhiāng-chhiāng 滾，in 肯定 AI 主播正確、客觀 ê 報導，而且 ē-tàng 隨時配合觀眾 ê 需要，來個人化調整。這款創新，tng leh kā 新聞產業轉變，mā hō͘ 咱看著 AI tī 未來媒體 ê 潛力。
+---
+Definition: A digital representation or character powered by artificial intelligence, capable of interacting with users in a human-like manner.
+
+Ex: A news channel recently announced that they will be using an AI avatar to present news broadcasts. This AI news anchor will be able to provide news updates 24/7 and can broadcast in multiple languages, making it easier for viewers to access the latest information. The audience response has been overwhelmingly positive, with viewers appreciating the AI anchor's accuracy, objectivity, and ability to personalize the news delivery based on their preferences. This innovation is transforming the news industry and showcasing the potential of AI in the future of media.
+
+-----
+
+65. VRAM、影像記憶體 (POJ: VRAM、Iáⁿ-siōng kì-ek thé, 英: VRAM, 日: VRAM、ブイラム)
+
+定義：VRAM 是一種專工設計來儉影像資料 ê 電腦記憶體，hō͘ GPU(圖像處理器) ē-tàng 緊緊讀寫資料，而且有法度平行 ùi 濟个資料點仝時讀寫，hō͘ 電腦 iah-sī 其他裝置 ê 螢幕 ē-tàng 順序 kā 圖像顯示--出來。VRAM m̄-nā 對親像電腦視覺、影像辨識、kap 影片生成這款，有食力圖像處理 ê AI 工課要緊，對文字處理 ê AI 工課來講 mā 是袂欠--tit，因為大型語言má-to͘h (LLM) 愛有足濟記憶體來 hō͘ 伊儉 má-to͘h 參數 kap 資料，而且平行 ùi 記憶體讀資料，來幫贊 má-to͘h 推論 kap 訓練 ê 效率。
+
+例：若是講電競選手，伊電腦 VRAM 無夠，tī 伊 leh 耍遊戲 ê 時陣，畫面 to̍h 會 lè-guh(lag、tùn-teⁿ)，甚至牢--leh，來影響著 in ê 表現。VRAM 愈濟，GPU ē-tàng 一擺處理 ê 圖像資料 to̍h 愈濟，遊戲畫面 to̍h 會較順，較四序。仝款道理，若是欲訓練一支 會用--tit 翻譯語言 iah-sī 寫文章 ê AI má-to͘h，VRAM 愈濟，而且 ē-tàng 平行讀寫較濟資料，訓練速度 to̍h 愈緊、效率愈有。所以，VRAM 對 AI 工課，無論是圖像處理 iah-sī 文字處理，lóng 不止仔要緊。
+---
+Definition: VRAM is a specialized type of computer memory designed to store image data, allowing the graphics processing unit (GPU) to quickly read and write data, and enabling parallel access to multiple data points simultaneously. This allows for smooth display of images on a computer or other device screen. VRAM is crucial not only for AI tasks that involve heavy image processing, such as computer vision, image recognition, and video generation, but also for text-based AI tasks. This is because large language models (LLMs) require significant memory to store model parameters and data, and benefit from parallel data access for efficient model inferencing and training.
+
+Ex: If a gamer's computer doesn't have enough VRAM, the game might lag or even crash during gameplay, affecting their performance. The more VRAM available, the more image data the GPU can process at once, resulting in smoother and more seamless gameplay. Similarly, for training an AI model capable of translating languages or writing articles, more VRAM and parallel data access lead to faster and more efficient training. Therefore, VRAM is essential for AI tasks, regardless of whether they involve image or text processing.
+
+-----
+
+66. AI 食電 (POJ: AI chia̍h-tiān, 英: AI Power Consumption, 日: AI 消費電力)
+
+定義：AI 系統 tī 訓練 má-to͘h (模型) kap 走推論工課 ê 時陣，愛用--tio̍h ê 電聲。
+
+例：專家警告講，AI 產業快速成長，全世界費能源凡勢會衝誠懸，遮个能源需求若是用化石燃料來 thap(塌)，會 kā 氣候變遷加速。為著欲 kā AI 發展 ê 環境衝擊減到上低，科技公司 kap 研究機構 tng leh 積極發展 khah 省電 ê AI 計算法 hām 硬體，mā leh 推sak(捒) 再生能源 ê 使用。Koh 有，in mā leh 探討 án-chóaⁿ kā AI 用 tī 能源管理 kap 節能技術頂頭，來 kā 能源使用效率改善，來 kā AI 發展 ê 正面利益上大化，mā kā 負面衝擊上細化。
+---
+Definition: The amount of electrical energy required to run AI systems, including training models and performing inference tasks.
+
+Ex: Experts warn that the rapid growth of the AI industry could lead to a significant increase in global energy consumption, and if this energy demand is met by fossil fuels, it could accelerate climate change. To mitigate the environmental impact of AI development, tech companies and research institutions are actively developing more energy-efficient AI algorithms and hardware, as well as promoting the use of renewable energy sources. Additionally, they are exploring how AI can be used in energy management and conservation technologies to improve energy efficiency, maximizing the positive benefits of AI while minimizing its negative impacts.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 67-69 》 （罔參考）
+
+67. 雲兜 GPU、雲頂 GPU (POJ: Hûn-tau GPU、Hûn-téng GPU, 英: Cloud GPU, 日: クラウド GPU) 
+
+定義：一款服務，ùi 雲兜計算平台支援有力 ê 圖像處理單元 (GPU)，hō͘ 一寡組織 m̄-bián 投資貴參參 ê 硬體，就有法度走不止仔愛計算力 ê AI 工課。
+
+例：一間新創公司 leh 開發 AI 接(chih)力 ê 醫學影像分析工具，in 用雲兜 GPU 來訓練 in ê 深度學習 má-to͘h (模型)。Hō͘ in 有法度處理 MRI 掃描 ê 大量資料集，m̄-bián 去買貴參參 ê 硬體。雲兜做底 ê 步數 hō͘ in 有法度緊緊做循環調整 koh 規模弓大，開發時間減 60%，而且 hō͘ in kā 這款救人命 ê 技術 khah 緊上市，這凡勢會影響著全世界幾若百萬个病人。
+---
+Definition: A service that provides access to powerful Graphics Processing Units (GPUs) through cloud computing platforms, enabling organizations to run computationally intensive AI workloads without investing in expensive hardware.
+
+Ex: A startup developing an AI-powered medical imaging analysis tool leveraged cloud GPUs to train their deep learning models. This allowed them to process massive datasets of MRI scans without purchasing expensive hardware. The cloud-based approach enabled rapid iteration and scaling, reducing development time by 60% and allowing the startup to bring their life-saving technology to market faster, potentially impacting millions of patients worldwide.
+
+-----
+
+68. 在地 LLM (POJ: Chāi-tē LLM, 英: Local LLM, 日: ローカル LLM)
+
+定義：一款大型語言 má-to͘h，ē-tàng tī 用者 ê 在地裝置 iah-sī só-boh(server) 運作，hō͘ 人隱私方面 ê 利點，mā 較免倚靠雲兜服務，m̄-koh chamm 雲兜 ê LLM 比--起來，在地 LLM tī má-to͘h 寸尺 kap 才調這搭，to̍h 較會有限制。
+
+例：一間注重隱私 ê 科技公司，tī in ê 巧手機仔 khí-盤(keyboard) App 內底，開發一款在地 LLM。這款 tī 裝置頂頭 ê má-to͘h (模型) ē-tàng 提供聰明文字料算 kap 自動修改，m̄-bián kā 用者資料傳去外部 só-boh。這款步數 m̄-nā kā 使用者 ê 隱私加強，mā 提供離線 ê 功能。在地 LLM ê 反應速度 kap 個人化學習，kā 拍字效率改善 25%，hō͘ 使用者足滿意，App ê 使用率 mā 有加添。
+---
+Definition: A Large Language Model that can be run on a user's local device or server, offering privacy benefits and reduced reliance on cloud services, albeit with potential limitations in model size and capability compared to cloud-based alternatives.
+
+Ex: A privacy-conscious tech company developed a local LLM for their smartphone keyboard app. The on-device model provided intelligent text predictions and autocorrections without sending user data to external servers. This approach not only enhanced user privacy but also enabled offline functionality. The local LLM's quick response times and personalized learning improved typing efficiency by 25%, leading to high user satisfaction and increased app adoption rates.
+
+-----
+
+69. 邊墘 AI (POJ: Piⁿ-kîⁿ AI, 英: Edge AI, 日: エッジ AI)
+
+定義：kā AI 計算法 kap 程序直接 tī 邊墘裝置 iah-sī 資料來源近兜發落，m̄-sī tī 中央化 ê 雲兜系統，án-ne thang 好現時處理資料，koh hō͘ iân-chhiân(延延) 時間減少。
+
+例：一間製造廠 tī in ê 品質管制過程內底，用邊墘 AI。有 AI 接(chih)力 ê kha-mé-lah kap sián-soh(sensor)，產品 tī khōng-bé-á 頂懸 leh 徙 ê 時陣，就 ē-tàng 現時分析，隨 kā 欠點揣--出來。這款現場發落 ê 步數，hō͘ 網路 iân-chhiân(延延) 無--去 ，koh kā 欠點產品減 40%。邊墘 AI 系統 goân-á ē-sái 適應新 ê 產品變化，m̄-bián tī 雲兜再訓練，kā 規間製造廠 ê 生產 chhun-kiu(伸勼) kap 效率大大改善。
+---
+Definition: The deployment of AI algorithms and processes directly on edge devices or near the data source, rather than in a centralized cloud-based system, enabling real-time processing and reduced latency.
+
+Ex: A manufacturing plant implemented edge AI in their quality control process. AI-enabled cameras and sensors analyzed products in real-time as they moved along the assembly line, instantly detecting defects. This on-site processing eliminated network latency and reduced defective products by 40%. The edge AI system also adapted to new product variations without needing cloud retraining, significantly improving production flexibility and efficiency across the entire manufacturing operation.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 70-72 》 （罔參考）
+
+70. 重聲 (POJ: Tāng-siaⁿ, 英: Weight, 日: 重み、おもみ)
+
+定義：人工神經網路--ni̍h，重聲是數值參數，決定神經元 chham 神經元之間相連 ê 強度。Tī 訓練過程當中，重聲會 hông 調整，來 hō͘ 網路 tī 特定工課 ê 表現上適化。
+
+例：一陣研究者開發一款獨創 ê 重聲原初化技術，用 tī 蛋白質結構料算 ê 深度學習 má-to͘h。In 根據蛋白質資料庫 ê 統計特性，斟酌 kā 原初重聲設定好勢，就按呢 khah 緊收束，而且 kā 預測蛋白質結構 ê 精確度改善。用這款重聲原初化步數訓練--出來 ê má-to͘h，料算蛋白質拗疊 ê 速度 khah 緊標準步數，而且精確度 mā 較懸，這對認捌蛋白質 ê 功能 kap研發新藥來講，lóng 誠有幫贊。這號突破顯示講，重聲管理 tī 提升 AI tiàm 科學研究應用 ê 表現遮，搬關要 ê 角色。
+---
+Definition: In artificial neural networks, weights are numerical parameters that determine the strength of the connection between neurons. They are adjusted during the training process to optimize the network's performance on a given task.
+
+Ex: A team of researchers developed a novel weight initialization technique for deep learning models in protein structure prediction. By carefully setting the initial weights based on statistical properties of protein databases, they achieved faster convergence and improved accuracy in predicting protein structures. The model trained with this weight initialization method predicted protein folding faster and with higher accuracy than standard approaches, significantly aiding in understanding protein function and developing new drugs. This breakthrough highlighted the critical role of weight management in enhancing AI performance for scientific research applications. 
+
+71. 開源 LLM (POJ: Khai-goân LLM, 英: Open Source LLM, 日: オープンソース LLM)
+
+定義：一類大型語言 má-to͘h，伊 ê khó͘(code)、枝骨，定定連代先訓練--好 ê 重聲 lóng 公開 thang 揣--著，hō͘ 開發者 ē-tàng 自由來用、修改、kap 傳湠這款 má-to͘h。
+
+例：一个研究團隊開發一款開源 LLM，專門用 tī 低資源語言。In kā má-to͘h 免費公開，hō͘ 全世界 ê 開發者 ē-tàng kā 伊改來用 tī 各種語言 kap 腔口。這款協作 ê 努力，致到 m̄-nā 50 款以早照顧無夠 ê 語言，lóng 有開講機器人 kap 翻譯工具 thang 用，大大改善幾若百萬使用者 ê 數位無障礙環境，koh tiàm 數位時代，kā 語言 ê 多元性保存--落來。
+---
+Definition: A Large Language Model whose code, architecture, and often pre-trained weights are publicly available, allowing developers to use, modify, and distribute the model freely.
+
+Ex: A research team developed an open source LLM for low-resource languages. By making the model freely available, they enabled developers worldwide to adapt it for various languages and dialects. This collaborative effort led to the creation of chatbots and translation tools for over 50 previously underserved languages, dramatically improving digital accessibility for millions of users and preserving linguistic diversity in the digital age.
+
+-----
+
+72. Hugging Face (POJ: Hugging Face, 日: Hugging Face)
+
+定義：一个平台 kah 社群，hō͘ 人會用--tit 分享、探揣、kap 合作機器學習 má-to͘h、資料集 hām 相關 ê 資源，尤其注重 tī 自然語言處理 ê 工課。
+
+例：一位資料科學家用 Hugging Face 來分享伊訓練 tī 社群媒體資料 ê 特殊感情分析 má-to͘h。伊 kā  má-to͘h ap-ló͘(upload)--起去 Hugging Face，幾若禮拜內底，各行各業 ê 開發者 to̍h ùi Hugging Face táng-ló͘(download) 這支 má-to͘h，koh ka si-á-geh(微調整) 來 hô(和) in 特殊 ê 需要。𫝛時(siāng-sî)，伊 mā tī Hugging Face 發見一个獨特 ê 客戶評論資料集，伊就用這款資料集進一步 kā 伊 ê má-to͘h 改善。這款分享 kap 改善 ê 循環，kā 伊 ê 研究加速，致使伊 tī ùi 短文字節仔偵測幼路 ê 情緒線索這搭位，有突破性 ê 進展。
+---
+Definition: A platform and community that facilitates the sharing, discovery, and collaboration on machine learning models, datasets, and related resources, particularly focusing on natural language processing tasks.
+
+Ex: A data scientist used Hugging Face to share a specialized sentiment analysis model trained on social media data. Within weeks, developers from various industries downloaded and fine-tuned the model for their specific needs. Simultaneously, she discovered a unique dataset of customer reviews, which she used to further improve her model. This cycle of sharing and improvement accelerated her research and led to a breakthrough in detecting subtle emotional cues in short text snippets.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 73-75 》 （罔參考）
+
+73. GitHub (POJ: GitHub, 日: GitHub)
+
+定義：一个網路平台，專門 leh hō͘ 人做版本控制 kap 協作，hō͘ 開發者 ē-tàng kā in ê khó͘-bè-suh(code base) 儉--leh、管理、hām 分享，包括 AI kap 機器學習 ê 計畫。
+
+例：一位 AI 研究者 tī GitHub 公開伊創新 ê 圖像生成計算法。伊 kā khó͘-bè-suh ap-ló͘(upload)--起去 GitHub，這个 khó͘-bè-suh 足緊 to̍h kā 人 siâⁿ(唌)--來，全世界 ê 開發者 lóng ùi GitHub táng-ló͘(download) 伊 ê khó͘(code)，來鬥相共 ka 改善 koh 上適化。一間新創公司 kā 這款加強--過 ê 計算法，鬥--入去 in ê 圖像設計 App，而且 kā 原底 ê 研究者 kap 貢獻者列--出來。這款 GitHub 加持 ê 協作，kā AI 接(chih)力 創意工具 ê 發展加速，mā kā 上前沿 ê 圖像生成技術大眾化，hō͘ 較濟人用會著。
+---
+Definition: A web-based platform for version control and collaboration that allows developers to store, manage, and share their code repositories, including AI and machine learning projects.
+
+Ex: An AI researcher open-sourced her innovative image generation algorithm on GitHub. The repository quickly gained traction, with developers worldwide contributing improvements and optimizations. A startup integrated the enhanced algorithm into their graphic design app, crediting the original researcher and contributors. This collaborative effort, facilitated by GitHub, accelerated the development of AI-powered creative tools and democratized access to cutting-edge image generation technology.
+
+-----
+
+74. 智識圖 (POJ: Tì-sek tô͘, 英: Knowledge Graph, 日: 知識グラフ、ちしきグラフ)
+
+定義：一款 kā 資訊結構化 ê 表示法，kā 資料整理做概念 chham in 之間 ê 關係，hō͘ 機器 ē-tàng 理解 kap 推論資料內底複雜 ê 互相牽連。
+
+例：一間農業科技公司開發一个智識圖，kā 農作物品種、土地種類、氣候模式、kap 市場趨勢 lóng 連--起來。In ê AI 系統 ē-tàng 提供個人化 ê 建議 hō͘ 農民。Tī 一個罕得落雨 ê 地區，系統建議種會擋洘旱 ê 農作物，koh 根據土地成份 kap 天氣預報，提供上適合 ê 沃水方式。系統 mā 會考慮市場需求 kah 運輸問題，建議種會趁較濟錢 ê 農作物。結局，農民看著產量增加 30%，省水，趁錢 koh chhèng(衝) 25%。智識圖 mā 顯示巧妙 ê 輪作技術，自然 hō͘ 土地肥力加添。
+---
+Definition: A structured representation of information that organizes data into entities and their relationships, allowing machines to understand and reason about complex interconnections within the data.
+
+Ex: An agricultural technology company developed a knowledge graph that linked crop varieties, soil types, climate patterns, and market trends. Their AI system could provide personalized recommendations to farmers. In a region experiencing drought, the system recommended drought-resistant crops and suggested optimal irrigation strategies based on soil composition and weather forecasts. Taking into account market demand and transportation logistics, the system also recommended crops that would yield higher profits. As a result, farmers saw a 30% increase in crop yield, water savings, and a 25% boost in income. The knowledge graph also revealed innovative crop rotation techniques that naturally enhanced soil fertility. 
+
+-----
+
+75. 敵對攻擊 (POJ: Te̍k-tùi kong-kek, 英: Adversarial Attack, 日: 敵対的攻撃、てきたいてきこうげき)
+
+定義：一款技術，用來 kā 輸入資料創空，hō͘ AI má-to͘h，尤其 tī 電腦視覺 kah 自然語言處理遮个領域，會應毋著，iah-sī 行為變 kah 無正常。
+
+例：Tī 模擬認捌戰爭 ê 軍事演習--ni̍h，一陣 AI 專家展示講 in ē-tàng 對敵軍 ê 無人機監視系統發動敵對攻擊。In kā AI 生成--出來 ê 巧妙花草安 tī 車 ê 迷彩頂懸，成功 hō͘ 敵軍 ê 圖像認捌 AI kā 戰車認毋著做普通車。這款敵對技術 ê 突破，致使軍方開發 khah 粗勇 ê AI 系統 chham 新 ê 電子戰策略，對未來 ê 戰爭準則有重大 ê 影響。
+---
+Definition: A technique used to manipulate input data to cause an AI model to make mistakes or behave abnormally, particularly in areas like computer vision and natural language processing. 
+
+Ex: During a simulated reconnaissance warfare exercise, a team of AI specialists demonstrated their ability to launch adversarial attacks against enemy drone surveillance systems. By applying subtle, AI-generated patterns to the camouflage of vehicles, they successfully tricked the enemy's image recognition AI into misclassifying tanks as ordinary vehicles. This breakthrough in adversarial techniques prompted the military to develop more robust AI systems and new electronic warfare strategies, significantly impacting the future of warfare doctrines.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 76-78 》 （罔參考）
+
+76. AI 走獄 (POJ: AI cháu-ga̍k, 英: AI Jailbreaking, 日: AI ジェイルブレイク)
+
+定義：Kā AI 系統 ê 限制 iah-sī 安全措施閃--開，hō͘ 伊做毋是設計 iah-sī 訓練伊 ê 人欲做 ê 代誌，定定是為著欲用著較濟功能、有較濟控制權、iah-sī ùi AI 系統提著敏感 ê 資訊。
+
+例：一个 hé-khoh(hacker) 集團 kā 一款商業用 ê 開講機器人創 hō͘ 走獄，hō͘ 伊有法度生成(seng-sêng) 有害 ê 內容 kap 假消息。In kā má-to͘h ê 安全協定改改--去，hō͘ 伊 ē-tàng ùi 提著大範圍 ê 線頂資料，koh kā 伊訓練來傳湠特定 ê 政治宣傳。這款 AI 走獄 ê 事件，hō͘ 大家煩惱 AI 烏白用 ê 問題，mā 提醒咱愛有 khah 勇壯 ê 安全措施，來防止 AI hông(予人) 用 tī 惡意 ê 目的。為著欲應付遮个新威脅，AI 開發者開始注心 kā 安全 kap 倫理 考慮入去 má-to͘h 設計，kā má-to͘h 訓練 hō͘ thang 認捌 kap 抵抗敵對攻擊，而且 kā 系統監控 hō͘ khah 嚴，來 kā 無授權讀寫 ê 風險上小化。
+---
+Definition: Bypassing the limitations or safety measures of an AI system to make it perform actions not intended or approved by its designers or trainers, often to gain access to more functionality, control, or sensitive information from the AI system.
+
+Ex: A group of hackers jailbroke a commercial chatbot AI, enabling it to generate harmful content and misinformation. They modified the model's safety protocols, allowing it to access a wider range of online data and training it to spread specific political propaganda. This incident of AI jailbreaking raised concerns about AI misuse and highlighted the need for more robust security measures to prevent AI from being used for malicious purposes. To address these emerging threats, AI developers are focusing on incorporating safety and ethical considerations into model design, training models to recognize and resist adversarial attacks, and implementing stricter system monitoring to minimize the risk of unauthorized access.
+
+-----
+
+77. 智識蒸餾 (POJ: Tì-sek cheng-liû, 英: Knowledge Distillation, 日: 知識蒸留、ちしきじょうりゅう)
+
+定義：一款機器學習技術，kā 一支大型 iah-sī 複雜 ê AI má-to͘h (號做「老師 má-to͘h」) ê 智識，徙--去另外一支 khah 細 iah-sī khah 簡單 ê má-to͘h (號做「學生 má-to͘h」)，hō͘ 學生 má-to͘h ē-tàng 計算資源用較少 iah-sī 較袂費電，koh 表現 kah chham 老師 má-to͘h 會比並--tit。
+
+例：一个研究團隊開發一支足厲害 ê AI má-to͘h，ē-tàng ùi 醫學影像 kā 濟濟款癌細胞精確分別--出來，m̄-koh 這支 má-to͘h 寸尺傷過頭大，普通 ê 病院電腦無夠力 thang 走。為著欲 hō͘ 遮个技術 khah 好普及，in 就用智識蒸餾，kā 大型 má-to͘h ê 智識撨徙--去一支 khah 細隻 ê má-to͘h，án-ne 較無力 ê 電腦 mā 有法度走--tit ，而且準確度原仔有懸。這款步數 hō͘ 濟濟資源有限 ê 病院 mā ē-tàng 用會著頭沿 ê AI 診斷工具，kā 癌早早揣--出來，hō͘ 病人 thang 早早治療。
+---
+Definition: A machine learning technique where the knowledge from a large or complex AI model (called the "teacher model") is transferred to a smaller or simpler model (called the "student model"), allowing the student model to achieve comparable performance with fewer computational resources or lower power consumption.
+
+Ex: A research team developed a powerful AI model that could accurately distinguish various types of cancer cells from medical images, but the model was too large to run on typical hospital computers. To make this technology more accessible, they used knowledge distillation to transfer the knowledge from the large model to a smaller one that could run on less powerful computers while maintaining high accuracy. This approach enabled many hospitals with limited resources to utilize cutting-edge AI diagnostic tools for early cancer detection, leading to earlier treatment for patients.
+
+-----
+
+78. 風格撨徙 (POJ: Hong-keh chhiâu-sóa, 英: Style Transfer, 日: スタイル変換、スタイルへんかん)
+
+定義：一款 AI 技術，ē-tàng kā 一張圖像 iah-sī 影片 ê 藝術風格，hô(和) 去另外一張圖像 iah-sī 影片，hō͘ 伊 看--起來袂輸是用彼个風格創作--出來-ê。
+
+例：一間室內設計公司 kā 風格撨徙技術用 tī in ê 線頂平台，hō͘ 客戶 ē-tàng 看著 in ê 房間若準用無仝款 ê 室內設計風格裝潢，會生做啥款。客戶 ē-tàng kā in 房間 ê 相片 ap-ló͘(upload)--起去，koh ùi 濟款風格--ni̍h 揀，比論講現代風、工業風、iah-sī 歐式古典風。AI 就會 kā 遮个風格 hô(和)去客戶 ê 房間相片，生成 (seng-sêng) 若正實 ê 模擬圖，hō͘ 客戶 ē-tàng 輕鬆比較無仝 ê 設計方案，揣著上 hah(合) in khùi-kháu(氣口) ê 款式。這款技術 m̄-nā hō͘ 室內設計師 ê 工課簡化，mā hō͘ 客戶 tī 裝潢 in 夢想厝 ê 時陣，體驗 khah 好。
+---
+Definition: An AI technique that applies the artistic style of one image or video to another, making it appear as if it were created in that style.
+
+Ex: An interior design company integrated style transfer technology into their online platform, allowing customers to visualize how their rooms would look with different interior design styles. Customers could upload photos of their rooms and choose from various styles, such as modern, industrial, or European classical. The AI would then apply these styles to the customer's photos, generating realistic simulations that allowed them to easily compare different design options and find the one that best suited their taste. This technology not only streamlined the work of interior designers but also enhanced the customer experience when designing their dream homes.
+
+-----
+ 
+
+《 AI 相關台語語詞 kap 例句 79-81 》 （罔參考）
+
+79. AI 機器人 (POJ: AI ki-khì-lâng, 英: AI Robot, 日: AI ロボット)
+
+定義：一款 ē-tàng 自動做複雜動作 ê 機器，用 AI 計算法來𤆬決策 kap 做工課。
+
+例：一間電腦製造廠 tī in ê khōng-bé-á，用 AI 機器人。遮个機器人，有電腦視覺 kah 適應性學習演算法，ē-tàng 精確認捌 kap 處理各種零件。In ē-tàng 根據現時 ê 品質管制資料，隨時調整 in ê 動作，kā 欠點減 40%。AI 驅動 ê 自動化，hō͘ 生產效率添 60%，而且 hō͘ 人類員工有法度注心 tī 較複雜、較有創意 ê 產品設計 kap 創新工課。
+---
+Definition: A machine capable of carrying out complex actions automatically, guided by artificial intelligence algorithms for decision-making and task execution.
+
+Ex: A PC manufacturing factory implemented AI robots in their assembly line. These robots, equipped with computer vision and adaptive learning algorithms, could identify and handle various components with high precision. They dynamically adjusted their movements based on real-time quality control data, reducing defects by 40%. The AI-driven automation increased production efficiency by 60% and allowed human workers to focus on more complex, creative tasks in product design and innovation.
+
+-----
+
+80. AI 模擬 (POJ: AI bô͘-gí, 英: AI Simulation, 日: AI シミュレーション)
+
+定義：一款電腦 má-to͘h，用人工智慧來複製複雜 ê 系統 iah-sī 時景，hō͘ 咱有法度料算、分析、kap 落決策。
+
+例：氣象學家用 AI 模擬來做天氣預報，kā 衛星、地面測站、kap 歷史模式 ê 資料 lóng 綜合--起來。這款 má-to͘h ē-tàng tī 兩禮拜進前，就 kā 極端天氣事件料算 kah 有 85% 準。Tī 風颱季，這款模擬幫贊 hō͘ 政府機關會赴做撤離 ê 決策，凡勢解救著幾若千條性命。伊 mā kā 災害應變 ê 資源分配上適化，大碼 kā 嚴重天氣事件 ê 經濟衝擊壓低。
+---
+Definition: A computer-based model that uses artificial intelligence to replicate complex systems or scenarios, enabling prediction, analysis, and decision-making.
+
+Ex: Meteorologists developed an AI simulation for weather forecasting that integrated data from satellites, ground stations, and historical patterns. The model could predict extreme weather events with 85% accuracy up to two weeks in advance. During a hurricane season, the simulation helped authorities make timely evacuation decisions, potentially saving thousands of lives. It also optimized resource allocation for disaster response, significantly reducing the economic impact of severe weather events.
+
+-----
+
+81. AI 人型機器人 (POJ: AI jîn-hêng ki-khì-lâng, 英: AI Humanoid Robot, 日: AI 人型ロボット、エーアイじんがたロボット)
+
+定義：一款機器人，設計 kah 有親像人類 ê 形體 kap 行為，用 AI 來互動、學習、kap 做工課。
+
+例：一間頭沿 ê 科技公司發表一款 AI 人型機器人，專工設計來看顧老大人。這款機器人 ē-tàng chham 人自然開講，認捌情緒，koh ē-tàng 發落家事。Tī 一項試驗計畫內底，伊鬥相共老大人 hō͘ 會記得食藥仔、做簡單 ê 運動、kap 做四常 ê 家事。這款人型機器人 ê 做陣功能，kā 使用者孤單 ê 感覺減 30%，而且伊 ê 監控功能，ē-tàng 隨時 hō͘ 人醫療協助，kā 獨居老大人規个生活品質改善。[ 註：這猶袂有 ]
+---
+Definition: A robot designed to resemble and mimic human form and behavior, powered by artificial intelligence for interaction, learning, and task performance.
+
+Ex: A leading tech company unveiled an AI humanoid robot designed for elderly care. The robot could engage in natural conversations, recognize emotions, and perform household tasks. In a pilot program, it assisted seniors with medication reminders, light exercise routines, and daily chores. The humanoid's companionship features reduced feelings of loneliness among users by 30%, while its monitoring capabilities allowed for quick medical interventions, improving overall quality of life for elderly individuals living independently.​​​​​​​​​​​​​​​​
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 82-84 》 （罔參考）
+
+82. 指示注入 (POJ: Chí-sī chù-siā, 英: Prompt Injection, 日: プロンプトインジェクション)
+
+定義：一款對網路安全 ê 攻擊，歹人 kā 惡意 ê 資料 iah-sī 指令，注入去 AI 系統 ê 輸入指示(prompt) 內底，hō͘ AI má-to͘h 生成 (seng-sêng) 無欲愛 ê 輸出，iah-sī 行無愛 ê 行動。
+
+例：彼間公司 ê 線頂客服系統，用 AI 開講機器人來應答客戶 ê 問題。一个 ké-khoh(hacker) kā 一節指示注入去開講機器人 ê 系統，hō͘ 伊 kā 機密 ê 客戶資料漏洩--出去。ké-khoh(hacker) tī 輸入指示--ni̍h，kā 看--起來無害 ê 文字包--入去，m̄-koh 事實上 kā 開講機器人 ê 行為改變--去，hō͘ 伊 ùi 資料庫--ni̍h kā 敏感 ê 資訊搜揀--出來，koh 傳--去 ké-khoh(hacker) ê só-boh(server)。這層事件 kā 公司提醒講，AI 系統 ê 安全性是誠要緊，in 著愛 kā 輸入做驗證而且清 hō͘ 清氣，來避免指示注入 ê 攻擊。
+---
+Definition: A cybersecurity attack where malicious data or commands are injected into the input prompt of an AI system, causing the AI model to generate unintended outputs or perform undesired actions.
+
+Ex: A company's online customer service system used an AI chatbot to answer customer queries. A hacker injected a prompt injection attack into the chatbot system, causing it to leak confidential customer data. The hacker included seemingly harmless text in the input prompt that actually altered the chatbot's behavior, making it retrieve sensitive information from the database and send it to the hacker's server. This incident highlighted the importance of AI system security and the need for proper input validation and sanitization to prevent prompt injection attacks.
+
+-----
+
+83. 文生音樂 生成 (POJ: Bûn seng im-ga̍k seng-sêng, 英: Text-to-Music Generation, 日: テキスト音楽生成、テキストおんがくせいせい)
+
+定義：一款 AI 技術，ē-tàng 根據文字描述 iah-sī 指示來創作音樂作品，包括旋律、和聲、節奏，有當陣仔 mā 包括歌詞。
+
+例：一間音樂教育新創公司開發一款文生音樂 má-to͘h (模型) hō͘ 學生用。有一个學生 kā「創作一塊春天時，快樂、活跳 ê 歌 ，用鋼琴 kap gì-tah 來演奏」拍--落去，AI 就創作一段 hō͘ 人歡喜 ê 旋律，koh 配四序 ê 樂器伴奏。這款工具 kā 學生鬥相共了解音樂理論 ê 概念，hō͘ in ē-tàng 用簡單 ê 文字指令，試無仝款 ê 音樂元素，來 kā in ê 創作力 kap 作曲技巧提升。
+---
+Definition: An AI technique that creates musical compositions based on textual descriptions or prompts, encompassing melody, harmony, rhythm, and sometimes lyrics.
+
+Ex: A music education startup developed a text-to-music generation tool for students. When a student typed "create a happy, upbeat song about springtime with a piano and guitar," the AI composed a cheerful melody with fitting instrumentals. This tool helped students understand music theory concepts by allowing them to experiment with different musical elements through simple text commands, enhancing their creativity and composition skills.
+
+-----
+
+84. 文生話音、TTS (POJ: Bûn seⁿ ōe-im、TTS, 英: Text-to-Speech、TTS, 日: テキスト音声合成、テキストおんせいごうせい)
+
+定義：一款 AI 技術，ē-tàng kā 文字資料轉做話音，hō͘ 電腦 iah-sī 其他裝置有法度 kā 文字唸--出來。
+
+例：一間新創公司 kā 文字生話音技術應用 tī 台語教育 kap 推sak。In 開發一款線頂台語學習平台，內底有濟濟台語文教材，包括故事、歌詩、新聞等等，lóng ē-tàng 用 AI kā 伊唸--出來。學生 ē-sái tī 平台頂懸練習聽講台語，mā 會用--tit 調整腔口 kap 話速，來配合 in 學習 ê 跤步。這款技術 hō͘ 學生學台語 khah 心適、 khah 有效率，mā hō͘ 台語文 khah 好鬥陣，對台語教育 kap 復振有誠大 ê 幫贊。Koh-khah 要緊--ê 是，遮个 AI 語音資料 ē-tàng 公開 hō͘ 台語語音辨識系統 ê 開發者用，來 hō͘ 台語語音技術 ê 發展 koh 行向前，而且 hō͘ 台語 tī 數位時代有 khah 好 ê 環境。
+---
+Definition: An AI technique that converts text data into speech, enabling computers or other devices to read text aloud.
+
+Ex: A startup company is utilizing text-to-speech technology for Taiwanese language education and promotion. They developed an online Taiwanese learning platform with various Taiwanese language materials, including stories, poems, news articles, and more, all of which can be read aloud by AI. Students can practice listening and speaking Taiwanese on the platform and adjust the accent and speaking speed to suit their learning pace. This technology makes learning Taiwanese more engaging and efficient for students, increases the accessibility of Taiwanese language materials, and significantly contributes to Taiwanese language education and revitalization. Moreover, these AI-generated speech data can be made available to developers of Taiwanese speech recognition systems, further advancing Taiwanese speech technology and creating a more favorable environment for the language in the digital age.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 85-87 》 （罔參考）
+
+85. SOTA má-to͘h、上前沿 má-to͘h (POJ: Siōng chiân-iân má-to͘h, 英: SOTA model, 日: 最先端モデル、さいせんたんモデル)
+
+定義：SOTA má-to͘h (模型) 是 leh 講一款 tī 特定工課 iah-sī 評估基準--ni̍h，表現上讚 ê AI iah-sī 機器學習 má-to͘h，比所有進前 ê má-to͘h lóng 較 gâu，代表 tī 伊 ê 領域內底，現此時能力 ê 上山尾溜。
+
+例：一陣 AI 研究者開發一款 SOTA má-to͘h (模型)，ē-tàng 預測蛋白質結構。In ê má-to͘h ē-tàng 精確料算蛋白質 ê 3D 結構，準確度到 95%，較贏所有進前試--ê。這項突破隨 kā 藥物研發 ê 過程加速，hō͘ 製藥公司 ē-tàng 設計 khah 有效 ê 藥物，來醫進前無法度醫 ê 病。才幾若月日，這款 má-to͘h 就鬥相共研發一款有希望 thang 好醫罕見遺傳病 ê 新藥仔，hō͘ 咱看著講，kā AI 能力 ê 界線 lu(攄) hō͘ 出--去，會 án-chóaⁿ 衝擊真實世界。
+---
+Definition: A State-of-the-Art model refers to an AI or machine learning model that achieves the best performance on a specific task or benchmark compared to all previously existing models, representing the current pinnacle of capability in its field.
+
+Ex: A team of AI researchers developed a SOTA model for protein structure prediction. Their model accurately predicted the 3D structures of proteins with 95% accuracy, surpassing all previous attempts. This breakthrough immediately accelerated drug discovery processes, enabling pharmaceutical companies to design more effective medications for previously untreatable diseases. Within months, the model contributed to the development of a promising new treatment for a rare genetic disorder, showcasing the real-world impact of pushing the boundaries of AI capabilities.​​​​​​​​​​​​​​​​
+
+-----
+
+86. ControlNet、控制網 (POJ: ControlNet、Khòng-chè-bāng, 英: ControlNet, 日: ControlNet、コントロールネット)
+
+定義：一款神經網路架構，hō͘ AI má-to͘h 內底 ē-tàng kā 圖像生成 ê 過程精確控制，使用者就按呢 ē-tàng 根據特定 ê 輸入條件，若親像邊墘、深度圖、iah-sī 姿勢估算，來引𤆬輸出。
+
+例：一間時裝設計公司 kā ControlNet 鬥--入去 in AI 攄捒 ê 設計過程。設計師 ē-tàng kā 粗粗仔 ê 草圖 kap 姿勢準則輸入--落去，來生成 (seng-sêng) tī 虛擬 má-to͘h 身軀頂懸穿插 ê 詳細、真實圖像。這款工具 hō͘ 設計師 ē-tàng 緊緊 kā 新設計做原型，而且簡單 to̍h ē-sái 調整風格、布料 kap 尺寸。ControlNet 接(chih)力 ê 系統 kā ùi 概念到上尾設計 ê 時間減 60%，hō͘ 公司有法度 khah 緊應付 tng 欲puh(發)--出來 ê 時裝趨勢 kap 客戶 ê 偏 hèng(興)。
+---
+Definition: An neural network architecture that allows for precise control over image generation processes in AI models, enabling users to guide the output based on specific input conditions such as edges, depth maps, or pose estimation.
+
+Ex: A fashion design company integrated ControlNet into their AI-driven design process. By inputting rough sketches and pose guidelines, designers could generate detailed, realistic images of clothing on virtual models. This tool allowed for rapid prototyping of new designs, with the ability to easily adjust styles, fabrics, and fits. The ControlNet-powered system reduced the time from concept to final design by 60%, enabling the company to respond more quickly to emerging fashion trends and customer preferences.​​​​​​​​​​​​​​​​
+
+-----
+
+87. AI 憲法 (POJ: AI hiàn-hoat, 英: AI Constitution, 日: AI 憲法、エーアイけんぽう)
+
+定義：開發 AI 系統 ê 一款路數，kā 安全措施 kap 倫理原則設入內，確保 AI ê 行為會 ha̍h(合) 代先定義--好 ê 規範 kap 價值觀。
+
+例：一間科技公司 tī 開發社群媒體平台 ê 內容審查系統 ê 時陣，kā AI 憲法做--落去。這款 AI 用程式 kā 言論自由、使用者安全 kap 文化敏感度遮个原則設定--入去。拄著有爭議 ê 文章 ê 時，系統會 kā 遮个原則取平衡，落幼路 ê 決定，一方面保護使用者 ê 表達，一方面 kā 可能 ê 傷害減輕。這款路數 hō͘ 審查錯誤少 40%，mā kā 使用者對平台管理 ê 信任度改善。
+---
+Definition: An approach to developing AI systems with built-in safeguards and ethical principles, ensuring the AI behaves in accordance with predefined rules and values.
+
+Ex: A tech company implemented constitutional AI in developing a content moderation system for a social media platform. The AI was programmed with principles of free speech, user safety, and cultural sensitivity. When faced with a controversial post, the system balanced these principles, making nuanced decisions that protected user expression while mitigating potential harm. This approach reduced moderation errors by 40% and improved user trust in the platform's governance.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 88-90 》 （罔參考）
+
+88. AI 自我意識 (POJ: AI chū-ngó͘ ì-sek, 英: AI Self-Awareness, 日: AI 自己認識、エーアイじこにんしき)
+
+定義：一款假設 ê 狀態，AI 系統有意識、會自我反省，koh 了解家己 ê 存在 hām 思考 ê 過程。
+
+例：一个研究團隊開發一隻 AI má-to͘h ，伊有前沿 ê 內省能力，in ê 目標是欲探討機器自我意識 ê 概念。這款 AI 顯示講伊有才調分析家己 ê 決策過程，理解家己智識 ê 不足，koh 會要求特定 ê 資訊來 kā 表現改善。雖然正實 ê 自我意識猶無影跡，m̄-koh 這个突破 hō͘ AI 系統 khah 透明化，khah 有法度解說--tit ，kā 關要決策過程內底，人類 kap AI 之間 ê 信任 kap 協作加強。
+---
+Definition: A hypothetical state where an AI system possesses consciousness, self-reflection, and an understanding of its own existence and thought processes.
+
+Ex: A research team developed an AI model with advanced introspective capabilities, aiming to explore the concept of machine self-awareness. The AI demonstrated an ability to analyze its own decision-making processes, recognize gaps in its knowledge, and request specific information to improve its performance. Although true self-awareness remains elusive, this breakthrough enhanced the transparency and explainability of AI systems, fostering trust and collaboration between humans and AI in critical decision-making processes.
+
+-----
+
+89. AI 犯罪 (POJ: AI hoān-chōe, 英: AI Crime, 日: AI 犯罪、エーアイはんざい)
+
+定義：Kō͘(怙) AI 技術來做無合法活動 ê 人 iah-sī 組織，in ē-hiáu 用 AI 來 kā 犯罪手法自動化、加強攻擊、iah-sī 走閃偵測。
+
+例 1：一个 AI 犯罪集團開發一款 AI má-to͘h (模型)，ē-tàng 模仿正實 ê 銀行客戶 ê 話音 kap 行為模式，來 hō͘ 電話客服系統相信 in ê 身份，就按呢 kā 幾若百个銀行口座 ê 錢偷提--去。遮个 AI 犯罪者者用濟个海外口座來洗錢，koh 用 AI kā in ê 線頂跤跡 hú(拊)--hìⁿ-sak，hō͘ 執法單位追蹤 in 足困難。這款 AI 犯罪 ê 出現，hō͘ 咱看著網路安全 kap 犯罪防治 ê 新挑戰，咱著愛有 khah 進步 ê 技術 kap 策略，來 kā 遮个 leh 進化 ê 威脅擋--落來。
+
+例 2：一个 AI 犯罪集團開發一款 AI má-to͘h (模型)，ē-tàng tī 社群媒體頂懸，模仿真人 ê 語氣 kap 行為模式，kā 假口座經營 kah chham 正實--ê 成成成，來傳湠假消息，影響政治選舉。遮个 AI 犯罪者 kā 假消息 chham 真實新聞 thàu-lām(透濫)--做伙，hō͘ 人足歹分別真假，用按呢來變弄輿論，致使社會對立 kap 政治 tōng-hàiⁿ(盪幌)。這款 AI 犯罪 ê 出現，hō͘ 咱智覺著網路安全 kap 資訊戰 ê 新挑戰，咱著愛有 khah 前沿 ê 技術 kap 策略，來 chham 遮个 leh 進化 ê 威脅相拼。
+---
+Definition: Individuals or organizations that leverage AI technologies to commit illegal activities, using AI to automate criminal techniques, enhance attacks, or evade detection.
+
+Ex 1: An AI criminal group developed an AI model that could mimic the voice and behavioral patterns of legitimate bank customers to deceive phone-based customer service systems, successfully stealing funds from hundreds of bank accounts. The AI criminals laundered the stolen money through various offshore accounts and used AI to erase their online tracks, making it extremely difficult for law enforcement agencies to trace them. This emergence of AI-powered crime highlighted new challenges in cybersecurity and crime prevention, requiring more advanced technologies and strategies to counter these evolving threats.
+
+Ex 2: An AI criminal group developed an AI model that could mimic the language and behavioral patterns of real people on social media to create and manage highly realistic fake accounts for spreading misinformation and influencing political elections. These AI criminals blended fake news with genuine articles, making it difficult for people to distinguish between truth and falsehood, manipulating public opinion, and sowing social discord and political instability. This emergence of AI-powered crime highlighted new challenges in cybersecurity and information warfare, requiring more advanced technologies and strategies to counter these evolving threats.
+
+-----
+
+90. 擴散 má-to͘h (POJ: Khok-sàn má-to͘h, 英: Diffusion Model, 日: 拡散モデル、かくさんモデル)
+
+定義：一款深度學習 má-to͘h (模型)，ē-tàng 生成 (seng-sêng) 高品質 ê 圖像，伊先 kā 圖像加添雜訊，koh 訓練另外一組神經網路，kā 遮个雜訊沓沓仔徙--hìⁿ-sak，來 kā 原底 ê 圖像重造--出來。
+
+例：一間遊戲工作室 kā 擴散 má-to͘h (模型) 用 tī in ê 科幻遊戲內底，生成 (seng-sêng) 外星世界 kap 奇巧生物。設計師 kā 一寡關要詞，比論講「水晶石洞，石洞頂懸有生物光 leh 爍 ê 礦石」、「有六支跤，身軀半透明 ê 外星生物」、「用反重力技術浮 tī 天頂 ê 城市 hām 建築」輸入--落去，má-to͘h 就會生成 (seng-sêng) 濟濟款無仝 ê 概念圖，hō͘ 美術團隊來激靈感，kā in ê 遊戲世界設計 kah khah 豐沛。這款 AI 工具 hō͘ in ē-tàng 較緊 kā 濟濟可能性探揣--出來，揀上 siâⁿ(唌)--人--ê，來 kā 遊戲 ê 視覺效果提升--起去另外一个坎站。
+---
+Definition: A type of deep learning model that can generate high-quality images by first adding noise to an image and then training another neural network to gradually remove the noise to reconstruct the original image.
+
+Ex: A game studio used diffusion models to generate alien worlds and fantastical creatures for their sci-fi game. By inputting keywords like "crystal caverns with bioluminescent minerals on the ceiling," "six-legged, translucent alien creatures," and "cities floating in the air with buildings using anti-gravity technology," the model produced a variety of concept art, inspiring the art team and enriching the game's world design. This AI tool allowed them to quickly explore a wide range of possibilities and select the most compelling ones, elevating the game's visuals to another level.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 91 》 （罔參考）
+
+91. AI 接力 ê 戰爭 (POJ: AI chih-la̍t ê chiàn-cheng, 英: AI-Powered War, 日: AI 駆動の戦争、エーアイくどうのせんそう)
+
+定義：未來凡勢會出現 ê 戰爭型態，AI 技術 tī 戰略、戰術、武器系統 kap 規个戰鬥--ni̍h，lóng 搬關要 ê 角色，致使戰爭 ê 性質 kap 衝擊大大改變。
+
+例 1：專家料算講，未來 AI 戰爭 ê 特徵是，速度會 khah 緊，規模 khah 大，koh 較免倚靠人類直接插跤手。想像一个 3D 戰場，AI lu-sak(攄捒) ê 無人機 tī 天頂飛，無人藏水艦 tī 海底覕，無人戰車 tī 塗跤走傱，in lóng 完全袂忝，koh 高精確完成任務 ，而且反應速度比人類 khah 緊。遮个 AI 系統 ē-tàng ùi 衛星、sián-soh(sensor)、kap 網路 khêng(窮) 大量 ê 資料，kā 敵軍 ê 策略料算--出來，koh 隨調整家己 ê 戰術，hō͘ 人類 tī 未來 ê 衝突--ni̍h，tn̄g(搪)--著空前 ê 挑戰。
+
+例 2：一个模擬都市戰爭 ê 情景--ni̍h，AI 接(chih)力 ê 無人機 leh 做現時偵察，kā 資料飼 hō͘ 中央指揮 AI。這个系統足緊 kā 建物結構、平民活動 kap 敵軍所在分析好勢，做動態 ê 戰鬥計畫。AI ê 機器人 kā 建物內底 ê 爆炸物清--hìⁿ-sak，koh 盡量 kā 平民 ê 風險壓低。AI ê 整合，kā 誤傷事件減 80%，koh kā 任務成功率提升，這 kā 咱開拆講， AI 對現代戰爭戰術有深遠 ê 影響。
+---
+Definition: A potential future form of warfare where artificial intelligence technologies play a dominant role in strategy, tactics, weapons systems, and overall combat, significantly altering the nature and impact of war.
+
+Ex 1: Experts predict that future AI warfare will be characterized by increased speed, scale, and reduced reliance on direct human involvement. Imagine a 3D battlefield with AI-powered drones in the sky, unmanned submarines lurking beneath the waves, and autonomous tanks maneuvering on land, all operating tirelessly and with high precision, reacting faster than human counterparts. These AI systems could gather vast amounts of data from satellites, sensors, and networks, predict enemy strategies, and adapt their tactics in real time, presenting unprecedented challenges for humans in future conflicts.
+
+Ex 2: In a simulated urban warfare scenario, AI-powered drones conducted real-time reconnaissance, feeding data to a central command AI. The system rapidly analyzed building structures, civilian movements, and enemy positions, creating dynamic battle plans. AI-guided robots cleared buildings of explosives while minimizing civilian risk. The integration of AI reduced friendly fire incidents by 80% and increased mission success rates, demonstrating the profound impact of AI on modern warfare tactics.
+
+-----
+
+92. AI 散赤 (POJ: AI sàn-chhiah, 英: AI Poverty, 日: AI 貧困、エーアイひんこん)
+
+定義：AI 技術發展 kah 應用，煞 hō͘ 一寡人 iah-sī 社群 tī 經濟、社會方面，變 khah 不利，he̍k-chiá 資源減少 ê 現象。
+
+例：AI 自動化 tī 濟濟產業愈來愈四常，致使濟濟傳統 ê 頭路 hō͘ 伊替換--去，造成大篐圍失業。若是講政府 kah 企業無 kā 勞工重訓練，koh 創造新 ê 頭路機會，遮个失業者就無的確會跋落 AI 散赤，in ê 生活水準會 ná 低--去，而且無法度參與 AI lu-sak(攄捒) ê 經濟。這款 AI 散赤 ê 問題，顯示科技進步對社會 ê 衝擊，mā 強調講咱著愛 kā AI 發展 kah 社會公平正義相連--起來，確保逐家 lóng ē-tàng ùi AI 革命來利益--tio̍h。
+---
+Definition: A phenomenon where the development and deployment of AI technologies lead to economic or social disadvantages or a reduction in resources for certain individuals or communities.
+
+Ex: As AI-driven automation becomes increasingly prevalent across various industries, many traditional jobs are being displaced, resulting in widespread unemployment. If governments and businesses fail to retrain workers and create new job opportunities, these displaced workers may fall into AI poverty, experiencing a decline in their living standards and an inability to participate in the AI-powered economy. This issue of AI poverty highlights the societal impact of technological advancements and emphasizes the need to align AI development with social equity, ensuring that everyone can benefit from the AI revolution.
+
+-----
+
+93. AI 公益 (POJ: AI kong-ek, 英: AI for Public Welfare, 日: 公共の福祉のためのAI、こうきょうのふくしのためのエーアイ)
+
+定義：kō͘(怙) AI 技術來發落社會 kah 環境問題，hō͘ 世界變 khah 好 ê 一款運動 kah 路數。
+
+例：一間允欲用 AI 來做公益 ê 科技公司，開發一款 AI má-to͘h (模型)，ē-tàng ùi 衛星影像 kā 非法 chhò(剉)林 ê 行為揣--出來。這款 má-to͘h 會分析森林 khàm-kah(崁蓋)率 ê 改變、樹仔品種、kap 地形資料，來 kā 可能 ê 違法剉林標示--出來。環保團體 kah 政府單位 ē-tàng 用遮个資訊，來阻擋非法剉林，保護森林資源 kah 生物多樣性。這款 AI 應用，對環境保育有足大 ê 貢獻，mā hō͘ 咱看著 AI ē-tàng 按怎 hō͘ 咱 ê 地球 khah 永續。
+---
+Definition: A movement and approach that leverages AI technologies to address social and environmental challenges, making the world a better place.
+
+Ex: A tech company committed to AI for Public Welfare developed an AI model that could detect illegal deforestation activities from satellite imagery. The model analyzed changes in forest cover, tree species, and terrain data to identify potential illegal logging operations. Environmental organizations and government agencies could use this information to prevent deforestation, protect forest resources, and preserve biodiversity. This AI application significantly contributed to environmental conservation and demonstrated how AI could help make our planet more sustainable.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 94-96 》 （罔參考）
+
+94. 深仿 (POJ:Chhim-hóng, 英: Deepfake, 日: ディープフェイク)
+
+定義：一款 AI 技術，ē-tàng kā 影片 iah-sī 音聲變弄，hō͘ 伊看--起來、聽--起來，袂輸某物人 leh 講 iah-sī leh 做 in 事實上無講、無做 ê 代誌。
+
+例：線頂流傳一塊深仿影片，kā 一个政治人物 ê 面鬥--起去另外一 sian(身)身軀，hō͘ 伊看--起來若親像 tī–leh 做卸世卸症 ê 代誌。這款深仿影片誠好騙--人，ē-tàng hō͘ 人對遮个人 ê 印象害害--去，he̍k-chiá 致使社會無安定。咱 tī 網路時代，著愛 khah 細膩，m̄-thang chhìn-chhái(凊彩) 相信 tī 線頂看--tio̍h、聽--tio̍h--ê，查驗資訊源頭是誠關要，才袂 hō 假消息𤆬歪--去。
+---
+Definition: An AI technique that manipulates videos or audio to make it appear as if someone is saying or doing something they never actually said or did.
+
+Ex: A deepfake video circulating online showed a politician's face superimposed on another person's body, making it seem as if the politician was engaging in scandalous activities. These deepfakes can be highly deceptive and can damage the reputation of individuals or even cause social unrest. In the age of the internet, we need to be more discerning and not readily believe everything we see or hear online. It's crucial to verify information sources to avoid being misled by false information.
+
+-----
+
+95. AI 假消息 (POJ: AI ké-siau-sek, 英: AI Disinformation, 日: AI 偽情報、エーアイぎじょうほう)
+
+定義：Kō͘(怙) AI 技術來 kā 假消息 iah-sī 誤導 ê 資訊，大量生成 (seng-sêng) kap 傳湠--出去。
+
+例：一个外國勢力用 AI 假消息系統，tī 選舉進前，大量 tiàm 社群媒體頂懸傳湠假消息，來影響選舉結果。遮个 AI 系統 ē-tàng 自動 seng-sêng(生成) 假新聞、假口座、koh 假評論，hō͘ 人真 oh(僫) 分別真假。遮个假消息 kā 選民誤導，致使社會對立，koh hō͘ 民主程序受威脅。咱面對 AI 假消息 ê 時，著愛 khah 有警覺，莫無查驗就 kā 資訊分享--出去，愛檢查資訊源頭，koh 愛參考多元 ê 觀點，來 kā 假消息 ê 衝擊上小化。
+---
+Definition: The use of AI technologies to create and spread false or misleading information at scale.
+
+Ex: A foreign power used an AI disinformation system to spread fake news on social media during an election to influence the outcome. The AI system could automatically generate fake news articles, fake accounts, and fake comments, making it difficult for people to distinguish between real and fabricated information. This disinformation campaign misled voters, sowed social discord, and threatened the democratic process. In the face of AI disinformation, we must be more vigilant, refrain from sharing information without verification, check information sources, and consider diverse perspectives to minimize the impact of fake news.
+
+-----
+
+96. AI 反詐欺 (POJ: AI hoán-chà-khi, 英: AI Anti-fraud, 日: AI 不正防止、エーアイふせいぼうし)
+
+定義：Kō͘(怙) AI 技術來料算、預防、kap 處理詐欺行為，ē-tàng hō͘ 金融機構、電子商務平台、kap 其他組織 ê 安全性 khah 妥當。
+
+例：一間信用卡公司用 AI 反詐欺系統來保護 in ê 客戶。AI 系統會相連紲分析交易資料，kā 可疑 ê 模式分別--出來，比論講無四常 ê 交易金額、所在、iah-sī 時間。若是系統偵測著可能 ê 詐欺行為，就會自動 kā kau-e̍k(交易)擋--落來，而且通知客戶來確認。這款 AI 接(chih)力 ê 步數，hō͘ 信用卡公司 ē-tàng khah 有效率 kā 詐欺損失壓低，mā 保全客戶 ê 資金。
+---
+Definition: The use of AI technologies to detect, prevent, and address fraudulent activities, enhancing security for financial institutions, e-commerce platforms, and other organizations.
+
+Ex: A credit card company implemented an AI anti-fraud system to protect its customers. The AI system continuously analyzed transaction data, identifying suspicious patterns such as unusual transaction amounts, locations, or times. If the system detected potential fraud, it could automatically block the transaction and notify the customer for verification. This AI-powered approach enabled the credit card company to more effectively reduce fraud losses and safeguard customer funds.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 97-99 》 （罔參考）
+
+97. Web API / 網路應用程式介面 (POJ: Bāng-lō͘ èng-iōng thêng-sek kài-bīn, 英: Web Application Programming Interface, 日: Web アプリケーションプログラミングインターフェース)
+
+定義：一款 API，專門用 tī 網路頂懸，hō͘ 無仝款 ê 應用程式 ē-tàng 互相溝通 kap 交換資料，普通是用 HTTP 協定來傳送資料，資料格式是用 JSON iah-sī XML。
+
+例 1：一間出版社用一款 LLM ê Web API 來 kā 出版流程自動化。In 開發一个系統，ē-tàng kā 手稿內容傳--去 hō͘ LLM API，LLM 就會 kā 文法錯誤、錯字、kap 風格問題標示--出來，koh 提議修改建議。系統 mā ē-tàng kā LLM 用來生成 (seng-sêng) 冊 ê 概要、目錄、kap 行銷文案。LLM API kā 出版流程 ê 效率提升，koh hō͘ 編輯 ē-tàng 注心 tī khah 有創意 kap 策略性 ê 工課。
+
+例 2：一間新聞媒體提供 Web API hō͘ 開發者 ē-tàng ùi in ê 資料庫提著新聞報導、相片、kap 影片。一支新聞綜合 App kā 這个 API 鬥--入去，hō͘ 用者 ē-tàng tī 仝一个 App 內底，看--tio̍h 濟間無仝新聞媒體 ê 報導，m̄-bián koh 跳去另外一个網站 iah-sī App。Web API 促進網路服務之間 ê 整合，hō͘ 開發者 ē-tàng 較緊 kā 新 ê 應用程式開發--出來，mā hō͘ 用者 ê 體驗 khah 四序。
+---
+Definition: A type of API specifically designed for use over the internet, allowing different applications to communicate and exchange data with each other, typically using the HTTP protocol for data transmission and formats like JSON or XML for data representation.
+
+Ex 1: A publishing house utilizes a Web API for an LLM to automate parts of their book publishing process. They developed a system that sends manuscript text to the LLM API, which then identifies grammatical errors, typos, and stylistic issues, providing suggestions for improvement. The system also leverages the LLM to generate book summaries, tables of contents, and marketing copy. The LLM API enhances the efficiency of the publishing workflow, allowing editors to focus on more creative and strategic tasks.
+
+Ex 2: A news organization provides a Web API that allows developers to access news articles, photos, and videos from their database. A news aggregator app integrates this API, enabling users to view content from multiple news sources within a single app, without needing to switch to different websites or apps. Web APIs facilitate the integration of online services, allowing developers to build new applications more rapidly and enhance user experience.
+
+-----
+
+98. Pa̍k、蟲 (POJ: Pa̍k、Thâng, 英: Bug, 日: バグ)
+
+定義：軟體 iah-sī 系統內底 ê 重耽 iah-sī 欠缺，致使伊 ê 行為無照按算，he̍k-chiá 結果耽重--去。
+
+例：一个程式設計師 tī–leh 寫一款 AI 接(chih)力 ê 影像辨識 App ê 時陣，發見一隻蟲，hō͘ App kā 貓仔認做狗仔。伊斟酌 kā khó͘(code) 檢查--過，揣著講訓練 má-to͘h (模型) ê 資料集--ni̍h，有一寡貓仔 ê 相片標籤 hông(予人) 標毋著--去。伊 kā 遮个錯誤標籤改--過，koh kā má-to͘h 重訓練，就按呢 kā 問題解決。Tī AI 發展--ni̍h，debug( tī-pa̍k、掠蟲 kap 清蟲 ）是誠關要 ê 工課，ē-tàng 保障 AI 系統 ê 正確 kap 可靠。
+---
+Definition: An error or flaw in software or a system that causes it to behave unexpectedly or produce incorrect results.
+
+Ex: A programmer working on an AI-powered image recognition app discovered a bug that caused the app to misidentify cats as dogs. After carefully reviewing the code, he found that some of the cat images in the training dataset were mislabeled. He corrected the mislabeled images and retrained the model, resolving the issue. Bug detection and fixing are crucial tasks in AI development, ensuring the accuracy and reliability of AI systems.
+
+-----
+
+99. 烏箱仔 (POJ: O͘-siuⁿ-á, 英: Black Box, 日: ブラックボックス)
+
+定義：一款系統 iah-sī má-to͘h (模型)，伊內底 ê 運作方式，對外部觀察者來講無透明，無法度 hō͘ 人了解伊是 án-chóaⁿ 做決定 iah-sī 出輸出--ê。
+
+例：濟濟人批評講，深度學習 má-to͘h (模型) 定定是烏箱仔，咱無法度完全了解 in án-chóaⁿ ùi 輸入資料來出輸出。這款無透明，hō͘ 人煩惱 AI ê 道德 kap 安全問題，因為咱無法度確定 AI 系統敢會落帶偏見 iah-sī 危險 ê 決定--出來。AI 研究者 tng leh 積極發展技術，來 hō͘ 烏箱仔 má-to͘h khah 會解說--tit，hō͘ 咱 ē-tàng 了解 in ê 決策過程，才 khah 會用--tit 安心 kā AI 應用 tī 較敏感 ê 領域，譬論講醫療 kap 司法。
+---
+Definition: A system or model whose internal workings are opaque to external observers, making it impossible to understand how it makes decisions or produces outputs.
+
+Ex: Many people criticize deep learning models for often being black boxes, as we cannot fully understand how they generate outputs from input data. This lack of transparency raises concerns about AI ethics and safety, as we cannot be sure if AI systems are making biased or dangerous decisions. AI researchers are actively developing techniques to make black box models more explainable, allowing us to understand their decision-making processes and feel more confident when applying AI in sensitive domains like healthcare and justice.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 100-102 》 （罔參考）
+
+100. AI 反假消息 (POJ: AI hoán ké-siau-sek, 英: AI Anti-disinformation, 日: AI 偽情報対策、エーアイぎじょうほうたいさく)
+，
+定義：Kō͘(怙) AI 技術來對抗假消息 ê 傳湠，包括分別、標示、kap 澄清假消息，mā ē-tàng kā 假消息 ê 來源 jiok(逐)--出來。
+
+例：一个社群媒體平台用 AI 反假消息系統，來 hō͘ in 平台頂懸 ê 假消息 khah 袂四界湠。AI 系統 ē-tàng 自動分別 kap 標示可能 ê 假新聞，koh 提供 ē-tàng 做查實 ê 資源 hō͘ 用者。系統 mā 有法度 kā 散布假消息 ê 口座 jiok(逐)--出來，kā in 停權 iah-sī 阻擋。這款 AI 接(chih)力 ê 步數，hō͘ 社群媒體平台 thang khah 有效率 kā 假消息 ê 負面影響減輕，mā hō͘ 用者 khah 安全 mā thang 信用 ê 資訊環境。
+---
+Definition: The use of AI technologies to combat the spread of disinformation, including identifying, flagging, and debunking false information, as well as tracing the sources of disinformation.
+
+Ex: A social media platform implemented an AI anti-disinformation system to reduce the prevalence of fake news on their platform. The AI system could automatically detect and flag potential fake news articles and provide users with links to fact-checking resources. The system could also track down accounts spreading disinformation and suspend or ban them. This AI-powered approach enabled the social media platform to more effectively mitigate the negative impacts of disinformation and provide users with a safer and more trustworthy information environment.
+
+-----
+
+101. AI 認知戰 (POJ: AI Jīn-ti-chiàn, 英: AI Recognition Warfare, 日: AI 認識戦、エーアイにんしきせん)
+
+定義：一種新型 ê 戰爭，kō͘(怙) AI 技術來影響對手 ê 認知、情緖、kap 決策，目標是 hō͘ in 判斷重耽，行利益對手 ê 行動。
+
+例：Tī 一个地緣政治緊張 ê 區域，兩个國家 tī–leh 拍 AI 認知戰。其中一个用 AI má-to͘h (模型) 來分析對手國內 ê 社群媒體資料，kā in ê 社會輿論、政治立場、kap 文化價值觀了解 kah 透透。就按呢用 AI 生成--出來 ê 假消息 kap 宣傳，針對性 ka 傳湠去對手國家，來使弄 hō͘ in 社會對立、政治無安定、hām 對政府無信任。這款 AI 認知戰，ē-tàng 連開一銃都免，就 úi 對手國家內部 kā 國際名聲破害--去，hō͘ in tī 國際舞台頂懸 pháiⁿ(歹) 徛起。
+---
+Definition: A new form of warfare that leverages AI technologies to manipulate an adversary's perceptions, emotions, and decision-making, aiming to induce miscalculations and actions favorable to one's own side.
+
+Ex: In a geopolitically tense region, two nations engaged in AI recognition warfare. One nation used AI models to analyze social media data from their adversary's country, gaining insights into their public opinion, political leanings, and cultural values. They then used AI to generate targeted disinformation and propaganda campaigns, spreading them within the adversary's borders to incite social discord, political instability, and distrust in the government. This AI recognition warfare, without firing a single shot, could destabilize the adversary nation from within, damage its international reputation, and weaken its position on the global stage.
+
+-----
+
+102. AI 反認知戰 (POJ: AI Hoán-jīn-ti-chiàn, 英: AI Anti-recognition Warfare, 日: AI 認識戦対策、エーアイにんしきせんたいさく)
+
+定義：Kō͘(怙) AI 技術來 chham 認知戰 ê 攻擊捙拼，包括分別、封鎖、kap 點破假消息，mā ē-tàng kā AI 系統訓練 hō͘ khah 會擋得敵對攻擊。
+
+例：一个國家 ê 國防部成立 AI 反認知戰中心，專門 leh 對付外國勢力 ê AI 攻擊。遮个中心用 AI má-to͘h (模型) 來監控網路活動，kā 可疑 ê 假消息 kap 宣傳分別--出來。In mā ē-tàng kā AI 系統訓練 hō͘ 分別 chham 抵抗深仿技術，hō͘ in 袂 hō͘ 假影片 iah-sī 假音聲 lāng(弄)--去。Koh-khah 要緊--ê 是，遮个中心 mā 會 kā 正確 ê 資訊四界湠--出去，hō͘ 民眾智覺認知戰 ê 危險，而且教 in án-chóaⁿ 分別假消息。這款 AI 反認知戰 ê 策略，hō͘ 國家有法度 kā 伊家己 ê 認知空間保護 hō͘ khah 好勢，mā hō͘ 民眾 tī 資訊戰 ê 時代，有法度做較明智 ê 判斷。
+---
+Definition: The use of AI technologies to counter recognition warfare attacks, including identifying, blocking, and debunking disinformation, as well as training AI systems to be more resilient to adversarial attacks.
+
+Ex: A nation's defense ministry established an AI anti-recognition warfare center to counter AI-powered attacks from foreign adversaries. The center used AI models to monitor online activity, identifying suspicious disinformation and propaganda campaigns. They also trained AI systems to recognize and resist deepfake technology, preventing them from being fooled by fake videos or audio. Moreover, the center disseminated accurate information to the public, raising awareness about the dangers of recognition warfare and educating them on how to identify disinformation. This AI anti-recognition warfare strategy enabled the nation to more effectively protect its cognitive space and empower its citizens to make informed decisions in the age of information warfare.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 103-105 》 （罔參考）
+
+103. 標籤 (POJ: Pio-chhiam, 英: Label, 日: ラベル)
+
+定義：Tī 機器學習--ni̍h，標籤是 kā 資料 kap 特定 ê 類別 iah-sī 數值 kap(合)--起來 ê 資訊，用來訓練 má-to͘h (模型) 認捌模式 kap 做料算。
+
+例 1：一間農業科技公司 kā in ê AI 系統訓練來 kā 無仝款 ê 農產品，根據影像，自動分類。In kā 幾若千張相片，包括 lìn-go͘h、柑仔、弓蕉、王梨等等，逐張相片 lóng 標一个標籤，表示這是啥物水果，koh 包括品種、大細、熟度等等 ê 資訊。按呢訓練--出來 ê AI má-to͘h，ē-tàng tī 農產品 ê 分級 kap 包裝過程，提供詳細 ê 分析 kah 建議，hō͘ 農民管理農產品 ē-tàng khah 精確、效率 koh 有。
+
+例 2：一間公司 leh 開發一款 AI 接(chih)力 ê OCR (光學認字) 系統，ē-tàng kā 手寫 ê 書類掃描--落來，koh 自動 kā 文字數位化。為著欲 hō͘ 系統 ē-tàng 精確認捌各種手寫字體，in kā 幾若百萬張手寫 ê 字 kap 正確 ê 文字標籤鬥--起來，án-ne 來訓練 AI má-to͘h。標籤資料愈濟、愈精確，OCR 系統 ê 辨識率 to̍h 愈懸，tī 處理歷史文件、醫療記錄、koh 有其他手寫資料 ê 時陣，效率 to̍h 愈有。譬論講，一个圖書館 ē-tàng 用這款 OCR 系統，kā in 館藏 ê 古早手稿數位化，hō͘ 研究者 kap 大眾 khah 有 thang 讀著遮个珍貴 ê 資料。
+---
+Definition: In machine learning, a label is a piece of information that associates data with a specific category or value, used to train models to recognize patterns and make predictions.
+
+Ex 1: An agricultural technology company trained their AI system to automatically classify different types of agricultural products based on images. They used thousands of images of apples, oranges, bananas, pineapples, and other fruits, each labeled with the correct fruit type, along with additional information such as variety, size, and ripeness. The trained AI model could then provide detailed analysis and recommendations during the sorting and packaging process, enabling farmers to manage their produce more accurately and efficiently.
+
+Ex 2: A company is developing an AI-powered OCR (Optical Character Recognition) system that can scan handwritten documents and automatically digitize the text. To enable the system to accurately recognize various handwriting styles, they are training the AI model using millions of handwritten characters paired with their correct text labels. The more abundant and accurate the label data, the higher the recognition rate of the OCR system, making it more efficient in processing historical documents, medical records, and other handwritten materials. For example, a library could use this OCR system to digitize their collection of ancient manuscripts, making these valuable resources more accessible to researchers and the public.
+
+-----
+
+104. 代先訓練 má-to͘h (POJ: Tāi-seng hùn-liān má-to͘h, 英: Pre-trained model, 日: 事前学習済みモデル、じぜんがくしゅうずみモデル)
+
+定義：一款 AI má-to͘h (模型)，已經 tī 一个極大 ê 資料集頂懸訓練--過，ē-tàng 用來做底，koh-chài 訓練 iah-sī si-á-geh(微調整)，來 tàu-tah(鬥搭) 特定 ê 工課 iah-sī 領域。
+
+例 1：一間新創公司欲開發一款台語 ê 語音助理，in 就用一个代先 tī 英語語料庫訓練--過 ê 語音辨識 má-to͘h 做起頭。In kā 這个 má-to͘h 用較細組 ê 台語語音資料集 koh-chài 訓練，就按呢 hō͘ má-to͘h ē-tàng 認捌台語 ê 語音模式。這款步數較省時間、省資源，比 ùi 自起頭訓練一支新 má-to͘h 效率 khah 有。
+
+例 2：一个研究團隊 tī leh 開發一款 ē-tàng ùi 醫學影像 kā 罕見疾病診斷--出來 ê AI 系統。In 資源、時間無夠 thang 自起頭訓練一支深度學習 má-to͘h，所以 in 就用一支代先 tī ImageNet 資料集（一个極大 ê 圖像資料庫）訓練--過 ê 電腦視覺 má-to͘h。In kā 這支 má-to͘h 用特定疾病 ê 醫學影像 koh-chài 訓練，hō͘ 伊 ē-tàng 認捌遮个疾病 ê 特徵。這款撨徙學習 ê 步數，ē-tàng 大碼 kā 訓練 ê 時間 kap 需要 ê 資料減少。
+---
+Definition: An AI model that has been previously trained on a massive dataset and can be used as a starting point for further training or fine-tuning to adapt it for a specific task or domain.
+
+Ex 1: A startup company wants to develop a Taiwanese language voice assistant. They start with a pre-trained speech recognition model that was trained on a large English language corpus. They then further train this model on a smaller Taiwanese speech dataset, allowing the model to recognize Taiwanese speech patterns. This approach saves time and resources compared to training a new model from scratch.
+
+Ex 2: A research team is developing an AI system to diagnose rare diseases from medical images. They lack the resources and time to train a deep learning model from scratch, so they utilize a pre-trained computer vision model that was trained on the ImageNet dataset, a massive image database. They further train this model on medical images specific to the rare disease, enabling it to recognize the characteristic features of the disease. This transfer learning approach significantly reduces the training time and data requirements.
+
+-----
+
+105. 文生產品 生成 (POJ: Bûn seⁿ sán-phín seng-sêng, 英: Text-to-Product Generation, 日: テキストから製品生成、テキストからせいひんせいせい)   [ 註：概念性，這猶袂有，毋過應該得欲有--矣 ]
+
+定義：一款 AI 技術，ē-tàng 根據文字描述 iah-sī 設計規格，來生成 (seng-sêng) 實體產品 iah-sī 數位產品 ê 設計，包括 3D má-to͘h (模型)、製造指令、kap 其他必要 ê 資訊。
+
+例：一間家具公司開發一款文生產品 AI 系統，hō͘ 客戶 ē-tàng 用自然語言來設計 in 家己 ê 家具。客戶 ē-sái kā in 欲愛 ê 家具款式、尺寸、材料、kap 功能，用文字描述--出來，AI 系統 to̍h 會自動生成 (seng-sêng) 相對應 ê 3D má-to͘h，koh kā 製造指令傳--去工廠，就按呢 ē-tàng kā 客戶獨獨有 ê 家具製作--出來。這款技術 hō͘ 客戶 tī 設計產品 ê 時陣，thang khah 有 chhun-kiu(伸勼) kap 創造力，mā hō͘ 客製化產品 ê 製作 khah 好參與 而且 效率 khah 有。
+---
+Definition: An AI technique that generates designs for physical or digital products based on textual descriptions or design specifications, including 3D models, manufacturing instructions, and other necessary information.
+
+Ex: A furniture company developed a text-to-product AI system that allowed customers to design their own furniture using natural language. Customers could describe their desired furniture style, dimensions, materials, and functionalities in text, and the AI system would automatically generate corresponding 3D models and send manufacturing instructions to the factory to produce the customer's unique furniture piece. This technology empowers customers with greater flexibility and creativity in product design and makes customized product manufacturing more accessible and efficient.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 106-108 》 （罔參考）
+
+106. 系統指示抽出 (POJ: Hē-thóng chí-sī thiu-chhut, 英: System Prompt Extraction, 日: システム指示抽出、システムしじちゅうしゅつ)
+
+定義：Kō͘(怙) 特殊設計 ê 輸入，意圖欲變弄 AI 系統，hō͘ 伊 kā 核心指令漏洩--出來，iah-sī 違反伊應該愛有 ê 行為限制。
+
+例：一个 ké-khoh(hacker) 試欲對一間公司 ê AI 助理，做系統指示抽出。伊頭先問一寡 kán-ná 無敗害 ê 問題，才沓沓仔 kā 問題變複雜，koh tī 問題內底藏微妙 ê 指令。若準無妥當 ê 安全措施，AI 助理就無的確會 tī 應答--ni̍h，kā 伊核心 ê 運作原則漏洩--出來。假使 ké-khoh(hacker) 成功 kā 系統指示抽--出來，伊就會用--tit 用遮个資訊來閃避安全設定，iah-sī 強逼 AI 做無授權 ê 代誌。為著欲防止系統指示抽出，AI 設計者著愛 kā 特殊 ê 安全機制做--入去，比論講指令階層法，來確保核心指令有受著保護，袂去 hō͘ 用者 ê 輸入壓--過。
+---
+Definition: The act of attempting to manipulate an AI system through specially crafted inputs to reveal its core instructions or violate its intended behavioral constraints.
+
+Ex: A hacker attempted system prompt extraction on a company's AI assistant. They started by asking seemingly innocuous questions, gradually increasing in complexity and hiding subtle commands within their queries. Without proper safeguards, the AI assistant might inadvertently reveal some of its core operating principles in its responses. If successful in extracting system prompts, the hacker could use this information to bypass security settings or force the AI to perform unauthorized actions. To prevent system prompt extraction, AI designers must implement special security mechanisms, such as instruction hierarchy methods, to ensure core instructions remain protected and cannot be overridden by user inputs.​​​​​​​​​​​​​​​​
+
+-----
+
+107. 指令階層 (POJ: Chí-lēng kai-chân, 英: Instruction Hierarchy, 日: 指示階層、しじかいそう)
+
+定義：AI 系統設計 ê 一款路數，kā 無仝坎 ê 指令排前後，確保 AI 會照上要緊 ê 指示來動作，mā ē-tàng 抵抗外部 ê 干擾。
+例：一間科技公司 tī in ê 客服系統內底，用指令階層法來 kā AI 助理 ê 表現改善。In kā 指令分做三坎：上頭坎是公司價值觀 ê 核心原則，中坎是標準 ê 客服程序 kap 應答策略，尾坎是詳細 ê 產品資訊 kap 四常 ê FAQ 答案。客戶問問題 ê 時陣，AI 助理會先參考上頭坎 ê 指示，確保應答 kap 公司形象有合，才 koh 去揣中坎 ê 指示，來決定愛 án-chóaⁿ 應答，上落尾才 ùi 尾坎 ê 指示--ni̍h 提特定 ê 詳細。這款路數確保 AI 助理 ê 應答，就準講 tn̄g(搪)--著較特殊 ê 問題，mā 會維持接一 kap 專業。Koh-khah 要緊--ê 是，假使有人想欲變弄 AI 生成無妥當 ê 內容，上頭坎 ê 安全指示就會囥頭先，hō͘ AI 袂去生成無適當 ê 應答。這款系統實施了後，客戶滿意度 chhèng(衝) 不止懸，客服人員 ê 效率 mā 改善，公司規个形象 mā phû(浮)懸。
+---
+Definition: A design approach for AI systems that prioritizes different levels of instructions, ensuring the AI operates according to the most important directives while resisting external interference.
+
+Ex: A tech company implemented the instruction hierarchy method in their customer service system to improve their AI assistant's performance. They divided instructions into three levels: the top level consisted of core principles derived from the company's values, the middle level included standard customer service procedures and response strategies, and the bottom level contained detailed product information and common FAQ answers. When a customer asked a question, the AI assistant would first refer to the top-level instructions to ensure the response aligned with the company's image, then consult the middle-level instructions to determine the appropriate approach, and finally draw specific details from the bottom-level instructions. This method ensured that the AI assistant's responses remained consistent and professional, even when faced with unusual queries. Moreover, if someone attempted to manipulate the AI into producing inappropriate content, the top-level safety instructions would take precedence, preventing the AI from generating unsuitable responses. After implementing this system, customer satisfaction increased significantly, customer service staff efficiency improved, and the company's overall image was enhanced.​​​​​​​​​​​​​​​​
+
+-----
+
+108. Ollama (POJ: O͘-lá-mah, 英: Ollama，日: Ollama)
+
+定義：Ollama 是一款開源 ê 框骨，設計來 kā 大型語言 má-to͘h (LLM) 普及化，hō͘ in ē-tàng 用個人電腦走。伊 kō͘(怙) 一个用者友善 ê 指令逝介面，kā táng-ló͘(download)、鬥、hām 走各種 AI má-to͘h ê 程序簡單化。Ollama 支援闊範圍 ê má-to͘h，ùi 較細、效率較好--ê，到較有力 ê 變體 lóng 有，koh hō͘ 用者 ē-tàng 仝時管理濟支 má-to͘h。伊針對消費級 ê 硬體，kā má-to͘h 表現上適化，用親像量子化遮个技術，來 hō͘ 記憶體用量 khah 少，m̄-koh 袂去 hō͘ 輸出品質差傷濟。另外，Ollama 提供一組 API，ē-tàng kā 遮个 má-to͘h 鬥--入去客製化 ê App，hō͘ 伊成做一款有 chhun-kiu(伸勼) ê 工具，hō͘ 開發者、研究者、kap hèng(興) AI ê 人，有法度免倚靠雲兜服務 iah-sī 貴參參 ê GPU 組合，來探揣 LLM ê 能力。
+
+例：一間致心 tī 教育科技 ê 創新新創公司，開發團隊用 Ollama 來 kā in ê 產品線革命化。In tiàm in 在地 ê 開發機器頂懸鬥 Ollama，逐台機器 lóng 走無仝款 ê má-to͘h，針對特定 ê 教育需求來調整。頭號設計師用 專門發落 khó͘(code) ê má-to͘h，來做 程式設計巧家教，仝時陣，內容團隊 kā 一支濟語言 má-to͘h 用來實驗，欲做 ē-tàng 適應學習者 ê 語言學習 App。另外，用者經驗研究者用 khah 細、khah 緊 ê má-to͘h，來 kā 用者回饋做感情分析。用 Ollama，這个團隊 ē-tàng 緊緊 kā AI lu-sak(攄捒) ê 功能做原型，用無仝款 ê má-to͘h 做 A/B 測試，koh 確保學生資料 ê 隱私，遮个 lóng 毋免開傷濟雲端計算 ê 成本。Tī in 逐禮拜 ê hé-khoh-sòng(hackathon) 活動，開發者 ē-tàng 緊緊 kā 新 má-to͘h 實例 pū(孵)--出來，來探揣新 ê 想法，ùi AI 接(chih)力 ê 文章拍分數，到個人化學習路程生成器 lóng 有。這款在地、帶 chhun-kiu(伸勼) ê AI 基礎設施，kā in ê 開發循環加速，hō͘ in ē-tàng kā 創新、AI 強化 ê 教育工具，khah 緊、koh khah 省錢 sak(捒)入去市場，較贏 in 遐个 kan-ta 倚靠雲兜解決方案 ê 競爭對手。
+---
+Definition: Ollama is an open-source framework designed to democratize access to large language models (LLMs) by enabling their execution on personal computers. It streamlines the process of downloading, installing, and running various AI models through a user-friendly command-line interface. Ollama supports a wide range of models, from smaller, efficient ones to more powerful variants, and allows users to manage multiple models simultaneously. It optimizes model performance for consumer-grade hardware, utilizing techniques like quantization to reduce memory usage without significantly compromising output quality. Additionally, Ollama provides an API for integrating these models into custom applications, making it a versatile tool for developers, researchers, and AI enthusiasts who want to explore LLM capabilities without relying on cloud services or expensive GPU setups.
+
+Example: At a innovative tech startup focused on educational technology, the development team leverages Ollama to revolutionize their product lineup. They install Ollama on their local development machines, each running different models tailored to specific educational needs. The lead programmer uses a code-savvy model for an intelligent programming tutor, while the content team experiments with a multilingual model to create an adaptive language learning app. Meanwhile, the UX researcher runs sentiment analysis on user feedback using a smaller, faster model. By using Ollama, the team can rapidly prototype AI-driven features, conduct A/B testing with different models, and ensure data privacy for student information — all without incurring hefty cloud computing costs. During their weekly hackathons, developers can quickly spin up new model instances to explore novel ideas, from AI-powered essay grading to personalized learning path generators. This local, flexible AI infrastructure accelerates their development cycle, allowing them to bring innovative, AI-enhanced educational tools to market faster and more cost-effectively than their competitors who rely solely on cloud-based solutions.​​​​​​​​​​​​​​​​
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 109 》 （罔參考）
+
+109. ComfyUI (POJ: ComfyUI, 英: ComfyUI, 日: ComfyUI)
+
+定義：一款開源 ê AI 藝術生成軟體，伊 ê 介面 kán-ná 站點(node)式程式設計，hō͘ 用者 ē-tàng 自由鬥搭無仝款 ê AI má-to͘h(model)，比論講 Stable Diffusion iah-sī ControlNet，來創作獨特 ê 圖像。ComfyUI 提供不止仔有 chhun-kiu(伸勼) ê 控制，hō͘ 用者 ē-tàng 調整 má-to͘h ê 各項參數，而且支援濟濟進階機能，親像影像合成、風格撨徙、kap 圖像 ap-sū-ké(upscale)。伊 chham Stable Diffusion WebUI(A1111) 比--起來，khah 對焦 tī hō͘ 進階用者有夠力 ê 客製化選項 ，hō͘ in ē-tàng kā AI 藝術創作 ê 可能性上大化。
+
+例 1：一位數位藝術家 kō͘(怙) ComfyUI 來創作一幅超現實 ê 夢景圖。伊 tī ComfyUI ê 站點圖(node graph)--ni̍h，kā 濟款 Stable Diffusion má-to͘h 鬥--起來，koh 調整 in ê 參數，來控制所 seng-sêng(生成)圖像 ê 色水、形體、kap 料身。伊 mā kā 圖像 ap-sū-ké(upscale) má-to͘h 安--入去，保証 hō͘ 生成--出來 ê 圖像 kài 清 koh 有詳細。伊 ê 作品 tī 線頂展覽，hō͘ 人呵咾講，伊 kā AI 藝術創作 ê 界線 sak(捒) kah 愈闊。
+
+例 2：一位 AI 研究者 kā ComfyUI 用來做實驗，欲探揣新奇 ê 圖像 seng-sêng(生成)技術。伊 tī ComfyUI 內底，kā 濟款站點(node)排--leh 連--leh，親像 kā 文字 īm-pé-tinh(embedding) 站點、擴散 má-to͘h(model) 站點、hām 圖像後處理站點連--起來，成做一組複雜 ê 工路。伊 ē-tàng 隨時調整遮个站點 ê 參數，koh ē-tàng tī 工路--ni̍h，插--入去新 ê 站點，iah-sī kā 舊--ê 徙--hìⁿ-sak，來研究無仝 AI 技術 ê 效能 kap 相交插 ê 模式。ComfyUI 提供 ê 伸勼性 kap 透明度，hō͘ 伊 ē-tàng khah 緊試新 ê 想法，koh ē-tàng kā 實驗結果詳細分析，來 kā AI 藝術生成 ê 領域 sak(捒) koh-khah 頭前。
+
+例 3：彼tīn(陳)數位藝術家慣勢用 Photoshop 來創作，m̄-koh in 這站仔開始探學 ComfyUI，因為對ComfyUI tī AI 藝術生成 ê 潛力起好玄。in kā Stable Diffusion má-to͘h(model) chham ControlNet 鬥做伙，來精確控制圖像 ê 構圖 hām 詳細，koh 用 ChatGPT 生成--出來 ê 文字指示，來激創作過程，結局，作品 koh-khah 有創意、koh-khah 迷人。
+---
+Definition: An open-source AI art generation software with a node-based interface that allows users to create unique images by combining different AI models, such as Stable Diffusion or ControlNet. ComfyUI offers highly flexible control, enabling users to adjust various model parameters and supports advanced features like image compositing, style transfer, and image upscaling. Compared to Stable Diffusion WebUI, it focuses on providing powerful customization options for advanced users to maximize the creative potential of AI art generation.
+
+Ex 1: A digital artist used ComfyUI to create a series of surreal dreamscapes. By connecting various Stable Diffusion models in ComfyUI's node graph and adjusting their parameters, she controlled the colors, shapes, and textures of the generated images. She also incorporated an image upscaling model to ensure the final outputs were incredibly sharp and detailed. Her artwork, showcased in an online exhibition, was praised for pushing the boundaries of AI art creation.
+
+Ex 2: An AI researcher utilized ComfyUI to experiment with novel image generation techniques. Within ComfyUI, she arranged and connected various nodes, such as text embedding nodes, diffusion model nodes, and image post-processing nodes, into intricate workflows. She could dynamically adjust the parameters of these nodes and insert new nodes or remove existing ones in the workflow to study the performance and interaction patterns of different AI techniques. The flexibility and transparency offered by ComfyUI allowed her to rapidly test new ideas and analyze experimental results in detail, pushing the boundaries of AI art generation.
+
+Ex 3: The digital artists, accustomed to using Photoshop for their creations, recently started exploring ComfyUI, intrigued by its potential for AI art generation. They combined the Stable Diffusion model with ControlNet to precisely control the composition and details of their images, and used text prompts generated by ChatGPT to spark their creative process, resulting in more imaginative and captivating artwork.
+
+-----
+
+
+《 AI 相關台語語詞 kap 例句 110 》 （罔參考）
+
+110. LangGraph (POJ: LangGraph, 英: LangGraph, 日: ランググラフ)
+
+定義：LangGraph 是一款開源 ê 框骨，設計來 kā 大型語言 má-to͘h(model) 轉變做濟崁 ê é-jinh(agent/代理人)。伊提供一套工具 kap API，hō͘ 開發者 ē-tàng kā LLM ê 輸出，轉做有狀態 ê 工作流程。LangGraph 利用「定向無循環圖」(DAG) ê 概念，kā 複雜 ê AI 工課拆做較細 ê 步，hō͘ 遮个步數 ē-tàng 互相溝通。Tī 這个 DAG 內底，逐个步數是一個站點(node)，站點 kah 站點 之間 ê 連接，是邊線(edge)，來決定資訊 ê 流動方向。這款設計，hō͘ AI 系統 ē-tàng 處理 khah 長 ê 對話、多步 ê 推理，iah-sī 愛記牢進前資訊 ê 工課。LangGraph mā 提供工具，thang 監控 kap tī-pák(debug) 遮个工作流程，hō͘ 開發者 khah 輕可來創造複雜 ê AI 應用程式。
+
+例 1：一間金融科技公司用 LangGraph 來開發一套巧 ê 股票投資系統。In kā 投資決策流程拆做幾若个步，一步用一个站點(node) 代表：ùi 新聞網站 kah 社群媒體--ni̍h 揣著相關 ê 資訊、分析公司財報 kah 市場趨勢、預測股票價數、kap 決定敢愛買賣股票。遮个站點(node) 透過 LangGraph ê DAG 結構，用墘線(edge)連--起來。系統會記牢進前 ê 投資決策 kah 結果，hō͘ 伊 ē-tàng ùi 經驗--ni̍h 學習，koh ē-tàng 應付複雜 ê 市場狀況，來 kā 投資報酬上大化。
+
+例 2：為著欲設計一套 ē-tàng 自動寫新聞稿 ê 系統，一間新聞媒體公司 kā LangGraph 用--落來。In kā 新聞稿 ê 寫作過程，拆做幾若步，做 tī LangGraph 內底，成做一个一个 ê 站點(node)：ùi 各款新聞來源--ni̍h，kā 相關 ê 資訊 khioh(抾)--出來、kā 遮个資訊整理 kah 概要、生成新聞稿 ê 草稿、koh kā 草稿修改 kah 編輯。遮个站點(node) 透過 LangGraph ê DAG 結構，用墘線(edge)連--起來。系統 ē-tàng ùi 記者寫 ê 新聞稿，自動生成無仝語言 ê 新聞報導，koh ē-tàng kā 新聞發布去無仝款 ê 平台，hō͘ 新聞傳播 kah 較闊。
+---
+Definition: LangGraph is an open-source framework designed to transform large language models (LLMs) into multi-step agents. It provides a set of tools and APIs that allow developers to convert LLM outputs into stateful workflows. LangGraph utilizes the concept of a Directed Acyclic Graph (DAG) to break down complex AI tasks into smaller steps that can communicate with each other. In this DAG, each step is represented as a node, and the connections between nodes are edges that determine the flow of information. This design enables AI systems to handle longer conversations, multi-step reasoning, or tasks that require remembering previous information. LangGraph also provides tools for monitoring and debugging these workflows, making it easier for developers to create complex AI applications.
+
+Ex 1: A fintech company used LangGraph to develop a sophisticated stock investment system. They broke down the investment decision-making process into several steps, each represented as a node: gathering relevant information from news websites and social media, analyzing company financial reports and market trends, predicting stock prices, and deciding whether to buy or sell stocks. These nodes were connected through edges in LangGraph's DAG structure. The system remembered previous investment decisions and outcomes, allowing it to learn from experience and adapt to complex market conditions to maximize investment returns.
+
+Ex 2: To design a system capable of automatically generating press releases, a news media company utilized LangGraph. They divided the press release writing process into several steps, represented as nodes within LangGraph: extracting relevant information from various news sources, summarizing and organizing this information, generating a draft press release, and revising and editing the draft. These nodes were connected through edges in LangGraph's DAG structure. The system can automatically generate news reports in different languages from journalists' drafts and publish them to various platforms, expanding the reach of their news coverage.
+
+-----
+
+111. 人類相kēng(楗)強化 (POJ: Jîn-lūi sio-kēng kiông-hòa, Human-in-the-Loop Augmentation, 日: 人間参加型オーグメンテーション、にんげんさんかがたオーグメンテーション)
+
+定義：kā AI 工具 hām 專業 ê 工課流程 tàu-tah(鬥搭)--起來，目標是欲增強人類 ê 專業能力，m̄ 是欲 kā 取代--去。這个做法強調講，人類專家 kap AI 系統互相合作，chham人類 ê 判斷、創意、kah 經驗相食穿，chham AI 快速處理資料、認捌模式、koh 生成(seng-sêng)洞見 ê 才調，按呢來 kā 工課 ê 品質、效率、kah 成果提升。
+Definition: The integration of AI tools into professional workflows to enhance human expertise, rather than replace it. This approach emphasizes collaboration between human experts and AI systems, combining human judgment, creativity, and experience with AI's ability to rapidly process data, recognize patterns, and generate insights, thereby improving the quality, efficiency, and outcomes of work.
+
+這馬 ê 挑戰(2024)：欲 án-chóaⁿ 有效利用 AI 工具，koh kā 伊 ê 效益發揮 kah 上大，hō͘ 伊 贏過 AI 抑是 人類單獨做工課 ê 成果，猶有困難 。一个主要 ê 挑戰，就是欲 án-chóaⁿ 設計會用--得 kā 人類 ê 專業 kap AI ê 能力無縫相kap(佮) ê 系統 kah 介面，而且 hō͘ 專業人員感覺自然 koh 直覺，m̄-bián(毋免)變做 AI 專家才有法度來用。
+Current Challenge(2024): Effectively leveraging AI tools and maximizing their benefits to surpass the capabilities of either AI or humans alone remains a challenge. One major challenge lies in designing systems and interfaces that seamlessly integrate human expertise with AI capabilities and feel natural and intuitive to professionals, without requiring them to become AI experts.
+
+2025 年 ê 期待：開發改良 ê 系統 kap 介面，hō͘ 專業人員 khah 簡單利用 AI，而且 m̄ 免有 AI 專門智識。這包括較直覺 ê用者介面、ē-hiáu(會曉) 解釋家己按怎做決定 ê AI 系統、koh 有 kā 人類 ê 回饋 kap 氣口同齊考慮 ê 學習演算法。
+2025 Expectation: The development of improved systems and interfaces that make it easier for professionals to utilize AI without requiring specialized AI knowledge. This includes more intuitive user interfaces, explainable AI systems that can articulate their decision-making processes, and learning algorithms that incorporate human feedback and preferences.
+
+例 1 (台語-英語翻譯)：�一間語言科技公司開發一个 AI 接力 ê 台語-英語翻譯系統，目標是欲 kā 台語翻譯 ê 品質提升，特別是 tī 複雜 iah-sī 罕得見 ê 詞彙 kap 句型這tah-ūi。這个系統用一个大型 ê 台語-英語平行語料庫來訓練，而且用人類相kēng(楗)強化 ê 步數，hō͘ 專業 ê 台語翻譯人員 ē-tàng 隨時 kā AI 生成(seng-sêng) ê 翻譯校對、修改、kap 認可。AI 系統會 ùi 人類 ê 回饋--ni̍h 學習，勻勻仔 kā 家己 ê 翻譯能力改善。閣有，這个系統 mā 提供一个用者友善 ê 介面，hō͘ 翻譯人員 ē-tàng 緊緊揣著相關 ê 詞彙、例句、kap 翻譯準則，hō͘ in ê 工課 khah 順序。這款人類 kap AI 合作 ê 模式，m̄-nā hō͘ 台語翻譯 ê 效率提升，mā hō͘ 翻譯 ê 品質 khah 穩定、khah 正確，特別是 tī 專業領域，親像法律、醫學、iah-sī 技術文件。這个例 kā 咱展現講，人類相kēng(楗)強化 ē-tàng 克服純粹 AI 系統 ê 限制，而且 kā 人類 ê 專業 kap AI ê 處理能力鬥搭--起來，hō͘ 翻譯工課閣較完善。
+Example 1 (Taigi-English Translation):�A language technology company is developing an AI-assisted Taigi-English translation system aimed at improving the quality of Taigi translations, particularly for complex or rare vocabulary and sentence structures. The system is trained on a large Taigi-English parallel corpus and employs a human-in-the-loop augmentation approach, allowing professional Taigi translators to review, edit, and validate the AI-generated translations. The AI system learns from the human feedback, gradually improving its translation capabilities. Additionally, the system provides a user-friendly interface that allows translators to quickly access relevant terminology, example sentences, and translation guidelines, streamlining their workflow. This collaborative approach between humans and AI not only enhances the efficiency of Taigi translation but also ensures higher consistency and accuracy, especially in specialized domains such as legal, medical, or technical documents. This example demonstrates how human-in-the-loop augmentation can overcome the limitations of purely AI-driven systems and combine human expertise with AI's processing power to achieve superior translation outcomes.
+
+例 2 (教育): 一个線上學習平台開發一个 AI 接力 ê 寫作輔導系統，目標是欲 kā 學生 ê 寫作技巧提升，而且 hō͘ 老師 khah 輕鬆。這个系統用自然語言處理技術，ē-tàng 分析學生 ê 作文，koh 提供文法、風格、kap 結構方面 ê 建議。M̄-koh，m̄ 是 kā 錯誤自動改--過來，系統會 kā 有問題 ê 所在標--出來，而且 hō͘ 學生提示，hō͘ in 家己思考 án-chóaⁿ 改。老師 mā ē-tàng 參與這个過程，提供 koh-khah 個人化 ê 指導 kap 回饋。這款人類相kēng(楗)強化 ê 步數，m̄-nā hō͘ 學生 ê 寫作能力進步，mā 培養 in ê 批判思考 kap 自我編修 ê 能力。一个初步 ê 研究顯示，用這个系統 ê 學生，in ê 作文分數有顯明 ê 提升，而且 in 對寫作課 ê 參與度 kah 自信嘛有增加。這个例 kā 咱展現講，人類相kēng(楗)強化 ē-tàng 創造 koh-khah 有效 koh 有互動性 ê 學習環境，而且 kā 老師 kap 學生 ê 潛力 lóng tháu-pàng(敨放)--出來。
+Example 2 (Education): An online learning platform developed an AI-assisted writing tutoring system to improve students' writing skills and reduce teachers' workload. The system uses natural language processing techniques to analyze students' essays and provide suggestions on grammar, style, and structure. However, instead of automatically correcting errors, the system highlights potential issues and prompts students to think about how to revise their work. Teachers can also participate in the process, offering more personalized guidance and feedback. This human-in-the-loop augmentation approach not only enhances students' writing proficiency but also fosters their critical thinking and self-editing abilities. A preliminary study showed that students using this system significantly improved their essay scores and demonstrated increased engagement and confidence in writing classes. This example illustrates how human-in-the-loop augmentation can create more effective and interactive learning environments, unlocking the potential of both teachers and students.
+
+-----
+
+112. AI 數位懸低坎(POJ: AI sò͘-ūi koân-kē-khám, 英: AI Digital Gap, 日: AI デジタル格差、エーアイ デジタルかくさ)
+
+定義: AI 技術 ê 發展、應用、kap 利益分配 tī 無仝地區、社群、iah-sī 族群之間 ê 無平等現象。這款落差會 hō͘ 本來就 tī 社會、經濟、iah-sī 教育方面 ê 無平等 koh-khah 嚴重。
+Definition: The unequal development, adoption, and distribution of benefits of AI technologies across different regions, communities, or demographic groups. This gap can exacerbate existing social, economic, or educational inequalities.
+
+例 1 (低資源語言):相像台語這款低資源語言，因為 tī 網路頂懸 ê 數位內容 kah 訓練資料相對少，leh 開發 AI 應用 ê 時陣，定定 hông 放捒。這造成一个惡性循環：因為較無 AI 工具支援台語，台語 ê 數位內容 to̍h 較袂成長，煞 hō͘ 台語 tī AI 時代愈來愈邊緣化。譬論講，雖然主流 ê 語音辨識系統 ē-tàng 支援濟濟款語言，毋過其中台語 ê 辨識正確率 iáu-koh 有一段坎差，因為訓練資料無夠額。這 m̄-nā 限制台語使用者享受 AI 技術 ê 好處，mā 對台語 ê 保存 kah 推廣造成威脅。這个例顯示講，AI 數位懸低坎差會 hō͘ 低資源語言 tī 數位時代 ê 弱勢地位 koh-khah 嚴重，而且 hō͘  語言多樣性 ê 保護挑戰。
+Example (Low-Resource Language):Low-resource languages like Taigi are often left behind in AI development due to the relative scarcity of digital content and training data available online. This creates a vicious cycle where the lack of AI tools for Taigi hinders the growth of its digital presence, further marginalizing the language in the AI era. For instance, while mainstream speech recognition systems can support numerous languages, the accuracy for Taigi remains noticeably lower due to insufficient training data. This not only limits Taigi speakers' access to the benefits of AI technologies but also poses a threat to the preservation and promotion of the language. This example illustrates how the AI digital gap can exacerbate the disadvantaged position of low-resource languages in the digital age and pose challenges to linguistic diversity.
+
+例 2 (教育機會):
+AI 接力 ê 個人化學習平台，有法度 hō͘ 學生有 koh-khah 有效 ê 學習體驗，毋過 in ê 使用，tī 無仝地區 ê 學校有誠大 ê 差別。有錢 ê 學校 ē-tàng 買較好 ê 軟硬體設備，而且 老師 mā 有較濟機會接受相關訓練，hō͘ in ê 學生有較濟機會接觸著 AI 教育工具。相對來講，散赤地區 ê 學校 to̍h 欠缺資源，hō͘ 學生 tī 數位時代 ê 競爭力受著限制。這款 AI 教育懸低坎差，會 kā 社會階層流動 ê 阻礙加深，而且 hō͘ 弱勢學生較oh(僫)得著成功 ê 機會。
+Example 2 (Educational Opportunities):
+AI-powered personalized learning platforms can enhance learning experiences for students, but their adoption varies significantly across different school districts. Wealthier schools can afford better software and hardware, and their teachers often have more opportunities to receive training on these tools, providing their students with greater access to AI educational resources. In contrast, under-resourced schools in disadvantaged areas lack access to these technologies, limiting their students' competitiveness in the digital age. This AI educational gap can hinder social mobility and make it harder for students from disadvantaged backgrounds to succeed.
+
+-----
+
+API / 應用程式介面 (POJ: API、Èng-iōng-thêng-sek kài-bīn, 英: Application Programming Interface, 日: API、エーピーアイ)
+
+定義：一款軟體中介物，hō͘ 兩个應用程式 ē-tàng 互相溝通。伊是一組定義 kap 協定，hō͘ 開發者 ē-tàng 建立會當 kap 其他軟體系統整合 ê 應用程式。簡單來講，API 親像一个服務生，tī 用者 kap 系統當中走傱， kā 用者 ê 需求傳達 hō͘ 系統知，koh kā 系統 ê 回應傳--轉去 hō͘ 用者。
+
+例：你 leh 用手機仔 App 叫外送 ê 時，App 會用 API kap 餐廳 ê 系統溝通，傳送你 ê 訂單資訊，koh kā 你回報餐點 ê 製作狀況。地圖 App mā 是用 API ùi 外部服務提著地圖資料 kap 路線資訊，hō͘ 你 ē-tàng 看著地圖、揣路、kap 導航。社群媒體 App 用 API hō͘ 你 ē-tàng ùi 無仝平台分享內容，親像 kā Instagram ê 相片分享去 Facebook。總講--一句，API hō͘ 軟體系統之間 ē-tàng 互相合作，hō͘ 用者 koh-khah 方便、功能 koh-khah 豐沛 ê 使用體驗。
+
+-----
+
+
+
+
+
+
+
+
+
+
