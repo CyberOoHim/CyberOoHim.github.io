@@ -8,57 +8,123 @@ permalink: /pages/downloads.html
 
 <p>Here you can find datasets, tools, models, and documentation related to the Taigi AI project.</p>
 
+<!-- Category Filter Buttons -->
+<div class="category-filters">
+  <button class="filter-button active" onclick="filterCategory('all')">All</button>
+  {% assign categories = '' | split: '' %}
+  {% for download in site.data.downloads %}
+    {% unless download[0] contains '#' %}
+      {% assign cat = download[0] %}
+      {% assign categories = categories | push: cat %}
+    {% endunless %}
+  {% endfor %}
+  {% for category in categories %}
+    <button class="filter-button" onclick="filterCategory('{{ category }}')">
+      {{ category | replace: '-', ' ' | capitalize }}
+    </button>
+  {% endfor %}
+</div>
+
+<!-- Downloads List -->
 {% for download in site.data.downloads %}
-  <h2>{{ download[0] | capitalize }}</h2>
-  <ul>
-    {% for item in download[1] %}
-      <li>
-        <h3>{{ item.name }} (v{{ item.version }})</h3>
-        <p>{{ item.description }}</p>
-        {% if item.download_url %}
-          <a href="{{ item.download_url }}" class="button">Download {{ item.filename }}</a>
-        {% elsif item.link %}
-          <div class="web-app-buttons">
-            <a href="{{ item.link }}" class="button">Go to Web App</a>
-            {% if item.html_download %}
-              <a href="{{ item.html_download }}" download class="button download-button">
-                Download HTML Version
-              </a>
-            {% endif %}
-          </div>
-        {% endif %}
-        <p>Last Updated: {{ item.updated }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+  {% unless download[0] contains '#' %}
+    <div class="category-section" data-category="{{ download[0] }}">
+      <h2>{{ download[0] | replace: '-', ' ' | capitalize }}</h2>
+      <ul>
+        {% for item in download[1] %}
+          <li class="download-item {{ item.category }}">
+            <h3>{{ item.name }} {% if item.version %}(v{{ item.version }}){% endif %}</h3>
+            <p>{{ item.description }}</p>
+            <div class="action-buttons">
+              {% if item.download_url %}
+                <a href="{{ item.download_url }}" class="button">Download {{ item.filename }}</a>
+              {% endif %}
+              
+              {% if item.link %}
+                <div class="web-app-buttons">
+                  <a href="{{ item.link }}" class="button app-button">
+                    <span class="button-icon">🌐</span>
+                    Open Web App
+                  </a>
+                  {% if item.html_download %}
+                    <a href="{{ item.html_download }}" download class="button download-button">
+                      <span class="button-icon">💻</span>
+                      Download Offline Version
+                    </a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+            <p class="metadata">Last Updated: {{ item.updated }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endunless %}
 {% endfor %}
 
 <style>
-.web-app-buttons {
+
+.download-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.download-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.download-item.web-apps {
+  border-left: 4px solid #28a745;
+}
+
+.download-item.datasets {
+  border-left: 4px solid #007bff;
+}
+
+.download-item.tools {
+  border-left: 4px solid #6610f2;
+}
+
+.action-buttons {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
   margin: 1rem 0;
 }
 
-.button {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
+.button-icon {
+  margin-right: 0.5rem;
 }
 
-.button:hover {
-  background-color: #0056b3;
-}
-
-.download-button {
+.app-button {
   background-color: #28a745;
 }
 
-.download-button:hover {
+.app-button:hover {
   background-color: #218838;
+}
+
+.metadata {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* Make buttons more touch-friendly on mobile */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .button {
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>
