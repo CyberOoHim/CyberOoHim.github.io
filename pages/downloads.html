@@ -8,20 +8,57 @@ permalink: /pages/downloads.html
 
 <p>Here you can find datasets, tools, models, and documentation related to the Taigi AI project.</p>
 
-{% for category, items in site.data.downloads %}
-  <h2>{{ category | capitalize }}</h2>
+{% for download in site.data.downloads %}
+  <h2>{{ download[0] | capitalize }}</h2>
   <ul>
-    {% for item in items %}
+    {% for item in download[1] %}
       <li>
         <h3>{{ item.name }} (v{{ item.version }})</h3>
         <p>{{ item.description }}</p>
         {% if item.download_url %}
           <a href="{{ item.download_url }}" class="button">Download {{ item.filename }}</a>
         {% elsif item.link %}
-          <a href="{{ item.link }}" class="button">Go to Web App</a>
+          <div class="web-app-buttons">
+            <a href="{{ item.link }}" class="button">Go to Web App</a>
+            {% if item.html_download %}
+              <a href="{{ item.html_download }}" download class="button download-button">
+                Download HTML Version
+              </a>
+            {% endif %}
+          </div>
         {% endif %}
         <p>Last Updated: {{ item.updated }}</p>
       </li>
     {% endfor %}
   </ul>
 {% endfor %}
+
+<style>
+.web-app-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.download-button {
+  background-color: #28a745;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+</style>
