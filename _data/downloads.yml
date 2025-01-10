@@ -9,7 +9,7 @@ datasets:
     updated: 2025-01-09
 
 web-apps:
-  - name: Taigi-English word game 01"
+  - name: Taigi-English word game 01
     description: An example web Apps of Taigi-English word game.
     version: 1.0
     filename: Taigi_word_game_01_v0.1.html
