@@ -25,4 +25,4 @@ o-1. [《 台語 AI workshop 》 補充：申請 Google AI Studio ê API key](ht
 ---
 ## 做台語 Web App
 
-[《 用 AI 做台語 App 》 KIP 轉 POJ ，做 App 家己來。 》](https://www.facebook.com/groups/2361817230821829/permalink/2385302301806655/)
+[《 用 AI 做台語 App 》 KIP 轉 POJ ，做 App 家己來。 》](tbd)
