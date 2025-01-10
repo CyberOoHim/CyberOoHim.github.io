@@ -16,7 +16,7 @@ permalink: /pages/web-apps.html
             {% assign item_base_name = item.path | split: '/' | last | replace: '.html', '' %}
 
             {% if item.url contains '/pages/' and item_extension == 'html' %}
-                {% unless item_base_name == 'about' or item_base_name == 'articles' or item_base_name == 'web-apps' %}
+                {% unless item_base_name == 'about' or item_base_name == 'articles' or item_base_name == 'web-apps' or item_base_name == 'downloads' %}
                     <article class="project-card">
                         <h2>
                             <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
