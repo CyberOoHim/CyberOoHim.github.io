@@ -138,19 +138,19 @@ permalink: /pages/TL_to_POJ_conversion.html
 </head>
 <body>
   <div class="page-wrapper">
-    <div id="container">
-      <h1>KIP(台羅) 轉 POJ(白話字)</h1>
-      <p id="description">這个工具會當 kā 台羅(KIP)轉做白話字(POJ)。請 tī 下跤 ê 文字框仔內底輸入台羅，chhi̍h(揤)「轉--loeh」按鈕，就會當看--tio̍h POJ 輸出結果。</p>
-      <textarea id="inputText" placeholder="Beh 轉 ê KIP..."></textarea>
-      <button id="convert-button" onclick="convertText()">轉--loeh</button>
-      <button id="clear-button" onclick="clearText()">清清--leh</button>
-      <button id="download-button" style="display: none;">Táng-ló͘ 文字</button>
-      <div id="output"></div>
-      <div id="note">
-        <p>＊1. 請注意：結果總--是愛 koh 再檢查--一下。</p>
-        <p>＊2. 原始 khó͘ 參考，授權 license 看伊：<a href="https://github.com/taicrypt/POJ_TL" target="_blank">潘科元(Phoaⁿ Kho-goân) - POJ_TL 白話字(POJ) vs. 台羅(TL) 轉換家私 Python3 模組</a></p>
-      </div>
-    </div>
+<div id="container">
+  <h1>KIP(台羅) 轉 POJ(白話字)</h1>
+  <p id="description">這个工具會當 kā 台羅(KIP)轉做白話字(POJ)。請 tī 下跤 ê 文字框仔內底輸入台羅，chhi̍h(揤)「轉--loeh」按鈕，就會當看--tio̍h POJ 輸出結果。</p>
+  <textarea id="inputText" placeholder="Beh 轉 ê KIP..."></textarea>
+  <button id="convert-button" onclick="convertText()">轉--loeh</button>
+  <button id="download-button" style="display: none;">Táng-ló͘ 文字</button>
+  <button id="clear-button" onclick="clearText()">清清--leh</button>
+  <div id="output"></div>
+  <div id="note">
+    <p>＊1. 請注意：結果總--是愛 koh 再檢查--一下。</p>
+    <p>＊2. 原始 khó͘ 參考，授權 license 看伊：<a href="https://github.com/taicrypt/POJ_TL" target="_blank">潘科元(Phoaⁿ Kho-goân) - POJ_TL 白話字(POJ) vs. 台羅(TL) 轉換家私 Python3 模組</a></p>
+  </div>
+</div>
   </div>
 <script>
 function RC(poj) {
@@ -434,7 +434,7 @@ function convertText() {
   const inputTextValue = inputText.value;
   const convertedText = TLtiau_2_POJtiau_mixed(inputTextValue);
   outputDiv.innerHTML = convertedText.replace(/\n/g, "<br>");
-  downloadButton.style.display = 'inline-block';
+  downloadButton.style.display = 'inline-block'; // Show download button after conversion
 }
 
   function clearText() {
