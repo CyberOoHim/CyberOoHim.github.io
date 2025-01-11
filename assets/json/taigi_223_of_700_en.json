@@ -1,0 +1,1117 @@
+[
+    {
+        "Hanji": "阿爸",
+        "en": "father",
+        "POJ": "a-pa/pah/pâ"
+    },
+    {
+        "Hanji": "阿母",
+        "en": "mother",
+        "POJ": "a-bú/bó"
+    },
+    {
+        "Hanji": "阿妗",
+        "en": "aunt (wife of maternal uncle)",
+        "POJ": "a-kīm"
+    },
+    {
+        "Hanji": "阿姆",
+        "en": "aunt (father's brother's wife)",
+        "POJ": "a-m"
+    },
+     {
+        "Hanji": "囡仔",
+        "en": "child",
+        "POJ": "gín-á"
+    },
+    {
+        "Hanji": "心肝仔囝",
+        "en": "darling",
+        "POJ": "sim-koaⁿ-á-kiáⁿ"
+    },
+    {
+        "Hanji": "壓霸",
+        "en": "domineering; unreasonable",
+        "POJ": "ah-pà"
+    },
+    {
+        "Hanji": "曷使",
+        "en": "why bother?",
+        "POJ": "ah-sái"
+    },
+    {
+        "Hanji": "曷著",
+         "en": "why bother?",
+        "POJ": "ah-tioh"
+    },
+    {
+        "Hanji": "曷敢",
+         "en": "how dare?",
+        "POJ": "ah-káⁿ"
+    },
+    {
+        "Hanji": "抑是",
+         "en": "or",
+        "POJ": "ah2-sī"
+    },
+    {
+        "Hanji": "愛耍",
+        "en": "playful; fun-loving",
+        "POJ": "ài-sńg"
+    },
+    {
+        "Hanji": "愛睏",
+         "en": "sleepy",
+        "POJ": "ài-khùn"
+    },
+    {
+        "Hanji": "倩囡仔",
+         "en": "to carry a child on one's back",
+        "POJ": "āiⁿ-gín-á"
+    },
+    {
+        "Hanji": "偝巾",
+         "en": "baby carrier",
+        "POJ": "āiⁿ-kin"
+    },
+    {
+        "Hanji": "沃花",
+         "en": "water the flowers",
+        "POJ": "ak-hoe"
+    },
+    {
+        "Hanji": "沃雨",
+         "en": "get caught in the rain",
+        "POJ": "ak-hō͘"
+    },
+      {
+        "Hanji": "糜傷泔",
+        "en": "watery porridge",
+        "POJ": "môe/bê-siuⁿ-ám"
+    },
+    {
+         "Hanji":"泔糜",
+         "en": "porridge",
+        "POJ": "ám- môe/bê-"
+    },
+     {
+        "Hanji": "漿泔",
+        "en": "to starch",
+        "POJ": "chiuⁿ-ám"
+    },
+    {
+        "Hanji": "頷頸",
+        "en": "neck",
+        "POJ": "ām-kún"
+    },
+    {
+        "Hanji": "按呢",
+        "en": "like this, in this way",
+        "POJ": "án-ne"
+    },
+    {
+        "Hanji": "按怎",
+        "en": "how, why",
+        "POJ": "án-chóaⁿ"
+    },
+    {
+        "Hanji": "縛組組",
+        "en": "tied up tightly",
+        "POJ": "pak2-ân-ân"
+    },
+    {
+        "Hanji":"手頭組",
+        "en": "tight financial situation",
+        "POJ": "chhiú-thâu-ân"
+    },
+    {
+        "Hanji": "翁某",
+         "en":"husband and wife",
+        "POJ": "ang-bó͘"
+    },
+     {
+        "Hanji": "翁婿",
+        "en": "husband",
+        "POJ": "ang-sài"
+    },
+    {
+       "Hanji": "布袋戲尪仔",
+         "en": "glove puppet",
+       "POJ": "pò͘-tē-hì-ang-á"
+    },
+    {
+        "Hanji": "尪仔標",
+        "en": "a type of round trading card",
+        "POJ": "ang-á-phiau"
+    },
+    {
+       "Hanji": "遏斷",
+        "en": "to break off",
+        "POJ": "at-tng"
+    },
+    {
+        "Hanji": "遏樹枝",
+        "en": "to break a branch",
+        "POJ": "at-chhiū-ki"
+    },
+     {
+        "Hanji":"漚衫",
+        "en": "to soak clothes",
+        "POJ": "au-saⁿ"
+    },
+    {
+        "Hanji":"漚鹹菜",
+        "en": "to pickle vegetables",
+        "POJ": "au-kiâm-chhài"
+    },
+     {
+        "Hanji": "茶甌",
+        "en": "teacup",
+        "POJ": "tê-au"
+    },
+    {
+        "Hanji": "一甌茶",
+        "en": "a cup of tea",
+        "POJ": "chit-au-tê"
+    },
+      {
+        "Hanji":"拗斷",
+        "en":"to break off",
+        "POJ": "áu-tng"
+    },
+    {
+         "Hanji":"硬拗",
+        "en": "to twist facts",
+        "POJ": "ngē-áu"
+    },
+    {
+        "Hanji": "柴漚去",
+        "en": "the wood is rotten",
+        "POJ": "chhâ-àu--khì"
+    },
+      {
+        "Hanji":"漚貨",
+         "en": "rotten goods",
+        "POJ": "àu-hòe"
+    },
+    {
+        "Hanji": "漚步",
+         "en": "dirty trick",
+        "POJ": "àu-pō͘"
+    },
+     {
+         "Hanji":"後日",
+         "en":"the day after tomorrow",
+        "POJ": "āu--jit/lit"
+    },
+     {
+        "Hanji": "後日",
+         "en":"in the future",
+        "POJ": "āu-jit/lit"
+    },
+    {
+        "Hanji": "固後壁",
+         "en": "put in the back",
+        "POJ": "khng-au-piah"
+    },
+    {
+        "Hanji": "後壁鄉",
+        "en": "Houbi Township",
+        "POJ": "Au-piah-hiong"
+    },
+    {
+        "Hanji":"門關無峇",
+         "en":"the door is not closed tightly",
+        "POJ": "mng-koaiⁿ-bô͘-bā"
+    },
+    {
+        "Hanji": "個性真峇",
+        "en": "compatible personality",
+        "POJ": "kò-sèng-chin-bā"
+    },
+    {
+        "Hanji": "心情稞",
+        "en": "in a bad mood",
+        "POJ": "sim-chêng-bái"
+    },
+    {
+        "Hanji":"環境稞",
+        "en":"bad environment",
+        "POJ":"khoân-kéng-bái"
+    },
+     {
+        "Hanji": "目鏡",
+         "en":"glasses",
+        "POJ": "bak2-kiàⁿ"
+    },
+    {
+        "Hanji": "目眉",
+        "en":"eyebrow",
+        "POJ": "bak2-bâi"
+    },
+    {
+        "Hanji": "茉莉",
+        "en": "jasmine",
+        "POJ": "bak2-nī"
+    },
+    {
+        "Hanji": "目屎",
+        "en": "tears",
+        "POJ": "bak2-sái"
+    },
+    {
+        "Hanji":"挽花",
+        "en":"to pick flowers",
+        "POJ": "bán-hoe"
+    },
+    {
+        "Hanji": "挽茶",
+        "en": "to pick tea leaves",
+        "POJ":"bán-tê"
+    },
+    {
+       "Hanji": "挽果子",
+        "en":"to pick fruit",
+        "POJ": "bán-kóe-chí"
+    },
+     {
+       "Hanji":"蠻皮",
+       "en":"stubborn",
+       "POJ":"bân-phôe"
+    },
+    {
+       "Hanji":"慢且是",
+        "en":"wait a moment",
+       "POJ": "bān-chhiáⁿ-sī"
+    },
+    {
+        "Hanji":"蠔罩",
+        "en":"mosquito net",
+        "POJ":"báng-tà"
+    },
+    {
+        "Hanji":"蠔仔",
+        "en":"mosquito",
+        "POJ": "báng-á"
+    },
+     {
+        "Hanji":"醉茫茫",
+        "en":"drugged; intoxicated; befuddled",
+        "POJ":"chùi-bâng-bâng"
+    },
+     {
+       "Hanji": "白茫茫",
+        "en":"a blurry white mass",
+       "POJ": "peh2-bâng-bâng"
+    },
+     {
+        "Hanji": "捌字",
+       "en":"literate",
+        "POJ":"bat-ji/lī"
+    },
+    {
+       "Hanji": "捌去",
+        "en":"have been there before",
+        "POJ":"bat-khì"
+    },
+     {
+       "Hanji":"草發真密",
+        "en":"grass grows very densely",
+       "POJ":"chháu-hoat-chin-bat"
+    },
+    {
+         "Hanji":"袂食袂睏",
+         "en":"unable to eat or sleep",
+        "POJ":"bē-chiah-bē-khùn"
+    },
+     {
+        "Hanji":"袂行",
+        "en":"cannot walk",
+        "POJ":"bē-kiâⁿ"
+    },
+    {
+        "Hanji": "袂來",
+        "en":"will not come",
+        "POJ": "bē-lâi"
+    },
+    {
+         "Hanji": "袂當去",
+         "en":"cannot go",
+        "POJ":"bē-tàng-khì"
+    },
+    {
+        "Hanji":"欲食飯",
+        "en":"want to eat",
+        "POJ":"beh-chiah-png"
+    },
+    {
+        "Hanji": "欲知",
+         "en":"if know",
+        "POJ": "beh-chai"
+    },
+    {
+        "Hanji": "小眯一下",
+         "en": "take a nap",
+        "POJ": "sió-bî-chit--ē"
+    },
+    {
+        "Hanji": "予我眯著",
+         "en":"got a glimpse of",
+        "POJ":"hō͘-góa-bî--tioh"
+    },
+     {
+        "Hanji": "風微微",
+        "en": "breezy",
+        "POJ": "hong-bî-bî"
+    },
+    {
+        "Hanji": "微微仔笑",
+        "en": "smile slightly",
+        "POJ": "bî-bî-á-chhiò"
+    },
+    {
+        "Hanji":"沫水",
+        "en":"to dive",
+        "POJ":"bī-chúi"
+    },
+    {
+        "Hanji":"峴雨",
+         "en":"to take shelter from the rain",
+        "POJ":"bih-hō͘"
+    },
+     {
+        "Hanji": "峴相揣",
+        "en": "hide and seek",
+        "POJ": "bih-sio-chhōe"
+    },
+    {
+       "Hanji": "齒抿仔",
+       "en": "toothbrush",
+       "POJ": "khí-bín-á"
+    },
+     {
+        "Hanji": "鞋抿仔",
+        "en":"shoe brush",
+        "POJ": "ê-bín-á"
+    },
+    {
+        "Hanji": "敏豆仔",
+        "en":"green bean",
+        "POJ":"bín-tāu-á"
+    },
+    {
+        "Hanji":"明仔載",
+        "en":"tomorrow",
+        "POJ":"mîn-á-chài"
+    },
+    {
+        "Hanji": "眠夢",
+        "en":"dream",
+        "POJ": "bîn-bāng"
+    },
+    {
+        "Hanji":"面色",
+        "en":"complexion",
+        "POJ":"bīn-sek"
+    },
+    {
+         "Hanji": "面熟",
+        "en":"familiar-looking",
+        "POJ":"bīn-sek"
+    },
+    {
+        "Hanji": "無錢",
+         "en":"no money",
+        "POJ":"bô-chîⁿ"
+    },
+    {
+        "Hanji": "無閒",
+         "en": "not free",
+        "POJ":"bô-êng"
+    },
+    {
+       "Hanji": "無較緩",
+       "en": "useless",
+       "POJ": "bô-khah-choah"
+    },
+     {
+        "Hanji":"無彩工",
+         "en":"a waste of effort",
+        "POJ": "bô-chhái-kang"
+    },
+    {
+        "Hanji":"無彩錢",
+        "en":"a waste of money",
+        "POJ": "bô-chhái-chîⁿ"
+    },
+     {
+         "Hanji": "罔看",
+        "en": "take a look",
+        "POJ": "bóng-khòaⁿ"
+    },
+     {
+        "Hanji":"罔食",
+        "en":"make do with",
+         "POJ":"bóng-chiah"
+    },
+    {
+         "Hanji":"罩霁",
+        "en":"shrouded in heavy fog",
+         "POJ":"tà-bông"
+    },
+    {
+        "Hanji":"起雾",
+        "en":"to fog up",
+        "POJ":"khí-bông"
+    },
+     {
+        "Hanji": "霈霧",
+         "en":"heavy fog",
+        "POJ":"bông-bū"
+    },
+    {
+        "Hanji": "翁仔某",
+        "en":"husband and wife",
+        "POJ":"ang-á-bó͘"
+    },
+    {
+        "Hanji":"某囝",
+        "en":"wife and children",
+        "POJ":"bó͘-kiáⁿ"
+    },
+     {
+        "Hanji":"跳舞",
+        "en":"dance",
+        "POJ":"thiàu-bú"
+    },
+    {
+        "Hanji": "烏白舞",
+         "en": "to fool around",
+        "POJ":"ou-peh2-bú"
+    },
+    {
+        "Hanji":"阿母",
+        "en":"mother",
+        "POJ":"a-bú/bó"
+    },
+    {
+       "Hanji": "老母",
+         "en": "mother",
+        "POJ": "lāu-bú/bó"
+    },
+    {
+       "Hanji": "尾溜",
+        "en":"tail",
+        "POJ":"bóe/bé-liu"
+    },
+    {
+        "Hanji":"尾後",
+        "en":"behind",
+        "POJ":"bóe/bé-āu"
+    },
+    {
+         "Hanji": "一尾魚",
+         "en":"a fish",
+        "POJ": "chit-bóe bóe/bé-hî"
+    },
+     {
+       "Hanji": "尾蝶",
+         "en":"butterfly",
+        "POJ":"bóe/bé-iah2"
+     },
+    {
+        "Hanji": "蝶仔",
+         "en":"butterfly",
+        "POJ":"iah-á"
+    },
+    {
+        "Hanji":"魩仔魚",
+        "en":"whitebait",
+        "POJ":"but-á-hî/hû"
+    },
+     {
+        "Hanji":"我的",
+         "en":"my",
+        "POJ":"góa-ê"
+    },
+    {
+       "Hanji": "公家的",
+         "en":"public",
+        "POJ":"kong-ke-ê"
+    },
+    {
+       "Hanji":"一个",
+        "en":"one",
+       "POJ":"chit-ê"
+    },
+     {
+        "Hanji":"足濟个",
+        "en":"a lot of",
+       "POJ":"chiok-chē/chōe-ê"
+    },
+    {
+        "Hanji": "下晡",
+         "en":"afternoon",
+         "POJ":"e-pou"
+    },
+    {
+        "Hanji": "下畫",
+         "en":"afternoon",
+        "POJ":"e-tàu"
+    },
+    {
+        "Hanji":"下昏",
+        "en":"evening",
+        "POJ":"e-hng"
+    },
+    {
+        "Hanji": "下暗",
+         "en":"evening",
+        "POJ":"e-àm"
+    },
+     {
+        "Hanji": "下跤",
+        "en":"below",
+         "POJ":"ē-kha"
+    },
+     {
+       "Hanji":"一下",
+       "en":"a little bit",
+        "POJ":"chit-ē"
+    },
+     {
+         "Hanji":"會使",
+         "en":"can",
+         "POJ":"ē-sái"
+    },
+    {
+        "Hanji":"會曉",
+         "en":"can",
+        "POJ":"ē-hiáu"
+    },
+    {
+        "Hanji":"下頦",
+         "en":"chin",
+         "POJ":"ē-hâi"
+    },
+    {
+        "Hanji": "會當去",
+        "en":"can go",
+        "POJ":"ē-tàng-khì"
+    },
+     {
+        "Hanji":"巷仔真狹",
+        "en":"the alley is very narrow",
+        "POJ":"hāng-á-chin-eh2"
+    },
+     {
+        "Hanji": "狹裙",
+         "en":"narrow skirt",
+         "POJ":"eh2-kûn"
+    },
+    {
+        "Hanji":"礙虐",
+        "en":"awkward",
+        "POJ":"gãi-gioh"
+    },
+    {
+        "Hanji": "愣去",
+         "en":"stunned, in a daze",
+         "POJ":"gāng--khì"
+    },
+     {
+        "Hanji":"獒早",
+        "en":"good morning",
+        "POJ":"gâu-chá"
+    },
+    {
+         "Hanji":"熬煮食",
+         "en":"good at cooking",
+         "POJ":"gâu-chú-chiah"
+    },
+    {
+        "Hanji":"假獒",
+        "en":"pretentious, conceited",
+        "POJ":"ké-gâu"
+    },
+    {
+        "Hanji":"獒破病",
+         "en":"prone to illness",
+        "POJ":"gâu-phòa-pēⁿ/pīⁿ"
+    },
+     {
+        "Hanji":"夯貨",
+        "en":"carry goods",
+         "POJ":"giâ-hòe/hè"
+    },
+    {
+        "Hanji":"夯起來",
+        "en":"lift it up",
+        "POJ":"giâ--khí-lâi"
+    },
+    {
+        "Hanji":"櫸箸",
+        "en":"pick up chopsticks",
+        "POJ":"giảh-tī/tū"
+    },
+     {
+         "Hanji":"擰頭",
+         "en":"raise head",
+         "POJ":"giảh-thâu"
+    },
+    {
+        "Hanji":"擇手",
+        "en":"raise hand",
+        "POJ":"giảh-chhiú"
+    },
+    {
+       "Hanji": "頭毛鋏仔",
+       "en": "hair clip",
+       "POJ":"thâu-mng-giap-á"
+    },
+    {
+       "Hanji": "鋏予伊好",
+        "en":"clip it properly",
+       "POJ":"giap-hō͘-i-hó"
+    },
+    {
+        "Hanji":"挾咧",
+        "en":"clip on",
+        "POJ":"giap2--leh"
+    },
+    {
+        "Hanji":"「拾」牢牢",
+        "en":"grip firmly",
+        "POJ":"gīm-tiâu-tiâu"
+    },
+     {
+        "Hanji":"查某囡仔",
+         "en":"girl",
+        "POJ":"cha-bó͘-gín-á"
+    },
+    {
+        "Hanji":"囡仔兄",
+         "en":"boy",
+        "POJ":"gín-á-hiaⁿ"
+    },
+    {
+         "Hanji":"凝心",
+        "en":"a feeling of depression",
+         "POJ":"gêng-sim"
+    },
+     {
+        "Hanji":"戇人",
+        "en":"fool",
+         "POJ":"gōng-lâng"
+    },
+     {
+        "Hanji": "戇呆",
+        "en":"stupid",
+         "POJ":"gōng-tai"
+    },
+     {
+        "Hanji": "是我",
+        "en":"It's me",
+         "POJ":"sī-góa"
+    },
+    {
+        "Hanji":"外口",
+        "en":"outside",
+        "POJ":"gōa-kháu"
+    },
+    {
+        "Hanji":"外家",
+        "en":"maternal home",
+        "POJ":"gōa-ke"
+    },
+    {
+        "Hanji": "十外歲",
+         "en":"over ten years old",
+         "POJ":"chap-gōa-hòe"
+    },
+     {
+        "Hanji": "百外个",
+        "en":"over a hundred",
+         "POJ":"pah-gōa-ê"
+    },
+    {
+        "Hanji": "阮的",
+        "en":"our",
+         "POJ":"gún-ê"
+    },
+    {
+        "Hanji":"阮兜",
+        "en":"my home",
+        "POJ":"gún-tau"
+    },
+    {
+         "Hanji":"外甥",
+         "en":"nephew (sister's son)",
+        "POJ":"gōe-seng"
+    },
+     {
+        "Hanji": "員外",
+        "en": "a wealthy person",
+        "POJ": "goân-gōe"
+    },
+    {
+        "Hanji":"月娘",
+         "en":"moon",
+         "POJ":"goeh2/geh2-niû"
+    },
+     {
+       "Hanji":"繕褲帶",
+       "en":"to fasten the belt",
+       "POJ":"hâ-khò͘-tòa"
+    },
+    {
+        "Hanji":"繕裙",
+        "en":"apron",
+        "POJ":"hâ-kûn"
+    },
+    {
+        "Hanji":"竹箬",
+        "en":"bamboo sheath",
+        "POJ":"tek-hah"
+    },
+    {
+       "Hanji": "甘蔗箬",
+         "en":"sugarcane leaf",
+       "POJ":"kam-chià-hah"
+    },
+    {
+       "Hanji":"個性會合",
+       "en":"compatible personality",
+       "POJ":"kò-sèng-ē-hảh"
+    },
+     {
+        "Hanji":"合軀",
+         "en":"well-fitting",
+         "POJ":"hah-su"
+    },
+    {
+       "Hanji":"人生海海",
+        "en":"that's life",
+        "POJ":"jîn/lîn-seng-hái-hái"
+    },
+    {
+       "Hanji":"海湧",
+        "en":"ocean wave",
+        "POJ":"hái-éng"
+    },
+    {
+       "Hanji":"蚶仔",
+         "en":"clam",
+        "POJ":"ham-á"
+    },
+    {
+        "Hanji": "諏古",
+        "en":"absurd; nonsensical",
+        "POJ":"hàm-kó͘"
+    },
+    {
+        "Hanji": "諏鏡",
+         "en":"magnifying glass",
+        "POJ":"hàm-kiàⁿ"
+    },
+    {
+        "Hanji":"陷眠",
+        "en":"sleep talking",
+        "POJ":"hām-bîn"
+    },
+    {
+        "Hanji":"愛吼",
+        "en":"like to cry",
+        "POJ":"ài-háu"
+    },
+    {
+        "Hanji": "鳥仔咧吼",
+        "en":"birds are chirping",
+        "POJ":"chiáu-á-leh-háu"
+    },
+     {
+        "Hanji": "後生",
+        "en":"son",
+        "POJ":"hāu-seⁿ/siⁿ"
+    },
+     {
+        "Hanji":"彼是我的",
+         "en":"that is mine",
+        "POJ":"he-sī-góa-ê"
+    },
+    {
+        "Hanji":"下鹽",
+        "en":"add salt",
+        "POJ":"hē-iâm"
+    },
+    {
+         "Hanji":"下本錢",
+         "en":"to invest capital",
+        "POJ":"hē-pún-chîⁿ"
+    },
+     {
+        "Hanji":"佇遐",
+         "en":"there",
+        "POJ":"tī-hia"
+    },
+     {
+        "Hanji":"遐的",
+        "en":"those",
+        "POJ":"hia--ê"
+    },
+    {
+        "Hanji":"遐的人",
+         "en":"those people there",
+        "POJ":"hia-ê-lâng"
+    },
+     {
+        "Hanji":"遐濟",
+         "en":"so many",
+        "POJ":"hiah-chē/chōe"
+    },
+    {
+        "Hanji":"遐慢",
+         "en":"so slow",
+        "POJ":"hiah-bān"
+    },
+    {
+        "Hanji":"遐爾燒",
+        "en":"so hot",
+        "POJ":"hiah-nī-sio"
+    },
+    {
+        "Hanji":"遐爾遠",
+         "en":"so far",
+        "POJ":"hiah-nī-hng"
+    },
+    {
+       "Hanji":"簽椒仔",
+        "en":"chili pepper",
+        "POJ":"hiam-chio-á"
+    },
+    {
+         "Hanji":"臭尿簽",
+        "en":"smell of urine",
+         "POJ":"chhàu-jiō-hiam"
+    },
+     {
+        "Hanji":"掀開",
+        "en":"to lift",
+        "POJ":"hian-khui"
+    },
+    {
+         "Hanji":"掀報紙",
+        "en":"to flip the newspaper",
+         "POJ":"hian-pò-chóa"
+    },
+    {
+        "Hanji": "現出原形",
+        "en":"to reveal one's true colors",
+         "POJ":"hiàn-chhut-goân-hêng"
+    },
+     {
+        "Hanji":"現煮現食",
+         "en":"freshly cooked and eaten",
+         "POJ":"hiān-chú-hiān-chiah"
+    },
+    {
+         "Hanji":"看現現",
+         "en":"to see very clearly",
+        "POJ":"khòaⁿ-hiān-hiān"
+    },
+    {
+         "Hanji": "足現世",
+        "en":"very shameful",
+         "POJ":"chiok-hiān-sì"
+    },
+    {
+        "Hanji":"現世",
+        "en":"to be an eyesore",
+        "POJ":"hiān-sì"
+    },
+    {
+        "Hanji":"燃火",
+        "en":"to burn firewood",
+        "POJ":"hiâⁿ-hóe/hé"
+    },
+     {
+        "Hanji":"燃茶",
+        "en":"to boil water for tea",
+        "POJ":"hiâⁿ-tê"
+    },
+    {
+        "Hanji":"燃滾水",
+        "en":"to boil water",
+        "POJ":"hiâⁿ -kún-chúi"
+    },
+    {
+        "Hanji":"抗桷",
+        "en":"to throw away",
+         "POJ":"hiat-kak2"
+    },
+    {
+        "Hanji":"烏白掀",
+        "en":"to throw around",
+         "POJ":"ou-peh2-hiat"
+    },
+    {
+       "Hanji":"囂俳",
+        "en":"arrogant",
+       "POJ":"hiau-pai"
+    },
+    {
+       "Hanji": "欣羨",
+        "en": "envy",
+       "POJ":"him-siān"
+    },
+    {
+        "Hanji":"形影",
+         "en":"figure",
+        "POJ":"hêng-iáⁿ"
+    },
+    {
+        "Hanji":"歇畫",
+        "en":"noon break",
+         "POJ":"hioh-tàu"
+    },
+     {
+        "Hanji":"歇熱",
+        "en":"summer vacation",
+        "POJ":"hioh-joah"
+    },
+     {
+         "Hanji":"歇寒",
+        "en":"winter vacation",
+        "POJ":"hioh-kôaⁿ"
+    },
+     {
+        "Hanji": "雄雄",
+        "en":"suddenly",
+        "POJ":"hiông-hiông"
+    },
+    {
+        "Hanji":"翕油飯",
+        "en":"to steam glutinous oil rice",
+        "POJ":"hip-iû-png"
+    },
+    {
+        "Hanji":"天氣真翕",
+        "en":"the weather is very humid",
+        "POJ":"thiⁿ-khì-chin-hip"
+    },
+     {
+        "Hanji":"翕相",
+         "en":"take a picture",
+        "POJ":"hip-siōng/siòng"
+    },
+    {
+        "Hanji":"彼間厝",
+        "en":"that house",
+         "POJ":"hit-keng-chhù"
+    },
+    {
+        "Hanji":"彼時",
+         "en":"that time",
+        "POJ":"hit-sî"
+    },
+    {
+        "Hanji":"好佳哉",
+         "en":"fortunately",
+         "POJ":"hó-ka-chài"
+    },
+     {
+        "Hanji": "好勢",
+        "en":"all set; done properly",
+         "POJ":"hó-sè"
+    },
+     {
+        "Hanji":"做風颱",
+        "en":"to have a typhoon",
+        "POJ":"chò-hong-thai"
+    },
+     {
+        "Hanji":"風颱天",
+        "en":"typhoon day",
+        "POJ":"hong-thai-thiⁿ"
+    },
+    {
+       "Hanji":"好奇",
+       "en":"curious",
+       "POJ":"hò͘ⁿ-kî"
+    },
+     {
+       "Hanji":"好玄",
+       "en":"curious",
+        "POJ":"hò͘ⁿ-hiân"
+    },
+    {
+       "Hanji":"胡蠅",
+       "en":"fly",
+        "POJ":"hô͘-sîn"
+    },
+    {
+        "Hanji": "予你",
+         "en": "give you",
+        "POJ": "hō͘--lí"
+    },
+    {
+        "Hanji": "予人請",
+         "en": "to be treated by someone",
+        "POJ": "hō͘-lâng-chhiáⁿ"
+    },
+    {
+        "Hanji": "撫撫咧",
+        "en": "to pat gently",
+        "POJ": "hu-hu--leh"
+    },
+    {
+        "Hanji": "拊掉",
+         "en": "to wipe off",
+        "POJ": "hú-tiāu"
+    },
+    {
+        "Hanji": "拊仔",
+         "en": "eraser",
+        "POJ": "hú-á"
+    },
+    {
+        "Hanji": "肉拊",
+        "en": "pork floss",
+        "POJ": "bah-hú"
+    },
+    {
+        "Hanji": "拊魚拊",
+         "en": "to make fish floss",
+        "POJ": "hú-hî-hú"
+    },
+    {
+        "Hanji": "喝拳",
+         "en": "to play the finger-guessing game",
+        "POJ": "hoah-kûn"
+    },
+    {
+        "Hanji": "大聲喝",
+        "en": "to shout loudly",
+        "POJ": "tōa-siaⁿ-hoah"
+    },
+    {
+        "Hanji": "橫直",
+        "en": "anyway",
+        "POJ": "hoâiⁿ/hûiⁿ-tit"
+    },
+    {
+        "Hanji": "翻頭",
+        "en": "to turn head",
+        "POJ": "hoan-thâu"
+    },
+    {
+        "Hanji": "凡勢",
+         "en": "maybe",
+        "POJ": "hoān-sè"
+    },
+     {
+        "Hanji": "法度",
+        "en": "method",
+        "POJ": "hoat-tō͘"
+    }
+]
