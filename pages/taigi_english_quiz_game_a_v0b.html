@@ -52,7 +52,7 @@ permalink: /pages/taigi_english_quiz_game.html
             margin-bottom: 20px;
             color: #2196F3;
             /* Question font size and weight */
-            font-size: 1.5em; /* Same as the base font size */
+            font-size: 1.3em; /* Same as the base font size */
             font-weight: bold; /* Make question bold */
         }
 
@@ -75,7 +75,7 @@ permalink: /pages/taigi_english_quiz_game.html
             transition: background-color 0.3s;
             width: 100%;
             /* Option font size (adjust as needed) */
-            font-size: 1.0em; /* Slightly smaller than base font size */
+            font-size: 0.9em; /* Slightly smaller than base font size */
         }
 
         .option-container:hover {
@@ -224,7 +224,7 @@ permalink: /pages/taigi_english_quiz_game.html
             </div>
             <div id="result"></div>
             <div id="chineseCheckboxContainer">
-                <input type="checkbox" id="chineseCheckbox" checked>
+                <input type="checkbox" id="chineseCheckbox">
                 <label for="chineseCheckbox">Show Chinese</label>
             </div>
         </div>
@@ -277,7 +277,7 @@ permalink: /pages/taigi_english_quiz_game.html
         let retries = 3;
         let correctlyAnsweredWords = new Set();
         let wordData = [];
-        let showChinese = true; // Initial state for Chinese display
+        let showChinese = false; // Initial state for Chinese display
 
         // Set initial UI text (no changes)
         document.getElementById('gameTitle').textContent = uiText.gameTitle;
@@ -476,5 +476,4 @@ permalink: /pages/taigi_english_quiz_game.html
     </script>
 </body>
 </html>
-
 
