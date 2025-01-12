@@ -292,7 +292,7 @@ permalink: /pages/taigi_english_quiz_game.html
             try {
             // Set Taigi-English dictionary path
                 // GitHub pages
-                const response = await fetch('taigi_223_of_700_en_cn_v0.1.json');
+                const response = await fetch('/assets/json/taigi_223_of_700_en_cn_v0.1.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
