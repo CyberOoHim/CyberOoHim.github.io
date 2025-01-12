@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV/JSON Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .conversion-type {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .radio-group {
+            display: inline-block;
+            background: #f0f0f0;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .radio-group label {
+            display: inline-block;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+
+        .radio-group input[type="radio"]:checked + label {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .upload-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+        }
+
+        .preview-section {
+            margin-bottom: 30px;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .preview-content {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            overflow-x: auto;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .ellipsis-row {
+            text-align: center;
+            padding: 10px;
+            font-style: italic;
+            color: #666;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        .file-label:hover {
+            background-color: #1976D2;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .note-area {
+            margin-bottom: 20px;
+            height: 50px; /* Reduced height */
+            overflow: hidden;
+            text-align: center; /* Center align the text */
+        }
+
+        .note-area pre {
+            font-size: 14px; /* Adjustable font size */
+            line-height: 1.4;
+            white-space: pre-wrap;
+            margin: 0;
+            display: inline-block; /* Needed for center alignment to work */
+            text-align: center; /* Align text within the pre to the left */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV/JSON Converter</h1>
+        
+        <div class="conversion-type">
+            <div class="radio-group">
+                <input type="radio" id="csv-to-json" name="conversion-type" value="csv-to-json" checked>
+                <label for="csv-to-json">CSV to JSON</label>
+                <input type="radio" id="json-to-csv" name="conversion-type" value="json-to-csv">
+                <label for="json-to-csv">JSON to CSV</label>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <label for="file-input" class="file-label" id="upload-label">
+                Choose CSV File
+            </label>
+            <input type="file" id="file-input">
+            <button id="download-btn" class="button" disabled>Download</button>
+            <button id="clear-btn" class="button" disabled>Clear</button>
+        </div>
+
+        <div class="note-area">
+            <pre id="converter-docstring">CSV/JSON Converter notes </pre>
+        </div>
+        <div id="error-message" class="error-message"></div>
+
+        <div class="preview-container">
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 id="input-preview-title">CSV Preview</h2>
+                </div>
+                <h3 style="text-align: center;">The first 10 items</h3>
+                <div class="preview-content">
+                    <div id="input-preview-first"></div>
+                </div>
+                <h3 style="text-align: center;">The last 10 items</h3>
+                <div class="preview-content">
+                    <div id="input-preview-last"></div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 id="output-preview-title">JSON Preview</h2>
+                </div>
+                <h3 style="text-align: center;">The first 10 items</h3>
+                <div class="preview-content">
+                    <div id="output-preview-first"></div>
+                </div>
+                <h3 style="text-align: center;">The last 10 items</h3>
+                <div class="preview-content">
+                    <div id="output-preview-last"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let inputData = null;
+        let outputData = null;
+
+        const fileInput = document.getElementById('file-input');
+        const downloadBtn = document.getElementById('download-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const inputPreviewFirst = document.getElementById('input-preview-first');
+        const inputPreviewLast = document.getElementById('input-preview-last');
+        const outputPreviewFirst = document.getElementById('output-preview-first');
+        const outputPreviewLast = document.getElementById('output-preview-last');
+        const uploadLabel = document.getElementById('upload-label');
+        const errorMessage = document.getElementById('error-message');
+        const inputPreviewTitle = document.getElementById('input-preview-title');
+        const outputPreviewTitle = document.getElementById('output-preview-title');
+        const converterDocstring = document.getElementById('converter-docstring');
+
+        /**
+         * Cleans a string by removing leading/trailing quotes and whitespace.
+         * @param {string} str - The string to clean.
+         * @returns {string} The cleaned string.
+         */
+        function cleanString(str) {
+            return str.replace(/^["'\s]+|["'\s]+$/g, '');
+        }
+
+        /**
+         * Creates an HTML table from headers and rows.
+         * @param {string[]} headers - The table headers.
+         * @param {object[]} rows - The table rows.
+         * @returns {string} The HTML table.
+         */
+        function createTable(headers, rows) {
+            let table = '<table><thead><tr>';
+            headers.forEach(header => {
+                table += `<th>${header}</th>`;
+            });
+            table += '</tr></thead><tbody>';
+
+            rows.forEach(row => {
+                table += '<tr>';
+                headers.forEach(header => {
+                    table += `<td>${row[header] || ''}</td>`;
+                });
+                table += '</tr>';
+            });
+
+            table += '</tbody></table>';
+            return table;
+        }
+
+        /**
+         * Parses a single line of CSV data, handling quoted values.
+         * @param {string} line - The CSV line to parse.
+         * @returns {string[]} The parsed values.
+         */
+        function parseCSVLine(line) {
+            const values = [];
+            let currentValue = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        // Escaped double quote
+                        currentValue += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    values.push(currentValue);
+                    currentValue = '';
+                } else {
+                    currentValue += char;
+                }
+            }
+
+            values.push(currentValue);
+            return values;
+        }
+
+        /**
+         * Processes a CSV string into headers and data, handling quoted values.
+         * @param {string} csv - The CSV string.
+         * @returns {{headers: string[], data: object[]}} The headers and data.
+         */
+        function processCSV(csv) {
+            csv = csv.replace(/\r\n/g, '\n');
+            const lines = csv.trim().split('\n');
+            const headers = parseCSVLine(lines[0]);
+
+            const result = lines.slice(1)
+                .filter(line => line.trim())
+                .map(line => {
+                    const values = parseCSVLine(line);
+                    const obj = {};
+                    headers.forEach((header, index) => {
+                        let value = cleanString(values[index] || '');
+                        if (value.startsWith('{') || value.startsWith('[')) {
+                            try {
+                                // If it's a valid JSON, stringify it
+                                const parsedValue = JSON.parse(value);
+                                value = JSON.stringify(parsedValue);
+                            } catch (e) {
+                                // If parsing fails, keep the original string
+                            }
+                        }
+                        obj[header] = value;
+                    });
+                    return obj;
+                });
+
+            return { headers, data: result };
+        }
+
+        /**
+         * Processes a JSON string into headers, CSV, and data.
+         * Ensures list, dict, or JSON values are treated as single strings.
+         * @param {string} json - The JSON string.
+         * @returns {{headers: string[], csv: string, data: object[]}} The headers, CSV, and data.
+         */
+        function processJSON(json) {
+            const data = JSON.parse(json);
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('JSON must be an array of objects');
+            }
+
+            // Get all unique headers
+            const headers = Array.from(new Set(
+                data.flatMap(obj => Object.keys(obj))
+            ));
+
+            // Convert to CSV, treating complex values as single strings
+            const csvRows = data.map(obj =>
+                headers.map(header => {
+                    let value = obj[header];
+                    if (typeof value === 'object') {
+                        // Stringify objects, lists, and any nested JSON
+                        value = JSON.stringify(value);
+                    }
+                    return value ? `"${value.replace(/"/g, '""')}"` : ''; // Escape double quotes within the string
+                }).join(',')
+            );
+
+            return {
+                headers,
+                csv: [headers.join(','), ...csvRows].join('\n'),
+                data
+            };
+        }
+
+        /**
+         * Updates the previews for CSV to JSON conversion.
+         * @param {string[]} headers - The CSV headers.
+         * @param {object[]} allRows - All CSV rows.
+         */
+        function updatePreviewsCSVToJSON(headers, allRows) {
+            // Preview first 10 and last 10 rows
+            const first10 = allRows.slice(0, 10);
+            const last10 = allRows.length > 10 ? allRows.slice(-10) : [];
+
+            // Input (CSV) Preview
+            inputPreviewFirst.innerHTML = createTable(headers, first10);
+            inputPreviewLast.innerHTML = last10.length ? createTable(headers, last10) : '';
+
+            // Output (JSON) Preview
+            const first10Json = JSON.stringify(first10, null, 2);
+            const last10Json = last10.length ? JSON.stringify(last10, null, 2) : '';
+
+            outputPreviewFirst.innerHTML = `<pre>${first10Json}</pre>`;
+            outputPreviewLast.innerHTML = last10.length ? `<pre>${last10Json}</pre>` : '';
+        }
+
+        /**
+         * Updates the previews for JSON to CSV conversion.
+         * @param {string[]} headers - The JSON headers.
+         * @param {object[]} jsonData - The JSON data.
+         * @param {string} csvData - The CSV data.
+         */
+        function updatePreviewsJSONToCSV(headers, jsonData, csvData) {
+            // JSON Preview (input)
+            const first10Json = JSON.stringify(jsonData.slice(0, 10), null, 2);
+            const last10Json = jsonData.length > 10
+                ? JSON.stringify(jsonData.slice(-10), null, 2)
+                : '';
+
+            inputPreviewFirst.innerHTML = `<pre>${first10Json}</pre>`;
+            inputPreviewLast.innerHTML = jsonData.length > 10 ? `<pre>${last10Json}</pre>` : '';
+
+            // CSV Preview (output)
+            const csvRows = csvData.split('\n');
+            const first10Rows = csvRows.slice(0, 11); // Include header
+            const last10Rows = csvRows.length > 11
+                ? csvRows.slice(-10)
+                : [];
+
+            const tableData = processCSV(first10Rows.join('\n'));
+            outputPreviewFirst.innerHTML = createTable(tableData.headers, tableData.data);
+
+            outputPreviewLast.innerHTML = last10Rows.length
+                ? createTable(
+                    processCSV([csvRows[0], ...last10Rows].join('\n')).headers,
+                    processCSV([csvRows[0], ...last10Rows].join('\n')).data
+                )
+                : '';
+        }
+
+        // Update UI based on conversion type
+        document.querySelectorAll('input[name="conversion-type"]')
+            .forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const isCSVToJSON = e.target.value === 'csv-to-json';
+                    fileInput.accept = isCSVToJSON ? '.csv' : '.json';
+                    uploadLabel.textContent = `Choose ${
+                        isCSVToJSON ? 'CSV' : 'JSON'
+                    } File`;
+                    inputPreviewTitle.textContent = `${
+                        isCSVToJSON ? 'CSV' : 'JSON'
+                    } Preview`;
+                    outputPreviewTitle.textContent = `${
+                        isCSVToJSON ? 'JSON' : 'CSV'
+                    } Preview`;
+
+                    // Clear current data and reset file input
+                    clearBtn.click();
+                    fileInput.value = '';
+                });
+            });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) {
+                errorMessage.style.display = 'none'; // Hide error if no file selected
+                return;
+            }
+
+            // Check file type
+            const isCSVToJSON = document.getElementById('csv-to-json').checked;
+            const allowedTypes = isCSVToJSON ? ['text/csv'] : ['application/json'];
+            if (!allowedTypes.includes(file.type)) {
+                errorMessage.textContent = `Error: Invalid file type. Please upload a ${isCSVToJSON ? 'CSV' : 'JSON'} file.`;
+                errorMessage.style.display = 'block';
+                clearBtn.click(); // Clear file input and reset state
+                return; // Stop further processing
+            }
+
+            // If file type is valid, proceed with reading the file
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    errorMessage.style.display = 'none'; // Hide error message on successful read
+
+                    if (isCSVToJSON) {
+                        inputData = e.target.result;
+                        const { headers, data } = processCSV(inputData);
+                        outputData = data;
+                        updatePreviewsCSVToJSON(headers, data);
+                    } else {
+                        inputData = e.target.result;
+                        const { headers, csv, data } = processJSON(inputData);
+                        outputData = csv;
+                        updatePreviewsJSONToCSV(headers, data, csv);
+                    }
+
+                    downloadBtn.disabled = false;
+                    clearBtn.disabled = false;
+                } catch (error) {
+                    errorMessage.textContent = `Error: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                    clearBtn.click();
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            if (!outputData) return;
+
+            const isCSVToJSON = document.getElementById('csv-to-json').checked;
+            const blob = new Blob(
+                [
+                    isCSVToJSON
+                        ? JSON.stringify(outputData, null, 2)
+                        : outputData
+                ],
+                {
+                    type: isCSVToJSON
+                        ? 'application/json'
+                        : 'text/csv'
+                }
+            );
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = isCSVToJSON ? 'converted.json' : 'converted.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            inputPreviewFirst.innerHTML = '';
+            inputPreviewLast.innerHTML = '';
+            outputPreviewFirst.innerHTML = '';
+            outputPreviewLast.innerHTML = '';
+            inputData = null;
+            outputData = null;
+            downloadBtn.disabled = true;
+            clearBtn.disabled = true;
+            errorMessage.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
+
