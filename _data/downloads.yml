@@ -16,14 +16,22 @@ datasets:
     category: datasets
     updated: 2025-01-09
 
-#web-apps:
-  #- name: Taigi-English word game 01
-    #description: An example web Apps of Taigi-English word game.
-    #version: 1.0
-    #filename: Taigi_word_game_01_v0.1.html
-    #download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/web-apps/Taigi_word_game_a_v0.1.html
-    #category: web-apps
-    #updated: 2025-01-10
+  - name: Taigi-English quiz game - dictionary
+    description: An example corpus of Taigi-English quiz game. (試驗版，隨時會閣改。）
+    version: 0b
+    filename: assets/json/taigi_223_of_700_en_cn_v0b.json
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/assets/json/taigi_223_of_700_en_cn_v0b.json
+    category: datasets
+    updated: 2025-01-12
+
+web-apps:
+  - name: Taigi-English quiz game
+    description: An experimental web Apps of Taigi-English quiz game. (試驗版，隨時會閣改。）
+    version: 0c
+    filename: taigi_english_quiz_game_a_v0c.html
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/pages/taigi_english_quiz_game_a_v0c.html
+    category: web-apps
+    updated: 2025-01-12
 
 #tools:
   #- name: Example Tool
