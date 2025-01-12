@@ -16,7 +16,7 @@ o-1. [《 台語 AI workshop 》 補充：申請 Google AI Studio ê API key](ht
 
 2. [《 台語 AI workshop 》  System Instruction](https://www.facebook.com/groups/2361817230821829/permalink/2384689151867970/)
 
-3. [《 台語 AI workshop 》   In-Context Training（ICT) and X-shot Learning](https://www.facebook.com/groups/2361817230821829/permalink/2386867081650177/)
+3. [《 台語 AI workshop 》   In-Context Training（ICT) and X-shot Learning](https://www.facebook.com/groups/2361817230821829/permalink/2385259975144221/)
 
 4. [《 台語 AI workshop 》 訓練專門科个 AI 助手 - 台語文情境式講演 AI 助手](https://www.facebook.com/groups/2361817230821829/permalink/2386110628392489/)
 
