@@ -195,7 +195,13 @@ permalink: /pages/taigi_math_game_a.html
             ]
         };
 
-        fetch('/assets/json/taigi_kid_math_problems_v0.1.json')
+        const dictionaryPath = "taigi_kid_math_problems_v0a.json";
+        const folderPath = "/assets/json";
+        const github_pages = true;
+
+        const dict_to_fetch = github_pages ? `${folderPath}/${dictionaryPath}` : dictionaryPath;
+        
+        fetch(dict_to_fetch)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
