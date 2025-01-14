@@ -16,6 +16,14 @@ datasets:
     category: datasets
     updated: 2025-01-09
 
+  - name: Taigi-English parallel pairs + supplementary dictionary
+    description: An example corpus of Taigi-English pairs + supplementary dictionary. 囥一寡文法、句型、新聞+文章翻譯，佮欲冬半以來，若試 Google AI Studio 若補充，家己寫，無專業个試驗用小詞典，罔參考。
+    version: 20240813
+    filename: taigi_english_pairs+supplementary_dict_20240813_license.csv
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_english_pairs+supplementary_dict_20240813_license.csv
+    category: datasets
+    updated: 2025-01-014
+
   - name: Taigi-English quiz game - dictionary
     description: An example corpus of Taigi-English quiz game. (試驗版，隨時會閣改。）
     version: 0b
