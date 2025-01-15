@@ -213,6 +213,13 @@ permalink: /pages/taigi_english_quiz_game.html
             font-size: 0.8em; /* Match button font size */
             margin-top: 20px; /* Add some top margin */
         }
+          #credit {
+             font-size: 0.6em; /* Very small font size */
+            text-align: center; /* Center-align the text */
+            margin-top: 20px; /* Add some top margin */
+             color: #888; /* Light grey color for the credit */
+            font-style: italic; /* Italic style for the credit */
+        }
     </style>
 </head>
 <body>
@@ -244,19 +251,22 @@ permalink: /pages/taigi_english_quiz_game.html
                 <input type="checkbox" id="chineseCheckbox">
                 <label for="chineseCheckbox">Show Chinese</label>
             </div>
+            <!-- Credit line added here with very small font size -->
+            <div id="credit">- The bilingual dictionary is processed by Google AI Studio -</div>
         </div>
     </div>
 <script>
     // JavaScript
-    // Configuration: Path to the Taigi-English dictionary JSON
-// Define a condition for switching paths
-const useLocalPath = true; // Set to true to use the external path
+    // Configuration: Set JSON path, GitHub pages or local folder
+        const dictionaryPath = "taigi_859_of_700_en_cn_v0c.json";
+        const folderPath = "/assets/json";
+    // Define a condition for switching paths
+        const github_pages = true; // Set to true to use the external path
 
-// Use the condition to determine the dictionary path
-const dictionaryPath = useLocalPath 
-    ? '/assets/json/taigi_223_of_700_en_cn_v0b.json'
-    : 'taigi_223_of_700_en_cn_v0b.json';
-    
+    // Use the condition to determine the dictionary path
+        const dict_to_fetch = github_pages ? `${folderPath}/${dictionaryPath}` : dictionaryPath;
+        
+    // Customizable UI text
     const uiText = {
         gameTitle: "台-英 奕字",
         scoreLabel: "着分:",
@@ -326,20 +336,20 @@ const dictionaryPath = useLocalPath
     resetButton.textContent = uiText.resetButton;
     nextButton.textContent = uiText.nextButton;
 
-    // Function to fetch the dictionary (no changes)
+    // Function to fetch the dictionary (with error handling)
     async function fetchDictionary() {
         try {
-        // Set Taigi-English dictionary path
-            // GitHub pages
-            const response = await fetch(dictionaryPath);
+            const response = await fetch(dict_to_fetch);
             if (!response.ok) {
+                 // Throw an error if the response is not ok (e.g., 404, 500)
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             wordData = await response.json();
             displayWord();
         } catch (error) {
+             // Display error message on screen if something goes wrong with JSON fetch
             console.error('Error fetching dictionary:', error);
-            bulletinElement.textContent = 'Failed to load dictionary.';
+            bulletinElement.textContent = 'Failed to load dictionary. Please check.';
         }
     }
 
