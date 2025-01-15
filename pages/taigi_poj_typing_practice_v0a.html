@@ -1,3 +1,9 @@
+---
+layout: apps
+title: (試驗版，閣足濟愛改) Taigi POJ Typing Practice
+version: v0a
+permalink: /pages/taigi_poj_typing_practice.html
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,7 +206,7 @@
         ];
 
         // Fetch and initialize dictionary
-        fetch('taigi_223_of_700_en_cn_POJ_num_v0.1.json')
+        fetch('/assets/datasets/taigi_223_of_700_en_cn_POJ_num_v0.1.json')
             .then(response => response.json())
             .then(data => {
                 // Validate fetched data
