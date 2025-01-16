@@ -26,8 +26,8 @@ permalink: /pages/taigi_english_quiz_game.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taigi-English Word Game</title>
-    <style>
-        /* CSS (no changes) */
+ <style>
+        /* CSS (with fun color palette) */
         body {
             font-family: sans-serif;
             display: flex;
@@ -35,9 +35,10 @@ permalink: /pages/taigi_english_quiz_game.html
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #f8f8f8;
+            background-color: #f0f8ff; /* Light Alice Blue background */
             /* Base font size for the entire game */
             font-size: 28px; /* Set the base font size here */
+            color: #2f4f4f; /* Dark Slate Gray text color for readability */
         }
 
         /* Container for fixed width */
@@ -48,10 +49,10 @@ permalink: /pages/taigi_english_quiz_game.html
         }
 
         #container {
-            background-color: #fff;
+            background-color: #fffff0; /* Light Lavender Blush container */
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -59,15 +60,15 @@ permalink: /pages/taigi_english_quiz_game.html
         }
 
         h1 {
-            color: #333;
+            color: #4682b4; /* Steel Blue title */
             margin-bottom: 20px;
             /* Title font size (adjust as needed) */
-            font-size: 1.3em;  /* 1.5 times the base font size */
+            font-size: 1.5em;  /* 1.5 times the base font size */
         }
 
         #word {
             margin-bottom: 20px;
-            color: #2196F3;
+            color: #ff6347; /* Tomato question color */
             /* Question font size and weight */
             font-size: 1.3em; /* Same as the base font size */
             font-weight: bold; /* Make question bold */
@@ -83,12 +84,12 @@ permalink: /pages/taigi_english_quiz_game.html
             width: 45%;
         }
 
-        .option-container {
+         .option-container {
             display: flex;
             align-items: center;
             padding: 10px 20px;
             border-radius: 5px;
-            background-color: #e0e0e0;
+            background-color: #e6e6fa; /* Lavender option background */
             transition: background-color 0.3s;
             width: 100%;
             /* Option font size (adjust as needed) */
@@ -96,7 +97,7 @@ permalink: /pages/taigi_english_quiz_game.html
         }
 
         .option-container:hover {
-            background-color: #d0d0d0;
+            background-color: #d8bfd8; /* Thistle on hover */
         }
 
         .option-container input[type="radio"] {
@@ -122,31 +123,31 @@ permalink: /pages/taigi_english_quiz_game.html
 
         /* Submit button styles */
         #submit-button {
-            background-color: #4CAF50;
+            background-color: #3cb371; /* Medium Sea Green */
             margin-right: 20px;
         }
 
         #submit-button:hover {
-            background-color: #367c39;
+            background-color: #2e8b57; /* Sea Green on hover */
         }
 
         /* Reset button styles */
         #reset-button {
-            background-color: #f44336; /* Red color */
+            background-color: #dc143c; /* Crimson */
         }
 
         #reset-button:hover {
-            background-color: #da190b; /* Darker red on hover */
+            background-color: #b22222; /* Firebrick on hover */
         }
 
         /* Next button styles */
         #next-button {
-            background-color: #2196F3; /* Blue color */
+             background-color: #1e90ff; /* Dodger Blue */
             display: none; /* Initially hidden */
         }
 
         #next-button:hover {
-            background-color: #0d8aee; /* Darker blue on hover */
+            background-color: #0000ff; /* Blue on hover */
         }
 
         #result {
@@ -157,19 +158,19 @@ permalink: /pages/taigi_english_quiz_game.html
         }
 
         .correct {
-            color: green;
+            color: #008000; /* Green */
         }
 
         .incorrect {
-            color: red;
+            color: #b22222; /* Firebrick */
         }
 
-        #scoreRow {
+         #scoreRow {
             display: flex;
             justify-content: space-around;
             align-items: center;
             margin-bottom: 10px;
-            width: 50%;
+             width: 50%;
         }
 
         #scoreLabel,
@@ -182,12 +183,12 @@ permalink: /pages/taigi_english_quiz_game.html
         #score,
         #incorrectScore {
             margin-left: 10px;
-            /* Score display font size (adjust as needed) */
+             /* Score display font size (adjust as needed) */
             font-size: 0.9em; /* Slightly smaller than base font size */
         }
 
         #incorrectScore {
-            color: red;
+            color: #b22222; /* Firebrick */
         }
 
         #button-container {
@@ -208,20 +209,19 @@ permalink: /pages/taigi_english_quiz_game.html
         }
 
         /* Checkbox styles */
-        #chineseCheckboxContainer {
+          #chineseCheckboxContainer {
             margin-bottom: 10px; /* Add some spacing */
             font-size: 0.8em; /* Match button font size */
-            margin-top: 20px; /* Add some top margin */
+             margin-top: 20px; /* Add some top margin */
         }
-          #credit {
-             font-size: 0.4em; /* Very small font size */
+         #credit {
+            font-size: 0.4em; /* Very small font size */
             text-align: center; /* Center-align the text */
             margin-top: 0px; /* Add some top margin */
              color: #888; /* Light grey color for the credit */
             font-style: italic; /* Italic style for the credit */
         }
-        
-                  #copyRight {
+            #copyRight {
             font-size: 0.4em; /* Very small font size */
             text-align: center; /* Center-align the text */
             margin-top: 0px; /* Add some top margin */
