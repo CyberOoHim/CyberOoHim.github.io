@@ -5,134 +5,153 @@ version: v0a
 permalink: /pages/taigi_poj_typing_practice.html
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>POJ Typing Practice</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;  /* ← Adjust overall width of game area */
+            font-family: sans-serif;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;     /* ← Adjust outer padding of game area */
+            padding: 20px;
             background-color: #2f4454;
         }
         .game-container {
             background-color: #375673;
-            padding: 30px;     /* ← Adjust inner padding of game container */
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             color: #e8ecef;
         }
-        
-        /* Title size */
+
         h1 {
             color: #e8ecef;
             text-align: center;
-            margin-bottom: 30px;  /* ← Adjust space below title */
-            font-size: 32px;      /* ← Adjust title size */
+            margin-bottom: 5px; /* Reduced margin to bring text closer */
+            font-size: 32px;
         }
-
-        /* Options area (checkboxes) */
+        
+        .subtitle{
+            color: #a8b5c5;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+        
         .options {
-            margin: 20px 0;       /* ← Adjust vertical spacing around options */
+            margin: 20px 0;
             text-align: center;
             background-color: #2f4454;
-            padding: 20px;        /* ← Adjust padding around checkboxes */
+            padding: 20px;
             border-radius: 8px;
-            font-size: 20px;      /* ← Adjust checkbox label size */
+            font-size: 20px;
         }
         .options label {
-            margin: 0 15px;       /* ← Adjust space between checkboxes */
+            margin: 0 15px;
         }
 
-        /* Main word display area */
         .word-display {
-            margin: 30px 0;       /* ← Adjust vertical spacing around word display */
+            margin: 30px 0;
             text-align: center;
             background-color: #2f4454;
-            padding: 25px;        /* ← Adjust padding around displayed words */
+            padding: 25px;
             border-radius: 8px;
         }
         #pojDisplay {
-            font-size: 42px;      /* ← Adjust POJ text size */
-            margin-bottom: 15px;  /* ← Adjust space between POJ and number */
+            font-size: 42px;
+            margin-bottom: 15px;
         }
         #targetDisplay {
-            font-size: 36px;      /* ← Adjust target number size */
+            font-size: 36px;
             color: #a8b5c5;
         }
 
-        /* Translation boxes */
         .translations {
             display: flex;
             justify-content: space-around;
-            margin: 30px 0;       /* ← Adjust vertical spacing around translations */
+            margin: 30px 0;
         }
         .translation-box {
-            padding: 20px;        /* ← Adjust padding inside translation boxes */
+            padding: 20px;
             background-color: #2f4454;
             border-radius: 5px;
-            min-width: 150px;     /* ← Adjust minimum width of translation boxes */
+            min-width: 150px;
             text-align: center;
-            font-size: 24px;      /* ← Adjust translation text size */
+            font-size: 24px;
         }
 
-        /* Input area */
         .input-area {
             text-align: center;
-            margin: 30px 0;       /* ← Adjust vertical spacing around input */
+            margin: 30px 0;
         }
         #userInput {
-            font-size: 28px;      /* ← Adjust input text size */
-            padding: 15px;        /* ← Adjust padding inside input field */
-            width: 400px;         /* ← Adjust width of input field */
+            font-size: 28px;
+            padding: 15px;
+            width: 400px;
             border: 2px solid #4a6583;
             border-radius: 5px;
             background-color: #e8ecef;
             color: #2f4454;
         }
         #userInput::placeholder {
-            font-size: 24px;      /* ← Adjust placeholder text size */
+            font-size: 24px;
             color: #6789ab;
         }
 
-        /* Stats area */
         .stats {
             display: flex;
             justify-content: space-around;
-            margin: 30px 0;       /* ← Adjust vertical spacing around stats */
+            margin: 30px 0;
         }
         .stat-box {
             background-color: #2f4454;
-            padding: 20px;        /* ← Adjust padding inside stat boxes */
+            padding: 20px;
             border-radius: 5px;
-            min-width: 130px;     /* ← Adjust minimum width of stat boxes */
+            min-width: 130px;
             text-align: center;
-            font-size: 22px;      /* ← Adjust stats text size */
+            font-size: 22px;
         }
         .stat-box div:first-child {
-            margin-bottom: 10px;  /* ← Adjust space between stat label and number */
+            margin-bottom: 10px;
         }
 
-        /* Correct/Incorrect text colors */
         .correct {
             color: #98ff98;
-            font-size: 28px;      /* ← Adjust correct answer text size */
+            font-size: 28px;
         }
         .incorrect {
             color: #ff9898;
-            font-size: 28px;      /* ← Adjust incorrect answer text size */
+            font-size: 28px;
+        }
+        
+        #credit {
+             font-size: 0.6em; /* Very small font size */
+            text-align: center; /* Center-align the text */
+            margin-top: 0px; /* Add some top margin */
+             color: #888; /* Light grey color for the credit */
+            font-style: italic; /* Italic style for the credit */
+        }
+        
+        #copyRight {
+            font-size: 0.6em; /* Very small font size */
+            text-align: center; /* Center-align the text */
+            margin-top: 0px; /* Add some top margin */
+            color: #888; /* Light grey color for the credit */
+            font-style: italic; /* Italic style for the credit */
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="game-container">
         <h1>POJ Typing Practice</h1>
-        
+        <div class="subtitle">Typing with POJ sò͘-jī tiāu-û.</div>
+
         <div class="options">
             <label><input type="checkbox" id="showHanji" checked> Show Hanji</label>
             <label><input type="checkbox" id="showEn" checked> Show English</label>
-            <label><input type="checkbox" id="showCn" checked> Show Chinese</label>
+            <label><input type="checkbox" id="showCn"> Show Chinese</label>
         </div>
 
         <div class="word-display">
@@ -147,7 +166,7 @@ permalink: /pages/taigi_poj_typing_practice.html
         </div>
 
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="Type POJ with the tone number here..." autocomplete="off">
+            <input type="text" id="userInput" placeholder="Type POJ + tone number here..." autocomplete="off">
         </div>
 
         <div class="stats">
@@ -164,30 +183,55 @@ permalink: /pages/taigi_poj_typing_practice.html
                 <div id="accuracy">0%</div>
             </div>
         </div>
+        <!-- Credit line added here with very small font size -->
+        <!-- from 教育部台語700字 -->
+        <div id="credit">The web apps and dictionary was processed by Google AI Studio.</div>
+        <div id="copyRight">© 2025 Cyber O͘-hîm ki-tē. All rights reserved. </div>
+
     </div>
 
     <script>
-        let dictionary = [];
-        let currentWord = null;
-        let correctCount = 0;
-        let incorrectCount = 0;
+        // Configuration: Set JSON path, GitHub pages or local folder
+        const dictionaryPath = "taigi_223_of_700_en_cn_POJ_num_v0.1.json";
+        const folderPath = "/assets/json";
+        const github_pages = false;
+        const defaultPath = folderPath + "/" + dictionaryPath;
+        const localPath = dictionaryPath;
+        const dict_to_fetch = github_pages ? defaultPath : localPath;
 
-        // Helper function to get first word before "/"
+        let dictionary = [];
+
+        const loadDictionary = (path) =>
+            fetch(path)
+                .then(res => res.ok ? res.json() : Promise.reject(`HTTP error! Status: ${res.status}`))
+                .then(data => {
+                    dictionary = data.filter(isValidWord);
+                    if (!dictionary.length)
+                        console.warn('No valid words, using sample data'), dictionary = sampleData;
+                    nextWord();
+                })
+                .catch(err => {
+                    console.error('Error loading', path, err);
+                    const fallbackPath = github_pages ? defaultPath : localPath;
+                    path !== fallbackPath ?
+                        (console.log("Attempting fallback", fallbackPath), loadDictionary(fallbackPath)) :
+                        (console.warn('Fallback failed, using sample data'), dictionary = sampleData, nextWord());
+                });
+
+        loadDictionary(dict_to_fetch);
         function getFirstWord(text) {
             return text ? text.split('/')[0].trim() : '';
         }
 
-        // Add data validation function
         function isValidWord(word) {
-            return word && 
-                   word.POJ && 
-                   word.POJ_num && 
-                   word.Hanji && 
-                   word.en && 
+            return word &&
+                   word.POJ &&
+                   word.POJ_num &&
+                   word.Hanji &&
+                   word.en &&
                    word.cn;
         }
 
-        // Sample data with proper structure
         const sampleData = [
             {
                 "POJ": "a-pa/pah/pâ",
@@ -205,50 +249,34 @@ permalink: /pages/taigi_poj_typing_practice.html
             }
         ];
 
-        // Fetch and initialize dictionary
-        fetch('/assets/json/taigi_223_of_700_en_cn_POJ_num_v0.1.json')
-            .then(response => response.json())
-            .then(data => {
-                // Validate fetched data
-                dictionary = data.filter(isValidWord);
-                if (dictionary.length === 0) {
-                    console.warn('No valid words found in fetched data, using sample data');
-                    dictionary = sampleData;
-                }
-                nextWord();
-            })
-            .catch(error => {
-                console.error('Error loading dictionary:', error);
-                dictionary = sampleData;
-                nextWord();
-            });
+
+        let currentWord = null;
+        let correctCount = 0;
+        let incorrectCount = 0;
 
         function nextWord() {
-            // Get a random word and validate it
             const randomIndex = Math.floor(Math.random() * dictionary.length);
             currentWord = dictionary[randomIndex];
-            
+
             if (!isValidWord(currentWord)) {
                 console.error('Invalid word data:', currentWord);
-                currentWord = sampleData[0]; // Use first sample word as fallback
+                currentWord = sampleData[0];
             }
 
-            // Update displays with explicit type checking
             const pojDisplay = document.getElementById('pojDisplay');
             const targetDisplay = document.getElementById('targetDisplay');
-            
+
             pojDisplay.textContent = getFirstWord(currentWord.POJ) || '';
             targetDisplay.textContent = getFirstWord(currentWord.POJ_num) || '';
-            
+
             updateTranslations();
-            
+
             const userInput = document.getElementById('userInput');
             userInput.value = '';
             userInput.className = '';
         }
 
         function updateTranslations() {
-            // Update each translation box with fallbacks
             const hanjiBox = document.getElementById('hanjiBox');
             const enBox = document.getElementById('enBox');
             const cnBox = document.getElementById('cnBox');
@@ -288,7 +316,6 @@ permalink: /pages/taigi_poj_typing_practice.html
             }
         });
 
-        // Event listeners for checkboxes
         document.getElementById('showHanji').addEventListener('change', updateTranslations);
         document.getElementById('showEn').addEventListener('change', updateTranslations);
         document.getElementById('showCn').addEventListener('change', updateTranslations);
