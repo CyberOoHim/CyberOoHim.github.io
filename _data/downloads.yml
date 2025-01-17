@@ -16,30 +16,30 @@ datasets:
     category: datasets
     updated: 2025-01-09
 
-  - name: Taigi-English parallel pairs + supplementary dictionary
-    description: An example corpus of Taigi-English pairs + supplementary dictionary. 囥一寡文法、句型、新聞+文章翻譯，佮欲冬半以來，若試 Google AI Studio 若補充，家己寫，無專業个試驗用小詞典，罔參考。
-    version: 20240813
-    filename: taigi_english_pairs+supplementary_dict_20240813_license.csv
-    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/_downloads/datasets/taigi_english_pairs+supplementary_dict_20240813_license.csv
-    category: datasets
-    updated: 2025-01-014
-
-  - name: Taigi-English quiz game - dictionary
-    description: An example corpus of Taigi-English quiz game. (試驗版，隨時會閣改。）
+  - name: Taigi-English quiz game - dictionary(223)
+    description: An example corpus of Taigi-English quiz game. ùi 教育部台語700字，用 Google AI Studio 整理--過 ê 223 塊台語詞，較細組，用來飼予 AI 生新語料較利便。
     version: 0b
     filename: assets/json/taigi_223_of_700_en_cn_v0b.json
     download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/assets/json/taigi_223_of_700_en_cn_v0b.json
     category: datasets
     updated: 2025-01-12
 
+  - name: Taigi-English quiz game - dictionary(1280)
+    description: An example corpus of Taigi-English quiz game. ùi 教育部台語700字，用 Google AI Studio 整理--過 ê 1280 塊台語詞。
+    version: 0d
+    filename: assets/json/taigi_1280_of_700_en_cn_v0d.json
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/assets/json/taigi_1280_of_700_en_cn_v0d.json
+    category: datasets
+    updated: 2025-01-17
+
 web-apps:
-  - name: Taigi-English quiz game
-    description: An experimental web Apps of Taigi-English quiz game. (試驗版，隨時會閣改。）
-    version: 0c
-    filename: taigi_english_quiz_game_a_v0c.html
-    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/pages/taigi_english_quiz_game_a_v0c.html
+  - name: Taigi-English quiz game (台英奕字）
+    description: An experimental web Apps of Taigi-English quiz game. 用--ê datasets 是 ùi 教育部台語700字，用 Google AI Studio 整理--過 ê 1280 塊台語詞.
+    version: 0e
+    filename: taigi_english_quiz_game_a_v0e.html
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/pages/taigi_english_quiz_game_a_v0e.html
     category: web-apps
-    updated: 2025-01-12
+    updated: 2025-01-17
 
 #tools:
   #- name: Example Tool
