@@ -1,0 +1,625 @@
+---
+layout: apps
+title: CSV/JSON 互轉
+version: v0.1-1
+permalink: /pages/csv_json_2way_converter.html
+---
+<!--
+    Copyright (C) 2025 [Cyber O͘-hîm ki-tē]
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV/JSON Converter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+        font-size: 16px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 28px;
+    }
+
+    .conversion-type {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .conversion-buttons button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: lightyellow;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 5px;
+    }
+
+    .conversion-buttons button:hover {
+        background-color: #e6e68a;
+    }
+
+    .conversion-buttons button.active {
+        background-color: #ffdb4d;
+        border: 1px solid #333;
+    }
+
+    .upload-section {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin: 5px;
+    }
+
+    .button:hover {
+        background-color: #45a049;
+    }
+
+    .button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    .clear-button {
+        background-color: #f44336;
+    }
+
+    .clear-button:hover {
+        background-color: #d32f2f;
+    }
+
+    .clear-button:disabled {
+        background-color: #ffcdd2;
+    }
+
+    .preview-container {
+        margin-top: 20px;
+    }
+
+    .preview-section {
+        margin-bottom: 30px;
+    }
+
+    .preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .preview-header h2 {
+        font-size: 25px;
+        margin: 0 auto;
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    .item-count {
+        font-size: 18px;
+        margin-right: 20px;
+        color: #555;
+        font-weight: bold;
+    }
+
+    .preview-content {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+        overflow-x: auto;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .ellipsis-row {
+        text-align: center;
+        padding: 10px;
+        font-style: italic;
+        color: #666;
+    }
+
+    #file-input {
+        display: none;
+    }
+
+    .file-label {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin: 5px;
+    }
+
+    .file-label:hover {
+        background-color: #1976D2;
+    }
+
+    .error-message {
+        color: #d32f2f;
+        text-align: center;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #ffebee;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .file-name-display {
+        margin-top: 10px;
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+         text-align: center;
+         margin-bottom: 10px;
+    }
+    .note-area {
+        margin-bottom: 20px;
+        height: 50px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .note-area pre {
+        font-size: 16px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        margin: 0;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .filename-options {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .filename-options label {
+        margin-right: 10px;
+         font-size: 18px;
+    }
+
+     .filename-options input[type="radio"] {
+        transform: scale(1.5); /* Enlarge the radio button */
+        margin-right: 5px; /* Add some space between the button and the label text */
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV/JSON Converter</h1>
+
+        <div class="note-area">
+            <pre id="converter-docstring">註: CSV 轉做 JSON 了後，有 "\ 這款特殊字符是正常，若閣改這个 JSON 檔案，照按呢用就好。</pre>
+        </div>
+
+        <div class="conversion-type">
+            <div class="conversion-buttons">
+                <button id="csv-to-json" class="active">CSV to JSON</button>
+                <button id="json-to-csv">JSON to CSV</button>
+            </div>
+        </div>
+
+ <div class="upload-section">
+            <label for="file-input" class="file-label" id="upload-label">
+                Choose CSV File
+            </label>
+            <input type="file" id="file-input">
+            <button id="download-btn" class="button" disabled>Download</button>
+            <button id="clear-btn" class="button clear-button" disabled>Clear</button>
+            </div>
+
+         <div id="file-name-display" class="file-name-display"></div>
+
+         <div class="filename-options">
+                <label>
+                    <input type="radio" name="filename-option" value="default" checked>
+                    Use "converted.csv/.json"
+                </label>
+                 <label>
+                    <input type="radio" name="filename-option" value="original">
+                    Use Original File Name
+                </label>
+         </div>
+
+
+        <div id="error-message" class="error-message"></div>
+
+        <div class="preview-container">
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 id="input-preview-title">CSV Preview</h2>
+                    <span id="input-item-count" class="item-count"></span>
+                </div>
+                <h3 style="text-align: center;">The first 10 items</h3>
+                <div class="preview-content">
+                    <div id="input-preview-first"></div>
+                </div>
+                <h3 style="text-align: center;">The last 10 items</h3>
+                <div class="preview-content">
+                    <div id="input-preview-last"></div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 id="output-preview-title">JSON Preview</h2>
+                     <span id="output-item-count" class="item-count"></span>
+                </div>
+                <h3 style="text-align: center;">The first 10 items</h3>
+                <div class="preview-content">
+                    <div id="output-preview-first"></div>
+                </div>
+                <h3 style="text-align: center;">The last 10 items</h3>
+                <div class="preview-content">
+                    <div id="output-preview-last"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let inputData = null;
+        let outputData = null;
+        let currentConversionType = 'csv-to-json';
+        let originalFileName = null;
+
+        const fileInput = document.getElementById('file-input');
+        const downloadBtn = document.getElementById('download-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const inputPreviewFirst = document.getElementById('input-preview-first');
+        const inputPreviewLast = document.getElementById('input-preview-last');
+        const outputPreviewFirst = document.getElementById('output-preview-first');
+        const outputPreviewLast = document.getElementById('output-preview-last');
+        const uploadLabel = document.getElementById('upload-label');
+        const errorMessage = document.getElementById('error-message');
+        const inputPreviewTitle = document.getElementById('input-preview-title');
+        const outputPreviewTitle = document.getElementById('output-preview-title');
+        const converterDocstring = document.getElementById('converter-docstring');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const inputItemCount = document.getElementById('input-item-count');
+        const outputItemCount = document.getElementById('output-item-count');
+        const filenameOption = document.querySelectorAll('input[name="filename-option"]');
+
+        function cleanString(str) {
+            return str.replace(/^["'\s]+|["'\s]+$/g, '');
+        }
+
+        function createTable(headers, rows) {
+            let table = '<table><thead><tr>';
+            headers.forEach(header => {
+                table += `<th>${header}</th>`;
+            });
+            table += '</tr></thead><tbody>';
+
+            rows.forEach(row => {
+                table += '<tr>';
+                headers.forEach(header => {
+                    table += `<td>${row[header] || ''}</td>`;
+                });
+                table += '</tr>';
+            });
+
+            table += '</tbody></table>';
+            return table;
+        }
+
+        function parseCSVLine(line) {
+            const values = [];
+            let currentValue = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        currentValue += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    values.push(currentValue);
+                    currentValue = '';
+                } else {
+                    currentValue += char;
+                }
+            }
+
+            values.push(currentValue);
+            return values;
+        }
+
+        function processCSV(csv) {
+            csv = csv.replace(/\r\n/g, '\n');
+            const lines = csv.trim().split('\n');
+            const headers = parseCSVLine(lines[0]);
+
+            const result = lines.slice(1)
+                .filter(line => line.trim())
+                .map(line => {
+                    const values = parseCSVLine(line);
+                    const obj = {};
+                    headers.forEach((header, index) => {
+                        let value = cleanString(values[index] || '');
+                        if (value.startsWith('{') || value.startsWith('[')) {
+                            try {
+                                const parsedValue = JSON.parse(value);
+                                value = JSON.stringify(parsedValue);
+                            } catch (e) {
+                            }
+                        }
+                        obj[header] = value;
+                    });
+                    return obj;
+                });
+
+            return { headers, data: result };
+        }
+
+        function processJSON(json) {
+            const data = JSON.parse(json);
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('JSON must be an array of objects');
+            }
+
+            const headers = Array.from(new Set(
+                data.flatMap(obj => Object.keys(obj))
+            ));
+
+            const csvRows = data.map(obj =>
+                headers.map(header => {
+                    let value = obj[header];
+                    if (typeof value === 'object') {
+                        value = JSON.stringify(value);
+                    }
+                    return value ? `"${value.replace(/"/g, '""')}"` : '';
+                }).join(',')
+            );
+
+            return {
+                headers,
+                csv: [headers.join(','), ...csvRows].join('\n'),
+                data
+            };
+        }
+
+
+        function updatePreviewsCSVToJSON(headers, allRows) {
+             const first10 = allRows.slice(0, 10);
+            const last10 = allRows.length > 10 ? allRows.slice(-10) : [];
+
+            inputPreviewFirst.innerHTML = createTable(headers, first10);
+            inputPreviewLast.innerHTML = last10.length ? createTable(headers, last10) : '';
+
+            const first10Json = JSON.stringify(first10, null, 2);
+            const last10Json = last10.length ? JSON.stringify(last10, null, 2) : '';
+
+            outputPreviewFirst.innerHTML = `<pre>${first10Json}</pre>`;
+            outputPreviewLast.innerHTML = last10.length ? `<pre>${last10Json}</pre>` : '';
+
+            inputItemCount.textContent = `Items: ${allRows.length}`;
+            outputItemCount.textContent = `Items: ${allRows.length}`;
+
+        }
+
+        function updatePreviewsJSONToCSV(headers, jsonData, csvData) {
+            const first10Json = JSON.stringify(jsonData.slice(0, 10), null, 2);
+            const last10Json = jsonData.length > 10
+                ? JSON.stringify(jsonData.slice(-10), null, 2)
+                : '';
+
+            inputPreviewFirst.innerHTML = `<pre>${first10Json}</pre>`;
+            inputPreviewLast.innerHTML = jsonData.length > 10 ? `<pre>${last10Json}</pre>` : '';
+
+
+             const csvRows = csvData.split('\n');
+            const first10Rows = csvRows.slice(0, 11);
+            const last10Rows = csvRows.length > 11
+                ? csvRows.slice(-10)
+                : [];
+
+             const tableData = processCSV(first10Rows.join('\n'));
+            outputPreviewFirst.innerHTML = createTable(tableData.headers, tableData.data);
+
+
+             outputPreviewLast.innerHTML = last10Rows.length
+                ? createTable(
+                    processCSV([csvRows[0], ...last10Rows].join('\n')).headers,
+                    processCSV([csvRows[0], ...last10Rows].join('\n')).data
+                )
+                : '';
+
+            inputItemCount.textContent = `Items: ${jsonData.length}`;
+            outputItemCount.textContent = `Items: ${csvData.split('\n').length - 1}`;
+        }
+
+        document.querySelectorAll('.conversion-buttons button')
+            .forEach(button => {
+                button.addEventListener('click', (e) => {
+                    document.querySelectorAll('.conversion-buttons button')
+                        .forEach(btn => btn.classList.remove('active'));
+
+                    e.target.classList.add('active');
+
+                    currentConversionType = e.target.id;
+                    fileInput.accept = currentConversionType === 'csv-to-json' ? '.csv' : '.json';
+                    uploadLabel.textContent = `Choose ${
+                        currentConversionType === 'csv-to-json' ? 'CSV' : 'JSON'
+                    } File`;
+                    inputPreviewTitle.textContent = `${
+                        currentConversionType === 'csv-to-json' ? 'CSV' : 'JSON'
+                    } Preview`;
+                    outputPreviewTitle.textContent = `${
+                        currentConversionType === 'csv-to-json' ? 'JSON' : 'CSV'
+                    } Preview`;
+
+                     clearBtn.click();
+                    fileInput.value = '';
+                });
+            });
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) {
+                errorMessage.style.display = 'none';
+                  fileNameDisplay.textContent = '';
+                return;
+            }
+
+           originalFileName = file.name.split('.').slice(0,-1).join('.');
+            fileNameDisplay.textContent = `Uploaded file: ${file.name}`;
+
+            const allowedTypes = currentConversionType === 'csv-to-json'
+                ? ['text/csv']
+                : ['application/json'];
+            if (!allowedTypes.includes(file.type)) {
+                errorMessage.textContent = `Error: Invalid file type. Please upload a ${
+                    currentConversionType === 'csv-to-json' ? 'CSV' : 'JSON'
+                } file.`;
+                errorMessage.style.display = 'block';
+                 clearBtn.click();
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    errorMessage.style.display = 'none';
+
+                    if (currentConversionType === 'csv-to-json') {
+                        inputData = e.target.result;
+                        const { headers, data } = processCSV(inputData);
+                        outputData = data;
+                        updatePreviewsCSVToJSON(headers, data);
+                    } else {
+                        inputData = e.target.result;
+                        const { headers, csv, data } = processJSON(inputData);
+                        outputData = csv;
+                        updatePreviewsJSONToCSV(headers, data, csv);
+                    }
+
+                    downloadBtn.disabled = false;
+                    clearBtn.disabled = false;
+                } catch (error) {
+                    errorMessage.textContent = `Error: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                    clearBtn.click();
+                }
+            };
+            reader.readAsText(file);
+        });
+
+         downloadBtn.addEventListener('click', () => {
+             if (!outputData) return;
+
+            let downloadFileName;
+            const selectedOption = document.querySelector('input[name="filename-option"]:checked').value;
+            if (selectedOption === 'original' && originalFileName){
+                downloadFileName = `${originalFileName}.${currentConversionType === 'csv-to-json' ? 'json' : 'csv'}`;
+
+            } else {
+                 downloadFileName = `converted.${currentConversionType === 'csv-to-json' ? 'json' : 'csv'}`;
+            }
+
+             const blob = new Blob(
+                 [
+                     currentConversionType === 'csv-to-json'
+                         ? JSON.stringify(outputData, null, 2)
+                         : outputData
+                 ],
+                 {
+                     type: currentConversionType === 'csv-to-json'
+                         ? 'application/json'
+                         : 'text/csv'
+                 }
+             );
+
+             const url = URL.createObjectURL(blob);
+             const a = document.createElement('a');
+             a.href = url;
+             a.download = downloadFileName;
+             document.body.appendChild(a);
+             a.click();
+             document.body.removeChild(a);
+             URL.revokeObjectURL(url);
+         });
+       
+        clearBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            inputPreviewFirst.innerHTML = '';
+            inputPreviewLast.innerHTML = '';
+            outputPreviewFirst.innerHTML = '';
+            outputPreviewLast.innerHTML = '';
+            inputData = null;
+            outputData = null;
+            downloadBtn.disabled = true;
+            clearBtn.disabled = true;
+            errorMessage.style.display = 'none';
+              fileNameDisplay.textContent = '';
+              originalFileName = null;
+        });
+    </script>
+</body>
+</html>
