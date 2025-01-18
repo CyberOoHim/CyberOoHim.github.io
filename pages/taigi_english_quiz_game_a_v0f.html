@@ -1,4 +1,4 @@
----
+ ---
 layout: apps
 title: Taigi-English Quiz Game ( 1. 畫面凡勢會無倚中央，抑是揤鈕傷細粒，這當陣共 browser 字骨寸尺設定改細、改大看覓。2. 下跤 "My Dict" 會使 upload 家己做个詞典。)
 version: v0f
@@ -91,9 +91,10 @@ permalink: /pages/taigi_english_quiz_game.html
         width: 45%;
     }
 
-    .option-container {
+   .option-container {
         display: flex;
-        align-items: center;
+        flex-direction: column; /* Changed to column */
+        align-items: flex-start; /* Align items to the start */
         /* Adjust padding around the option text.  */
         padding: 0.875em 1.75em; /* Increased padding */
         border-radius: 0.3125em;
@@ -111,9 +112,14 @@ permalink: /pages/taigi_english_quiz_game.html
         line-height: 1.5em; /* Adjust line height if you enable wrapping*/
         cursor: pointer; /* make it a clickable area */
     }
-
-    .option-container:hover {
-        background-color: #d8bfd8;
+    .option-container .en-text {
+        font-size: 1em; /* Original English text size */
+        /* line-height: 1.5em;  Adjust line height of en text*/
+    }
+    .option-container .cn-text {
+        font-size: 0.8em;  /* Smaller Chinese text size */
+        margin-top: 0.1em;  /* Add space between English and Chinese */
+        line-height: 1.2em; /* Adjust line height of cn text*/
     }
 
   /* Hide the radio buttons */
@@ -541,8 +547,25 @@ permalink: /pages/taigi_english_quiz_game.html
             radio.id = 'option' + index;
             optionContainer.appendChild(radio);
 
+            // Create a span for the English part
+             const enText = document.createElement('span');
+            enText.classList.add('en-text');
+            // Check if the option includes both en and cn
+            if (showChinese && option.includes(" (")) {
+                const [en, cn] = option.split(" (");
+                enText.textContent = en;
+                optionContainer.appendChild(enText);
+               // Create a span for the Chinese part
+                const cnText = document.createElement('span');
+                 cnText.classList.add('cn-text');
+                cnText.textContent = `(${cn.slice(0,-1)})`;  // Remove last ')'
+               optionContainer.appendChild(cnText);
+            } else {
+                enText.textContent = option;
+               optionContainer.appendChild(enText);
+            }
+
             const label = document.createElement('label');
-            label.textContent = option;
             label.htmlFor = 'option' + index;
             optionContainer.appendChild(label);
 
