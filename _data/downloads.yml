@@ -32,6 +32,14 @@ datasets:
     category: datasets
     updated: 2025-01-17
 
+  - name: Taigi grammar points(https://tggl.naer.edu.tw/grammars)
+    description: An example corpus of Taigi grammar points. ùi 台語語料庫應用檢索系統-語法點檢索 整理--來ê，請注意伊 ê license。
+    version: 20250125
+    filename: _downloads/datasets/taigi_grammars_trimmed_POJ_all.csv
+    download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/blob/main/_downloads/datasets/taigi_grammars_trimmed_POJ_all.csv
+    category: datasets
+    updated: 2025-01-25
+
 web-apps:
   - name: Taigi-English quiz game (台英奕字）
     description: An experimental web Apps of Taigi-English quiz game. 用--ê datasets 是 ùi 教育部台語700字，用 Google AI Studio 整理--過 ê 1280 塊台語詞.
