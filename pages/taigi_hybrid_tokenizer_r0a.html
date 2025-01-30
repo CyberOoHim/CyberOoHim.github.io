@@ -45,13 +45,22 @@ permalink: /pages/taigi_hybrid_tokenizer.html
         background-color: #f8f8f8;
     }
 
-    #fileInput {
-        margin-bottom: 10px;
-        font-size: 24px;
+    #fileInputLabel { /* Style for the label acting as button */
+        display: inline-block;
+        padding: 8px 15px; /* Reduced padding - adjust these values */
+        font-size: 20px;   /* Optional: Slightly reduced font size - adjust if needed */
+        font-weight: bold; /* Add this line to make the text bold */
+        min-width: 100px; /* Adjust min-width if needed to fit text after font size change */
+        height: auto;      /* Let height adjust based on padding and font-size */
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        text-align: center;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
 
-        padding: 12px 20px; /* Good padding for a larger feel */
-        min-width: 150px; /* Ensure a minimum width even if text is short */
-        height: auto; /* Let height adjust based on padding and font-size */
+    #fileInput {
+        display: none;
     }
 
     #dictionaryStatus {
@@ -93,9 +102,9 @@ permalink: /pages/taigi_hybrid_tokenizer.html
 
     <div class="note-area">Note: This tool helps parse Taiwanese POJ text. Upload additional dictionaries for enhanced accuracy.</div>
 
-    <div class="input-section">
+<div class="input-section">
         <h3>1. Load Additional Dictionary (Optional)</h3>
-        <input type="file" id="fileInput" accept=".csv" multiple>
+        <label for="fileInput" id="fileInputLabel">Upload 補充詞典</label>  <input type="file" id="fileInput" accept=".csv" multiple style="display: none;">
         <div id="dictionaryStatus">Loading built-in dictionary...</div>
     </div>
 
@@ -118,7 +127,7 @@ permalink: /pages/taigi_hybrid_tokenizer.html
 <script>
 // Configuration: Set dictionary path, GitHub pages or local folder
 const dictionaryPath = "kautian_詞目_20250116_hanji_poj_poj.csv";
-const folderPath = "/_downloads/datasets";
+const folderPath = "/assets/csv";
 // Define a condition for switching paths
 const github_pages = true; // Set to true to use the external path
 
