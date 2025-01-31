@@ -1,22 +1,17 @@
----
-layout: default
-title: Web Apps and Pages
-permalink: /pages/web-apps.html
----
-
 <div class="projects-container">
     <h1>Our Web Apps and Pages</h1>
 
     <p>Here's a showcase of our interactive web applications and pages related to Taigi AI.</p>
 
     <section class="project-list">
+        {% assign excluded_pages = 'about,articles,web-apps,downloads,taigi_poj_hanji_hybrid_tokenizer' | split: ',' %}
         {% for item in site.pages %}
             {% assign item_path_parts = item.path | split: '.' %}
             {% assign item_extension = item_path_parts | last %}
             {% assign item_base_name = item.path | split: '/' | last | replace: '.html', '' %}
 
             {% if item.url contains '/pages/' and item_extension == 'html' %}
-                {% unless item_base_name == 'about' or item_base_name == 'articles' or item_base_name == 'web-apps' or item_base_name == 'downloads' %}
+                {% unless excluded_pages contains item_base_name %}
                     <article class="project-card">
                         <h2>
                             <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
