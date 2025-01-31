@@ -10,7 +10,7 @@ permalink: /pages/web-apps.html
     <p>Here's a showcase of our interactive web applications and pages related to Taigi AI.</p>
 
     <section class="project-list">
-        {% assign excluded_pages = 'about,articles,web-apps,downloads,taigi_hybrid_tokenizer' | split: ',' %}
+        {% assign excluded_pages = 'about,articles,web-apps,downloads' | split: ',' %}
         {% for item in site.pages %}
             {% assign item_path_parts = item.path | split: '.' %}
             {% assign item_extension = item_path_parts | last %}
