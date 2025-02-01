@@ -521,6 +521,7 @@ tokenizeHanji(text) {
                 current += codePoint > 0xFFFF ? 2 : 1;
                 addedChars += codePoint > 0xFFFF ? 2 : 1;
             }
+
             if (this.dictionary[candidate]) {
                 tokens.push({
                     'text': candidate,
@@ -529,9 +530,10 @@ tokenizeHanji(text) {
                 });
                 i += addedChars; // Increment by the actual number of characters/surrogate pairs
                 matched = true;
-                break;
+                break; // Exit the inner loop once a match is found
             }
         }
+
         if (!matched) {
             const codePoint = text.codePointAt(i);
             const char = String.fromCodePoint(codePoint);
@@ -549,44 +551,47 @@ tokenizeHanji(text) {
     return tokens;
 }
 
-        tokenize(text) {
-            const tokens = [];
-            let i = 0;
-            while (i < text.length) {
-                const char = text.codePointAt(i);
-                const charStr = String.fromCodePoint(char);
-                if (this._isHanjiChar(charStr)) {
-                    const hanjiText = text.slice(i);
-                    const hanjiTokens = this.tokenizeHanji(hanjiText);
-                    if (hanjiTokens.length > 0) {
-                        tokens.push(...hanjiTokens);
-                        i += hanjiTokens[0].text.length;
-                    } else {
-                        tokens.push({ text: charStr, type: 'unknown' });
-                        i++;
-                    }
-                } else if (this._isPojChar(charStr)) {
-                    const pojSlice = text.slice(i);
-                    const unfilteredPojTokens = this.tokenizePoj(pojSlice);
-                    const pojTokens = unfilteredPojTokens;
-                    if (pojTokens.length > 0) {
-                        const firstToken = pojTokens[0];
-                        tokens.push(firstToken);
-                        i += firstToken.text.length;
-                    } else {
-                        tokens.push({ text: charStr, type: 'unknown' });
-                        i++;
-                    }
-                } else {
-                    if (!this.ignoredCharsRegex.test(charStr)) {
-                        tokens.push({ text: charStr, type: 'unknown' });
-                    }
-                    i++;
-                }
-                i += char > 0xFFFF ? 2 : 1;
+tokenize(text) {
+    const tokens = [];
+    let i = 0;
+    while (i < text.length) {
+        const char = text.codePointAt(i);
+        const charStr = String.fromCodePoint(char);
+
+        let tokenFound = false;
+        let addedLength = 0; // Keep track of how much to increment i
+
+        if (this._isHanjiChar(charStr)) {
+            const hanjiText = text.slice(i);
+            const hanjiTokens = this.tokenizeHanji(hanjiText);
+            if (hanjiTokens.length > 0) {
+                tokens.push(...hanjiTokens);
+                // Calculate the total length of added Hanji tokens
+                addedLength = hanjiTokens.reduce((sum, token) => sum + token.text.length, 0);
+                tokenFound = true;
             }
-            return this.filterTokens(tokens);
+        } else if (this._isPojChar(charStr)) {
+            const pojSlice = text.slice(i);
+            const pojTokens = this.tokenizePoj(pojSlice);
+            if (pojTokens.length > 0) {
+                const firstToken = pojTokens[0];
+                tokens.push(firstToken);
+                addedLength = firstToken.text.length; // Length of the first POJ token
+                tokenFound = true;
+            }
         }
+
+        if (tokenFound) {
+            i += addedLength; // Increment i by the calculated length
+        } else {
+            if (!this.ignoredCharsRegex.test(charStr)) {
+                tokens.push({ text: charStr, type: 'unknown' });
+            }
+            i += char > 0xFFFF ? 2 : 1; // Increment for unknown chars or surrogate pairs
+        }
+    }
+    return this.filterTokens(tokens);
+}
 
         filterTokens(tokens) {
             const filteredTokens = [];
