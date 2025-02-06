@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>台語 漢字/羅馬字 lām 英語 拆詞</title>
+<style>
+body {
+    font-family: sans-serif;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.help-upload-wrapper {
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative; /* Keep relative positioning */
+}
+
+.help-upload-wrapper button {
+    float: left;
+    vertical-align: middle;
+    height: 54px;
+    font-size: 1.6em;
+    padding: 10px 15px;
+}
+
+.help-upload-wrapper #uploadLabel {
+    font-size: 1.4em;
+    padding: 10px 20px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    float: left;
+    margin-left: 10px;
+    vertical-align: middle;
+    height: 32px;
+    line-height: 36px;
+}
+.help-upload-wrapper #dictStatus {
+    /* No longer absolute positioning */
+    display: inline-block;  /*  Inline-block to flow with other elements*/
+    vertical-align: middle;  /* Align vertically with the label and button */
+    margin-left: 10px;      /* Space after the upload label */
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap;
+}
+/* ... (other styles remain the same) ... */
+h2, h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+textarea {
+    font-size: 1.2em;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+button {
+    font-size: 1.2em;
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+
+.token {
+    font-size: 1.2em;
+    padding: 2px;
+    margin: 2px;
+}
+
+.hanji {
+    background-color: #e6f3ff;
+}
+
+.poj {
+    background-color: #fff0e6;
+}
+
+.english {
+    background-color: #e6ffe6;
+}
+
+.unknown {
+    background-color: #f0f0f0;
+}
+
+.hanji-result {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.output-section {
+    margin-top: 20px;
+}
+
+.output-separator {
+    margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.pos-hidden {
+    display: none;
+}
+.help-message {
+    clear: both;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    display: none;
+}
+
+.help-message p {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.red-button {
+    color: #F08080;
+    background-color: #eee; /*  Light red background */
+}
+
+</style>
+</head>
+<body>
+<h1>台語 漢字/羅馬字 lām 英語 拆詞</h1>
+<div class="help-upload-wrapper">
+    <button id="helpButton">按怎用</button>
+    <label for="uploadDict" id="uploadLabel">新添詞典</label>
+    <input type="file" id="uploadDict" accept=".csv" style="display: none;" />
+    <span id="dictStatus" class="help-upload-wrapper"></span>  <!-- Changed to span and moved inside -->
+</div>
+<div id="helpMessage" class="help-message">
+    <p>
+        這个工具會使處理台語白話字 (POJ), 漢字, 佮 英語. 伊有內建詞典, 嘛會當上傳家己 ê 詞典 (CSV 格式).  點「拆詞」, 下跤就會顯示拆--開 ê 詞佮詞典查詢結果. 「Copy」鈕會當複製結果, 「看 詞性/解說」鈕控制詞性佮解說 ê 顯示.
+    </p>
+    <p>
+        <strong>按怎用:</strong>
+        <ol>
+            <li>佇頂面 ê 文字框仔內底, 輸入台語漢字, POJ, 抑是英語, 抑是相濫.</li>
+            <li>點「拆詞」鈕.</li>
+            <li>下跤會顯示拆--開 ê 詞, 閣有詞典內底查--著 ê 資料.</li>
+            <li>點「Copy」鈕, 複製結果.</li>
+            <li>點「看 詞性/解說」鈕, 控制顯示抑是隱藏詞性佮解說.</li>
+            <li>點「清清--leh」鈕, 清除輸入框仔佮結果.</li>
+        </ol>
+    </p>
+
+    <p>
+        <strong>追加詞典 (CSV 格式):</strong>  上傳 ê 詞典檔案愛是 CSV 格式, 有兩種:
+    </p>
+    <p>
+        <strong>1. 漢字-POJ 對應 (一般詞彙):</strong>
+        <ul>
+            <li>欄位 1: 漢字 (詞目)</li>
+            <li>欄位 2: POJ (多音用 <code>/</code> 分隔)</li>
+            <li>欄位 3: 詞性/解說 (選填, 多組請用<code>\n</code>分隔，詞性用<code>[]</code>).</li>
+        </ul>
+        範例:<br>
+        <code>詞目,音讀,詞性解說<br>
+        台灣,Tâi-oân,[名詞]\n指咱所居住ê國家</code>
+    </p>
+    <p>
+        <strong>2. 台語-英語 對應 (台英/英台):</strong>
+        <ul>
+            <li>欄位 1: 台語 (POJ 抑是 漢字)</li>
+            <li>欄位 2: 英語</li>
+            <li>欄位 3: 詞性 (選填, 多組請用<code>\n</code>分隔，詞性用<code>[]</code>).</li>
+        </ul>
+        範例:<br>
+        <code>台語詞,英語翻譯,詞性<br>
+        hó-sè,in good health,[形容詞]\n身體健康</code>
+    </p>
+    <p>
+        <strong>注意事項:</strong>
+        <ul>
+          <li>檔案愛用 UTF-8 編碼.</li>
+          <li>確認欄位數量正確.</li>
+          <li>若詞條有逗點 <code>,</code>, 用雙引號 <code>"</code> 包起來.</li>
+          <li>若詞條解說有換行，請將整個詞條解說欄位用雙引號<code>"</code>包起來.</li>
+        </ul>
+    </p>
+</div>
+
+    <div class="input-section">
+        <h3>輸入台文</h3>
+        <textarea id="pojInput" rows="4" style="width: 100%" placeholder="輸入 台語漢字、POJ 抑是相濫攏好..."></textarea>
+        <div class="button-container">
+            <button onclick="processText()">拆  詞</button>
+            <button id="togglePosButton">看 詞性/解說</button>
+             <button id="copyButton">Copy</button>
+             <button onclick="clearText()" class="red-button">清清--leh</button>
+        </div>
+
+    </div>
+
+    <div class="output-section">
+
+        <div id="combinedOutput"></div>
+    </div>
+
+<script>
+    // Configuration: Set dictionary path, GitHub pages or local folder
+    const dictionaryPath = "kautian_詞目+義項_20250116_POJ_trimmed.csv";
+    const folderPath = "/assets/csv";
+    const github_pages = false;
+    const dict_to_fetch = github_pages ? folderPath + "/" + dictionaryPath : dictionaryPath;
+
+    let showPos = true; // Initial state for showing POS/Definitions
+
+    // Global variable to store names of additional dictionaries loaded
+    let additionalDictNames = [];
+
+    class MixedTokenizer {
+        constructor() {
+            this.dictionary = {};
+            this.englishIndex = {}; // New index for English terms
+            this.pojChars = ['Á', 'À', 'Â', 'Ā', 'A̍', 'É', 'È', 'Ê', 'Ē', 'E̍', 'Í', 'Ì', 'Î', 'Ī', 'I̍', 'Ḿ', 'M̀', 'M̂', 'M̄', 'M̍', 'Ń', 'Ǹ', 'N̂', 'N̄', 'N̍', 'Ó', 'Ò', 'Ô', 'Ō', 'O̍', 'O͘', 'Ó͘', 'Ò͘', 'Ô͘', 'Ō͘', 'O̍͘', 'Ú', 'Ù', 'Û', 'Ū', 'U̍', 'á', 'à', 'â', 'ā', 'a̍', 'é', 'è', 'ê', 'ē', 'e̍', 'í', 'ì', 'î', 'ī', 'i̍', 'ḿ', 'm̀', 'm̂', 'm̄', 'm̍', 'ń', 'ǹ', 'n̂', 'n̄', 'n̍', 'ⁿ', 'ó', 'ò', 'ô', 'ō', 'o̍', 'o͘', 'ó͘', 'ò͘', 'ô͘', 'ō͘', 'o̍͘', 'ú', 'ù', 'û', 'ū', 'u̍'];
+            this.pojCharRegex = this._createPojCharRegex();
+            this.ignoredCharsRegex = /[\d!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~\u3000-\u303F\uFF00-\uFFEF&&[^\u002D\u2010]]/;
+            // UPDATED Hanji Regex (including extension blocks)
+            this.hanjiRegex = /[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2A6DF}\u{2A700}-\u{2B73F}\u{2B740}-\u{2B81F}\u{2B820}-\u{2CEAF}\u{2CEB0}-\u{2EBEF}\u{30000}-\u{3134F}]/u;
+            this.loadBuiltInDictionary();
+
+        }
+        _createPojCharRegex() {
+            const pojCharPattern =
+                "[AEIOUaeiou][\\u030d\\u0300\\u0301\\u0302\\u0304\\u0358\\u207F]*|" +
+                "[\\u004F\\u006F][\\u030d\\u0358]*|" +
+                "[\\u00D3\\u00F3][\\u0358]*|" +
+                "[\\u00D2\\u00F2][\\u0358]*|" +
+                "[\\u00D4\\u00F4][\\u0358]*|" +
+                "[\\u014C\\u014D][\\u0358]*|" +
+                "[\\u004E\\u006E][\\u0302\\u0304]*|" +
+                "[\\u004D\\u006D][\\u0300\\u0302\\u0304]*|" +
+                "[\\u006E][\\u207F]*|" +
+                "[\\u00C1\\u00C0\\u00C2\\u0100\\u00C9\\u00C8\\u00CA\\u0112\\u00CD\\u00CC\\u00CE\\u012A\\u1E3E\\u0143\\u01F8\\u00D3\\u00D2\\u00D4\\u014C\\u00DA\\u00D9\\u00DB\\u016A\\u00E1\\u00E0\\u00E2\\u0101\\u00E9\\u00E8\\u00EA\\u0113\\u00ED\\u00EC\\u00EE\\u012B\\u1E3F\\u0144\\u01F9\\u00F3\\u00F2\\u00F4\\u014D\\u00FA\\u00F9\\u00FB\\u016B]|" +
+                "[ -͘]|" +
+                "[a-zA-Z]";
+            return new RegExp(pojCharPattern);
+        }
+
+         // Modified loadBuiltInDictionary to store filename
+        async loadBuiltInDictionary() {
+            try {
+                const response = await fetch(dict_to_fetch);
+                if (!response.ok) {
+                    throw new Error(`Failed to load dictionary: ${response.status} ${response.statusText}`);
+                }
+                const text = await response.text();
+                this.parseDictionaryContent(text);
+                console.log("Dictionary loaded successfully!");
+                this.builtInDictName = dictionaryPath; // Store filename of built-in dict
+                this.updateDictionaryStatus();
+            } catch (error) {
+                console.error("Error loading built-in dictionary:", error);
+            }
+        }
+
+        // Modified parseDictionaryContent to not track counts, just parse
+        parseDictionaryContent(text, fileName = null) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+
+            // Parse CSV maintaining newlines within quoted fields
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
+
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    currentRow.push(currentField.trim());
+                    currentField = '';
+                } else if (char === '\n' && !inQuotes) {
+                    currentRow.push(currentField.trim());
+                    if (currentRow.length > 0) {
+                        rows.push(currentRow);
+                    }
+                    currentRow = [];
+                    currentField = '';
+                } else if (char === '\r') {
+                    // Skip carriage returns
+                    continue;
+                } else {
+                    currentField += char;
+                }
+            }
+
+            // Handle the last row
+            if (currentField || currentRow.length > 0) {
+                currentRow.push(currentField.trim());
+                rows.push(currentRow);
+            }
+
+            for (const row of rows) {
+                if (row.length < 2) continue;
+
+                const [first, second, rawPos = ''] = row;
+                if (!first || !second) continue;
+
+                // Handle Taigi-English format
+                if (this._isTaigiEnglish(row)) {
+                    const taigi = first;
+                    const english = second;
+
+                    // Add Taigi to English mapping (with pos)
+                    if (!this.dictionary[taigi]) {
+                        this.dictionary[taigi] = [[], []];
+                    }
+                    if (!this.dictionary[taigi][0].includes(english)) {
+                        this.dictionary[taigi][0].push(english);
+                        this.dictionary[taigi][1].push({ english: english, pos: rawPos });
+                    }
+
+                    // Add English to Taigi mapping (with pos)
+                    if (!this.dictionary[english]) {
+                        this.dictionary[english] = [[], []];
+                    }
+                    if (!this.dictionary[english][0].includes(taigi)) {
+                        this.dictionary[english][0].push(taigi);
+                        // Store pos along with the Taigi word
+                        this.dictionary[english][1].push({ taigi: taigi, pos: rawPos });
+                    }
+
+                    // Add to English index (case-insensitive)
+                    const lowerEnglish = english.toLowerCase();
+                    if (!this.englishIndex[lowerEnglish]) {
+                        this.englishIndex[lowerEnglish] = new Set();
+                    }
+                    this.englishIndex[lowerEnglish].add(english);
+                }
+                // Handle traditional POJ-Hanji format
+                else {
+                    const posDefinitions = this._parseMultiplePosDefinitions(rawPos);
+                    this._addPojHanjiEntry(first, second, posDefinitions);
+                }
+            }
+
+            if (fileName) {
+                additionalDictNames.push(fileName); // Store name of additional dict
+            }
+
+            this.updateDictionaryStatus();
+        }
+
+        // Modified updateDictionaryStatus to show filenames
+        updateDictionaryStatus() {
+            let statusMessage = "";
+
+            if (this.builtInDictName) {
+                statusMessage += `內設: ${this.builtInDictName} 添好--ah。<br>`;
+            }
+
+            if (additionalDictNames.length > 0) {
+                const fileNames = additionalDictNames.join(', ');
+                statusMessage += `家己添: ${fileNames} 添好--ah。`;
+            }
+
+            document.getElementById('dictStatus').innerHTML = statusMessage;
+        }
+
+        _parseMultiplePosDefinitions(rawPos) {
+            if (!rawPos) return [];
+
+            // Remove surrounding quotes and clean up
+            rawPos = rawPos.replace(/^"|"$/g, '').trim();
+            if (!rawPos) return [];
+
+            // Split the raw text into individual definition lines
+            const definitionLines = rawPos.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0); // Remove empty lines
+
+            const definitions = [];
+
+            for (const line of definitionLines) {
+                // Check for POS tag
+                const posMatch = line.match(/^\[(.*?)\]/);
+                if (posMatch) {
+                    // Has POS tag
+                    const pos = posMatch[1]; // Store only the content inside brackets
+                    const def = line.slice(posMatch[0].length).trim();
+                    if (def) {
+                        definitions.push({
+                            pos: pos,
+                            def: def
+                        });
+                    }
+                } else {
+                    // No POS tag
+                    if (line) {
+                        definitions.push({
+                            pos: '', // Empty string for no POS
+                            def: line
+                        });
+                    }
+                }
+            }
+
+            return definitions;
+        }
+
+       _addPojHanjiEntry(first, second, posDefinitions) {
+            const hanji = this._isHanjiChar(first.charAt(0)) ? first : second;
+            const poj = this._isHanjiChar(first.charAt(0)) ? second : first;
+            let entryType = null;  //  'poj' or 'hanji'
+
+            if (!this.dictionary[hanji]) {
+                this.dictionary[hanji] = [[], []];
+            }
+
+            const pojVariants = poj.split('/').map(v => v.trim()).filter(Boolean);
+            pojVariants.forEach(pojVariant => {
+                if (!this.dictionary[hanji][0].includes(pojVariant)) {
+                    this.dictionary[hanji][0].push(pojVariant);
+                    entryType = 'hanji';  //New Hanji entry added
+                }
+
+                // Handle Hanji -> POJ mapping
+                this._updateDictionaryEntry(hanji, pojVariant, posDefinitions);
+
+
+                // Handle reverse mapping (POJ -> Hanji)
+                if (!this.dictionary[pojVariant]) {
+                    this.dictionary[pojVariant] = [[], []];
+                }
+                if (!this.dictionary[pojVariant][0].includes(hanji)) {
+                    this.dictionary[pojVariant][0].push(hanji);
+                    //don't mark as new entry, because it is just a reverse mapping
+                }
+                this._updateDictionaryEntry(pojVariant, pojVariant, posDefinitions, hanji);
+            });
+
+            //Add POJ entries to dictionary
+            if (!this.dictionary[poj] && entryType != 'hanji'){
+                this.dictionary[poj] =  [[], []];
+                entryType = 'poj'; // New POJ entry
+            }
+
+            return entryType;
+        }
+
+        _updateDictionaryEntry(key, pojVariant, posDefinitions, hanjiOverride = null) {
+            const hanji = hanjiOverride || key;
+            let existingEntry = this.dictionary[key][1].find(e =>
+                e.poj === pojVariant && e.hanji === hanji
+            );
+
+            if (existingEntry) {
+                // Add new definitions, avoiding duplicates
+                posDefinitions.forEach(posDef => {
+                    if (!existingEntry.definitions.some(existingDef =>
+                        existingDef.pos === posDef.pos && existingDef.def === posDef.def)) {
+                        existingEntry.definitions.push(posDef);
+                    }
+                });
+            } else {
+                // Create new entry
+                this.dictionary[key][1].push({
+                    poj: pojVariant,
+                    hanji: hanji,
+                    definitions: [...posDefinitions]
+                });
+            }
+        }
+
+        _isTaigiEnglish(row) {
+            const [first, second] = row;
+            // Check if it's English (allowing spaces and hyphens)
+            const isEnglish = /^[a-zA-Z\s-]+$/.test(second);
+            // Check if it's Taigi (contains POJ characters or follows POJ patterns)
+            const isTaigi = this.pojChars.some(char => first.includes(char)) ||
+                /^[a-zA-Z\s\-]+$/.test(first);
+            return isTaigi && isEnglish;
+        }
+
+
+        // Javascript Ported Methods
+        tokenize(text) {
+            const tokens = [];
+            let i = 0;
+            while (i < text.length) {
+                let matched = false;
+
+                // Try to match the longest possible token
+                for (let len = Math.min(30, text.length - i); len > 0; len--) {
+                    const candidate = text.slice(i, i + len);
+
+                    // Skip if contains ignored characters
+                    if (this.ignoredCharsRegex.test(candidate)) continue;
+
+                    // Check if it's an English word
+                    let isEnglish = false;
+                    if (/^[a-zA-Z\s-]+$/.test(candidate)) {
+                        const lowerCandidate = candidate.toLowerCase();  // Corrected toLowerCase()
+                        if (this.englishIndex[lowerCandidate]) {
+                            isEnglish = true;
+                        }
+                    }
+
+                    if (isEnglish) {
+                        // Find English dictionary key (prioritize original case)
+                        let dictKey = this._findDictionaryKey(candidate, 'english');
+                        if (dictKey) {
+                            tokens.push({
+                                text: candidate,
+                                type: 'english',
+                                dictionary: this.dictionary[dictKey],
+                                dict_key: dictKey,
+                                aux_dict_key: false
+                            });
+                            i += len;
+                            matched = true;
+
+                            // Check for POJ dictionary key (different case)
+                            let dictKeyLower = this._findDictionaryKey(candidate.toLowerCase(), 'poj'); // Corrected toLowerCase()
+                            if (dictKeyLower && dictKeyLower !== dictKey) {
+                                tokens.push({
+                                    text: candidate,
+                                    type: 'poj',
+                                    dictionary: this.dictionary[dictKeyLower],
+                                    dict_key: dictKeyLower,
+                                    aux_dict_key: true  // Mark as auxiliary
+                                });
+                            }
+                            continue; // Important: Skip further checks
+                        }
+                    }
+
+
+                    // If not a confirmed English word, try POJ/Hanji
+                    if (!matched) {
+                        let type = this._isHanjiChar(candidate[0]) ? 'hanji' : 'poj';
+                        let dictKey = this._findDictionaryKey(candidate, type);
+
+                        if (dictKey) {
+                            tokens.push({
+                                text: candidate,
+                                type: type,
+                                dictionary: this.dictionary[dictKey],
+                                dict_key: dictKey,
+                                aux_dict_key: false
+                            });
+                            i += len;
+                            matched = true;
+
+                            // If POJ, check for a lowercase dictionary entry
+                            if (type === 'poj') {
+                                let dictKeyLower = this._findDictionaryKey(candidate.toLowerCase(), type); // Corrected toLowerCase()
+                                if (dictKeyLower) {
+                                    tokens.push({
+                                        text: candidate.toLowerCase(), // Corrected toLowerCase()
+                                        type: 'poj',
+                                        dictionary: this.dictionary[dictKeyLower],
+                                        dict_key: dictKeyLower,
+                                        aux_dict_key: true // Mark as auxiliary
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                if (!matched) {
+                    // Handle single character
+                    const char = text[i];
+                    let type = 'unknown';
+                    if (this._isHanjiChar(char)) {
+                        type = 'hanji';
+                    } else if (this._isPojChar(char)) {
+                        type = 'poj';
+                    } else if (/^[a-zA-Z]$/.test(char)) {
+                        // Check if single English char is in English index
+                        type = this.englishIndex[char.toLowerCase()] ? 'english' : 'unknown'; // Corrected toLowerCase()
+                    }
+
+                    let dictKey = this._findDictionaryKey(char, type);
+                    tokens.push({
+                        text: char,
+                        type: type,
+                        dictionary: this.dictionary[dictKey] || this.dictionary[char], // Fallback to char
+                        dict_key: dictKey,
+                        aux_dict_key: false
+
+                    });
+                    i++;
+                }
+            }
+            return this.filterTokens(tokens);
+        }
+
+
+        // Helper function to find dictionary key, handling case sensitivity
+        _findDictionaryKey(candidate, type) {
+            if (type === 'english') {
+                // Prioritize original case for English
+                const lowerCandidate = candidate.toLowerCase(); // Corrected toLowerCase()
+                if (this.englishIndex[lowerCandidate]) {
+                    // Return the *original* case version from the index
+                    for (const originalCase of this.englishIndex[lowerCandidate]) {
+                        if (this.dictionary[originalCase]) {
+                            return originalCase;
+                        }
+                    }
+                }
+            } else {
+                // For POJ and Hanji, check original case and then lowercase
+                if (this.dictionary[candidate]) {
+                    return candidate;
+                } else if (this.dictionary[candidate.toLowerCase()]) {  // Corrected toLowerCase()
+                    return candidate.toLowerCase(); // Corrected toLowerCase()
+                }
+            }
+            return null; // No match found
+        }
+
+
+
+        filterTokens(tokens) {
+            const filteredTokens = [];
+            let i = 0;
+
+            while (i < tokens.length) {
+                const token = tokens[i];
+
+                // Skip empty tokens
+                if (!token || token.text.trim() === '') {
+                    i++;
+                    continue;
+                }
+
+                // Handle double hyphen cases
+                if (i + 2 < tokens.length &&
+                    tokens[i].text === '-' &&
+                    tokens[i + 1].text === '-') {
+
+                    const nextToken = tokens[i + 2];
+                    if (nextToken && (nextToken.type === 'poj' || nextToken.type === 'hanji')) {
+                        const combinedToken = {
+                            text: '--' + nextToken.text,
+                            type: nextToken.type,
+                            dictionary: nextToken.dictionary,
+                            dict_key: nextToken.dict_key,
+                            aux_dict_key: false // Ensure aux_dict_key is set
+
+                        };
+                        filteredTokens.push(combinedToken);
+                        i += 3;
+                        continue;
+                    }
+                }
+
+                // Don't add duplicate tokens in sequence
+                const prevToken = filteredTokens[filteredTokens.length - 1];
+                if (!prevToken || prevToken.text !== token.text || prevToken.type !== token.type) {
+                    filteredTokens.push(token);
+                }
+                i++;
+            }
+
+            return filteredTokens;
+        }
+
+
+        _isHanjiChar(char) {
+            return this.hanjiRegex.test(char);
+        }
+
+        _isPojChar(char) {
+            return this.pojCharRegex.test(char);
+        }
+    }
+
+    const mixedTokenizer = new MixedTokenizer();
+
+    function processText() {
+        try {
+            const input = document.getElementById('pojInput').value;
+            if (!input.trim()) {
+                document.getElementById('combinedOutput').innerHTML = '<p>請輸入欲發落 ê 台文</p>';
+                return;
+            }
+
+            const tokens = mixedTokenizer.tokenize(input);
+            // Filter out auxiliary tokens for display
+            let tokenOutput = tokens.filter(token => !token.aux_dict_key).map((token, index) =>
+                `<span class="token ${token.type}">${token.text}</span>${index < tokens.length - 1 ? ' ' : ''}`
+            ).join('');
+
+            const processedTokens = new Set();
+            let dictOutput = '';
+
+            tokens.forEach(token => {
+                // Use dict_key if available, otherwise use token.text
+                const tokenKey = `${token.type}:${token.dict_key || token.text}`;
+                if (processedTokens.has(tokenKey)) return;
+
+                const dictionary = token.dictionary;
+                if (dictionary && dictionary[1] && dictionary[1].length > 0) {
+                     const groupedEntries = {};
+                     const emptyDefinitions = new Set(); // For entries without definitions
+
+                    dictionary[1].forEach(entry => {
+                        if (!entry.definitions) {
+                            entry.definitions = [];
+                        }
+
+                        // Determine primary_key and secondary_key
+                        let primaryKey = null;
+                        let secondaryKey = null;
+
+                        if (token.type === 'poj') {
+                            primaryKey = entry.poj;
+                            secondaryKey = entry.hanji || entry.english || entry.taigi;
+                        } else if (token.type === 'english') {
+                            primaryKey = entry.english;
+                            secondaryKey = entry.taigi;
+                        } else if (token.type === 'hanji') {
+                            primaryKey = entry.hanji;
+                            secondaryKey = entry.poj;
+                        }
+
+                        if (!primaryKey) {
+                            primaryKey = entry.hanji || entry.english || entry.poj || entry.taigi;
+                        }
+                        if (!secondaryKey) {
+                            secondaryKey = entry.hanji || entry.english || entry.poj || entry.taigi;
+                        }
+
+                         if (entry.definitions.length === 0) {
+                            emptyDefinitions.add(secondaryKey);
+                            return; // Skip to the next entry
+                        }
+
+                        // Group entries based on primary key, secondary key, POS, and definition
+                        if (!groupedEntries[primaryKey]) {
+                            groupedEntries[primaryKey] = { key: primaryKey, variants: {} };
+                        }
+
+
+                        entry.definitions.forEach(definition => {
+                            const pos = definition.pos || '';
+                            const defText = definition.def || '';
+                            const variantKey = `${secondaryKey}_${pos}`; // Combine secondary key and POS
+
+                            if (!groupedEntries[primaryKey].variants[variantKey]) {
+                                groupedEntries[primaryKey].variants[variantKey] = {
+                                    key: secondaryKey,
+                                    pos: pos,
+                                    definitions: []
+                                };
+                            }
+                            groupedEntries[primaryKey].variants[variantKey].definitions.push(defText);
+                        });
+                    });
+
+                    // Use token.dict_key if available, otherwise use token.text for display
+                    const dictKeyDisplay = token.dict_key || token.text;
+                    let matchString = '';
+
+                    // Special handling for Hanji to combine POJ variants with the same definition
+                    if (token.type === 'hanji') {
+                        const combinedPojVariants = {}; // Key: (pos, def), Value: list of POJ variants
+                        Object.entries(groupedEntries).forEach(([primaryKey, primaryEntry]) => {
+                            Object.entries(primaryEntry.variants).forEach(([variantKey, variantEntry]) => {
+                                const posDefKey = `${variantEntry.pos}_${variantEntry.definitions.join(';')}`;
+                                if (!combinedPojVariants[posDefKey]) {
+                                    combinedPojVariants[posDefKey] = [];
+                                }
+                                combinedPojVariants[posDefKey].push(variantEntry.key);
+                            });
+                        });
+
+                        Object.entries(combinedPojVariants).forEach(([posDefKey, pojVariants]) => {
+                            const [pos, ] = posDefKey.split('_');
+                            const definitions = posDefKey.split('_')[1].split(';');
+                            const formattedDefinitions = formatDefinitionsCombined(definitions, pos, showPos);
+                            const combinedPojStr = [...new Set(pojVariants)].sort().join('/');
+                            matchString += `  <strong>${combinedPojStr}</strong> ${formattedDefinitions}<br>`;
+                        });
+                    } else {
+                        Object.entries(groupedEntries).forEach(([primaryKey, primaryEntry]) => {
+                            Object.entries(primaryEntry.variants).forEach(([variantKey, variantEntry]) => {
+                                const formattedDefinitions = formatDefinitionsCombined(variantEntry.definitions, variantEntry.pos, showPos);
+                                matchString += `  <strong>${variantEntry.key}</strong> ${formattedDefinitions}<br>`;
+                            });
+                        });
+                                            }
+                    // Handle empty definitions
+                    if (emptyDefinitions.size > 0) {
+                        const emptyDefStr = [...emptyDefinitions].sort().join('; ');
+                        matchString += `  <strong>${emptyDefStr}</strong><br>`;
+                    }
+
+                    if (matchString) {
+                        dictOutput += `
+                    <div class="hanji-result">
+                        ${dictKeyDisplay} →<br>${matchString}
+                    </div>`;
+                }
+            }
+
+            processedTokens.add(tokenKey);
+        });
+
+        document.getElementById('combinedOutput').innerHTML = `
+        <h3>拆--開 ê 詞:</h3>
+        ${tokenOutput}
+        <div class='output-separator'></div>
+        <h3>查詞典</h3>
+        ${dictOutput || '<p>揣無相對應 ê 詞</p>'}
+    `;
+
+    } catch (error) {
+        console.error('Error processing text:', error);
+        document.getElementById('combinedOutput').innerHTML =
+            `<p>發落台文 ê 時陣有重躭: ${error.message}</p>`;
+    }
+}
+    function formatDefinitionsCombined(definitions, pos, showPos) {
+        if (!showPos) {
+            return "";
+        }
+
+        const formattedParts = definitions.map((defText, i) => `(${i + 1}). ${defText}`);
+
+        const posStr = pos && showPos ? `[${pos}]` : '';
+        return `${posStr} ${formattedParts.join(' ')}`;
+    }
+
+    document.getElementById('copyButton').addEventListener('click', function () {
+        const input = document.getElementById('pojInput').value;
+        const tokenElements = document.querySelectorAll('#combinedOutput .token');
+
+        // Filter out unrecognized characters (like emojis)
+        let tokenText = Array.from(tokenElements).map(el => {
+            if (el.classList.contains('unknown')) {
+                return ''; // Return empty string for unknown tokens
+            } else {
+                return el.textContent; // Use textContent for other tokens
+            }
+        }).join(' ').replace(/\s+/g, ' ').trim(); // Replace multiple spaces with a single space
+
+        const dictElements = document.querySelectorAll('#combinedOutput .hanji-result');
+        let dictText = Array.from(dictElements).map(el => {
+            const token = el.querySelector('strong').textContent;
+            let resultText = "";
+
+            Array.from(el.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    resultText += node.textContent;
+                } else if (node.tagName === 'STRONG') {
+                    return; // Skip the <strong> node itself
+                } else if (node.classList && !node.classList.contains('pos-info')) {
+                    resultText += node.textContent;
+                } else if (showPos && node.classList && node.classList.contains('pos-info')) {
+                    resultText += node.textContent;
+                }
+            });
+
+            resultText = resultText.replace(/^ → /, '').trim();
+
+            return `${token} ${resultText}`;
+        }).join('\n');
+
+        // If dictText is empty, provide a "No matches found" message
+        if (!dictText) {
+            dictText = "揣無相對應 ê 詞";
+        }
+
+        const copyText = `<台語原文>\n\n${input}\n---\n<拆--開 ê 詞>\n\n${tokenText}\n---\n<查詞典>\n\n${dictText}\n---`;
+
+        navigator.clipboard.writeText(copyText).then(() => {
+            this.textContent = 'Copy 好--ah!';
+            setTimeout(() => {
+                this.textContent = 'Copy';
+            }, 1500);
+        }).catch(err => {
+            console.error('Copy 失敗: ', err);
+            this.textContent = 'Copy 失敗';
+            setTimeout(() => {
+                this.textContent = 'Copy';
+            }, 1500);
+        });
+    });
+    document.getElementById('togglePosButton').addEventListener('click', function () {
+        showPos = !showPos; // Toggle state
+        const posInfoElements = document.querySelectorAll('.pos-info');  //This line was missing in the previous partial code, but required to use the class
+        posInfoElements.forEach(element => {
+            element.style.display = showPos ? 'inline' : 'none';
+        });
+        this.textContent = showPos ? '看 詞性/解說' : '免 詞性/解說';
+
+    });
+
+     // upload event listener
+    document.getElementById('uploadDict').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (!file) {
+            alert('無揀檔案');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            try {
+                mixedTokenizer.parseDictionaryContent(e.target.result, file.name);
+                alert('新詞典添好--ah!');
+                // No need to update status here, parseDictionaryContent handles it
+            } catch (error) {
+                console.error('掠新添詞典 ê 時陣有重躭:', error);
+                alert('新添詞典有毋着，請檢查格式');
+            }
+        };
+        reader.onerror = function (e) {
+            console.error('掠檔案有重耽:', e);
+            alert('掠檔案有重耽');
+        };
+        reader.readAsText(file);
+    });
+
+    document.getElementById('helpButton').addEventListener('click', function () {
+        const helpMessage = document.getElementById('helpMessage');
+        const computedStyle = window.getComputedStyle(helpMessage);
+        helpMessage.style.display = computedStyle.display === 'none' ? 'block' : 'none';
+    });
+
+    function clearText() {
+        document.getElementById('pojInput').value = '';
+        document.getElementById('combinedOutput').innerHTML = '';
+    }
+
+</script>
+</body>
+
+</html>
