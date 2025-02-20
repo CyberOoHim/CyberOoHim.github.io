@@ -24,6 +24,15 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // Configuration: Set JSON path, GitHub pages or local folder
+        const dictionaryPath = "kautian_詞目_20250116_hanji_poj_poj.csv";
+        const folderPath = "/assets/csv";
+        // Define a condition for switching paths
+        const github_pages = true; // Set to true to use the external path
+
+        // Use the condition to determine the dictionary path
+        const dict_to_fetch = github_pages ? `${folderPath}/${dictionaryPath}` : dictionaryPath;
+
         // Variables to be populated from CSV
         let textArray = [];
         const bgFontSize = 24;
@@ -50,7 +59,8 @@
         }
 
         // Load and parse CSV file
-        fetch('kautian_詞目_20250116_hanji_poj_poj.csv')
+        
+        fetch(dict_to_fetch)
             .then(response => {
                 if (!response.ok) throw new Error('CSV file not found');
                 return response.text();
