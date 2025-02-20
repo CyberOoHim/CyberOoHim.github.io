@@ -1,9 +1,3 @@
----
-layout: apps
-title: Taigi digital rain
-version: v0a
-permalink: /pages/taigi_digital_rain.html
----
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,15 +23,6 @@ permalink: /pages/taigi_digital_rain.html
         // Set canvas size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        // Configuration: Set JSON path, GitHub pages or local folder
-        const dictionaryPath = "kautian_詞目_20250116_hanji_poj_poj.csv";
-        const folderPath = "/assets/csv";
-        // Define a condition for switching paths
-        const github_pages = true; // Set to true to use the external path
-
-        // Use the condition to determine the dictionary path
-        const dict_to_fetch = github_pages ? `${folderPath}/${dictionaryPath}` : dictionaryPath;
 
         // Variables to be populated from CSV
         let textArray = [];
@@ -65,8 +50,7 @@ permalink: /pages/taigi_digital_rain.html
         }
 
         // Load and parse CSV file
-        
-        fetch(dict_to_fetch)
+        fetch('kautian_詞目_20250116_hanji_poj_poj.csv')
             .then(response => {
                 if (!response.ok) throw new Error('CSV file not found');
                 return response.text();
