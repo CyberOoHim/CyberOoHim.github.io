@@ -1,3 +1,9 @@
+---
+layout: apps
+title: Taigi digital rain
+version: v0a
+permalink: /pages/taigi_digital_rain.html
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,16 +44,21 @@
         let maxTextLength = 0;
 
         // Function to initialize raindrop arrays after loading text
-        function initializeRainArrays() {
-            columns = Math.floor(canvas.width / fgFontSize);
-            maxTextLength = Math.max(...textArray.map(t => t.length));
-            drops = Array(columns).fill(0).map(() => -maxTextLength - Math.random() * 10);
-            bgDrops = Array(columns).fill(0).map(() => -maxTextLength - Math.random() * 10);
-            speeds = Array(columns).fill(0).map(() => (0.5 + Math.random() * 0.5) * 0.04);
-            bgSpeeds = Array(columns).fill(0).map(() => (0.35 + Math.random() * 0.3) * 0.04);
-            fgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
-            bgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
-        }
+function initializeRainArrays() {
+    columns = Math.floor(canvas.width / fgFontSize);
+    maxTextLength = Math.max(...textArray.map(t => t.length));
+    console.log('Max Text Length:', maxTextLength);
+    drops = Array(columns).fill(0).map((_, i) => 
+        i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
+    );
+    bgDrops = Array(columns).fill(0).map((_, i) => 
+        i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
+    );
+    speeds = Array(columns).fill(0).map(() => (0.5 + Math.random() * 0.5) * 0.04);
+    bgSpeeds = Array(columns).fill(0).map(() => (0.35 + Math.random() * 0.3) * 0.04);
+    fgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+    bgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+}
 
         // Load and parse CSV file
         fetch('kautian_詞目_20250116_hanji_poj_poj.csv')
