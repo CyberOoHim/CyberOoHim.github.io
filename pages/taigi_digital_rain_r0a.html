@@ -26,6 +26,7 @@ permalink: /pages/taigi_digital_rain.html
     <script>
         // 家己 local 走个時，.csv 个 file path 愛會記得改
         const path_to_fetch = '/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv'
+        
         /** @type {HTMLCanvasElement} */
         const canvas = document.getElementById('canvas');
         /** @type {CanvasRenderingContext2D} */
@@ -89,7 +90,7 @@ permalink: /pages/taigi_digital_rain.html
                     const cols = line.split(',').map(c => c.trim());
                     const hanji = cols[hanjiIndex] || '';
                     const poj = cols[pojIndex] || '';
-                    return `${poj} ${hanji}`;  // Format as "羅馬字，漢字"
+                    return `${poj} ${hanji}`;  // Format as "羅馬字 漢字"
                 }).filter(line => line !== '，');  // Filter out empty entries
 
                 if (textArray.length === 0) {
