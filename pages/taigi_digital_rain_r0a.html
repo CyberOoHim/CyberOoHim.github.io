@@ -23,7 +23,9 @@ permalink: /pages/taigi_digital_rain.html
 <body>
     <canvas id="canvas"></canvas>
     <script>
+        /** @type {HTMLCanvasElement} */
         const canvas = document.getElementById('canvas');
+        /** @type {CanvasRenderingContext2D} */
         const ctx = canvas.getContext('2d');
 
         // Set canvas size
@@ -31,34 +33,37 @@ permalink: /pages/taigi_digital_rain.html
         canvas.height = window.innerHeight;
 
         // Variables to be populated from CSV
-        let textArray = [];
-        const bgFontSize = 24;
-        const fgFontSize = 32;
-        let columns = 0;
-        let drops = [];
-        let bgDrops = [];
-        let speeds = [];
-        let bgSpeeds = [];
-        let fgText = [];
-        let bgText = [];
-        let maxTextLength = 0;
+        let textArray = []; // Array of text strings loaded from CSV
+        const bgFontSize = 24; // Background font size (adjust for visibility)
+        const fgFontSize = 32; // Foreground font size (adjust for prominence)
+        let columns = 0; // Number of text columns (calculated dynamically)
+        let drops = []; // Foreground drop positions
+        let bgDrops = []; // Background drop positions
+        let speeds = []; // Foreground drop speeds (adjust speed multiplier below)
+        let bgSpeeds = []; // Background drop speeds (adjust speed multiplier below)
+        let fgText = []; // Foreground text content
+        let bgText = []; // Background text content
+        let maxTextLength = 0; // Longest text string length
 
-        // Function to initialize raindrop arrays after loading text
-function initializeRainArrays() {
-    columns = Math.floor(canvas.width / fgFontSize);
-    maxTextLength = Math.max(...textArray.map(t => t.length));
-    console.log('Max Text Length:', maxTextLength);
-    drops = Array(columns).fill(0).map((_, i) => 
-        i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
-    );
-    bgDrops = Array(columns).fill(0).map((_, i) => 
-        i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
-    );
-    speeds = Array(columns).fill(0).map(() => (0.5 + Math.random() * 0.5) * 0.04);
-    bgSpeeds = Array(columns).fill(0).map(() => (0.35 + Math.random() * 0.3) * 0.04);
-    fgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
-    bgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
-}
+        /**
+         * Initializes arrays for raindrop animation after text is loaded.
+         * Sets up positions, speeds, and text for foreground and background drops.
+         */
+        function initializeRainArrays() {
+            columns = Math.floor(canvas.width / fgFontSize);
+            maxTextLength = Math.max(...textArray.map(t => t.length));
+            console.log('Max Text Length:', maxTextLength);
+            drops = Array(columns).fill(0).map((_, i) => 
+                i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
+            );
+            bgDrops = Array(columns).fill(0).map((_, i) => 
+                i < columns / 2 ? Math.random() * 2 : -Math.min(maxTextLength, 5) - Math.random() * 5
+            );
+            speeds = Array(columns).fill(0).map(() => (0.5 + Math.random() * 0.5) * 0.04); // Speed range: 0.02-0.04 (adjust multiplier for faster/slower)
+            bgSpeeds = Array(columns).fill(0).map(() => (0.35 + Math.random() * 0.3) * 0.04); // Speed range: 0.014-0.026 (adjust multiplier for faster/slower)
+            fgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+            bgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+        }
 
         // Load and parse CSV file
         fetch('/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv')
@@ -100,16 +105,20 @@ function initializeRainArrays() {
                 animate();
             });
 
+        /**
+         * Draws the digital rain effect on the canvas.
+         * Handles both background (faint) and foreground (bright) text drops.
+         */
         function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fade effect (adjust alpha for fade speed)
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // Background rain
             ctx.font = `${bgFontSize}px 'Noto Sans CJK TC', monospace`;
-            ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.3)'; // Background opacity (adjust alpha for visibility)
             for (let i = 0; i < columns; i++) {
                 const text = bgText[i];
-                const textHeight = text.length * bgFontSize * 0.8;
+                const textHeight = text.length * bgFontSize * 0.8; // Spacing factor (adjust 0.8 for text density)
                 const y = bgDrops[i] * bgFontSize;
                 if (y > canvas.height + textHeight) {
                     bgDrops[i] = -textHeight / bgFontSize;
@@ -126,10 +135,10 @@ function initializeRainArrays() {
 
             // Foreground rain
             ctx.font = `${fgFontSize}px 'Noto Sans CJK TC', monospace`;
-            ctx.fillStyle = '#0F0';
+            ctx.fillStyle = '#0F0'; // Foreground color (adjust for different colors)
             for (let i = 0; i < columns; i++) {
                 const text = fgText[i];
-                const textHeight = text.length * fgFontSize * 0.8;
+                const textHeight = text.length * fgFontSize * 0.8; // Spacing factor (adjust 0.8 for text density)
                 const y = drops[i] * fgFontSize;
                 if (y > canvas.height + textHeight) {
                     drops[i] = -textHeight / fgFontSize;
@@ -145,7 +154,10 @@ function initializeRainArrays() {
             }
         }
 
-        // Animation loop defined but started after CSV load
+        /**
+         * Animation loop that continuously redraws the canvas.
+         * Starts only after CSV data is loaded.
+         */
         function animate() {
             draw();
             requestAnimationFrame(animate);
@@ -159,8 +171,8 @@ function initializeRainArrays() {
             while (drops.length < newColumns) {
                 drops.push(-maxTextLength - Math.random() * 10);
                 bgDrops.push(-maxTextLength - Math.random() * 10);
-                speeds.push((0.5 + Math.random() * 0.5) * 0.2);
-                bgSpeeds.push((0.2 + Math.random() * 0.3) * 0.2);
+                speeds.push((0.5 + Math.random() * 0.5) * 0.2); // Speed range: 0.1-0.2 (adjust multiplier for faster/slower)
+                bgSpeeds.push((0.2 + Math.random() * 0.3) * 0.2); // Speed range: 0.04-0.1 (adjust multiplier for faster/slower)
                 fgText.push(textArray[Math.floor(Math.random() * textArray.length)]);
                 bgText.push(textArray[Math.floor(Math.random() * textArray.length)]);
             }
