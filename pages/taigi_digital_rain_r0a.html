@@ -23,6 +23,8 @@ permalink: /pages/taigi_digital_rain.html
 <body>
     <canvas id="canvas"></canvas>
     <script>
+        // 家己 local 走个時，.csv 个 file path 愛會記得改
+        const path_to_fetch = '/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv'
         /** @type {HTMLCanvasElement} */
         const canvas = document.getElementById('canvas');
         /** @type {CanvasRenderingContext2D} */
@@ -66,7 +68,7 @@ permalink: /pages/taigi_digital_rain.html
         }
 
         // Load and parse CSV file
-        fetch('/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv')
+        fetch(path_to_fetch)
             .then(response => {
                 if (!response.ok) throw new Error('CSV file not found');
                 return response.text();
