@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Digital Rain - CSV Loaded</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Variables to be populated from CSV
+        let textArray = [];
+        const bgFontSize = 24;
+        const fgFontSize = 32;
+        let columns = 0;
+        let drops = [];
+        let bgDrops = [];
+        let speeds = [];
+        let bgSpeeds = [];
+        let fgText = [];
+        let bgText = [];
+        let maxTextLength = 0;
+
+        // Function to initialize raindrop arrays after loading text
+        function initializeRainArrays() {
+            columns = Math.floor(canvas.width / fgFontSize);
+            maxTextLength = Math.max(...textArray.map(t => t.length));
+            drops = Array(columns).fill(0).map(() => -maxTextLength - Math.random() * 10);
+            bgDrops = Array(columns).fill(0).map(() => -maxTextLength - Math.random() * 10);
+            speeds = Array(columns).fill(0).map(() => (0.5 + Math.random() * 0.5) * 0.04);
+            bgSpeeds = Array(columns).fill(0).map(() => (0.35 + Math.random() * 0.3) * 0.04);
+            fgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+            bgText = Array(columns).fill(0).map(() => textArray[Math.floor(Math.random() * textArray.length)]);
+        }
+
+        // Load and parse CSV file
+        fetch('kautian_詞目_20250116_hanji_poj_poj.csv')
+            .then(response => {
+                if (!response.ok) throw new Error('CSV file not found');
+                return response.text();
+            })
+            .then(csvText => {
+                // Simple CSV parser
+                const lines = csvText.trim().split('\n');
+                const headers = lines[0].split(',').map(h => h.trim());
+                const hanjiIndex = headers.indexOf('漢字');
+                const pojIndex = headers.indexOf('羅馬字');
+
+                if (hanjiIndex === -1 || pojIndex === -1) {
+                    throw new Error('CSV must contain "漢字" and "羅馬字" columns');
+                }
+
+                textArray = lines.slice(1).map(line => {
+                    const cols = line.split(',').map(c => c.trim());
+                    const hanji = cols[hanjiIndex] || '';
+                    const poj = cols[pojIndex] || '';
+                    return `${poj}，${hanji}`;  // Format as "羅馬字，漢字"
+                }).filter(line => line !== '，');  // Filter out empty entries
+
+                if (textArray.length === 0) {
+                    throw new Error('No valid data in CSV');
+                }
+
+                // Initialize rain arrays after loading text
+                initializeRainArrays();
+                animate();  // Start animation
+            })
+            .catch(error => {
+                console.error('Error loading CSV:', error);
+                // Fallback textArray if CSV fails
+                textArray = ["羅馬字，漢字"];  // Default single entry
+                initializeRainArrays();
+                animate();
+            });
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Background rain
+            ctx.font = `${bgFontSize}px 'Noto Sans CJK TC', monospace`;
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+            for (let i = 0; i < columns; i++) {
+                const text = bgText[i];
+                const textHeight = text.length * bgFontSize * 0.8;
+                const y = bgDrops[i] * bgFontSize;
+                if (y > canvas.height + textHeight) {
+                    bgDrops[i] = -textHeight / bgFontSize;
+                    bgText[i] = textArray[Math.floor(Math.random() * textArray.length)];
+                } else {
+                    ctx.save();
+                    ctx.translate(i * bgFontSize, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(text, 0, 0);
+                    ctx.restore();
+                }
+                bgDrops[i] += bgSpeeds[i];
+            }
+
+            // Foreground rain
+            ctx.font = `${fgFontSize}px 'Noto Sans CJK TC', monospace`;
+            ctx.fillStyle = '#0F0';
+            for (let i = 0; i < columns; i++) {
+                const text = fgText[i];
+                const textHeight = text.length * fgFontSize * 0.8;
+                const y = drops[i] * fgFontSize;
+                if (y > canvas.height + textHeight) {
+                    drops[i] = -textHeight / fgFontSize;
+                    fgText[i] = textArray[Math.floor(Math.random() * textArray.length)];
+                } else {
+                    ctx.save();
+                    ctx.translate(i * fgFontSize, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(text, 0, 0);
+                    ctx.restore();
+                }
+                drops[i] += speeds[i];
+            }
+        }
+
+        // Animation loop defined but started after CSV load
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const newColumns = Math.floor(canvas.width / fgFontSize);
+            while (drops.length < newColumns) {
+                drops.push(-maxTextLength - Math.random() * 10);
+                bgDrops.push(-maxTextLength - Math.random() * 10);
+                speeds.push((0.5 + Math.random() * 0.5) * 0.2);
+                bgSpeeds.push((0.2 + Math.random() * 0.3) * 0.2);
+                fgText.push(textArray[Math.floor(Math.random() * textArray.length)]);
+                bgText.push(textArray[Math.floor(Math.random() * textArray.length)]);
+            }
+            drops.length = newColumns;
+            bgDrops.length = newColumns;
+            speeds.length = newColumns;
+            bgSpeeds.length = newColumns;
+            fgText.length = newColumns;
+            bgText.length = newColumns;
+            columns = newColumns;
+        });
+    </script>
+</body>
+</html>
