@@ -61,7 +61,7 @@ function initializeRainArrays() {
 }
 
         // Load and parse CSV file
-        fetch('kautian_詞目_20250116_hanji_poj_poj.csv')
+        fetch('/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv')
             .then(response => {
                 if (!response.ok) throw new Error('CSV file not found');
                 return response.text();
