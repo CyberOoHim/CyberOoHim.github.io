@@ -24,8 +24,6 @@ permalink: /pages/taigi_digital_rain.html
     <canvas id="canvas"></canvas>
     
     <script>
-        // 家己 local 走个時，.csv 个 file path 愛會記得改
-        const path_to_fetch = '/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv'
         
         /** @type {HTMLCanvasElement} */
         const canvas = document.getElementById('canvas');
@@ -36,6 +34,9 @@ permalink: /pages/taigi_digital_rain.html
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // 家己 local 走个時，.csv 个 file path 愛會記得改
+        const path_to_fetch = '/assets/csv/kautian_詞目_20250116_hanji_poj_poj.csv'
+        
         // Variables to be populated from CSV
         let textArray = []; // Array of text strings loaded from CSV
         const bgFontSize = 24; // Background font size (adjust for visibility)
@@ -72,13 +73,14 @@ permalink: /pages/taigi_digital_rain.html
         // Load and parse CSV file
         fetch(path_to_fetch)
             .then(response => {
-                if (!response.ok) throw new Error('CSV file not found');
+                if (!response.ok) throw new Error('CSV file not found，check file path.');
                 return response.text();
             })
             .then(csvText => {
                 // Simple CSV parser
                 const lines = csvText.trim().split('\n');
                 const headers = lines[0].split(',').map(h => h.trim());
+                // .csv 个直逝名 ùi 遮改
                 const hanjiIndex = headers.indexOf('漢字');
                 const pojIndex = headers.indexOf('羅馬字');
 
@@ -104,7 +106,7 @@ permalink: /pages/taigi_digital_rain.html
             .catch(error => {
                 console.error('Error loading CSV:', error);
                 // Fallback textArray if CSV fails
-                textArray = ["羅馬字，漢字"];  // Default single entry
+                textArray = ["Pe̍h-ōe-jī 漢字"];  // Default single entry
                 initializeRainArrays();
                 animate();
             });
