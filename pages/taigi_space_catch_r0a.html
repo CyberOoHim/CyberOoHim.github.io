@@ -48,6 +48,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     const ASSET_PATH = '/assets/taigi_space_catch/';
     const WARNING_INTERVAL = 10;
     const EFFECT_DURATION = 500;
+    const STARSHIP_X = 125;
 
     let starship, spaceObjects = [], effects = [], score = 0, lives = 5;
     let bgSpeed = 2, taigiWords = [], targetY, gameOver = false, isPaused = false;
@@ -186,7 +187,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 
     class Starship {
         constructor() {
-            this.x = 115;
+            this.x = STARSHIP_X;
             this.y = height / 2;
             this.assignHanji();
         }
