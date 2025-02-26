@@ -262,8 +262,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         constructor() {
             this.x = width;
             this.y = random(height);
-            let baseSpeed = map(width, 800, 1440, 2, 4, true);
-            this.speed = baseSpeed + random(1, 3);
+            let baseSpeed = map(width, 200, 1440, 2, 4, true);
+            this.speed = min(baseSpeed + random(0.5, 2), 4.5);
             this.color = color(random(100, 255), random(100, 255), random(100, 255));
             
             let rand = random();
@@ -323,9 +323,10 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     }
 
     function handleSpaceObjects() {
-        let spawnRate = Math.floor(map(width, 800, 1440, 40, 15, true));
-        if (!isPaused && frameCount % spawnRate === 0 && !gameOver && taigiWords.length > 0) {
-            spaceObjects.push(new SpaceObject());
+        let spawnRate = Math.floor(map(width, 200, 1440, 40, 15, true));
+        /* including space object crowdness adjustment */
+        if (!isPaused && frameCount % spawnRate === 0 && !gameOver && taigiWords.length > 0 && spaceObjects.length < Math.floor(width / 80)) {
+        spaceObjects.push(new SpaceObject());
             objectSpawnCount++;
             if (lives == 1 && objectSpawnCount % WARNING_INTERVAL == 0 && laserSound.isLoaded()) {
                 laserSound.play();
