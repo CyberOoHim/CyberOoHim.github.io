@@ -361,12 +361,12 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         const topY = 10; // Positive value to stay within canvas
         fill(0, 0, 50);
         rect(10, topY, width * 0.3, height * 0.1); // Scale with canvas
-        image(scoreImg, 10, topY + 10, height * 0.025, height * 0.025); // Scale icons
+        image(scoreImg, 10, topY + height * 0.025, height * 0.025, height * 0.025); // Scale icons
         fill(255);
         textSize(height * 0.035);
-        text(`着分: ${score}`, 40, topY + height * 0.05);
-        image(livesImg, 10, topY + height * 0.06, height * 0.025, height * 0.025);
-        text(`性命: ${lives}`, 40, topY + height * 0.09);
+        text(`着分: ${score}`, 15 + 20 * height / width, topY + height * 0.05);
+        image(livesImg, 10, topY + height * 0.065, height * 0.025, height * 0.025);
+        text(`性命: ${lives}`, 15 + 20 * height / width, topY + height * 0.09);
     }
 
     function touchMoved() {
