@@ -21,7 +21,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         position: absolute; 
         padding: 8px 16px; 
         font-size: 22px; /* Base size, overridden in JS */
-        background-image: url('/assets/taigi_space_catch/IMG_2992.PNG');
+        background-color: #FFFFE0; /* Light yellow */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -30,12 +30,18 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         color: black;
         border-radius: 10px;
         z-index: 10;
-    }
+        
+        line-height: 1; 
+        height: 100%;
+
+    /* Flexbox properties for centering the text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
-    #replayButton { 
-        display: none; /* Position set in JS */
-    }
-    /* #nextButton and #pauseButton positions set dynamically in JS */
+    display: none; /* Hide buttons initially */
+}
+    
     </style>
 </head>
 <body>
