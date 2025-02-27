@@ -1,6 +1,6 @@
 ---
 layout: apps
-title: Taigi space catch 1
+title: Taigi space catch-1
 version: v0d
 permalink: /pages/taigi_space_catch-1.html
 note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石黑體(TW)。 3. Sound Effect by https://pixabay.com. 4. fixed 4:3 and 3:4 ratio of canvas
@@ -105,24 +105,28 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
             loadImage(ASSET_PATH + 'IMG_2989.PNG'), loadImage(ASSET_PATH + 'IMG_2990.PNG')
         ];
 
-        loadTable(ASSET_PATH + 'kautian_詞目_20250116_hanji_poj_poj.csv', 'csv', 'header',
-            (table) => {
-                taigiWords = table.getRows().map(r => ({ hanji: r.getString('漢字'), poj: r.getString('羅馬字') }))
-                    .filter(w => w.hanji && w.poj && w.hanji.length <= 5);
-                console.log("Loaded Taigi words:", taigiWords.length);
-            },
-            () => {
-                taigiWords = [
-                    { hanji: "感心", poj: "kám-sim" }, { hanji: "臺語", poj: "Tâi-gí" },
-                    { hanji: "好勢", poj: "hó-sè" }, { hanji: "心適", poj: "sim-sek" },
-                    { hanji: "時行", poj: "sî-kiâⁿ" }, { hanji: "日", poj: "jit" },
-                    { hanji: "月", poj: "goe̍h" }, { hanji: "聲", poj: "siaⁿ" },
-                    { hanji: "刀仔", poj: "to-á" }, { hanji: "料身", poj: "liāu-sin" }
-                ];
-                console.log("Using sample Taigi words:", taigiWords);
-            }
-        );
+const defaultTaigiWords = [
+    { hanji: "感心", poj: "kám-sim" }, { hanji: "臺語", poj: "Tâi-gí" },
+    { hanji: "好勢", poj: "hó-sè" }, { hanji: "心適", poj: "sim-sek" },
+    { hanji: "時行", poj: "sî-kiâⁿ" }, { hanji: "日", poj: "jit" },
+    { hanji: "月", poj: "goe̍h" }, { hanji: "聲", poj: "siaⁿ" },
+    { hanji: "刀仔", poj: "to-á" }, { hanji: "料身", poj: "liāu-sin" }
+];
+
+loadTable(ASSET_PATH + 'kautian_詞目_20250116_hanji_poj_poj.csv', 'csv', 'header',
+    (table) => {
+        taigiWords = table.getRows()
+            .map(r => ({ hanji: r.getString('漢字'), poj: r.getString('羅馬字') }))
+            .filter(w => w.hanji && w.poj && w.hanji.length <= 5)
+            .concat(defaultTaigiWords);
+        console.log("Loaded Taigi words:", taigiWords.length);
+    },
+    () => {
+        taigiWords = defaultTaigiWords;
+        console.log("Using sample Taigi words:", taigiWords);
     }
+);
+}
 
 function setup() {
     isLandscape = windowWidth / windowHeight > 1;
@@ -181,7 +185,7 @@ function setup() {
     difficultyDiv.style('z-index', '10');
 
     // Add help text above the slider, forced to one line
-    let helpText = createSpan(' *注意：歇睏才chhiâu難度');
+    let helpText = createSpan(' ＊ 歇睏 chiah 換字、難度');
     helpText.parent(difficultyDiv);
     helpText.position(0, -35); // Position it above the slider
     helpText.style('color', '#D3D3D3');
@@ -192,12 +196,12 @@ function setup() {
     slider = createSlider(1, 3, 1, 1); // min=1, max=3, default=2, step=1
     slider.parent(difficultyDiv);
     slider.position(0, 0);
-    slider.style('width', '150px');
+    slider.style('width', '180px');
     slider.style('color', '#D3D3D3');
 
     label = createSpan('難度: 1');
     label.parent(difficultyDiv);
-    label.position(160, 0);
+    label.position(190, 0);
     label.style('color', '#D3D3D3');
     label.style('font-size', '16px');
     label.style('width', '100px')
