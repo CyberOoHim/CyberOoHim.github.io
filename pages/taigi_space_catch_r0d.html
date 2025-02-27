@@ -1,6 +1,6 @@
 ---
 layout: apps
-title: Taigi space catch-1
+title: Taigi space catch-1 
 version: v0d
 permalink: /pages/taigi_space_catch-1.html
 note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石黑體(TW)。 3. Sound Effect by https://pixabay.com. 4. fixed 4:3 and 3:4 ratio of canvas
@@ -307,11 +307,8 @@ function setup() {
             this.y = random(height);
             let difficulty = slider.value();
             let multiplier = difficulty / 2.0;
-            let baseSpeed = isLandscape ? map(width, 200, 1440, 2, 4.5, true) : map(width, 200, 1440, 2, 4.5, true);
-            this.speed = min(
-                baseSpeed * multiplier + (isLandscape ? random(0.5, 2) * multiplier : random(0.5, 2) * multiplier),
-                (isLandscape ? 4.5 : 4.5) * multiplier
-            );
+            let baseSpeed = 3.5;
+            this.speed = min((baseSpeed + random(0.5, 2) ) * multiplier, 4.5 * multiplier);
             this.color = color(random(100, 255), random(100, 255), random(100, 255));
             this.img = spaceObjectImgs[floor(random(spaceObjectImgs.length))];
             this.poj = random() < 0.3 ? starship.matchingPoj : taigiWords[floor(random(taigiWords.length))].poj;
@@ -352,9 +349,9 @@ function setup() {
     function handleSpaceObjects() {
         let difficulty = slider.value();
         let multiplier = difficulty / 2.0;
-        let baseSpawnRate = isLandscape ? Math.floor(map(width, 200, 1440, 45, 20, true)) : Math.floor(map(width, 200, 1440, 45, 20, true));
+        let baseSpawnRate = 20;
         let spawnRate = Math.floor(baseSpawnRate / Math.max(multiplier, 0.8));
-        let baseMaxDensity = isLandscape ? Math.floor(width / 100) : Math.floor(width / 100);
+        let baseMaxDensity = Math.floor(width / 50);
         let maxDensity = Math.floor(baseMaxDensity * Math.max(multiplier, 0.9));
 
         if (!isPaused && frameCount % spawnRate === 0 && !gameOver && taigiWords.length > 0 && spaceObjects.length < maxDensity) {
