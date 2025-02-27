@@ -1,3 +1,10 @@
+---
+layout: apps
+title: Taigi space catch
+version: v0d
+permalink: /pages/taigi_space_catch.html
+note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石黑體(TW)。 3. Sound Effect by https://pixabay.com. 4. fixed 4:3 and 3:4 ratio of canvas
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +89,7 @@
         gameOverSound = loadSound(ASSET_PATH + 'game-over-2-sound-effect-230463.mp3');
         gameStartSound = loadSound(ASSET_PATH + 'game-start-6104.mp3');
         laserSound = loadSound(ASSET_PATH + 'warning-sound-6686.mp3');
-        spaceImg = loadImage(ASSET_PATH + 'IMG_2975.PNG');
+        spaceImg = loadImage(ASSET_PATH + 'IMG_3010.PNG');
         starshipImg = loadImage(ASSET_PATH + 'IMG_2930.PNG');
         starshipInDangerImg = loadImage(ASSET_PATH + 'IMG_2976.PNG');
         scoreImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
@@ -181,25 +188,26 @@ function setup() {
     helpText.style('white-space', 'nowrap'); // Prevent text from wrapping
     helpText.style('width', '200px'); // Ensure enough width to fit the text
 
-    slider = createSlider(1, 3, 1, 1); // min=1, max=3, default=1, step=1
+    slider = createSlider(1, 3, 2, 1); // min=1, max=3, default=2, step=1
     slider.parent(difficultyDiv);
     slider.position(0, 0);
     slider.style('width', '150px');
+    slider.style('color', '#D3D3D3');
 
-    label = createSpan('Difficulty: 1');
+    label = createSpan('難度: 1');
     label.parent(difficultyDiv);
     label.position(160, 0);
-    label.style('color', 'white');
+    label.style('color', '#D3D3D3');
     label.style('font-size', '16px');
+    label.style('width', '100px')
 
     currentDifficulty = slider.value(); // Initialize cached difficulty
     slider.input(() => {
-        label.html('Difficulty: ' + slider.value()); // Always update label
+        label.html('難度: ' + slider.value()); // Always update label
         if (isPaused) { // Only update currentDifficulty when paused
             currentDifficulty = slider.value();
-            console.log("Difficulty applied:", currentDifficulty);
         } else {
-            console.log("Difficulty set to", slider.value(), "but will apply on next pause");
+                pass
         }
     });
 }
@@ -290,10 +298,10 @@ function setup() {
             this.y = random(height);
             let difficulty = slider.value();
             let multiplier = difficulty / 2.0;
-            let baseSpeed = isLandscape ? map(width, 200, 1440, 2, 4.5, true) : map(width, 200, 1440, 1.5, 3.5, true);
+            let baseSpeed = isLandscape ? map(width, 200, 1440, 2, 4.5, true) : map(width, 200, 1440, 2, 4.5, true);
             this.speed = min(
-                baseSpeed * multiplier + (isLandscape ? random(0.5, 2) * multiplier : random(0.5, 1.5) * multiplier),
-                (isLandscape ? 5.5 : 4.5) * multiplier
+                baseSpeed * multiplier + (isLandscape ? random(0.5, 2) * multiplier : random(0.5, 2) * multiplier),
+                (isLandscape ? 4.5 : 4.5) * multiplier
             );
             this.color = color(random(100, 255), random(100, 255), random(100, 255));
             this.img = spaceObjectImgs[floor(random(spaceObjectImgs.length))];
@@ -335,10 +343,10 @@ function setup() {
     function handleSpaceObjects() {
         let difficulty = slider.value();
         let multiplier = difficulty / 2.0;
-        let baseSpawnRate = isLandscape ? Math.floor(map(width, 200, 1440, 45, 20, true)) : Math.floor(map(width, 200, 1440, 35, 15, true));
-        let spawnRate = Math.floor(baseSpawnRate / multiplier);
-        let baseMaxDensity = isLandscape ? Math.floor(width / 80) : Math.floor(width / 100);
-        let maxDensity = Math.floor(baseMaxDensity * multiplier);
+        let baseSpawnRate = isLandscape ? Math.floor(map(width, 200, 1440, 45, 20, true)) : Math.floor(map(width, 200, 1440, 45, 20, true));
+        let spawnRate = Math.floor(baseSpawnRate / Math.max(multiplier, 0.8));
+        let baseMaxDensity = isLandscape ? Math.floor(width / 100) : Math.floor(width / 100);
+        let maxDensity = Math.floor(baseMaxDensity * Math.max(multiplier, 0.9));
 
         if (!isPaused && frameCount % spawnRate === 0 && !gameOver && taigiWords.length > 0 && spaceObjects.length < maxDensity) {
             spaceObjects.push(new SpaceObject());
