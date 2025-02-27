@@ -71,7 +71,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     let bgSpeed = 2, taigiWords = [], targetY, gameOver = false, isPaused = false;
     let objectSpawnCount = 0, ignoreMouseMove = false;
     let clickSound, crashSound, bonusSound, gameOverSound, gameStartSound, laserSound;
-    let spaceImg, starshipImg, starshipInDangerImg, scoreImg, livesImg, bonusImg, explosionImg;
+    let spaceImgLandscape, spaceImgPortrait, starshipImg, starshipInDangerImg, scoreImg, livesImg, bonusImg, explosionImg;
     let spaceObjectImgs = [];
     let gameFont;
     let nextButton = document.getElementById('nextButton');
@@ -89,7 +89,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         gameOverSound = loadSound(ASSET_PATH + 'game-over-2-sound-effect-230463.mp3');
         gameStartSound = loadSound(ASSET_PATH + 'game-start-6104.mp3');
         laserSound = loadSound(ASSET_PATH + 'warning-sound-6686.mp3');
-        spaceImg = loadImage(ASSET_PATH + 'IMG_3010.PNG');
+        spaceImgLandscape = loadImage(ASSET_PATH + 'IMG_3010.PNG'); // For landscape
+        spaceImgPortrait = loadImage(ASSET_PATH + 'IMG_3011.PNG'); // For portrait
         starshipImg = loadImage(ASSET_PATH + 'IMG_2930.PNG');
         starshipInDangerImg = loadImage(ASSET_PATH + 'IMG_2976.PNG');
         scoreImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
@@ -188,7 +189,7 @@ function setup() {
     helpText.style('white-space', 'nowrap'); // Prevent text from wrapping
     helpText.style('width', '200px'); // Ensure enough width to fit the text
 
-    slider = createSlider(1, 3, 2, 1); // min=1, max=3, default=2, step=1
+    slider = createSlider(1, 3, 1, 1); // min=1, max=3, default=2, step=1
     slider.parent(difficultyDiv);
     slider.position(0, 0);
     slider.style('width', '150px');
@@ -207,13 +208,17 @@ function setup() {
         if (isPaused) { // Only update currentDifficulty when paused
             currentDifficulty = slider.value();
         } else {
-                pass
+            pass
         }
     });
 }
 
     function draw() {
-        image(spaceImg, 0, 0, width, height);
+        if (isLandscape) {
+            image(spaceImgLandscape, 0, 0, width, height);
+            } else {
+                image(spaceImgPortrait, 0, 0, width, height);
+            }
         if (!gameOver && !isPaused) {
             starship.update(); // Update only when not paused or game over
             starship.show();
