@@ -13,6 +13,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     <title>Taigi Space Catch</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
     body { margin: 0; overflow: hidden; background: #000; }
     canvas { display: block; }
@@ -61,7 +62,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     #posDefDisplay {
         position: absolute;
         color: white;
-        font-size: 32px;
+        font-size: 28px;
         text-align: center;
         width: 80%; /* Adjust width as necessary */
         left: 10%;   /* Center horizontally */
@@ -74,7 +75,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     #playerGuide {
         position: absolute;
         color: white;
-        font-size: 32px;
+        font-size: 26px;
         text-align: center;
         width: 80%; /* Adjust as needed */
         left: 10%;   /* Center horizontally */
@@ -256,7 +257,7 @@ tableData.set(i, '詞性/解說', posDefValue);
         startButton.style.height = startButtonHeight + 'px';
         startButton.style.fontSize = startButtonFontSize + 'px';
         startButton.style.left = canvasLeft + (width / 2 - startButtonWidth / 2) + 'px';
-        startButton.style.top = canvasTop + ((isLandscape ? -130 : -150) + height / 2 - startButtonHeight / 2) + 'px';
+   startButton.style.top = canvasTop + ((isLandscape ? -150 : -200) + height / 2 - startButtonHeight / 2) + 'px';
 
         // Add difficulty slider and label
         difficultyDiv = createDiv();
@@ -298,50 +299,51 @@ tableData.set(i, '詞性/解說', posDefValue);
         gameOver = true; // Set gameOver to true initially to show start screen
     }
 
-    function draw() {
-        if (isLandscape) {
-            image(spaceImgLandscape, 0, 0, width, height);
-            } else {
-                image(spaceImgPortrait, 0, 0, width, height);
-            }
-        if (!gameOver && !isPaused) {
-            starship.update(); // Update only when not paused or game over
-            starship.show();
-            handleSpaceObjects();
-             posDefDisplay.style.display = 'none'; // Hide posDefDisplay during gameplay
-        } else if (isPaused) {
-            // Show posDefDisplay in pause screen
-            posDefDisplay.style.display = 'block';
-            // Format pos_def for display
-            let formattedPosDef = `${starship.hanji} → ${starship.matchingPoj}<br><br>${starship.pos_def.replace(/\s*\/\s*/g, '<br>').replace(/\n/g, '<br>')
-            // Replace slashes with line breaks
-            // Add <br> before "["
-}`;
-            posDefDisplay.innerHTML = formattedPosDef;
-
-            let canvasTop = (windowHeight - height) / 2;
-            posDefDisplay.style.top = canvasTop + (height * 0.53) + 'px'; // Adjust vertical position
-        }
-
-        for (let i = effects.length - 1; i >= 0; i--) {
-            effects[i].show();
-            if (effects[i].isExpired()) effects.splice(i, 1);
-        }
-        displayScoreAndLives();
-         if (gameOver) {
-            startButton.style.display = 'block';
-            nextButton.style.display = 'none';
-            pauseButton.style.display = 'none';
-            posDefDisplay.style.display = 'none';
-            playerGuide.style.display = 'block';
-            updatePlayerGuidePosition(); // Show and position the guide
-        } else {
-            nextButton.style.display = 'block';
-            pauseButton.style.display = 'block';
-            startButton.style.display = 'none';
-            playerGuide.style.display = 'none'; // Hide the guide
-        }
+function draw() {
+    if (isLandscape) {
+        image(spaceImgLandscape, 0, 0, width, height);
+    } else {
+        image(spaceImgPortrait, 0, 0, width, height);
     }
+    if (!gameOver && !isPaused) {
+        starship.update(); // Update only when not paused or game over
+        starship.show();
+        handleSpaceObjects();
+        posDefDisplay.style.display = 'none'; // Hide posDefDisplay during gameplay
+    } else if (isPaused) {
+        // Show posDefDisplay in pause screen with Markdown formatting
+        posDefDisplay.style.display = 'block';
+        // Format pos_def as Markdown
+        let formattedPosDef = `
+**${starship.hanji} → ${starship.matchingPoj}**
+\n---\n
+${starship.pos_def.replace(/\n/g, '\n\n')}
+        `;
+        posDefDisplay.innerHTML = marked.parse(formattedPosDef); // Assuming a Markdown parser like 'marked' is included
+
+        let canvasTop = (windowHeight - height) / 2;
+        posDefDisplay.style.top = canvasTop + (height * 0.53) + 'px'; // Adjust vertical position
+    }
+
+    for (let i = effects.length - 1; i >= 0; i--) {
+        effects[i].show();
+        if (effects[i].isExpired()) effects.splice(i, 1);
+    }
+    displayScoreAndLives();
+    if (gameOver) {
+        startButton.style.display = 'block';
+        nextButton.style.display = 'none';
+        pauseButton.style.display = 'none';
+        posDefDisplay.style.display = 'none';
+        playerGuide.style.display = 'block';
+        updatePlayerGuidePosition(); // Show and position the guide
+    } else {
+        nextButton.style.display = 'block';
+        pauseButton.style.display = 'block';
+        startButton.style.display = 'none';
+        playerGuide.style.display = 'none'; // Hide the guide
+    }
+}
 
     function changeWord() { starship.assignHanji(); }
     function resetGame() {
@@ -602,7 +604,7 @@ function windowResized() {
     startButton.style.height = startButtonHeight + 'px';
     startButton.style.fontSize = startButtonFontSize + 'px';
     startButton.style.left = canvasLeft + (width / 2 - startButtonWidth / 2) + 'px';
-    startButton.style.top = canvasTop + ((isLandscape ? -130 : -150) + height / 2 - startButtonHeight / 2) + 'px';
+   startButton.style.top = canvasTop + ((isLandscape ? -150 : -200) + height / 2 - startButtonHeight / 2) + 'px';
 
      // Update posDefDisplay position on resize
     posDefDisplay.style.left = canvasLeft + ( isLandscape ? width * 0 : width * 0.1 ) + 'px';  // Keep centered horizontally relative to canvas
@@ -616,9 +618,10 @@ function windowResized() {
 function updatePlayerGuidePosition() {
     let canvasTop = (windowHeight - height) / 2;
     let canvasLeft = (windowWidth - width) / 2;
-    playerGuide.style.top = canvasTop + ( -20 + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
-    playerGuide.style.left = canvasLeft + ( isLandscape ? ( -8 + width * 0 ): ( 9 + width * 0.1 )) + 'px';  
-    playerGuide.innerText = "掠配對 ê POJ，駛太空船，閃毋著 ê 字。\n六條命，看會當得幾分！\n\n👇 正頂爿 lu-chhôe → 1 上慢，3 上刺激\n👇 起鼓--lo͘h → 開－始𨑨迌\n👇 換字 → 這字 làng--kòe\n👇 歇睏 → 小停--一下，嘛會使偷 siòng 詞典";
+    playerGuide.style.top = canvasTop + ((isLandscape ? -60 : -80) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
+    playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
+    
+    playerGuide.innerHTML = marked.parse(`**< Formosa Space Catch >**\n\n駛太空船，掠 POJ 寶物。\n六條命，着幾分？\n\n**👇操作說明**\n\n正頂爿 lu-chhôe → 1 上慢，3 上刺激 (難度)\n\n起鼓--lo͘h → 開－始𨑨迌 (開始遊戲)\n\n換字 → 這字 làng--kòe (換字)\n\n歇睏 → 小停--一下，嘛會使偷 siòng 詞典 (暫停/繼續)`);
 }
 
 </script>
