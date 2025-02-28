@@ -14,7 +14,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
+<style>
     body { margin: 0; overflow: hidden; background: #000; }
     canvas { display: block; }
 
@@ -70,20 +70,23 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         z-index: 11;  /* Ensure it's above other elements */
         font-family: 'GenSekiGothic2TW-M'; /* Use the actual game font name */
         word-wrap: break-word; /* Allow long text to wrap */
+        line-height: 1.5; /* Set line spacing for posDefDisplay (adjust as needed) */
     }
     
     #playerGuide {
         position: absolute;
         color: white;
-        font-size: 22px;
+        font-size: 24px;
         text-align: center;
         width: 80%; /* Adjust as needed */
         left: 10%;   /* Center horizontally */
         z-index: 10; /* Above other elements */
         font-family: 'GenSekiGothic2TW-M';
         display: none; /* Initially hidden */
+        line-height: 1.8; /* Set line spacing for playerGuide (adjust as needed) */
     }
-    </style>
+</style>
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 </head>
 <body>
     <button id="startButton" onclick="resetGame()">起鼓--lo͘h</button>
@@ -621,16 +624,11 @@ function updatePlayerGuidePosition() {
     playerGuide.style.top = canvasTop + ((isLandscape ? -60 : -80) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
     playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
     
-    playerGuide.innerHTML = marked.parse(`## < Formosan ê 太空弄險 >
-
-**Póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**
-
+    playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
+**Póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
 **_👉難度 lu-chhôe_** → (正頂爿) 1 上慢，3 上刺激  
-
 **_👉起鼓--lo͘h_** → 開始𨑨迌  
-
 **_👉換字_** → 這字 làng--kòe  
-
 **_👉歇睏/繼續_** → 小停--一下，mā 會使偷 siòng 詞典
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​`);
