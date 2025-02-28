@@ -62,7 +62,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     #posDefDisplay {
         position: absolute;
         color: white;
-        font-size: 28px;
+        font-size: 24px;
         text-align: center;
         width: 80%; /* Adjust width as necessary */
         left: 10%;   /* Center horizontally */
@@ -75,7 +75,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     #playerGuide {
         position: absolute;
         color: white;
-        font-size: 26px;
+        font-size: 22px;
         text-align: center;
         width: 80%; /* Adjust as needed */
         left: 10%;   /* Center horizontally */
@@ -315,14 +315,14 @@ function draw() {
         posDefDisplay.style.display = 'block';
         // Format pos_def as Markdown
         let formattedPosDef = `
-**${starship.hanji} → ${starship.matchingPoj}**
+### **${starship.hanji} → ${starship.matchingPoj}**
 \n---\n
 ${starship.pos_def.replace(/\n/g, '\n\n')}
         `;
         posDefDisplay.innerHTML = marked.parse(formattedPosDef); // Assuming a Markdown parser like 'marked' is included
 
         let canvasTop = (windowHeight - height) / 2;
-        posDefDisplay.style.top = canvasTop + (height * 0.53) + 'px'; // Adjust vertical position
+        posDefDisplay.style.top = canvasTop + ( height * ( isLandscape ? 0.2 : 0.3 ) ) + 'px'; // Adjust vertical position
     }
 
     for (let i = effects.length - 1; i >= 0; i--) {
@@ -621,9 +621,21 @@ function updatePlayerGuidePosition() {
     playerGuide.style.top = canvasTop + ((isLandscape ? -60 : -80) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
     playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
     
-    playerGuide.innerHTML = marked.parse(`**< Formosa Space Catch >**\n\n駛太空船，掠 POJ 寶物。\n六條命，着幾分？\n\n**👇操作說明**\n\n正頂爿 lu-chhôe → 1 上慢，3 上刺激 (難度)\n\n起鼓--lo͘h → 開始𨑨迌 (開始遊戲)\n\n換字 → 這字 làng--kòe (換字)\n\n歇睏 → 小停--一下，嘛會使偷 siòng 詞典 (暫停/繼續)`);
+    playerGuide.innerHTML = marked.parse(`## < Formosan ê 太空弄險 >
+
+**Póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**
+
+**_👉難度 lu-chhôe_** → (正頂爿) 1 上慢，3 上刺激  
+
+**_👉起鼓--lo͘h_** → 開始𨑨迌  
+
+**_👉換字_** → 這字 làng--kòe  
+
+**_👉歇睏/繼續_** → 小停--一下，mā 會使偷 siòng 詞典
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​`);
 }
 
 </script>
 </body>
-</html>
+</html>>
