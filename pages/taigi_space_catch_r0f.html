@@ -76,14 +76,14 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     #playerGuide {
         position: absolute;
         color: white;
-        font-size: 24px;
+        font-size: 23px;
         text-align: center;
         width: 80%; /* Adjust as needed */
         left: 10%;   /* Center horizontally */
         z-index: 10; /* Above other elements */
         font-family: 'GenSekiGothic2TW-M';
         display: none; /* Initially hidden */
-        line-height: 1.8; /* Set line spacing for playerGuide (adjust as needed) */
+        line-height: 1.6; /* Set line spacing for playerGuide (adjust as needed) */
     }
 </style>
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
@@ -621,18 +621,16 @@ function windowResized() {
 function updatePlayerGuidePosition() {
     let canvasTop = (windowHeight - height) / 2;
     let canvasLeft = (windowWidth - width) / 2;
-    playerGuide.style.top = canvasTop + ((isLandscape ? -60 : -80) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
+    playerGuide.style.top = canvasTop + ((isLandscape ? -80 : -110) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
     playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
     
     playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
 **Póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-**_👉難度 lu-chhôe_** → (正頂爿) 1 上慢，3 上刺激  
-**_👉起鼓--lo͘h_** → 開始𨑨迌  
-**_👉換字_** → 這字 làng--kòe  
-**_👉歇睏/繼續_** → 小停--一下，mā 會使偷 siòng 詞典
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​`);
-}
+**_👉[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
+**_👉[起鼓--lo͘h]_** → 開始𨑨迌  
+**_👉[換字]_** → 這字 làng--kòe  
+**_👉[歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
+(內設教育部台語詞典)`)}
 
 </script>
 </body>
