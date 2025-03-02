@@ -20,7 +20,10 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 
     #startButton, #nextButton, #pauseButton {
         position: absolute;
-        background-color: #FFFFE0;
+        background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+        opacity: 0.95; /* Slight transparency for the entire button */
+        color: black;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -236,25 +239,27 @@ tableData.set(i, '詞性/解說', posDefValue);
         startButton.addEventListener('mousedown', () => ignoreMouseMove = true);
         document.addEventListener('mouseup', () => ignoreMouseMove = false);
 
-        // Fixed button sizes (same for all orientations)
-        let buttonWidth = width * (isLandscape ? 0.15 : 0.15);
-        let buttonHeight = height * (isLandscape ? 0.08 : 0.06);
-        let buttonFontSize = height * (isLandscape ? 0.03 : 0.025);
-        let startButtonWidth = width * 0.3;
-        let startButtonHeight = height * 0.08;
-        let startButtonFontSize = height * 0.035;
+        // button sizes (same for all orientations)
+    let buttonWidth = width * (isLandscape ? 0.15 : 0.15);
+    let buttonHeight = isLandscape ? 64 : 64;
+    let buttonFontSize = height * (isLandscape ? 0.04 : 0.025);
+    let buttonTop = isLandscape ? 3 : 33;
+    
+    let startButtonWidth = width * 0.3;
+    let startButtonHeight = height * 0.08;
+    let startButtonFontSize = height * 0.035;
 
-        nextButton.style.left = canvasLeft + (width * 0.32) + 'px';
-        nextButton.style.top = canvasTop + (height * 0.03) + 'px';
-        nextButton.style.width = buttonWidth + 'px';
-        nextButton.style.height = buttonHeight + 'px';
-        nextButton.style.fontSize = buttonFontSize + 'px';
+    nextButton.style.left = canvasLeft + (width * 0.32) + 'px';
+    nextButton.style.top = canvasTop + buttonTop + 'px';
+    nextButton.style.width = buttonWidth + 'px';
+    nextButton.style.height = buttonHeight + 'px';
+    nextButton.style.fontSize = buttonFontSize + 'px';
 
-        pauseButton.style.left = canvasLeft + (width * 0.5) + 'px';
-        pauseButton.style.top = canvasTop + (height * 0.03) + 'px';
-        pauseButton.style.width = buttonWidth + 'px';
-        pauseButton.style.height = buttonHeight + 'px';
-        pauseButton.style.fontSize = buttonFontSize + 'px';
+    pauseButton.style.left = canvasLeft + (width * 0.5) + 'px';
+    pauseButton.style.top = canvasTop + buttonTop + 'px';
+    pauseButton.style.width = buttonWidth + 'px';
+    pauseButton.style.height = buttonHeight + 'px';
+    pauseButton.style.fontSize = buttonFontSize + 'px';
 
         startButton.style.width = startButtonWidth + 'px';
         startButton.style.height = startButtonHeight + 'px';
@@ -497,16 +502,19 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
     }
 
     function displayScoreAndLives() {
-        const topY = 0;
-        let multiplierScoreAndLive = isLandscape ? 0.04 : 0.025;
-        fill(0, 0, 50);
-        rect(10, topY, width * 0.3, height * 0.1);
-        image(scoreImg, 10, topY + height * 0.03, height * multiplierScoreAndLive, height * multiplierScoreAndLive);
+        const topX = 0;
+        const topY = isLandscape ? 10 : 42;
+        let ScoreAndLiveSize = isLandscape ? 24
+         : 26;
+        fill(50, 50, 50, 128); // 100 = semi-transparent (0 = fully transparent, 255 = fully opaque)
+     
+        rect(topX, topY, width * 0.3, ScoreAndLiveSize * 2 + 7);
+        image(scoreImg, topX, topY, ScoreAndLiveSize, ScoreAndLiveSize);
         fill(255);
-        textSize(height * multiplierScoreAndLive);
-        text(`着分: ${score}`, 15 + height * 0.035, topY + height * 0.05);
-        image(livesImg, 10, topY + height * 0.065, height * multiplierScoreAndLive, height * multiplierScoreAndLive);
-        text(`性命: ${lives}`, 15 + height * 0.035, topY + height * 0.09);
+        textSize(ScoreAndLiveSize);
+        text(`着分: ${score}`, topX + ScoreAndLiveSize + 7, topY + 22 );
+        image(livesImg, topX, topY + 7 + ScoreAndLiveSize , ScoreAndLiveSize, ScoreAndLiveSize);
+        text(`性命: ${lives}`, topX + ScoreAndLiveSize + 7, topY + 22 + ScoreAndLiveSize + 5 );
     }
 
     function touchMoved() {
@@ -585,21 +593,23 @@ function windowResized() {
     canvas.style.left = canvasLeft + 'px';
     canvas.style.top = canvasTop + 'px';
 
-    let buttonWidth = width * 0.15;
-    let buttonHeight = height * 0.06;
-    let buttonFontSize = height * 0.025;
+    let buttonWidth = width * (isLandscape ? 0.15 : 0.15);
+    let buttonHeight = isLandscape ? 64 : 64;
+    let buttonFontSize = height * (isLandscape ? 0.04 : 0.025);
+    let buttonTop = isLandscape ? 3 : 33;
+    
     let startButtonWidth = width * 0.3;
     let startButtonHeight = height * 0.08;
     let startButtonFontSize = height * 0.035;
 
     nextButton.style.left = canvasLeft + (width * 0.32) + 'px';
-    nextButton.style.top = canvasTop + (height * 0.03) + 'px';
+    nextButton.style.top = canvasTop + buttonTop + 'px';
     nextButton.style.width = buttonWidth + 'px';
     nextButton.style.height = buttonHeight + 'px';
     nextButton.style.fontSize = buttonFontSize + 'px';
 
     pauseButton.style.left = canvasLeft + (width * 0.5) + 'px';
-    pauseButton.style.top = canvasTop + (height * 0.03) + 'px';
+    pauseButton.style.top = canvasTop + buttonTop + 'px';
     pauseButton.style.width = buttonWidth + 'px';
     pauseButton.style.height = buttonHeight + 'px';
     pauseButton.style.fontSize = buttonFontSize + 'px';
@@ -626,11 +636,11 @@ function updatePlayerGuidePosition() {
     playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
     
     playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
-**Póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-**_👉[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
-**_👉[起鼓--lo͘h]_** → 開始𨑨迌  
-**_👉[換字]_** → 這字 làng--kòe  
-**_👉[歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
+**頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
+**_1. [難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
+**_2. [起鼓--lo͘h]_** → 開始𨑨迌  
+**_3. [換字]_** → 這字 làng--kòe  
+**_4. [歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
 (內設教育部台語詞典)`)}
 
 </script>
