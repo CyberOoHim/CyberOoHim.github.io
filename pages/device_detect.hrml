@@ -1,0 +1,145 @@
+---
+layout: apps
+title: Device Detection
+version: v0a
+permalink: /pages/device_detect.html
+note: 
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        textarea {
+            width: 90%;
+            max-width: 500px;
+            height: 150px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+            font-size: 16px;
+            resize: vertical;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Device Detection Results</h2>
+    <textarea id="device-info" readonly>Detecting your device...</textarea>
+    <button id="refresh-btn">Refresh Detection</button>
+
+    <script>
+        // Function to detect device and update the textarea
+        function detectAndUpdateDevice() {
+            try {
+                console.log("Running device detection...");
+                
+                // Get the textarea element
+                const deviceInfoTextarea = document.getElementById("device-info");
+                if (!deviceInfoTextarea) {
+                    throw new Error("Could not find the device-info textarea element");
+                }
+                
+                // Clear previous content and show detection in progress
+                deviceInfoTextarea.value = "Detecting your device...\n";
+                
+                // Device detection function
+                function getDeviceType() {
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+                    const width = window.screen.width;
+                    const height = window.screen.height;
+                    
+                    // Determine device type
+                    let deviceType;
+                    if (isTouch) {
+                        if (/ipad|tablet/i.test(userAgent) || (width > 768 && width <= 1024)) {
+                            deviceType = "iPad/Tablet";
+                        } else {
+                            deviceType = "Mobile Phone";
+                        }
+                    } else {
+                        deviceType = "PC";
+                    }
+                    
+                    return {
+                        deviceType,
+                        userAgent,
+                        isTouch,
+                        screenWidth: width,
+                        screenHeight: height
+                    };
+                }
+                
+                // Get detection results
+                const detectionResult = getDeviceType();
+                
+                // Format the output for the textarea
+                const output = [
+                    `Device Type: ${detectionResult.deviceType}`,
+                    `Screen Size: ${detectionResult.screenWidth}x${detectionResult.screenHeight}`,
+                    `Touch Support: ${detectionResult.isTouch ? "Yes" : "No"}`,
+                    `User Agent: ${detectionResult.userAgent}`
+                ].join('\n');
+                
+                // Update the textarea with detection results
+                deviceInfoTextarea.value = output;
+                
+                console.log("Device detection completed:", detectionResult);
+                
+            } catch (error) {
+                console.error("Error in device detection:", error);
+                
+                // Try to display error in textarea if possible
+                const deviceInfoTextarea = document.getElementById("device-info");
+                if (deviceInfoTextarea) {
+                    deviceInfoTextarea.value = `Error detecting device: ${error.message}`;
+                }
+            }
+        }
+        
+        // Run detection when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM fully loaded");
+            detectAndUpdateDevice();
+            
+            // Set up refresh button
+            const refreshButton = document.getElementById("refresh-btn");
+            if (refreshButton) {
+                refreshButton.addEventListener("click", detectAndUpdateDevice);
+            }
+        });
+    </script>
+</body>
+</html>
