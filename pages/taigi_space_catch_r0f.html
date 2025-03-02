@@ -1,7 +1,7 @@
 ---
 layout: apps
 title: Formosa space catch
-version: v0f
+version: v0g
 permalink: /pages/formosa_space_catch.html
 note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石黑體(TW)。 3. Sound Effect by https://pixabay.com. 4. fixed 4:3 and 3:4 ratio of canvas 5. with pos/definition and player guide
 ---
@@ -119,7 +119,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 
 
     function preload() {
-        gameFont = loadFont('/assets/fonts/GenSekiGothic2TW-M.otf');
+        gameFont = loadFont( '/assets/fonts/GenSekiGothic2TW-M.otf');
         clickSound = loadSound(ASSET_PATH + 'click-234708.mp3');
         crashSound = loadSound(ASSET_PATH + 'crash-7075.mp3');
         bonusSound = loadSound(ASSET_PATH + 'game-bonus-2-294436.mp3');
@@ -237,9 +237,9 @@ tableData.set(i, '詞性/解說', posDefValue);
         document.addEventListener('mouseup', () => ignoreMouseMove = false);
 
         // Fixed button sizes (same for all orientations)
-        let buttonWidth = width * 0.15;
-        let buttonHeight = height * 0.06;
-        let buttonFontSize = height * 0.025;
+        let buttonWidth = width * (isLandscape ? 0.15 : 0.15);
+        let buttonHeight = height * (isLandscape ? 0.08 : 0.06);
+        let buttonFontSize = height * (isLandscape ? 0.03 : 0.025);
         let startButtonWidth = width * 0.3;
         let startButtonHeight = height * 0.08;
         let startButtonFontSize = height * 0.035;
@@ -497,14 +497,15 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
     }
 
     function displayScoreAndLives() {
-        const topY = 10;
+        const topY = 0;
+        let multiplierScoreAndLive = isLandscape ? 0.04 : 0.025;
         fill(0, 0, 50);
         rect(10, topY, width * 0.3, height * 0.1);
-        image(scoreImg, 10, topY + height * 0.025, height * 0.035, height * 0.035);
+        image(scoreImg, 10, topY + height * 0.03, height * multiplierScoreAndLive, height * multiplierScoreAndLive);
         fill(255);
-        textSize(height * 0.035);
+        textSize(height * multiplierScoreAndLive);
         text(`着分: ${score}`, 15 + height * 0.035, topY + height * 0.05);
-        image(livesImg, 10, topY + height * 0.065, height * 0.035, height * 0.035);
+        image(livesImg, 10, topY + height * 0.065, height * multiplierScoreAndLive, height * multiplierScoreAndLive);
         text(`性命: ${lives}`, 15 + height * 0.035, topY + height * 0.09);
     }
 
