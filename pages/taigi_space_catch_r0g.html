@@ -652,14 +652,14 @@ function updatePlayerGuidePosition() {
     let canvasTop = (windowHeight - height) / 2;
     let canvasLeft = (windowWidth - width) / 2;
     playerGuide.style.top = canvasTop + ((isLandscape ? -80 : -110) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
-    playerGuide.style.left = canvasLeft + (isLandscape ? (-8 + width * 0) : (9 + width * 0.1)) + 'px';  
+    playerGuide.style.left = canvasLeft + (isLandscape ? (0) : (100)) + 'px';  
     
     playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
 **頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-**_> [難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
-**_> [起鼓--lo͘h]_** → 開始𨑨迌  
-**_> [換字]_** → 這字 làng--kòe  
-**_> [歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
+**_[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
+**_[起鼓--lo͘h]_** → 開始𨑨迌  
+**_[換字]_** → 這字 làng--kòe  
+**_[歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
 (內設教育部台語詞典)`)}
 
 </script>
