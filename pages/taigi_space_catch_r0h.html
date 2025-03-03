@@ -120,8 +120,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     const ASSET_PATH = '/assets/taigi_space_catch/';
     const WARNING_INTERVAL = 10;
     const EFFECT_DURATION = 500;
-    const NUMBER_LIVES = NUMBER_LIVES;
-    let starship, spaceObjects = [], effects = [], score = 0, lives = 6;
+    const NUMBER_LIVES = 3;
+    let starship, spaceObjects = [], effects = [], score = 0, lives = NUMBER_LIVES;
     let bgSpeed = 2, taigiWords = [], targetY, gameOver = false, isPaused = false;
     let objectSpawnCount = 0, ignoreMouseMove = false;
     let clickSound, crashSound, bonusSound, gameOverSound, gameStartSound, laserSound;
