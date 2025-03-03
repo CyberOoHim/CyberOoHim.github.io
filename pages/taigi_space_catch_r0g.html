@@ -18,6 +18,23 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     body { margin: 0; overflow: hidden; background: #000; }
     canvas { display: block; }
 
+#loadingMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    animation: flash 1s linear infinite;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+    
     #startButton, #nextButton, #pauseButton {
         position: absolute;
         background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
@@ -92,7 +109,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 </head>
 <body>
-    <button id="startButton" onclick="resetGame()">掠資料...</button>
+   /*  <div id="loadingMessage">Tng the 掠資料...</div> */
+    <button id="startButton" onclick="resetGame()">起鼓--lo͘h</button>
     <button id="nextButton" onclick="changeWord()">換字</button>
     <button id="pauseButton" onclick="togglePause()">歇睏</button>
     <div id="posDefDisplay"></div>
@@ -121,102 +139,106 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     let playerGuide = document.getElementById('playerGuide');
 
 
-// In the global scope, add a flag to track if preload is complete
-let isPreloadComplete = false;
+    function preload() {
+        gameFont = loadFont( '/assets/fonts/GenSekiGothic2TW-M.otf');
+        clickSound = loadSound(ASSET_PATH + 'click-234708.mp3');
+        crashSound = loadSound(ASSET_PATH + 'crash-7075.mp3');
+        bonusSound = loadSound(ASSET_PATH + 'game-bonus-2-294436.mp3');
+        gameOverSound = loadSound(ASSET_PATH + 'game-over-2-sound-effect-230463.mp3');
+        gameStartSound = loadSound(ASSET_PATH + 'game-start-6104.mp3');
+        laserSound = loadSound(ASSET_PATH + 'warning-sound-6686.mp3');
+        spaceImgLandscape = loadImage(ASSET_PATH + 'IMG_3010.PNG'); // For landscape
+        spaceImgPortrait = loadImage(ASSET_PATH + 'IMG_3011.PNG'); // For portrait
+        starshipImg = loadImage(ASSET_PATH + 'IMG_2930.PNG');
+        starshipInDangerImg = loadImage(ASSET_PATH + 'IMG_2976.PNG');
+        scoreImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
+        livesImg = loadImage(ASSET_PATH + 'IMG_2936.PNG');
+        bonusImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
+        explosionImg = loadImage(ASSET_PATH + 'IMG_2932.PNG');
+        spaceObjectImgs = [
+            loadImage(ASSET_PATH + 'IMG_2983.PNG'), loadImage(ASSET_PATH + 'IMG_2982.PNG'),
+            loadImage(ASSET_PATH + 'IMG_2978.PNG'), loadImage(ASSET_PATH + 'IMG_2979.PNG'),
+            loadImage(ASSET_PATH + 'IMG_2980.PNG'), loadImage(ASSET_PATH + 'IMG_2981.PNG'),
+            loadImage(ASSET_PATH + 'IMG_2986.PNG'), loadImage(ASSET_PATH + 'IMG_2988.PNG'),
+            loadImage(ASSET_PATH + 'IMG_2989.PNG'), loadImage(ASSET_PATH + 'IMG_2990.PNG')
+        ];
 
-// Modified preload function to set the flag when done
-function preload() {
-    gameFont = loadFont('/assets/fonts/GenSekiGothic2TW-M.otf');
-    clickSound = loadSound(ASSET_PATH + 'click-234708.mp3');
-    crashSound = loadSound(ASSET_PATH + 'crash-7075.mp3');
-    bonusSound = loadSound(ASSET_PATH + 'game-bonus-2-294436.mp3');
-    gameOverSound = loadSound(ASSET_PATH + 'game-over-2-sound-effect-230463.mp3');
-    gameStartSound = loadSound(ASSET_PATH + 'game-start-6104.mp3');
-    laserSound = loadSound(ASSET_PATH + 'warning-sound-6686.mp3');
-    spaceImgLandscape = loadImage(ASSET_PATH + 'IMG_3010.PNG');
-    spaceImgPortrait = loadImage(ASSET_PATH + 'IMG_3011.PNG');
-    starshipImg = loadImage(ASSET_PATH + 'IMG_2930.PNG');
-    starshipInDangerImg = loadImage(ASSET_PATH + 'IMG_2976.PNG');
-    scoreImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
-    livesImg = loadImage(ASSET_PATH + 'IMG_2936.PNG');
-    bonusImg = loadImage(ASSET_PATH + 'IMG_2941.PNG');
-    explosionImg = loadImage(ASSET_PATH + 'IMG_2932.PNG');
-    spaceObjectImgs = [
-        loadImage(ASSET_PATH + 'IMG_2983.PNG'), loadImage(ASSET_PATH + 'IMG_2982.PNG'),
-        loadImage(ASSET_PATH + 'IMG_2978.PNG'), loadImage(ASSET_PATH + 'IMG_2979.PNG'),
-        loadImage(ASSET_PATH + 'IMG_2980.PNG'), loadImage(ASSET_PATH + 'IMG_2981.PNG'),
-        loadImage(ASSET_PATH + 'IMG_2986.PNG'), loadImage(ASSET_PATH + 'IMG_2988.PNG'),
-        loadImage(ASSET_PATH + 'IMG_2989.PNG'), loadImage(ASSET_PATH + 'IMG_2990.PNG')
-    ];
-
-    loadTable(ASSET_PATH + 'kautian_詞目+義項_20250116_POJ_trimmed.csv', 'csv', 'header',
-        (table) => {
-            tableData = table;
-            if (!tableData.columns.includes('詞性/解說')) {
-                tableData.addColumn('詞性/解說');
-            }
-
-            let posColumnName = null;
-            let defColumnName = null;
-
-            for (let col of tableData.columns) {
-                if (col.includes('詞性') || col.includes('pos') || col.includes('POS') || col.includes('part')) {
-                    posColumnName = col;
+        // Load CSV and process
+        loadTable(ASSET_PATH + 'kautian_詞目+義項_20250116_POJ_trimmed.csv', 'csv', 'header',
+            (table) => {
+                tableData = table;
+                // Add '詞性/解說' column and populate it
+                if (!tableData.columns.includes('詞性/解說')) {
+                  tableData.addColumn('詞性/解說');
                 }
-                if (col.includes('釋義') || col.includes('def') || col.includes('meaning') || col.includes('解說')) {
-                    defColumnName = col;
+
+                let posColumnName = null;
+                let defColumnName = null;
+
+                for (let col of tableData.columns) {
+                    if (col.includes('詞性') || col.includes('pos') || col.includes('POS') || col.includes('part')) {
+                        posColumnName = col;
+                    }
+                    if (col.includes('釋義') || col.includes('def') || col.includes('meaning') || col.includes('解說')) {
+                        defColumnName = col;
+                    }
                 }
+
+                if (!posColumnName) {
+                    posColumnName = tableData.columns[0]; // Fallback
+                }
+                if (!defColumnName) {
+                    defColumnName = tableData.columns.length > 1 ? tableData.columns[1] : tableData.columns[0]; // Fallback
+                }
+
+
+                for (let i = 0; i < tableData.getRowCount(); i++) {
+                    let pos = tableData.getString(i, posColumnName) || '';
+                    let definition = tableData.getString(i, defColumnName) || '';
+                    const posDefValue = (pos === definition) ? pos : `${pos} / ${definition}`;
+tableData.set(i, '詞性/解說', posDefValue);
+                }
+
+
+                // Prepare taigiWords for the game, including 詞性/解說 for Hanzi ONLY
+                taigiWords = tableData.getRows()
+                    .map(r => ({
+                        hanji: r.getString('漢字'),
+                        poj: r.getString('羅馬字'),
+                        pos_def: r.getString('詞性/解說') // Include combined column, associated with Hanzi
+                    }))
+                    .filter(w => w.hanji && w.poj && w.hanji.length <= 5);
+
+                 // Add a default empty word
+                taigiWords.push({ hanji: "", poj: "", pos_def: "" });
+                console.log("Loaded Taigi words:", taigiWords.length);
+
+            },
+            (err) => {
+                console.error("Error loading CSV:", err);
+                // Fallback to default words if CSV loading fails
+                const defaultTaigiWords = [
+                    { hanji: "感心", poj: "kám-sim", pos_def: "" }, { hanji: "臺語", poj: "Tâi-gí", pos_def: "" },
+                    { hanji: "好勢", poj: "hó-sè", pos_def: "" }, { hanji: "心適", poj: "sim-sek", pos_def: "" },
+                    { hanji: "時行", poj: "sî-kiâⁿ", pos_def: "" }, { hanji: "日", poj: "jit", pos_def: "" },
+                    { hanji: "月", poj: "goe̍h", pos_def: "" }, { hanji: "聲", poj: "siaⁿ", pos_def: "" },
+                    { hanji: "刀仔", poj: "to-á", pos_def: "" }, { hanji: "料身", poj: "liāu-sin", pos_def: "" },
+                    { hanji: "", poj: "", pos_def: "" } // Empty default word
+                ];
+                taigiWords = defaultTaigiWords;
+                console.log("Using sample Taigi words:", taigiWords);
             }
+        );
+    }
 
-            if (!posColumnName) posColumnName = tableData.columns[0];
-            if (!defColumnName) defColumnName = tableData.columns.length > 1 ? tableData.columns[1] : tableData.columns[0];
-
-            for (let i = 0; i < tableData.getRowCount(); i++) {
-                let pos = tableData.getString(i, posColumnName) || '';
-                let definition = tableData.getString(i, defColumnName) || '';
-                const posDefValue = (pos === definition) ? pos : `${pos} / ${definition}`;
-                tableData.set(i, '詞性/解說', posDefValue);
-            }
-
-            taigiWords = tableData.getRows()
-                .map(r => ({
-                    hanji: r.getString('漢字'),
-                    poj: r.getString('羅馬字'),
-                    pos_def: r.getString('詞性/解說')
-                }))
-                .filter(w => w.hanji && w.poj && w.hanji.length <= 5);
-
-            taigiWords.push({ hanji: "", poj: "", pos_def: "" });
-            console.log("Loaded Taigi words:", taigiWords.length);
-
-            isPreloadComplete = true; // Set flag when preload is done
-            startButton.innerText = "起鼓--lo͘h"; // Update button text
-        },
-        (err) => {
-            console.error("Error loading CSV:", err);
-            const defaultTaigiWords = [
-                { hanji: "感心", poj: "kám-sim", pos_def: "" }, { hanji: "臺語", poj: "Tâi-gí", pos_def: "" },
-                { hanji: "好勢", poj: "hó-sè", pos_def: "" }, { hanji: "心適", poj: "sim-sek", pos_def: "" },
-                { hanji: "時行", poj: "sî-kiâⁿ", pos_def: "" }, { hanji: "日", poj: "jit", pos_def: "" },
-                { hanji: "月", poj: "goe̍h", pos_def: "" }, { hanji: "聲", poj: "siaⁿ", pos_def: "" },
-                { hanji: "刀仔", poj: "to-á", pos_def: "" }, { hanji: "料身", poj: "liāu-sin", pos_def: "" },
-                { hanji: "", poj: "", pos_def: "" }
-            ];
-            taigiWords = defaultTaigiWords;
-            console.log("Using sample Taigi words:", taigiWords);
-
-            isPreloadComplete = true; // Set flag even on error
-            startButton.innerText = "起鼓--lo͘h"; // Update button text
-        }
-    );
-}
 
     function setup() {
         isLandscape = windowWidth / windowHeight > 1;
         let canvasWidth = isLandscape ? windowHeight * 4 / 3 : windowWidth;
         let canvasHeight = isLandscape ? windowHeight : windowWidth * 4 / 3;
         createCanvas(canvasWidth, canvasHeight);
-
+        document.getElementById('loadingMessage').style.display = 'none'; // Hide the loading message
+        
         let canvas = document.getElementById('defaultCanvas0');
         canvas.style.position = 'absolute';
         let canvasLeft = (windowWidth - canvasWidth) / 2;
@@ -351,28 +373,23 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
 }
 
     function changeWord() { starship.assignHanji(); }
-    
-function resetGame() {
-    if (!isPreloadComplete) {
-        console.log("Still loading data...");
-        return; // Prevent game reset until preload is complete
+    function resetGame() {
+        score = 0;
+        lives = 6;
+        spaceObjects = [];
+        effects = [];
+        bgSpeed = 0.5;
+        // Preserve current starship.y instead of resetting to targetY unless necessary
+        if (starship) starship.assignHanji(); // Only reset word, not position
+        else starship = new Starship(); // Create new starship only if it doesn’t exist
+        gameOver = false;
+        isPaused = false;
+        objectSpawnCount = 0;
+        startButton.style.display = 'none';
+        nextButton.style.display = 'block';
+        pauseButton.style.display = 'block';
+        if (gameStartSound.isLoaded()) gameStartSound.play();
     }
-    score = 0;
-    lives = 6;
-    spaceObjects = [];
-    effects = [];
-    bgSpeed = 0.5;
-    if (starship) starship.assignHanji();
-    else starship = new Starship();
-    gameOver = false;
-    isPaused = false;
-    objectSpawnCount = 0;
-    startButton.style.display = 'none';
-    nextButton.style.display = 'block';
-    pauseButton.style.display = 'block';
-    if (gameStartSound.isLoaded()) gameStartSound.play();
-}
-
     function togglePause() {
         isPaused = !isPaused;
         pauseButton.innerText = isPaused ? '繼續' : '歇睏';
