@@ -84,8 +84,10 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         color: white;
         font-size: 24px;
         text-align: center;
-        width: 80%; /* Adjust width as necessary */
-        left: 10%;   /* Center horizontally */
+        /* width: 80%;  Adjust width as necessary */
+        /* left: 10%;   Center horizontally */
+        left: 50%; /* Position at the horizontal center */
+        transform: translateX(-50%); /* Shift back by half the width */
         display: none; /* Initially hidden */
         z-index: 11;  /* Ensure it's above other elements */
         font-family: 'GenSekiGothic2TW-M'; /* Use the actual game font name */
@@ -98,8 +100,10 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         color: white;
         font-size: 23px;
         text-align: center;
-        width: 80%; /* Adjust as needed */
-        left: 10%;   /* Center horizontally */
+        /* width: 80%;  Adjust as needed */
+        /* left: 10%;   Center horizontally */
+        left: 50%; /* Position at the horizontal center */
+        transform: translateX(-50%); /* Shift back by half the width */
         z-index: 10; /* Above other elements */
         font-family: 'GenSekiGothic2TW-M';
         display: none; /* Initially hidden */
@@ -595,8 +599,8 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
             if (gameOver) buttons.push(startButton);
             for (let btn of buttons) {
                 let rect = btn.getBoundingClientRect();
-                if (mouseX >= rect.left && mouseX <= rect.right &&
-                    mouseY >= rect.top && mouseY <= rect.bottom) {
+                if (mouseX >= rect.left && mouseX < rect.right &&
+                    mouseY > rect.top && mouseY < rect.bottom) {
                     overButton = true;
                     break;
                 }
@@ -666,7 +670,7 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
         safeHeight = Math.max(scoreLivesBottom, buttonsBottom, sliderBottom);
 
         // Update posDefDisplay position on resize
-        posDefDisplay.style.left = canvasLeft + ( isLandscape ? width * 0 : width * 0.1 ) + 'px';  // Keep centered horizontally relative to canvas
+        // posDefDisplay.style.left = canvasLeft + ( isLandscape ? width * 0 : width * 0.1 ) + 'px';  // Keep centered horizontally relative to canvas
         posDefDisplay.style.top = canvasTop + (height * 0.6) + 'px'; // Keep vertical position
 
         // Update difficulty slider position
@@ -678,11 +682,11 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
         let canvasTop = (windowHeight - height) / 2;
         let canvasLeft = (windowWidth - width) / 2;
         playerGuide.style.top = canvasTop + ((isLandscape ? -80 : -110) + height / 2 + startButton.offsetHeight) + 'px'; // Position below start button
-        playerGuide.style.left = canvasLeft + (isLandscape ? (0) : (100)) + 'px';
+        // playerGuide.style.left = canvasLeft + (isLandscape ? (0) : (100)) + 'px';
 
-        playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**
-**頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**
-**_[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激
+        playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
+**頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
+**_[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
 **_[起鼓--lo͘h]_** → 開始𨑨迌
 **_[換字]_** → 這字 làng--kòe
 **_[歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng
