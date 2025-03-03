@@ -103,7 +103,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     const WARNING_INTERVAL = 10;
     const EFFECT_DURATION = 500;
 
-    let starship, spaceObjects = [], effects = [], score = 0, lives = 3;
+    let starship, spaceObjects = [], effects = [], score = 0, lives = 6;
     let bgSpeed = 2, taigiWords = [], targetY, gameOver = false, isPaused = false;
     let objectSpawnCount = 0, ignoreMouseMove = false;
     let clickSound, crashSound, bonusSound, gameOverSound, gameStartSound, laserSound;
@@ -356,7 +356,7 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
     function changeWord() { starship.assignHanji(); }
     function resetGame() {
         score = 0;
-        lives = 3;
+        lives = 6;
         spaceObjects = [];
         effects = [];
         bgSpeed = 0.5;
@@ -637,10 +637,10 @@ function updatePlayerGuidePosition() {
     
     playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
 **頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-**_1. [難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
-**_2. [起鼓--lo͘h]_** → 開始𨑨迌  
-**_3. [換字]_** → 這字 làng--kòe  
-**_4. [歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
+**_> [難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
+**_> [起鼓--lo͘h]_** → 開始𨑨迌  
+**_> [換字]_** → 這字 làng--kòe  
+**_> [歇睏/繼續]_** → 小停--一下，mā 會使偷 siòng  
 (內設教育部台語詞典)`)}
 
 </script>
