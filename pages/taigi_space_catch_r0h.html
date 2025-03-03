@@ -1,7 +1,7 @@
 ---
 layout: apps
 title: Formosa space catch
-version: v0h
+version: v0g
 permalink: /pages/formosa_space_catch.html
 note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石黑體(TW)。 3. Sound Effect by https://pixabay.com. 4. fixed 4:3 and 3:4 ratio of canvas 5. with pos/definition and player guide
 ---
@@ -109,7 +109,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 </head>
 <body>
-   /*  <div id="loadingMessage">Tng teh 掠資料...</div> */
+   /*  <div id="loadingMessage">Tng the 掠資料...</div> */
     <button id="startButton" onclick="resetGame()">起鼓--lo͘h</button>
     <button id="nextButton" onclick="changeWord()">換字</button>
     <button id="pauseButton" onclick="togglePause()">歇睏</button>
@@ -120,9 +120,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     const ASSET_PATH = '/assets/taigi_space_catch/';
     const WARNING_INTERVAL = 10;
     const EFFECT_DURATION = 500;
-    const numLives = 3;
 
-    let starship, spaceObjects = [], effects = [], score = 0, lives = numLives;
+    let starship, spaceObjects = [], effects = [], score = 0, lives = 6;
     let bgSpeed = 2, taigiWords = [], targetY, gameOver = false, isPaused = false;
     let objectSpawnCount = 0, ignoreMouseMove = false;
     let clickSound, crashSound, bonusSound, gameOverSound, gameStartSound, laserSound;
@@ -381,7 +380,7 @@ ${starship.pos_def.replace(/\n/g, '\n\n')}
     function changeWord() { starship.assignHanji(); }
     function resetGame() {
         score = 0;
-        lives = numLives;
+        lives = 6;
         spaceObjects = [];
         effects = [];
         bgSpeed = 0.5;
