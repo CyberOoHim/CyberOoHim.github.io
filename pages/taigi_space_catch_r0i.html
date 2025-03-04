@@ -64,17 +64,6 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         font-size: 16px;
         margin-left: 10px;
     }
-    #posDefCheckboxContainer {
-        display: flex;
-        align-items: center;
-        margin-top: 10px; /* Add some space above the checkbox */
-    }
-
-    #posDefCheckboxContainer label {
-        color: white;
-        font-size: 16px;
-        margin-left: 5px; /* Space between checkbox and label */
-    }
 
     #playerGuide {
         position: absolute;
@@ -87,7 +76,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         z-index: 10;
         font-family: 'GenSekiGothic2TW-M';
         display: none;
-        line-height: 1.6;
+        line-height: 1.8;
     }
 </style>
 </head>
@@ -120,9 +109,6 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     let posDefDisplayTimer = 0;
     let lastAlarmTime = 0;  // Track the last time the alarm sounded
     let alarmTriggered = false; // Flag to check if initial alarm has triggered
-    let showPosDef = true; // Flag to control display of POS/Definition
-    let posDefCheckbox;
-
 
     function preload() {
         gameFont = loadFont('/assets/fonts/GenSekiGothic2TW-M.otf');
@@ -227,8 +213,8 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         effects = [];
         
         let buttonWidth = width * 0.3;
-        let buttonHeight = height * 0.08;
-        let buttonFontSize = height * 0.035;
+        let buttonHeight = height * (isLandscape ? 0.12 : 0.08) ;
+        let buttonFontSize = height * (isLandscape ? 0.055 : 0.035);
         startButton.style.width = buttonWidth + 'px';
         startButton.style.height = buttonHeight + 'px';
         startButton.style.fontSize = buttonFontSize + 'px';
@@ -250,33 +236,14 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         label.parent(difficultyDiv);
         label.position(205, 0);
         label.style('color', '#D3D3D3');
-        label.style('font-size', '16px');
+        label.style('font-size', '20px');
         slider.input(() => label.html('難度: ' + slider.value()));
-
-        // Checkbox for POS/Definition
-        let checkboxContainer = createDiv();
-        checkboxContainer.id('posDefCheckboxContainer');
-        checkboxContainer.parent(difficultyDiv);
-        checkboxContainer.position(0, 50); // Position below the slider
-
-        posDefCheckbox = createCheckbox('顯示詞性/解說', true); // Create checkbox, initially checked
-        posDefCheckbox.parent(checkboxContainer);
-        posDefCheckbox.changed(checkboxChanged);
-
-        let checkboxLabel = createSpan('顯示詞性/解說');
-        checkboxLabel.parent(checkboxContainer);
-        checkboxLabel.style('color', 'white');
-        checkboxLabel.style('font-size', '16px');
-        checkboxLabel.style('margin-left', '5px');
 
         safeHeight = height * 0.1;
         gameOver = true; // Start with game over to show start page
         document.getElementById('loadingMessage').style.display = 'none'; // Hide loading after setup
         updatePlayerGuidePosition();
         console.log("Setup completed");
-    }
-    function checkboxChanged() {
-        showPosDef = posDefCheckbox.checked();
     }
 
     function draw() {
@@ -309,9 +276,9 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
                 alarmTriggered = false;
             }
 
-             if (showPosDef) {
-                displayPosDef(); // Display only if checkbox is checked
-            }
+            displayScoreAndLives();
+
+            displayPosDef(); // Always display POJ and definition
 
         } else {
             startButton.style.display = 'block';
@@ -323,7 +290,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
             effects[i].show();
             if (effects[i].isExpired()) effects.splice(i, 1);
         }
-        displayScoreAndLives();
+
     }
 
     function resetGame() {
@@ -366,7 +333,6 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         splitPosDef() {
             posDefLines = this.pos_def.split('\n');
         }
-
 
         update() {
             this.y = lerp(this.y, targetY, 0.1);
@@ -442,7 +408,6 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         if (frameCount % spawnRate === 0 && !gameOver && taigiWords.length > 0 && spaceObjects.length < maxDensity) {
             spaceObjects.push(new SpaceObject());
             objectSpawnCount++;
-            // Removed laser sound from here.  It's now handled in draw()
         }
         for (let i = spaceObjects.length - 1; i >= 0; i--) {
             spaceObjects[i].update();
@@ -455,7 +420,6 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
                     starship.assignHanji();
                 } else {
                     lives -= 1;
-                    // Removed initial laser play from here
                     if (crashSound.isLoaded()) crashSound.play();
                     effects.push(new Effect(spaceObjects[i].x, spaceObjects[i].y, explosionImg, EFFECT_DURATION));
                     if (lives <= 0) {
@@ -470,42 +434,42 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         }
     }
 
-function displayPosDef() {
-    let topX = isLandscape ? 220 : 210;
-    let topY = isLandscape ? 35 : 65;
-    let pojFontSize = isLandscape ? 30 : 28; // Slightly larger font size
-    let defFontSize = isLandscape ? 22 : 20;
-    let lineHeight = isLandscape ? 20 : 18; // Space between lines
+    function displayPosDef() {
+        let topX = isLandscape ? 220 : 210;
+        let topY = isLandscape ? 35 : 65;
+        let pojFontSize = isLandscape ? 27 : 26; // Slightly larger font size
+        let defFontSize = isLandscape ? 20 : 20;
+        let lineHeight = isLandscape ? 20 : 18; // Space between lines
 
-    let opacity = 192; // Set desired opacity (0-255, where 255 is fully opaque)
-    fill(255, 255, 255, opacity); // White text with opacity
+        let opacity = 196; // Set desired opacity (0-255, where 255 is fully opaque)
+        fill(255, 255, 255, opacity); // White text with opacity
 
-    // Display POJ
-    textSize(pojFontSize);
-    textAlign(LEFT);
-    text(starship.matchingPoj, topX, topY);
+        // Display POJ
+        textSize(pojFontSize);
+        textAlign(LEFT);
+        text(starship.matchingPoj, topX, topY);
 
-    // Display definition lines
-    let startIndex = posDefDisplayIndex;
-    let endIndex = Math.min(startIndex + MAX_LINES_TO_DISPLAY, posDefLines.length);
-    let displayedLines = posDefLines.slice(startIndex, endIndex);
+        // Display definition lines
+        let startIndex = posDefDisplayIndex;
+        let endIndex = Math.min(startIndex + MAX_LINES_TO_DISPLAY, posDefLines.length);
+        let displayedLines = posDefLines.slice(startIndex, endIndex);
 
-    // Render the displayed lines
-    for (let i = 0; i < displayedLines.length; i++) {
-        textSize(defFontSize);
-        text(displayedLines[i], topX, topY + pojFontSize + lineHeight * (i) );
-    }
+        // Render the displayed lines
+        for (let i = 0; i < displayedLines.length; i++) {
+            textSize(defFontSize);
+            text(displayedLines[i], topX, topY + pojFontSize + lineHeight * i);
+        }
 
-    // Update the timer and index for cycling
-    if (millis() - posDefDisplayTimer > POS_DEF_DISPLAY_TIME) {
-        posDefDisplayTimer = millis();
-        posDefDisplayIndex += MAX_LINES_TO_DISPLAY;
+        // Update the timer and index for cycling
+        if (millis() - posDefDisplayTimer > POS_DEF_DISPLAY_TIME) {
+            posDefDisplayTimer = millis();
+            posDefDisplayIndex += MAX_LINES_TO_DISPLAY;
 
-        if (posDefDisplayIndex >= posDefLines.length) {
-            posDefDisplayIndex = 0; // Wrap around to the beginning
+            if (posDefDisplayIndex >= posDefLines.length) {
+                posDefDisplayIndex = 0; // Wrap around to the beginning
+            }
         }
     }
-}
 
     function displayScoreAndLives() {
         const topX = 0;
@@ -557,8 +521,8 @@ function displayPosDef() {
         canvas.style.top = canvasTop + 'px';
 
         let buttonWidth = width * 0.3;
-        let buttonHeight = height * 0.08;
-        let buttonFontSize = height * 0.035;
+        let buttonHeight = height * (isLandscape ? 0.12 : 0.08) ;;
+        let buttonFontSize = height * (isLandscape ? 0.055 : 0.035);
         startButton.style.width = buttonWidth + 'px';
         startButton.style.height = buttonHeight + 'px';
         startButton.style.fontSize = buttonFontSize + 'px';
@@ -571,11 +535,11 @@ function displayPosDef() {
 
     function updatePlayerGuidePosition() {
         let canvasTop = (windowHeight - height) / 2;
-        playerGuide.style.top = canvasTop + (height / 2 + startButton.offsetHeight + 20) + 'px';
-        playerGuide.innerHTML = marked.parse(`### **< Formosan ê 太空弄險 >**  
-**頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-**_[難度 lu-chhôe]_** → 正頂爿, 1 上慢，3 上刺激  
+        playerGuide.style.top = canvasTop + (height / 2 + startButton.offsetHeight - 45 ) + 'px';
+        playerGuide.innerHTML = marked.parse(`### **Formosan 太空弄險**  
+**_[難度 lu-chhôe]_** → 倒爿 1 上慢，正爿 3 上刺激  
 **_[起鼓--lo͘h]_** → 開始𨑨迌  
+**頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
 (內設教育部台語詞典)`);
     }
 </script>
