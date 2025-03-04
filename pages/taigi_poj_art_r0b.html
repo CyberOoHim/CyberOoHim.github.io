@@ -74,11 +74,7 @@ note:
         #imageInput {
             display: none;
         }
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        /* No more checkbox-container */
         #customTextInput {
             width: 300px;
             height: 100px;
@@ -86,6 +82,12 @@ note:
             padding: 5px;
             resize: vertical;
         }
+        /* Style for the new pulldown */
+        #customTextDelimiter {
+          font-size: 16px;
+          padding: 5px;
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
 </head>
@@ -151,15 +153,17 @@ note:
                 <option value="Noto Sans">Noto Sans</option>
             </select>
         </div>
-        <div class="checkbox-container">
-            <label for="customTextCheckbox">Customized text (spaces，newlines, delimiters):</label>
-            <input type="checkbox" id="customTextCheckbox">
+        <!-- Pulldown for delimiter selection -->
+        <div class="slider-container">
+          <label for="customTextDelimiter">Custom Text Delimiter:</label>
+          <select id="customTextDelimiter">
+            <option value="space">Spaces/Newlines</option>
+            <option value="comma">Commas</option>
+            <option value="none" selected>None (Use Default Words)</option>
+          </select>
         </div>
-        <div class="checkbox-container">
-            <label for="customTextCommaCheckbox">Customized text (commas):</label>
-            <input type="checkbox" id="customTextCommaCheckbox">
-        </div>
-        <textarea id="customTextInput" placeholder="Enter words separated by spaces (e.g., hello world) or commas (e.g., chi̍t, Lōa Hô, Saⁿ) depending on checkbox selection"></textarea>
+
+        <textarea id="customTextInput" placeholder="Enter words separated by spaces (e.g., hello world) or commas (e.g., chi̍t, Lōa Hô, Saⁿ) depending on the selected delimiter."></textarea>
     </div>
 
     <script>
@@ -199,11 +203,12 @@ note:
         const fontSizeValue = document.getElementById('fontSizeValue');
         const sizeVariationValue = document.getElementById('sizeVariationValue');
         const charLengthValue = document.getElementById('charLengthValue');
-        const customTextCheckbox = document.getElementById('customTextCheckbox');
-        const customTextCommaCheckbox = document.getElementById('customTextCommaCheckbox');
+        // Remove checkbox references
         const customTextInput = document.getElementById('customTextInput');
         const fontFamilySelect = document.getElementById('fontFamily');
         const variationMethodSelect = document.getElementById('variationMethod');
+        // New pulldown reference
+        const customTextDelimiterSelect = document.getElementById('customTextDelimiter');
 
         let imageData = null;
         let imgWidth = 0;
@@ -260,29 +265,26 @@ note:
         function getRandomWord() {
             const maxLength = parseInt(charLengthSlider.value);
             let wordList;
+            const delimiter = customTextDelimiterSelect.value;
 
-            if (customTextInput.value.trim()) {
-                if (customTextCommaCheckbox.checked) {
-                    // Split by commas, preserving spaces within entries
+            if (delimiter !== "none" && customTextInput.value.trim()) {
+                if (delimiter === "comma") {
                     wordList = customTextInput.value
                         .split(',')
                         .map(w => w.trim())
                         .filter(w => w.length > 0 && !hanjiRegex.test(w));
-                } else if (customTextCheckbox.checked) {
-                    // Split by spaces or newlines, treating commas as regular characters
+                } else { // delimiter === "space"
                     wordList = customTextInput.value
                         .split(/[\s\n]+/)
                         .map(w => w.trim())
                         .filter(w => w.length > 0 && !hanjiRegex.test(w));
-                } else {
-                    wordList = taigiWords.length > 0 ? taigiWords : defaultTaigiWords;
                 }
             } else {
                 wordList = taigiWords.length > 0 ? taigiWords : defaultTaigiWords;
             }
 
             const filtered = wordList.filter(w => w.length <= maxLength && !hanjiRegex.test(w));
-            return filtered[Math.floor(Math.random() * filtered.length)] || 'a';
+            return filtered[Math.floor(Math.random() * filtered.length)] || 'a'; // Fallback to 'a' if empty
         }
 
         function getAverageColor(x, y, w, h, data) {
@@ -480,11 +482,13 @@ note:
         updateSlider(sizeVariationSlider, sizeVariationValue, '%');
         updateSlider(charLengthSlider, charLengthValue);
 
-        customTextCheckbox.addEventListener('change', () => {});
-        customTextCommaCheckbox.addEventListener('change', () => {});
+        // Removed checkbox event listeners
         customTextInput.addEventListener('input', () => {});
         fontFamilySelect.addEventListener('change', () => {});
         variationMethodSelect.addEventListener('change', () => {});
+        // Add event listener for the pulldown
+        customTextDelimiterSelect.addEventListener('change', () => {});
+
 
         document.addEventListener('DOMContentLoaded', () => {
             loadTaigiWords((success) => {
