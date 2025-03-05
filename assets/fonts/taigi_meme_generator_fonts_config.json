@@ -1,0 +1,51 @@
+{
+    "TaigiFonts": [
+        "GenSekiGothic2TW-M.otf",
+        "ChenYuluoyan-2.0-Thin.ttf",
+        "ChiayiCity.ttf",
+        "LessonOne-BoldItalic.ttf",
+        "POJVibes-Regular.ttf"
+    ],
+    "FontPaddingPresets": {
+        "GenSekiGothic2TW-M.otf": {
+            "left": 0.2,
+            "right": 0.2,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": 0,
+            "yOffset": 0
+        },
+        "ChenYuluoyan-2.0-Thin.ttf": {
+            "left": 0.25,
+            "right": 0.25,
+            "top": 0.0,
+            "bottom": 0.02,
+            "xOffset": 0,
+            "yOffset": -0.1
+        },
+        "ChiayiCity.ttf": {
+            "left": 0.15,
+            "right": 0.15,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": -0.1,
+            "yOffset": -0.1
+        },
+        "LessonOne-BoldItalic.ttf": {
+            "left": 0.15,
+            "right": 0.15,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": -0.1,
+            "yOffset": -0.1
+        },
+        "POJVibes-Regular.ttf": {
+            "left": 0.15,
+            "right": 0.15,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": -0.1,
+            "yOffset": -0.1
+        }
+    }
+}
