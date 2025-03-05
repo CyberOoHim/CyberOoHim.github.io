@@ -341,7 +341,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         show() {
             push();
             translate(this.x, this.y);
-            rotate(HALF_PI);
+            /* rotate(HALF_PI); */
             imageMode(CENTER);
             let imgSize = isLandscape ? height * 0.08 : width * 0.074;
             let img = (lives > 1) ? starshipImg : starshipInDangerImg;
