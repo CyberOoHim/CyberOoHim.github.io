@@ -70,8 +70,8 @@ note:
     </style>
 </head>
 <body>
+    <div id="canvasContainer"></div>
     <div id="controls">
-        <div id="canvasContainer"></div>
         <div class="control-group">
             <h3>Image & Text</h3>
             <div><input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()"></div>
@@ -375,7 +375,7 @@ function draw() {
             ySlider.value = yPos;
         }
 
-        function updateText() { userText = document.getElementById('textInput').value || "Hello, World!"; }
+        function updateText() { userText = document.getElementById('textInput').value || ""; }
         function updateColors() {
             let fc = document.getElementById('fontColor').value;
             let oc = document.getElementById('outlineColor').value;
