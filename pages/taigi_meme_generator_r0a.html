@@ -21,35 +21,47 @@ note:
             margin: 0;
             padding: 20px;
             background-color: #f0f0f0;
+            min-height: 100vh;
+        }
+        #canvasContainer {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 20px;
         }
         #controls {
-            margin-bottom: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
             width: 100%;
             max-width: 1200px;
+            box-sizing: border-box;
         }
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding: 10px;
+            padding: 15px;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
         }
         .control-group h3 {
-            margin: 0 0 5px 0;
+            margin: 0 0 10px 0;
             font-size: 16px;
             color: #333;
         }
         input, select, button {
             padding: 5px;
             font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
         }
         label {
             margin-right: 5px;
+            white-space: nowrap;
         }
         button {
             cursor: pointer;
@@ -64,20 +76,29 @@ note:
         }
         .flex-row {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 5px;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            #controls {
+                grid-template-columns: 1fr;
+            }
+            .control-group {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="canvasContainer"></div><br>
+    <div id="canvasContainer"></div>
     <div id="controls">
         <div class="control-group">
             <h3>Image & Text</h3>
             <div><input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()"></div>
             <div class="flex-row">
                 <label for="textInput">Text:</label>
-                <input type="text" id="textInput" value="" placeholder="Type your text" oninput="updateText()" style="flex-grow: 1;">
+                <input type="text" id="textInput" value="" placeholder="Type your text" oninput="updateText()">
             </div>
         </div>
         <div class="control-group">
@@ -161,7 +182,6 @@ note:
             <button onclick="downloadCanvas()">Download Image</button>
         </div>
     </div>
-
     <script>
         const MAX_DIMENSION = 1024;
         const fontsPath = '/assets/fonts/';
