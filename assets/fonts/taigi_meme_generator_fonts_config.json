@@ -1,10 +1,25 @@
 {
     "TaigiFonts": [
-        "GenSekiGothic2TW-M.otf",
-        "ChenYuluoyan-2.0-Thin.ttf",
-        "ChiayiCity.ttf",
-        "LessonOne-BoldItalic.ttf",
-        "POJVibes-Regular.ttf"
+        {
+            "FileName": "GenSekiGothic2TW-M.otf",
+            "MenuName": "Gen Seki Gothic"
+        },
+        {
+            "FileName": "ChenYuluoyan-2.0-Thin.ttf",
+            "MenuName": "Chen Yuluoyan Thin"
+        },
+        {
+            "FileName": "ChiayiCity.ttf",
+            "MenuName": "Chiayi City"
+        },
+        {
+            "FileName": "LessonOne-BoldItalic.ttf",
+            "MenuName": "Lesson One Bold Italic"
+        },
+        {
+            "FileName": "POJVibes-Regular.ttf",
+            "MenuName": "POJ Vibes"
+        }
     ],
     "FontPaddingPresets": {
         "GenSekiGothic2TW-M.otf": {
