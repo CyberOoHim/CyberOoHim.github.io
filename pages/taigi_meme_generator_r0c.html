@@ -256,15 +256,12 @@ note:
     let fullWidth, fullHeight;
 
     function preload() {
-        // Load the JSON file
         loadJSON(`${fontsPath}${fontsConfigJson}`, (fontData) => {
             TaigiFonts = fontData.TaigiFonts;
             FontPaddingPresets = fontData.FontPaddingPresets;
-            // Load fonts after JSON is loaded
             TaigiFonts.forEach(font => {
-                loadFont(`${fontsPath}${font}`);
+                loadFont(`${fontsPath}${font.FileName}`);
             });
-            // Set initial padding after fonts are loaded
             currentPadding = FontPaddingPresets[DEFAULT_FONT];
         }, (error) => {
             console.error('Error loading fonts.json:', error);
@@ -275,7 +272,6 @@ note:
         let canvas = createCanvas(200, 100);
         canvas.parent('canvasContainer');
         textAlign(CENTER, CENTER);
-        // Wait for fonts to be loaded before populating dropdown
         if (TaigiFonts.length > 0) {
             populateFontDropdown();
             currentFont = loadFont(`${fontsPath}${DEFAULT_FONT}`);
@@ -288,7 +284,7 @@ note:
         if (scaledImg) {
             image(scaledImg, 0, 0, width, height);
         }
-        if (!currentFont || !currentPadding) return; // Wait for font data to load
+        if (!currentFont || !currentPadding) return;
 
         push();
         translate(xPos / 2, yPos / 2);
@@ -338,12 +334,21 @@ note:
         pop();
     }
 
-    // Rest of your functions remain mostly the same, just update the updateFont function:
+    function populateFontDropdown() {
+        let select = document.getElementById('fontSelect');
+        TaigiFonts.forEach((font, index) => {
+            let option = document.createElement('option');
+            option.value = index;
+            option.text = font.MenuName; // Use MenuName instead of FileName
+            select.appendChild(option);
+        });
+    }
+
     function updateFont() {
         let fontIndex = document.getElementById('fontSelect').value;
         let selectedFont = TaigiFonts[fontIndex];
-        currentFont = loadFont(`${fontsPath}${selectedFont}`);
-        currentPadding = FontPaddingPresets[selectedFont];
+        currentFont = loadFont(`${fontsPath}${selectedFont.FileName}`);
+        currentPadding = FontPaddingPresets[selectedFont.FileName];
     }
 
     function loadImageFile() {
@@ -386,16 +391,6 @@ note:
         
         fullSizeImg = createGraphics(newWidth, newHeight);
         fullSizeImg.image(originalImg, 0, 0, newWidth, newHeight);
-    }
-
-    function populateFontDropdown() {
-        let select = document.getElementById('fontSelect');
-        TaigiFonts.forEach((font, index) => {
-            let option = document.createElement('option');
-            option.value = index;
-            option.text = font.split('.')[0];
-            select.appendChild(option);
-        });
     }
 
     function updateSliders() {
@@ -441,7 +436,7 @@ note:
     function updateBgEnable() { bgEnabled = document.getElementById('bgEnable').checked; }
 
     function downloadCanvas() {
-        if (!currentFont || !currentPadding) return; // Wait for font data
+        if (!currentFont || !currentPadding) return;
         
         let fullCanvas = createGraphics(fullWidth, fullHeight);
         fullCanvas.pixelDensity(1);
