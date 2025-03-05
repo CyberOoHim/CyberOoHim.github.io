@@ -71,6 +71,7 @@ note:
 </head>
 <body>
     <div id="controls">
+        <div id="canvasContainer"></div>
         <div class="control-group">
             <h3>Image & Text</h3>
             <div><input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()"></div>
@@ -160,7 +161,6 @@ note:
             <button onclick="downloadCanvas()">Download Image</button>
         </div>
     </div>
-    <div id="canvasContainer"></div>
 
     <script>
         const MAX_DIMENSION = 1024;
