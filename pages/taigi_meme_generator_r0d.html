@@ -36,6 +36,9 @@ note: Multiple texts
             gap: 10px;
             margin-top: 10px;
         }
+        #buttonContainer button {
+        width: 120px; /* Adjust this value to make buttons longer */
+    }
         #mainContainer {
             display: flex;
             width: 100%;
@@ -181,126 +184,127 @@ note: Multiple texts
     </style>
 </head>
 <body>
-    <div id="canvasContainer">
-        <div id="canvas"></div>
-        <div id="buttonContainer">
-            <input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()">
-            <button onclick="downloadCanvas()">Download Image</button>
-        </div>
-    </div>
-    <div id="mainContainer">
-        <div id="textListContainer">
-            <button onclick="addTextSet()">Add Text</button>
-            <ul id="textList"></ul>
-        </div>
-        <div id="controls">
-            <div class="control-group">
-                <h3 onclick="toggleCollapse(this)">Text Styling</h3>
-                <div class="flex-row">
-                    <label for="textInput">Text:</label>
-                    <textarea id="textInput" placeholder="Type your text" oninput="updateText()"></textarea>
-                </div>
-                <div class="flex-row">
-                    <label for="fontSelect">Font:</label>
-                    <select id="fontSelect" onchange="updateFont()"></select>
-                </div>
-                <div class="flex-row">
-                    <label for="textAlign">Alignment:</label>
-                    <select id="textAlign" onchange="updateTextAlign()">
-                        <option value="left">Left</option>
-                        <option value="center" selected>Center</option>
-                        <option value="right">Right</option>
-                    </select>
-                </div>
-                <div class="flex-row">
-                    <label for="fontColor">Text Color:</label>
-                    <input type="color" id="fontColor" value="#000000" onchange="updateColors()">
-                </div>
-                <div class="flex-row">
-                    <label for="fontAlpha">Text Transparency:</label>
-                    <input type="range" id="fontAlpha" min="0" max="255" value="255" oninput="updateFontAlpha()">
-                </div>
-                <div class="flex-row">
-                    <label for="textSize">Size:</label>
-                    <input type="range" id="textSize" min="10" max="400" value="96" oninput="updateSize()">
-                </div>
-                <div class="flex-row">
-                    <label for="strokeWidth">Stroke Width:</label>
-                    <input type="range" id="strokeWidth" min="0" max="20" value="4" oninput="updateStrokeWidth()">
-                </div>
-                <div class="flex-row">
-                    <label for="outlineColor">Stroke Color:</label>
-                    <input type="color" id="outlineColor" value="#000000" onchange="updateColors()">
-                </div>
-                <div class="flex-row">
-                    <label for="outlineAlpha">Stroke Transparency:</label>
-                    <input type="range" id="outlineAlpha" min="0" max="255" value="255" oninput="updateOutlineAlpha()">
-                </div>
-            </div>
-            <div class="control-group">
-                <h3 onclick="toggleCollapse(this)">Position & Background</h3>
-                <div class="flex-row">
-                    <label for="xPos">X Position:</label>
-                    <input type="range" id="xPos" min="0" max="400" value="200" oninput="updatePosition()">
-                </div>
-                <div class="flex-row">
-                    <label for="yPos">Y Position:</label>
-                    <input type="range" id="yPos" min="0" max="200" value="100" oninput="updatePosition()">
-                </div>
-                <div class="flex-row">
-                    <label for="rotation">Rotation:</label>
-                    <input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()">
-                </div>
-                <div class="flex-row">
-                    <input type="checkbox" id="bgEnable" onchange="updateBgEnable()">
-                    <label for="bgEnable">Enable Background</label>
-                </div>
-                <div class="flex-row">
-                    <label for="bgColor">Background Color:</label>
-                    <input type="color" id="bgColor" value="#ffffff" onchange="updateBgColor()">
-                </div>
-                <div class="flex-row">
-                    <label for="bgAlpha">Transparency:</label>
-                    <input type="range" id="bgAlpha" min="0" max="255" value="255" oninput="updateBgAlpha()">
-                </div>
-                <div class="flex-row">
-                    <label for="bgRadius">Radius:</label>
-                    <input type="range" id="bgRadius" min="0" max="50" value="0" oninput="updateBgRadius()">
-                </div>
-            </div>
-            <div class="control-group">
-                <h3 onclick="toggleCollapse(this)">Frame Settings</h3>
-                <div class="flex-row">
-                    <label for="frameStyle">Style:</label>
-                    <select id="frameStyle" onchange="updateFrameStyle()">
-                        <option value="none">None</option>
-                        <option value="solid">Solid</option>
-                        <option value="dash">Dash</option>
-                    </select>
-                </div>
-                <div class="flex-row">
-                    <label for="frameColor">Color:</label>
-                    <input type="color" id="frameColor" value="#000000" onchange="updateFrameColor()">
-                </div>
-                <div class="flex-row">
-                    <label for="frameAlpha">Transparency:</label>
-                    <input type="range" id="frameAlpha" min="0" max="255" value="255" oninput="updateFrameAlpha()">
-                </div>
-                <div class="flex-row">
-                    <label for="frameWidth">Width:</label>
-                    <input type="range" id="frameWidth" min="0" max="10" value="0" oninput="updateFrameWidth()">
-                </div>
-            </div>
-            <div class="control-group">
-                <h3 onclick="toggleCollapse(this)">Image Settings</h3>
-                <div class="flex-row">
-                    <label for="imageAlpha">Image Transparency:</label>
-                    <input type="range" id="imageAlpha" min="0" max="255" value="255" oninput="updateImageAlpha()">
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="canvasContainer">
+    <div id="canvas"></div>
+<div id="buttonContainer">
+    <button onclick="document.getElementById('imageUpload').click()">上傳圖片</button>
+    <input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()" style="display: none;">
+    <button onclick="downloadCanvas()">下載圖片</button>
+</div>
+</div>
 
+<div id="mainContainer">
+    <div id="textListContainer">
+        <button onclick="addTextSet()">加文字</button>
+        <ul id="textList"></ul>
+    </div>
+    <div id="controls">
+        <div class="control-group">
+            <h3 onclick="toggleCollapse(this)">文字樣式</h3>
+            <div class="flex-row">
+                <label for="textInput">文字:</label>
+                <textarea id="textInput" placeholder="拍你的字" oninput="updateText()"></textarea>
+            </div>
+            <div class="flex-row">
+                <label for="fontSelect">字型:</label>
+                <select id="fontSelect" onchange="updateFont()"></select>
+            </div>
+            <div class="flex-row">
+                <label for="textAlign">對齊:</label>
+                <select id="textAlign" onchange="updateTextAlign()">
+                    <option value="left">對倒爿</option>
+                    <option value="center" selected>對中央</option>
+                    <option value="right">對正爿</option>
+                </select>
+            </div>
+            <div class="flex-row">
+                <label for="fontColor">字色:</label>
+                <input type="color" id="fontColor" value="#000000" onchange="updateColors()">
+            </div>
+            <div class="flex-row">
+                <label for="fontAlpha">字 ê 透明度:</label>
+                <input type="range" id="fontAlpha" min="0" max="255" value="255" oninput="updateFontAlpha()">
+            </div>
+            <div class="flex-row">
+                <label for="textSize">大細:</label>
+                <input type="range" id="textSize" min="10" max="400" value="96" oninput="updateSize()">
+            </div>
+            <div class="flex-row">
+                <label for="strokeWidth">邊框粗細:</label>
+                <input type="range" id="strokeWidth" min="0" max="20" value="4" oninput="updateStrokeWidth()">
+            </div>
+            <div class="flex-row">
+                <label for="outlineColor">邊框色:</label>
+                <input type="color" id="outlineColor" value="#000000" onchange="updateColors()">
+            </div>
+            <div class="flex-row">
+                <label for="outlineAlpha">邊框透明度:</label>
+                <input type="range" id="outlineAlpha" min="0" max="255" value="255" oninput="updateOutlineAlpha()">
+            </div>
+        </div>
+        <div class="control-group">
+            <h3 onclick="toggleCollapse(this)">位置 kap 背景</h3>
+            <div class="flex-row">
+                <label for="xPos">X 位置:</label>
+                <input type="range" id="xPos" min="0" max="400" value="200" oninput="updatePosition()">
+            </div>
+            <div class="flex-row">
+                <label for="yPos">Y 位置:</label>
+                <input type="range" id="yPos" min="0" max="200" value="100" oninput="updatePosition()">
+            </div>
+            <div class="flex-row">
+                <label for="rotation">旋轉:</label>
+                <input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()">
+            </div>
+            <div class="flex-row">
+                <input type="checkbox" id="bgEnable" onchange="updateBgEnable()">
+                <label for="bgEnable">啟用背景</label>
+            </div>
+            <div class="flex-row">
+                <label for="bgColor">背景色:</label>
+                <input type="color" id="bgColor" value="#ffffff" onchange="updateBgColor()">
+            </div>
+            <div class="flex-row">
+                <label for="bgAlpha">透明度:</label>
+                <input type="range" id="bgAlpha" min="0" max="255" value="255" oninput="updateBgAlpha()">
+            </div>
+            <div class="flex-row">
+                <label for="bgRadius">圓角:</label>
+                <input type="range" id="bgRadius" min="0" max="50" value="0" oninput="updateBgRadius()">
+            </div>
+        </div>
+        <div class="control-group">
+            <h3 onclick="toggleCollapse(this)">框線設定</h3>
+            <div class="flex-row">
+                <label for="frameStyle">樣式:</label>
+                <select id="frameStyle" onchange="updateFrameStyle()">
+                    <option value="none">無</option>
+                    <option value="solid">實線</option>
+                    <option value="dash">虛線</option>
+                </select>
+            </div>
+            <div class="flex-row">
+                <label for="frameColor">框線色:</label>
+                <input type="color" id="frameColor" value="#000000" onchange="updateFrameColor()">
+            </div>
+            <div class="flex-row">
+                <label for="frameAlpha">框線透明度:</label>
+                <input type="range" id="frameAlpha" min="0" max="255" value="255" oninput="updateFrameAlpha()">
+            </div>
+            <div class="flex-row">
+                <label for="frameWidth">框線粗細:</label>
+                <input type="range" id="frameWidth" min="0" max="10" value="0" oninput="updateFrameWidth()">
+            </div>
+        </div>
+        <div class="control-group">
+            <h3 onclick="toggleCollapse(this)">圖片設定</h3>
+            <div class="flex-row">
+                <label for="imageAlpha">圖片透明度:</label>
+                <input type="range" id="imageAlpha" min="0" max="255" value="255" oninput="updateImageAlpha()">
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     const DEBUG = false;
     function log(...args) { if (DEBUG) console.log(...args); }
@@ -441,6 +445,12 @@ note: Multiple texts
         background(220);
         if (scaledImg) {
             tintedImage(scaledImg, 0, 0, width, height, imageAlpha);
+        } else {
+            fill(150, 150, 150, 255); // Faded grey text
+            textSize(32 / 2);
+            textFont('Times New Roman'); // Fallback font
+            textAlign(CENTER, CENTER);
+            text('現此時無圖', width / 2, height / 2);
         }
         textSets.forEach((textSet) => {
             if (!textSet.font || !textSet.padding || !fontCache.get(textSet.font)) return;
@@ -523,7 +533,7 @@ note: Multiple texts
         list.innerHTML = '';
         textSets.forEach((textSet, index) => {
             let li = document.createElement('li');
-            li.textContent = `Text ${index + 1}`;
+            li.textContent = `台文 #${index + 1}`;
             li.onclick = () => selectTextSet(index);
             if (index === selectedTextIndex) {
                 li.classList.add('selected');
