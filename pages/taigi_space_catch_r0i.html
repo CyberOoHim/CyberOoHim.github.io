@@ -88,7 +88,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 <script>
     const ASSET_PATH = '/assets/taigi_space_catch/';
     const EFFECT_DURATION = 500;
-    const NUMBER_LIVES = 5;
+    const NUMBER_LIVES = 3;
     const POS_DEF_DISPLAY_TIME = 2000; // 2 seconds
     const MAX_LINES_TO_DISPLAY = 1;
     const ALARM_INTERVAL = 5; // Seconds between alarm sounds
@@ -189,62 +189,77 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         );
     }
 
-    function setup() {
-        console.log("Setup started");
-        isLandscape = windowWidth / windowHeight > 1;
-        let canvasWidth = isLandscape ? windowHeight * 4 / 3 : windowWidth;
-        let canvasHeight = isLandscape ? windowHeight : windowWidth * 4 / 3;
-        createCanvas(canvasWidth, canvasHeight);
+function setup() {
+    console.log("Setup started");
+    isLandscape = windowWidth / windowHeight > 1;
+    let canvasWidth = isLandscape ? windowHeight * 4 / 3 : windowWidth;
+    let canvasHeight = isLandscape ? windowHeight : windowWidth * 4 / 3;
+    createCanvas(canvasWidth, canvasHeight);
 
-        let canvas = document.getElementById('defaultCanvas0');
-        canvas.style.position = 'absolute';
-        let canvasLeft = (windowWidth - canvasWidth) / 2;
-        let canvasTop = (windowHeight - canvasHeight) / 2;
-        canvas.style.left = canvasLeft + 'px';
-        canvas.style.top = canvasTop + 'px';
+    let canvas = document.getElementById('defaultCanvas0');
+    canvas.style.position = 'absolute';
+    let canvasLeft = (windowWidth - canvasWidth) / 2;
+    let canvasTop = (windowHeight - canvasHeight) / 2;
+    canvas.style.left = canvasLeft + 'px';
+    canvas.style.top = canvasTop + 'px';
 
-        startButton = document.getElementById('startButton');
-        playerGuide = document.getElementById('playerGuide');
+    startButton = document.getElementById('startButton');
+    playerGuide = document.getElementById('playerGuide');
 
-        textFont(gameFont);
-        starship = new Starship();
-        targetY = height / 2;
-        previousStarshipY = height / 2;
-        effects = [];
-        
-        let buttonWidth = width * 0.3;
-        let buttonHeight = height * (isLandscape ? 0.12 : 0.08) ;
-        let buttonFontSize = height * (isLandscape ? 0.055 : 0.035);
-        startButton.style.width = buttonWidth + 'px';
-        startButton.style.height = buttonHeight + 'px';
-        startButton.style.fontSize = buttonFontSize + 'px';
-        startButton.style.left = canvasLeft + (width / 2 - buttonWidth / 2) + 'px';
-        startButton.style.top = canvasTop + (height / 2 - buttonHeight / 2) + 'px';
-        startButton.style.display = 'block'; // Ensure visible initially
+    textFont(gameFont);
+    starship = new Starship();
+    targetY = height / 2;
+    previousStarshipY = height / 2;
+    effects = [];
+    
+    let buttonWidth = width * 0.3;
+    let buttonHeight = height * (isLandscape ? 0.12 : 0.08);
+    let buttonFontSize = height * (isLandscape ? 0.055 : 0.035);
+    startButton.style.width = buttonWidth + 'px';
+    startButton.style.height = buttonHeight + 'px';
+    startButton.style.fontSize = buttonFontSize + 'px';
+    startButton.style.left = canvasLeft + (width / 2 - buttonWidth / 2) + 'px';
+    startButton.style.top = canvasTop + (height / 2 - buttonHeight / 2) + 'px';
+    startButton.style.display = 'block'; // Ensure visible initially
 
-        difficultyDiv = createDiv();
-        difficultyDiv.position(canvasLeft + (width / 2 - 100), canvasTop + (height / 2 - 150));  // Adjusted y position
-        difficultyDiv.style('z-index', '10');
-        difficultyDiv.style('display', 'block'); // Show initially
+    difficultyDiv = createDiv();
+    difficultyDiv.position(canvasLeft + (width / 2 - 100), canvasTop + (height / 2 - 150));  // Adjusted y position
+    difficultyDiv.style('z-index', '10');
+    difficultyDiv.style('display', 'block'); // Show initially
 
-        slider = createSlider(1, 3, 1, 1);
-        slider.parent(difficultyDiv);
-        slider.position(0, 0);
-        slider.style('width', '200px');
+    slider = createSlider(1, 3, 1, 1);
+    slider.parent(difficultyDiv);
+    slider.position(0, 0);
+    slider.style('width', '200px');
 
-        label = createSpan('難度: 1');
-        label.parent(difficultyDiv);
-        label.position(205, 0);
-        label.style('color', '#D3D3D3');
-        label.style('font-size', '20px');
-        slider.input(() => label.html('難度: ' + slider.value()));
+    label = createSpan('難度: 1');
+    label.parent(difficultyDiv);
+    label.position(205, 0);
+    label.style('color', '#D3D3D3');
+    label.style('font-size', '20px');
+    
+    // Modified slider input event to save difficulty to local storage
+    slider.input(() => {
+        label.html('難度: ' + slider.value());
+        localStorage.setItem('difficulty', slider.value());
+    });
 
-        safeHeight = height * 0.1;
-        gameOver = true; // Start with game over to show start page
-        document.getElementById('loadingMessage').style.display = 'none'; // Hide loading after setup
-        updatePlayerGuidePosition();
-        console.log("Setup completed");
+    // Load saved difficulty from local storage
+let savedDifficulty = localStorage.getItem('difficulty');
+if (savedDifficulty !== null) {
+    let difficultyValue = parseInt(savedDifficulty, 10);
+    if (difficultyValue >= 1 && difficultyValue <= 3) {
+        slider.value(difficultyValue);
+        label.html('難度: ' + difficultyValue); // Update the label to match
     }
+}
+
+    safeHeight = height * 0.1;
+    gameOver = true; // Start with game over to show start page
+    document.getElementById('loadingMessage').style.display = 'none'; // Hide loading after setup
+    updatePlayerGuidePosition();
+    console.log("Setup completed");
+}
 
     function draw() {
         if (isLandscape) {
@@ -476,7 +491,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
         const topY = isLandscape ? 10 : 42;
         let ScoreAndLiveSize = isLandscape ? 24 : 26;
         fill(50, 50, 50, 128);
-        rect(topX, topY, width * 1, ScoreAndLiveSize * 2 + 8);
+        rect(topX, topY, width * 1, ScoreAndLiveSize * 2 + 7);
         image(scoreImg, topX, topY, ScoreAndLiveSize, ScoreAndLiveSize);
         fill(255);
         textSize(ScoreAndLiveSize);
@@ -540,7 +555,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 **_[難度 lu-chhôe]_** → 倒爿 1 上慢，正爿 3 上刺激  
 **_[起鼓--lo͘h]_** → 開始𨑨迌  
 **頂下 póe 螢幕 iah-sī lu 老鼠仔，徒太空船去𠄘 POJ 寶物**  
-(1. 內設教育部台語詞典  2. 手機仔狀況濟、字 koh 細，較無建議耍`);
+(內設教育部台語詞典)`);
     }
 </script>
 </body>
