@@ -5,24 +5,36 @@
             "MenuName": "源石黑體2TW-M"
         },
         {
+            "FileName": "Iansui-Regular.ttf",
+            "MenuName": "芫荽-Reg"
+        },
+        {
             "FileName": "ChenYuluoyan-2.0-Thin.ttf",
             "MenuName": "辰宇落雁體 細體 2.0"
         },
         {
             "FileName": "ChiayiCity.ttf",
-            "MenuName": "(POJ)嘉義體"
+            "MenuName": "(POJ) 嘉義體"
         },
         {
             "FileName": "LessonOne-BoldItalic.ttf",
-            "MenuName": "(POJ)Lesson One-斜體粗"
+            "MenuName": "(POJ) Lesson One-斜體粗"
         },
         {
             "FileName": "POJVibes-Regular.ttf",
-            "MenuName": "(POJ)A-ióng POJVibes-Reg"
+            "MenuName": "(POJ) A-ióng POJVibes-Reg"
         }
     ],
     "FontPaddingPresets": {
         "GenSekiGothic2TW-M.otf": {
+            "left": 0.2,
+            "right": 0.2,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": 0,
+            "yOffset": 0
+        },
+            "Iansui-Regular.ttf": {
             "left": 0.2,
             "right": 0.2,
             "top": 0.1,
