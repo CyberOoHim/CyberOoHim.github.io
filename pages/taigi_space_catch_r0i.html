@@ -87,6 +87,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
 
 <script>
     const ASSET_PATH = '/assets/taigi_space_catch/';
+    const FONT = 'GenSenRounded2TW-M.otf';
     const EFFECT_DURATION = 500;
     const NUMBER_LIVES = 5;
     const POS_DEF_DISPLAY_TIME = 2000; // 2 seconds
@@ -111,7 +112,7 @@ note: 1. Code 佮 圖 主要用 xAI ê Grok 3 做--ê。2. 台文字骨用源石
     let alarmTriggered = false; // Flag to check if initial alarm has triggered
 
     function preload() {
-        gameFont = loadFont('/assets/fonts/GenSekiGothic2TW-M.otf');
+        gameFont = loadFont('/assets/fonts/${FONT}');
         clickSound = loadSound(ASSET_PATH + 'click-234708.mp3');
         crashSound = loadSound(ASSET_PATH + 'crash-7075.mp3');
         bonusSound = loadSound(ASSET_PATH + 'game-bonus-2-294436.mp3');
