@@ -2,23 +2,23 @@
     "TaigiFonts": [
         {
             "FileName": "GenSekiGothic2TW-M.otf",
-            "MenuName": "Gen Seki Gothic"
+            "MenuName": "源石黑體2TW-M"
         },
         {
             "FileName": "ChenYuluoyan-2.0-Thin.ttf",
-            "MenuName": "Chen Yuluoyan Thin"
+            "MenuName": "辰宇落雁體 細體 2.0"
         },
         {
             "FileName": "ChiayiCity.ttf",
-            "MenuName": "Chiayi City"
+            "MenuName": "(POJ)嘉義體"
         },
         {
             "FileName": "LessonOne-BoldItalic.ttf",
-            "MenuName": "Lesson One Bold Italic"
+            "MenuName": "(POJ)Lesson One-斜體粗"
         },
         {
             "FileName": "POJVibes-Regular.ttf",
-            "MenuName": "POJ Vibes"
+            "MenuName": "(POJ)A-ióng POJVibes-Reg"
         }
     ],
     "FontPaddingPresets": {
