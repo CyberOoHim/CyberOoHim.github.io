@@ -5,6 +5,10 @@
             "MenuName": "源石黑體2TW-M"
         },
         {
+            "FileName": "GenSenRounded2TW-M.otf",
+            "MenuName": "思源黑體2TW-M"
+        },
+        {
             "FileName": "Iansui-Regular.ttf",
             "MenuName": "芫荽-Reg"
         },
@@ -20,10 +24,9 @@
             "FileName": "POJVibes-Regular.ttf",
             "MenuName": "(POJ) A-ióng POJVibes-Reg"
         },
-            
         {
-            "FileName": "CloisterBlack-Light-POJ-for-test-only-20241112_0d.otf",
-            "MenuName": "(POJ) CloisterBlack-Light"
+            "FileName": "Times New Roman",
+            "MenuName": "(POJ) Times New Roman"
         }
     ],
     "FontPaddingPresets": {
@@ -35,7 +38,15 @@
             "xOffset": 0,
             "yOffset": 0
         },
-            "Iansui-Regular.ttf": {
+        "GenSenRounded2TW-M.otf": {
+            "left": 0.2,
+            "right": 0.2,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": 0,
+            "yOffset": 0
+        },
+        "Iansui-Regular.ttf": {
             "left": 0.2,
             "right": 0.2,
             "top": 0.1,
@@ -67,13 +78,13 @@
             "xOffset": -0.1,
             "yOffset": -0.1
         },
-        "CloisterBlack-Light-POJ-for-test-only-20241112_0d.otf": {
+        "Times New Roman": {
             "left": 0.15,
             "right": 0.15,
             "top": 0.1,
             "bottom": 0.1,
             "xOffset": -0.1,
             "yOffset": -0.1
-        },
+        }
     }
 }
