@@ -13,16 +13,17 @@
             "MenuName": "辰宇落雁體 細體 2.0"
         },
         {
-            "FileName": "ChiayiCity.ttf",
-            "MenuName": "(POJ) 嘉義體"
-        },
-        {
             "FileName": "LessonOne-BoldItalic.ttf",
             "MenuName": "(POJ) Lesson One-斜體粗"
         },
         {
             "FileName": "POJVibes-Regular.ttf",
             "MenuName": "(POJ) A-ióng POJVibes-Reg"
+        },
+            
+        {
+            "FileName": "CloisterBlack-Light-POJ-for-test-only-20241112_0d.otf",
+            "MenuName": "(POJ) CloisterBlack-Light"
         }
     ],
     "FontPaddingPresets": {
@@ -50,14 +51,6 @@
             "xOffset": 0,
             "yOffset": -0.1
         },
-        "ChiayiCity.ttf": {
-            "left": 0.15,
-            "right": 0.15,
-            "top": 0.1,
-            "bottom": 0.1,
-            "xOffset": -0.1,
-            "yOffset": -0.1
-        },
         "LessonOne-BoldItalic.ttf": {
             "left": 0.15,
             "right": 0.15,
@@ -73,6 +66,14 @@
             "bottom": 0.1,
             "xOffset": -0.1,
             "yOffset": -0.1
-        }
+        },
+        "CloisterBlack-Light-POJ-for-test-only-20241112_0d.otf": {
+            "left": 0.15,
+            "right": 0.15,
+            "top": 0.1,
+            "bottom": 0.1,
+            "xOffset": -0.1,
+            "yOffset": -0.1
+        },
     }
 }
