@@ -45,39 +45,64 @@ note: Multiple texts
             max-width: 1200px;
             gap: 20px;
         }
-        #textListContainer {
-            flex: 1;
-            min-width: 0;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        #textList {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        #textList li {
-            padding: 16px 8px;
-            cursor: pointer;
-            border-bottom: 1px solid #ddd;
-            line-height: 1.5;
-        }
+
+#textListContainer {
+        flex: 1;
+        min-width: 0;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 100%; /* Ensure container takes full available width */
+    }
+    #textList {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+        max-height: 300px;
+        overflow-y: auto;
+        width: 100%; /* Base width, will be overridden by script */
+    }
+    #textListHeader {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 20px !important; /* Increased size with !important to override potential conflicts */
+        color: #333;
+        text-align: center; /* Center horizontally */
+    }
+
+    #textList li {
+        padding: 16px 8px;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+        line-height: 1.5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; /* Full width of #textList */
+        box-sizing: border-box;
+    }
+    #textList li button {
+        padding: 2px 5px;
+        font-size: 12px;
+        background-color: #ff4444;
+        width: 25%;
+        margin-left: 8px;
+    }
+    #textList li span {
+        width: 75%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
         #textList li:hover {
             background-color: #f5f5f5;
         }
         #textList li.selected {
             background-color: #e0f7fa;
         }
-        #textList li button {
-            float: right;
-            padding: 2px 5px;
-            font-size: 12px;
-            background-color: #ff4444;
-        }
+        
         #controls {
             flex: 3;
             display: grid;
@@ -187,26 +212,49 @@ note: Multiple texts
 <div id="canvasContainer">
     <div id="canvas"></div>
 <div id="buttonContainer">
-    <button onclick="document.getElementById('imageUpload').click()">上傳圖片</button>
+    <button onclick="document.getElementById('imageUpload').click()">揀圖</button>
     <input type="file" id="imageUpload" accept="image/*" onchange="loadImageFile()" style="display: none;">
-    <button onclick="downloadCanvas()">下載圖片</button>
+    <button onclick="downloadCanvas()">儉圖</button>
 </div>
 </div>
 
 <div id="mainContainer">
+
+<style>
+    #textListContainer {
+        flex: 1;
+        min-width: 0;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 100%;
+        position: relative; /* Added for layout control */
+    }
+    #textListHeader { /* Added for the new text */
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+</style>
+
+<body>
+<div id="mainContainer">
     <div id="textListContainer">
-        <button onclick="addTextSet()">加文字</button>
+        <div id="textListHeader">來耍台文五仁圖</div>
+        <button onclick="addTextSet()">添文字(~10)</button>
         <ul id="textList"></ul>
     </div>
     <div id="controls">
         <div class="control-group">
-            <h3 onclick="toggleCollapse(this)">文字樣式</h3>
+            <h3 onclick="toggleCollapse(this)">文字款式</h3>
             <div class="flex-row">
                 <label for="textInput">文字:</label>
-                <textarea id="textInput" placeholder="拍你的字" oninput="updateText()"></textarea>
+                <textarea id="textInput" placeholder="拍你 ê 文字" oninput="updateText()"></textarea>
             </div>
             <div class="flex-row">
-                <label for="fontSelect">字型:</label>
+                <label for="fontSelect">字骨:</label>
                 <select id="fontSelect" onchange="updateFont()"></select>
             </div>
             <div class="flex-row">
@@ -230,42 +278,42 @@ note: Multiple texts
                 <input type="range" id="textSize" min="10" max="400" value="96" oninput="updateSize()">
             </div>
             <div class="flex-row">
-                <label for="strokeWidth">邊框粗細:</label>
+                <label for="strokeWidth">字墘粗幼:</label>
                 <input type="range" id="strokeWidth" min="0" max="20" value="4" oninput="updateStrokeWidth()">
             </div>
             <div class="flex-row">
-                <label for="outlineColor">邊框色:</label>
+                <label for="outlineColor">字墘色水:</label>
                 <input type="color" id="outlineColor" value="#000000" onchange="updateColors()">
             </div>
             <div class="flex-row">
-                <label for="outlineAlpha">邊框透明度:</label>
+                <label for="outlineAlpha">墘框透明度:</label>
                 <input type="range" id="outlineAlpha" min="0" max="255" value="255" oninput="updateOutlineAlpha()">
             </div>
         </div>
         <div class="control-group">
             <h3 onclick="toggleCollapse(this)">位置 kap 背景</h3>
             <div class="flex-row">
-                <label for="xPos">X 位置:</label>
+                <label for="xPos">頂下位置:</label>
                 <input type="range" id="xPos" min="0" max="400" value="200" oninput="updatePosition()">
             </div>
             <div class="flex-row">
-                <label for="yPos">Y 位置:</label>
+                <label for="yPos">倒正位置:</label>
                 <input type="range" id="yPos" min="0" max="200" value="100" oninput="updatePosition()">
             </div>
             <div class="flex-row">
-                <label for="rotation">旋轉:</label>
+                <label for="rotation">踅敧:</label>
                 <input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()">
             </div>
             <div class="flex-row">
                 <input type="checkbox" id="bgEnable" onchange="updateBgEnable()">
-                <label for="bgEnable">啟用背景</label>
+                <label for="bgEnable"用背景</label>
             </div>
             <div class="flex-row">
-                <label for="bgColor">背景色:</label>
+                <label for="bgColor">背景色水:</label>
                 <input type="color" id="bgColor" value="#ffffff" onchange="updateBgColor()">
             </div>
             <div class="flex-row">
-                <label for="bgAlpha">透明度:</label>
+                <label for="bgAlpha">背景透明度:</label>
                 <input type="range" id="bgAlpha" min="0" max="255" value="255" oninput="updateBgAlpha()">
             </div>
             <div class="flex-row">
@@ -274,32 +322,32 @@ note: Multiple texts
             </div>
         </div>
         <div class="control-group">
-            <h3 onclick="toggleCollapse(this)">框線設定</h3>
+            <h3 onclick="toggleCollapse(this)">背景框逝設定</h3>
             <div class="flex-row">
-                <label for="frameStyle">樣式:</label>
+                <label for="frameStyle">框逝款式:</label>
                 <select id="frameStyle" onchange="updateFrameStyle()">
-                    <option value="none">無</option>
-                    <option value="solid">實線</option>
-                    <option value="dash">虛線</option>
+                    <option value="none">免</option>
+                    <option value="solid">實逝</option>
+                    <option value="dash">虛逝</option>
                 </select>
             </div>
             <div class="flex-row">
-                <label for="frameColor">框線色:</label>
+                <label for="frameColor">框逝色水:</label>
                 <input type="color" id="frameColor" value="#000000" onchange="updateFrameColor()">
             </div>
             <div class="flex-row">
-                <label for="frameAlpha">框線透明度:</label>
+                <label for="frameAlpha">框逝透明度:</label>
                 <input type="range" id="frameAlpha" min="0" max="255" value="255" oninput="updateFrameAlpha()">
             </div>
             <div class="flex-row">
-                <label for="frameWidth">框線粗細:</label>
+                <label for="frameWidth">框逝粗幼:</label>
                 <input type="range" id="frameWidth" min="0" max="10" value="0" oninput="updateFrameWidth()">
             </div>
         </div>
         <div class="control-group">
-            <h3 onclick="toggleCollapse(this)">圖片設定</h3>
+            <h3 onclick="toggleCollapse(this)">圖相設定</h3>
             <div class="flex-row">
-                <label for="imageAlpha">圖片透明度:</label>
+                <label for="imageAlpha">相圌相透明度:</label>
                 <input type="range" id="imageAlpha" min="0" max="255" value="255" oninput="updateImageAlpha()">
             </div>
         </div>
@@ -540,7 +588,9 @@ note: Multiple texts
         list.innerHTML = '';
         textSets.forEach((textSet, index) => {
             let li = document.createElement('li');
-            li.textContent = `台文 #${index + 1}`;
+            let span = document.createElement('span');
+            span.textContent = `台文 #${index + 1}`;
+            li.appendChild(span);
             li.onclick = () => selectTextSet(index);
             if (index === selectedTextIndex) {
                 li.classList.add('selected');
@@ -556,6 +606,13 @@ note: Multiple texts
             }
             list.appendChild(li);
         });
+        // Match the width of the "加文字" button
+        const addTextButton = document.querySelector('#textListContainer > button');
+        const textList = document.getElementById('textList');
+        if (addTextButton && textList) {
+            const buttonWidth = addTextButton.offsetWidth;
+            textList.style.width = `${buttonWidth}px`;
+        }
     }
 
     function selectTextSet(index) {
@@ -972,4 +1029,4 @@ note: Multiple texts
     }
 </script>
 </body>
-</html>
+</html
