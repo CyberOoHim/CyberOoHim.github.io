@@ -306,7 +306,7 @@ note: Multiple texts
     function log(...args) { if (DEBUG) console.log(...args); }
 
     const MAX_DIMENSION = 1024;
-    const MAX_TEXT_SETS = 10;
+    const MAX_TEXT_SETS = 5;
     const fontsPath = '/assets/fonts/';
     const fontsConfigJson = 'taigi_meme_generator_fonts_config.json';
     let TaigiFonts = [];
@@ -330,7 +330,7 @@ note: Multiple texts
     let fullWidth, fullHeight;
     let needsRedraw = true;
     let fontsLoaded = false;
-    let imageAlpha = 255; // New variable for image transparency
+    let imageAlpha = 255;
 
     function createDefaultTextSet() {
         return {
@@ -406,8 +406,8 @@ note: Multiple texts
         }, (error) => {
             console.error('Error loading fonts.json:', error);
             alert('Failed to load custom fonts. Using Times New Roman as fallback.');
-            TaigiFonts = [{ FileName: 'Times New Roman', MenuName: 'Times New Roman' }]; // Changed to Times New Roman
-            fontCache.set('Times New Roman', 'Times New Roman'); // Changed to Times New Roman
+            TaigiFonts = [{ FileName: 'Times New Roman', MenuName: 'Times New Roman' }];
+            fontCache.set('Times New Roman', 'Times New Roman');
             textSets.forEach((textSet) => {
                 textSet.font = 'Times New Roman';
                 textSet.padding = FALLBACK_PADDING;
@@ -421,12 +421,26 @@ note: Multiple texts
         });
     }
 
+    function tintedImage(img, x, y, w, h, alpha) {
+        push();
+        tint(255, 255, 255, alpha);
+        image(img, x, y, w, h);
+        pop();
+    }
+
+    p5.Graphics.prototype.tintedImage = function(img, x, y, w, h, alpha) {
+        this.push();
+        this.tint(255, 255, 255, alpha);
+        this.image(img, x, y, w, h);
+        this.pop();
+    };
+
     function draw() {
         if (!needsRedraw) return;
         log("Drawing canvas");
         background(220);
         if (scaledImg) {
-            tintedImage(scaledImg, 0, 0, width, height, imageAlpha); // Apply image transparency
+            tintedImage(scaledImg, 0, 0, width, height, imageAlpha);
         }
         textSets.forEach((textSet) => {
             if (!textSet.font || !textSet.padding || !fontCache.get(textSet.font)) return;
@@ -489,14 +503,6 @@ note: Multiple texts
             pop();
         });
         needsRedraw = false;
-    }
-
-    // Helper function to draw image with transparency
-    function tintedImage(img, x, y, w, h, alpha) {
-        push();
-        tint(255, 255, 255, alpha);
-        image(img, x, y, w, h);
-        pop();
     }
 
     function populateFontDropdown() {
@@ -562,7 +568,7 @@ note: Multiple texts
         document.getElementById('frameColor').value = rgbToHex(textSet.frameColor);
         document.getElementById('frameAlpha').value = textSet.frameColor[3];
         document.getElementById('frameWidth').value = textSet.frameWidth;
-        document.getElementById('imageAlpha').value = imageAlpha; // Update UI with current image alpha
+        document.getElementById('imageAlpha').value = imageAlpha;
     }
 
     function addTextSet() {
@@ -810,77 +816,95 @@ note: Multiple texts
 
     function downloadCanvas() {
         log("Downloading canvas");
-        if (!confirm('Do you want to download the image?')) return;
+        // if (!confirm('Do you want to download the image?')) {
+        //     log("Download cancelled by user");
+        //     return;
+        // }
 
-        let fullCanvas = createGraphics(fullWidth, fullHeight);
-        fullCanvas.pixelDensity(1);
+        try {
+            let fullCanvas = createGraphics(fullWidth, fullHeight);
+            fullCanvas.pixelDensity(1);
+            log("Created fullCanvas with dimensions:", fullWidth, fullHeight);
 
-        if (fullSizeImg) {
-            fullCanvas.tintedImage(fullSizeImg, 0, 0, fullWidth, fullHeight, imageAlpha); // Apply image transparency
-        }
-
-        textSets.forEach((textSet) => {
-            if (!textSet.font || !textSet.padding || !fontCache.get(textSet.font)) return;
-
-            fullCanvas.push();
-            fullCanvas.translate(textSet.xPos, textSet.yPos);
-            fullCanvas.rotate(radians(textSet.rotation));
-
-            fullCanvas.textSize(textSet.textSize);
-            fullCanvas.textFont(fontCache.get(textSet.font));
-            let align = textSet.textAlign === 'left' ? LEFT : textSet.textAlign === 'right' ? RIGHT : CENTER;
-            fullCanvas.textAlign(align, CENTER);
-
-            let lines = textSet.text.split('\n');
-            let paddingXLeft = textSet.padding.left * textSet.textSize;
-            let paddingXRight = textSet.padding.right * textSet.textSize;
-            let paddingYTop = textSet.padding.top * textSet.textSize;
-            let paddingYBottom = textSet.padding.bottom * textSet.textSize;
-            let xOffset = textSet.padding.xOffset * textSet.textSize;
-            let yOffset = textSet.padding.yOffset * textSet.textSize;
-
-            let bgXOffset = 0;
-            if (textSet.textAlign === 'left') {
-                bgXOffset = (textSet.textWidth * 2 + paddingXLeft - paddingXRight) / 2;
-            } else if (textSet.textAlign === 'right') {
-                bgXOffset = -(textSet.textWidth * 2 + paddingXRight - paddingXLeft) / 2;
-            }
-
-            if (textSet.bgEnabled) {
-                fullCanvas.noStroke();
-                fullCanvas.fill(textSet.bgColor[0], textSet.bgColor[1], textSet.bgColor[2], textSet.bgAlpha);
-                fullCanvas.rectMode(CENTER);
-                fullCanvas.rect(bgXOffset, 0, textSet.textWidth * 2 + paddingXLeft + paddingXRight, textSet.textHeight * 2 + paddingYTop + paddingYBottom, textSet.bgRadius);
-            }
-
-            if (textSet.strokeWidth > 0) {
-                fullCanvas.stroke(textSet.outlineColor[0], textSet.outlineColor[1], textSet.outlineColor[2], textSet.outlineColor[3]);
-                fullCanvas.strokeWeight(textSet.strokeWidth);
+            if (fullSizeImg) {
+                log("Drawing fullSizeImg with alpha:", imageAlpha);
+                fullCanvas.tintedImage(fullSizeImg, 0, 0, fullWidth, fullHeight, imageAlpha);
             } else {
-                fullCanvas.noStroke();
+                log("No fullSizeImg available, filling with background");
+                fullCanvas.background(220);
             }
-            fullCanvas.fill(textSet.fontColor[0], textSet.fontColor[1], textSet.fontColor[2], textSet.fontColor[3]);
-            lines.forEach((line, i) => {
-                fullCanvas.text(line, xOffset, yOffset + (i - (lines.length - 1) / 2) * textSet.textSize);
+
+            textSets.forEach((textSet) => {
+                if (!textSet.font || !textSet.padding || !fontCache.get(textSet.font)) {
+                    log("Skipping text set due to missing font:", textSet);
+                    return;
+                }
+
+                fullCanvas.push();
+                fullCanvas.translate(textSet.xPos, textSet.yPos);
+                fullCanvas.rotate(radians(textSet.rotation));
+
+                fullCanvas.textSize(textSet.textSize);
+                fullCanvas.textFont(fontCache.get(textSet.font));
+                let align = textSet.textAlign === 'left' ? LEFT : textSet.textAlign === 'right' ? RIGHT : CENTER;
+                fullCanvas.textAlign(align, CENTER);
+
+                let lines = textSet.text.split('\n');
+                let paddingXLeft = textSet.padding.left * textSet.textSize;
+                let paddingXRight = textSet.padding.right * textSet.textSize;
+                let paddingYTop = textSet.padding.top * textSet.textSize;
+                let paddingYBottom = textSet.padding.bottom * textSet.textSize;
+                let xOffset = textSet.padding.xOffset * textSet.textSize;
+                let yOffset = textSet.padding.yOffset * textSet.textSize;
+
+                let bgXOffset = 0;
+                if (textSet.textAlign === 'left') {
+                    bgXOffset = (textSet.textWidth * 2 + paddingXLeft - paddingXRight) / 2;
+                } else if (textSet.textAlign === 'right') {
+                    bgXOffset = -(textSet.textWidth * 2 + paddingXRight - paddingXLeft) / 2;
+                }
+
+                if (textSet.bgEnabled) {
+                    fullCanvas.noStroke();
+                    fullCanvas.fill(textSet.bgColor[0], textSet.bgColor[1], textSet.bgColor[2], textSet.bgAlpha);
+                    fullCanvas.rectMode(CENTER);
+                    fullCanvas.rect(bgXOffset, 0, textSet.textWidth * 2 + paddingXLeft + paddingXRight, textSet.textHeight * 2 + paddingYTop + paddingYBottom, textSet.bgRadius);
+                }
+
+                if (textSet.strokeWidth > 0) {
+                    fullCanvas.stroke(textSet.outlineColor[0], textSet.outlineColor[1], textSet.outlineColor[2], textSet.outlineColor[3]);
+                    fullCanvas.strokeWeight(textSet.strokeWidth);
+                } else {
+                    fullCanvas.noStroke();
+                }
+                fullCanvas.fill(textSet.fontColor[0], textSet.fontColor[1], textSet.fontColor[2], textSet.fontColor[3]);
+                lines.forEach((line, i) => {
+                    fullCanvas.text(line, xOffset, yOffset + (i - (lines.length - 1) / 2) * textSet.textSize);
+                });
+
+                if (textSet.frameStyle !== 'none' && textSet.frameWidth > 0) {
+                    fullCanvas.stroke(textSet.frameColor[0], textSet.frameColor[1], textSet.frameColor[2], textSet.frameColor[3]);
+                    fullCanvas.strokeWeight(textSet.frameWidth);
+                    if (textSet.frameStyle === 'dash') {
+                        fullCanvas.drawingContext.setLineDash([10, 5]);
+                    } else {
+                        fullCanvas.drawingContext.setLineDash([]);
+                    }
+                    fullCanvas.noFill();
+                    fullCanvas.rectMode(CENTER);
+                    fullCanvas.rect(bgXOffset, 0, textSet.textWidth * 2 + paddingXLeft + paddingXRight, textSet.textHeight * 2 + paddingYTop + paddingYBottom, textSet.bgRadius);
+                }
+
+                fullCanvas.pop();
             });
 
-            if (textSet.frameStyle !== 'none' && textSet.frameWidth > 0) {
-                fullCanvas.stroke(textSet.frameColor[0], textSet.frameColor[1], textSet.frameColor[2], textSet.frameColor[3]);
-                fullCanvas.strokeWeight(textSet.frameWidth);
-                if (textSet.frameStyle === 'dash') {
-                    fullCanvas.drawingContext.setLineDash([10, 5]);
-                } else {
-                    fullCanvas.drawingContext.setLineDash([]);
-                }
-                fullCanvas.noFill();
-                fullCanvas.rectMode(CENTER);
-                fullCanvas.rect(bgXOffset, 0, textSet.textWidth * 2 + paddingXLeft + paddingXRight, textSet.textHeight * 2 + paddingYTop + paddingYBottom, textSet.bgRadius);
-            }
-
-            fullCanvas.pop();
-        });
-
-        saveCanvas(fullCanvas, 'text_overlay_image', 'png');
+            log("Attempting to save canvas");
+            saveCanvas(fullCanvas, 'text_overlay_image', 'png');
+            log("SaveCanvas called successfully");
+        } catch (error) {
+            console.error("Error in downloadCanvas:", error);
+            alert("Failed to download the image. Check the console for details.");
+        }
     }
 </script>
 </body>
