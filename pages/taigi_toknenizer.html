@@ -1,0 +1,890 @@
+<!-- _layouts/apps.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taigi POJ/Hanji Hybrid dict query - Cyber O͘-hîm ki-tē</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <main>
+        <!--
+    Copyright (C) 2025 [Cyber O͘-hîm ki-tē]
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taigi POJ/Hanji Hybrid Tokenizer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 24px;
+    }
+    h1 {
+        font-size: 35px;
+        margin-bottom: 0px;
+    }
+    h3 {
+        font-size: 28px;
+        margin-bottom: 0px;
+    }
+    .input-section {
+        margin-bottom: 38px;
+        margin-top: 0px;
+    }
+
+    .output-section {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .result-section h3 {
+        font-size: 28px;
+        margin-bottom: 3px;
+        margin-top: 5px;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    .token {
+        display: inline-block;
+        padding: 2px 5px;
+        margin: 2px;
+        border-radius: 3px;
+        background-color: #f0f0f0;
+        font-size: 32px;
+        color: blue;
+    }
+
+    .hanji-result {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f8f8f8;
+        font-size: 32px;
+        color: blue;
+    }
+
+    .hanji-result .explanation {
+        font-size: 20px;
+        color: #333;
+        margin-top: 5px;
+    }
+
+    #combinedOutput {
+        font-size: 32px;
+    }
+
+    #fileInputLabel {
+        display: inline-block;
+        padding: 8px 15px;
+        font-size: 20px;
+        font-weight: bold;
+        min-width: 100px;
+        height: auto;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        text-align: center;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    #dictionaryStatus {
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+    .poj {
+        background-color: #e3f2fd;
+    }
+    .non-poj {
+        background-color: #f5f5f5;
+    }
+    .ignored {
+        color: #999;
+        font-size: 1.2em;
+    }
+    .hanji {
+        background-color: #ffe0b2;
+    }
+    .unknown {
+        background-color: #e0e0e0;
+    }
+    textarea {
+        font-size: 28px;
+    }
+    button {
+        font-size: 25px;
+        margin-top: 8px;
+        margin-left: 5px;
+    }
+
+.note-area {
+    font-size: 22px;
+    color: #555;
+    margin-bottom: 0px;
+    padding: 3px;
+    border: 1px solid #eee;
+}
+    
+    /* Style for copy buttons */
+    .copy-button {
+        font-size: 24px;
+        padding: 5px 10px;
+        margin-left: 5px;
+        cursor: pointer;
+        background-color: #c8e6c9; /* Light green background */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .copy-button:hover {
+        background-color: #a5d6a7; /* Slightly darker green on hover */
+    }
+    .button-container {
+    display: flex; /* Enables flexbox layout */
+    align-items: center; /* Aligns items vertically in the center */
+    margin-top: 10px;
+    }
+    .output-separator {
+        border-bottom: 1px dashed #aaa;
+        margin: 10px 0;
+    }
+    .explanation-toggle {
+        background-color: #e0e0e0; /* Default button color */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 25px;
+        margin-top: 8px;
+        margin-left: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .explanation-toggle.active {
+        background-color: #4caf50; /* Active button color */
+        color: white;
+    }
+
+</style>
+
+</head>
+<body>
+<h1>台語 漢-lô 切詞</h1>
+
+<div class="note-area">這支家私按教育部台語詞典來共  POJ、漢字、抑是 漢-lô 濫 ê 台文 切詞。會使閣添補充詞典來進一步改善正確率。</div>
+
+<div class="input-section">
+    <h3>1. 添補充詞典(無就干焦用內設--ê)</h3>
+    <div style="font-size: 20px; color: #555; margin-bottom: 9px;">((.csv 檔案，愛有 '漢字'、'羅馬字'，抑是'Taigi'、'English' 二逝直逝))</div>
+    <label for="fileInput" id="fileInputLabel">Chhi̍h--loeh 添詞典</label>
+    <input type="file" id="fileInput" accept=".csv" multiple style="display: none;">
+    <div id="dictionaryStatus">Tng leh 掠內設詞典，小等--一下...</div>
+</div>
+
+<div class="input-section">
+    <h3>2. 輸入台語文字</h3>
+    
+    <textarea id="pojInput" rows="4" style="width: 100%" placeholder="POJ、教育部漢字、抑是相濫..."></textarea>
+    <div class="button-container">
+        <button onclick="processText()">切  詞</button>
+        <button id="explanationToggle" class="explanation-toggle active" onclick="toggleExplanations()">Kóa 解說</button>
+        <button class="copy-button" onclick="copyCombined()">Copy 切詞結果</button>
+    </div>
+
+</div>
+
+<div class="output-section">
+    <div id="combinedOutput"></div>
+</div>
+
+<script>
+// Configuration: Set dictionary path, GitHub pages or local folder
+const dictionaryPath = "kautian_詞目+義項_20250116_POJ_trimmed.csv";
+const folderPath = "/assets/csv";
+// Define a condition for switching paths
+const github_pages = true; // Set to true to use the external path
+
+// Initial dictionary path (external)
+const externalDictPath = `${folderPath}/${dictionaryPath}`;
+
+// An array to store the names of all loaded files:
+const loadedFiles = [];
+
+// Fallback dictionary path (local)
+const localDictPath = dictionaryPath;
+
+let showExplanations = true; // Initial state for showing explanations
+
+function toggleExplanations() {
+    showExplanations = !showExplanations;
+    const button = document.getElementById('explanationToggle');
+    button.classList.toggle('active', showExplanations);
+    processText(); // Reprocess the text to show/hide explanations
+}
+
+class MixedTokenizer {
+    constructor() {
+        this.dictionary = {};
+        this.pojChars = ['Á', 'À', 'Â', 'Ā', 'A̍', 'É', 'È', 'Ê', 'Ē', 'E̍', 'Í', 'Ì', 'Î', 'Ī', 'I̍', 'Ḿ', 'M̀', 'M̂', 'M̄', 'M̍', 'Ń', 'Ǹ', 'N̂', 'N̄', 'N̍', 'Ó', 'Ò', 'Ô', 'Ō', 'O̍', 'O͘', 'Ó͘', 'Ò͘', 'Ô͘', 'Ō͘', 'O̍͘', 'Ú', 'Ù', 'Û', 'Ū', 'U̍', 'á', 'à', 'â', 'ā', 'a̍', 'é', 'è', 'ê', 'ē', 'e̍', 'í', 'ì', 'î', 'ī', 'i̍', 'ḿ', 'm̀', 'm̂', 'm̄', 'm̍', 'ń', 'ǹ', 'n̂', 'n̄', 'n̍', 'ⁿ', 'ó', 'ò', 'ô', 'ō', 'o̍', 'o͘', 'ó͘', 'ò͘', 'ô͘', 'ō͘', 'o̍͘', 'ú', 'ù', 'û', 'ū', 'u̍'];
+        this.pojCharRegex = this._createPojCharRegex();
+        this.ignoredCharsRegex = /[\d!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~\u3000-\u303F\uFF00-\uFFEF&&[^\u002D\u2010]]/;
+        this.hanjiRegex = /[\u4e00-\u9fff]/;
+        this.loadBuiltInDictionary();
+    }
+
+    _createPojCharRegex() {
+        const pojCharPattern =
+            "[AEIOUaeiou][\\u030d\\u0300\\u0301\\u0302\\u0304\\u0358\\u207F]*|" +
+            "[\\u004F\\u006F][\\u030d\\u0358]*|" +
+            "[\\u00D3\\u00F3][\\u0358]*|" +
+            "[\\u00D2\\u00F2][\\u0358]*|" +
+            "[\\u00D4\\u00F4][\\u0358]*|" +
+            "[\\u014C\\u014D][\\u0358]*|" +
+            "[\\u004E\\u006E][\\u0302\\u0304]*|" +
+            "[\\u004D\\u006D][\\u0300\\u0302\\u0304]*|" +
+            "[\\u006E][\\u207F]*|" +
+            "[\\u00C1\\u00C0\\u00C2\\u0100\\u00C9\\u00C8\\u00CA\\u0112\\u00CD\\u00CC\\u00CE\\u012A\\u1E3E\\u0143\\u01F8\\u00D3\\u00D2\\u00D4\\u014C\\u00DA\\u00D9\\u00DB\\u016A\\u00E1\\u00E0\\u00E2\\u0101\\u00E9\\u00E8\\u00EA\\u0113\\u00ED\\u00EC\\u00EE\\u012B\\u1E3F\\u0144\\u01F9\\u00F3\\u00F2\\u00F4\\u014D\\u00FA\\u00F9\\u00FB\\u016B]|" +
+            "[ -͘]|" +
+            "[a-zA-Z]";
+        return new RegExp(pojCharPattern);
+    }
+
+   async loadBuiltInDictionary() {
+        try {
+            // Try loading from the external path first
+            console.log(`Attempting to load from external path: ${externalDictPath}`);
+            const response = await fetch(externalDictPath);
+            if (!response.ok) {
+                throw new Error(`Failed to load from external path: ${response.status} ${response.statusText}`);
+            }
+            const text = await response.text();
+            await this.parseDictionaryContent(text, false, '漢字', '羅馬字'); // Add await here
+            this.updateDictionaryStatus(); // Update status immediately after loading
+            console.log(`Successfully loaded from external path: ${externalDictPath}`);
+            return;  // Exit if external load succeeds
+        } catch (error) {
+            console.warn('Error loading from external path:', error);
+            try {
+                // Fallback to the local path
+                console.log(`Attempting to load from local fallback path: ${localDictPath}`);
+                const response = await fetch(localDictPath);
+                 if (!response.ok) {
+                    throw new Error(`Failed to load from local path: ${response.status} ${response.statusText}`);
+                }
+                const text = await response.text();
+                await this.parseDictionaryContent(text, false, '漢字', '羅馬字'); // Add await here
+                this.updateDictionaryStatus(); // Update status immediately after loading
+                console.log(`Successfully loaded from local fallback path: ${localDictPath}`);
+                return;
+            } catch (fallbackError) {
+                console.error('Error loading from local fallback path:', fallbackError);
+                this.updateDictionaryStatus('Error loading built-in dictionary from both external and local paths. Using empty dictionary.');
+            }
+        }
+    }
+
+    // Modified to accept a custom status message
+    updateDictionaryStatus(customMessage = null) {
+        const pojSet = new Set();
+        const hanjiSet = new Set();
+
+        for (const key in this.dictionary) {
+            if (this._isHanjiKey(key)) {
+                hanjiSet.add(key);
+            } else if (key.trim() && key.toLowerCase() !== 'nan') {
+                pojSet.add(key.toLowerCase()); // Normalize POJ entries
+            }
+        }
+
+        // Display the custom message or the default status
+        document.getElementById('dictionaryStatus').textContent = customMessage ||
+            `內設: POJ 詞: ${pojSet.size}, 漢字詞: ${hanjiSet.size}`;
+    }
+
+    _isHanjiKey(key) {
+        // Correctly handle empty or "NaN" keys
+        if (!key || key.toLowerCase() === 'nan') {
+            return false; // Empty or "NaN" keys are not Hanji
+        }
+
+        for (let char of key) {
+            if (!this._isHanjiChar(char)) {
+                return false; // If any char is not Hanji, it's not a Hanji key
+            }
+        }
+        return true; // All chars are Hanji, and it's not empty or "NaN"
+    }
+
+    async loadAdditionalDictionary(file) {
+        try {
+            const text = await file.text();
+            this.parseDictionaryContent(text, true, 'Taigi', 'English'); // Pass 'Taigi' and 'English' as column names for additional dictionaries
+            console.log('Dictionary updated:', Object.keys(this.dictionary).length, 'total entries');
+        } catch (error) {
+            console.error('Error loading additional dictionary:', error);
+            throw error;
+        }
+    }
+
+    _isHanjiChar(char) {
+        return char >= '\u4e00' && char <= '\u9fff';
+    }
+
+    _isPojChar(char) {
+        return (char >= 'a' && char <= 'z') ||
+               (char >= 'A' && char <= 'Z') ||
+               char === '-' ||
+               char === ' ' ||
+               (char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 57) ||
+               this.pojChars.includes(char) ||
+               this.pojChars.map(c => c.toLowerCase()).includes(char);
+    }
+
+  parseDictionaryContent(text, isAdditional = false, hanjiColumnName = '漢字', pojColumnName = '羅馬字') {
+        const rows = text.split('\n').map(row => row.split(','));
+        const headers = rows[0];
+        let hanjiIndex = headers.findIndex(h => h.includes(hanjiColumnName));
+        let pojIndex = headers.findIndex(h => h.includes(pojColumnName));
+        let taigiIndex = headers.findIndex(h => h.includes('Taigi')); // Check for 'Taigi' column
+        let englishIndex = headers.findIndex(h => h.includes('English')); // Check for 'English' column
+        let posIndex = headers.findIndex(h => h.includes('詞性'));
+        let definitionIndex = headers.findIndex(h => h.includes('義項'));
+
+        let isTaigiEnglishDict = false; // Flag to identify Taigi-English dictionary
+
+        if (taigiIndex !== -1 && englishIndex !== -1) {
+            hanjiIndex = taigiIndex; // Use 'Taigi' as primary key column
+            pojIndex = englishIndex; // Use 'English' as target/translation column
+            isTaigiEnglishDict = true; // Set the flag
+        } else {
+            if (taigiIndex !== -1) hanjiIndex = taigiIndex; // Fallback to 'Taigi' if English not found
+            if (englishIndex !== -1) pojIndex = englishIndex; // Fallback to 'English' if Taigi not found
+
+            if (hanjiIndex === -1) hanjiIndex = headers.findIndex(h => h.includes('漢字')); // Fallback to default '漢字'
+            if (pojIndex === -1) pojIndex = headers.findIndex(h => h.includes('羅馬字'));   // Fallback to default '羅馬字'
+             if (hanjiIndex === -1 || pojIndex === -1) {
+                 console.error('Fallback columns "漢字" and "羅馬字" also not found.');
+                 return; // If even fallback columns are not found, exit parsing.
+            }
+        }
+
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (row.length < Math.max(hanjiIndex, pojIndex) + 1) continue;
+
+            const taigi_hanji_key = row[hanjiIndex] ? row[hanjiIndex].trim() : ''; // Use a more generic name for the key column
+            const english_poj_value = row[pojIndex] ? row[pojIndex].trim() : ''; // Use a more generic name for the value column
+            const pos = posIndex !== -1 && row[posIndex] ? row[posIndex].trim() : '';
+            const definition = definitionIndex !== -1 && row[definitionIndex] ? row[definitionIndex].trim() : '';
+
+            if (!english_poj_value || !taigi_hanji_key) continue;
+
+
+            // Store with the Taigi/Hanji key, but now 'poj' might be English in Taigi-English mode
+            if (!this.dictionary[taigi_hanji_key]) {
+                this.dictionary[taigi_hanji_key] = [];
+            }
+            const pojVariants = english_poj_value.split('/'); // Still split by '/' as variants might exist
+            pojVariants.forEach(variant => {
+                const trimmedVariant = variant.trim();
+                const existingEntry = this.dictionary[taigi_hanji_key].find(entry => entry.poj === trimmedVariant); // 'poj' now might be English
+                if (!existingEntry) {
+                    this.dictionary[taigi_hanji_key].push({ poj: trimmedVariant, pos: pos, definition: definition, isEnglishGloss: isTaigiEnglishDict }); // Add a flag
+                } else {
+                    // Update pos and definition if they are not empty
+                    if (pos && !existingEntry.pos) {
+                        existingEntry.pos = pos;
+                    }
+                    if (definition && !existingEntry.definition) {
+                        existingEntry.definition = definition;
+                    }
+                }
+            });
+
+            // Add POJ/English to Taigi/Hanji mappings (reverse lookup if needed, but maybe not necessary for your use case)
+            pojVariants.forEach(p => {
+                const key = p.trim();
+                if (!this.dictionary[key]) {
+                    this.dictionary[key] = [];
+                }
+                const existingEntry = this.dictionary[key].find(entry => entry.hanji === taigi_hanji_key); // 'hanji' now might be Taigi
+                if (!existingEntry) {
+                    this.dictionary[key].push({ hanji: taigi_hanji_key, pos: pos, definition: definition, isEnglishGloss: isTaigiEnglishDict }); // Add a flag
+                } else {
+                    // Update pos and definition if they are not empty
+                    if (pos && !existingEntry.pos) {
+                        existingEntry.pos = pos;
+                    }
+                    if (definition && !existingEntry.definition) {
+                        existingEntry.definition = definition;
+                    }
+                }
+            });
+        }
+        if (isAdditional) {
+            this.updateDictionaryStatus();
+        }
+    }
+
+
+    tokenizePoj(text) {
+        const tokens = [];
+        let i = 0;
+        const textLength = text.length;
+
+        while (i < textLength) {
+            let matched = false;
+
+            // Skip Hanji characters
+            if (this.hanjiRegex.test(text[i])) {
+                i++;
+                continue;
+            }
+
+            // Skip ignored characters
+            if (this.ignoredCharsRegex.test(text[i])) {
+                i++;
+                continue;
+            }
+
+            // Try dictionary matches first (longest match)
+            for (let length = Math.min(textLength - i, 20); length > 0; length--) {
+                const candidate = text.slice(i, i + length);
+
+                // Skip if candidate contains Hanji or ignored characters
+                if (this.hanjiRegex.test(candidate) || this.ignoredCharsRegex.test(candidate)) continue;
+
+                // Try both original case and swapped case for the first character
+                const firstChar = candidate.charAt(0);
+                const swappedFirstChar = this._swapCase(firstChar);
+                const swappedCaseCandidate = swappedFirstChar + candidate.slice(1);
+
+                // Check both cases in the dictionary
+                if (this.dictionary[candidate] || this.dictionary[candidate.toLowerCase()] || this.dictionary[swappedCaseCandidate]) {
+                    const dictKey = this.dictionary[candidate] ? candidate :
+                                    this.dictionary[candidate.toLowerCase()] ? candidate.toLowerCase() : swappedCaseCandidate;
+                    tokens.push({
+                        text: candidate,
+                        hanji: this.dictionary[dictKey],
+                        type: 'poj'
+                    });
+                    i += length;
+                    matched = true;
+                    break;
+                }
+            }
+
+            if (!matched) {
+                // Handle individual characters if no dictionary match found
+                const char = text[i];
+
+                if (!this.ignoredCharsRegex.test(char) && !this.hanjiRegex.test(char)) {
+                    const isPOJ = this.pojCharRegex.test(char);
+                    tokens.push({
+                        text: char,
+                        hanji: null,
+                        type: isPOJ ? 'poj' : 'non-poj'
+                    });
+                }
+                i++;
+            }
+        }
+
+        return this.pojFilterTokens(tokens);
+    }
+
+    // Helper function to swap the case of a character
+    _swapCase(char) {
+        if (char >= 'A' && char <= 'Z') {
+            return char.toLowerCase();
+        } else if (char >= 'a' && char <= 'z') {
+            return char.toUpperCase();
+        } else {
+            return char;
+        }
+    }
+
+    pojFilterTokens(tokens) {
+        const filtered = [];
+        let i = 0;
+
+        while (i < tokens.length) {
+            const token = tokens[i];
+
+            // Handle special diacritical marks
+            if (['͘', '̍', '̍͘', 'ⁿ'].includes(token.text)) {
+                if (filtered.length > 0) {
+                    // Combine with previous token
+                    const prevToken = filtered[filtered.length - 1];
+                    prevToken.text += token.text;
+
+                    // Update dictionary matches for combined token
+                    if (this.dictionary[prevToken.text]) {
+                        prevToken.hanji = this.dictionary[prevToken.text];
+                    } else if (this.dictionary[prevToken.text.toLowerCase()]) {
+                        prevToken.hanji = this.dictionary[prevToken.text.toLowerCase()];
+                    }
+                } else {
+                    // If no previous token, add as is
+                    filtered.push(token);
+                }
+            } else {
+                filtered.push(token);
+            }
+            i++;
+        }
+
+        return filtered;
+    }
+
+    tokenizeHanji(text) {
+        const tokens = [];
+        let i = 0;
+        while (i < text.length) {
+            let matched = false;
+            for (let length = Math.min(text.length - i, 10); length > 0; length--) {
+                const candidate = text.slice(i, i + length);
+                if (candidate in this.dictionary) {
+                    tokens.push({
+                        'text': candidate,
+                        'poj': this.dictionary[candidate],
+                        'type': 'hanji'
+                    });
+                    i += length;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                const char = text[i];
+                if (this._isHanjiChar(char)) {
+                    let foundMultiHanji = false;
+                    for (let length = Math.min(text.length - i, 10); length > 1; length--) {
+                        const candidate = text.slice(i, i + length);
+                        if (candidate in this.dictionary) {
+                            tokens.push({
+                                'text': candidate,
+                                'poj': this.dictionary[candidate],
+                                'type': 'hanji'
+                            });
+                            i += length;
+                            foundMultiHanji = true;
+                            break;
+                        }
+                    }
+                    if (!foundMultiHanji) {
+                        tokens.push({
+                            'text': char,
+                            'poj': null,
+                            'type': 'hanji'
+                        });
+                        i++;
+                    }
+                } else {
+                    i++;
+                }
+            }
+        }
+        return tokens;
+    }
+
+    tokenize(text) {
+        const tokens = [];
+        let i = 0;
+
+        while (i < text.length) {
+            const char = text[i];
+            const hanjiChar = this._isHanjiChar(char);
+            const pojChar = this._isPojChar(char);
+
+            if (hanjiChar) {
+                const hanjiTokens = this.tokenizeHanji(text.slice(i));
+                if (hanjiTokens.length > 0) {
+                    tokens.push(hanjiTokens[0]);
+                    i += hanjiTokens[0].text.length;
+                } else {
+                    tokens.push({text: char, type: 'unknown'});
+                    i++;
+                }
+            } else if (pojChar) {
+                const pojSlice = text.slice(i);
+                const unfilteredPojTokens = this.tokenizePoj(pojSlice);
+                const pojTokens = unfilteredPojTokens;
+
+                if (pojTokens.length > 0) {
+                    const firstToken = pojTokens[0];
+                    tokens.push(firstToken);
+                    i += firstToken.text.length;
+                } else {
+                    tokens.push({text: char, type: 'unknown'});
+                    i++;
+                }
+            } else {
+                // Handle ignored characters
+                if (!this.ignoredCharsRegex.test(char)) {
+                    tokens.push({text: char, type: 'unknown'});
+                }
+                i++;
+            }
+        }
+
+        return this.filterTokens(tokens);
+    }
+
+    filterTokens(tokens) {
+        const filteredTokens = [];
+        let i = 0;
+
+        while (i < tokens.length) {
+            const token = tokens[i];
+
+            // Skip empty tokens
+            if (token.text.trim() === '') {
+                i++;
+                continue;
+            }
+
+            // Handle double hyphen cases
+            if (i + 2 < tokens.length &&
+                tokens[i].text === '-' &&
+                tokens[i + 1].text === '-') {
+
+                const nextToken = tokens[i + 2];
+                if (nextToken && (nextToken.type === 'poj' || nextToken.type === 'hanji')) {
+                    const combinedToken = {
+                        text: '--' + nextToken.text,
+                        type: nextToken.type,
+                        [nextToken.type === 'poj' ? 'hanji' : 'poj']: nextToken[nextToken.type === 'poj' ? 'hanji' : 'poj']
+                    };
+                    filteredTokens.push(combinedToken);
+                    i += 3;
+                    continue;
+                }
+            }
+
+            filteredTokens.push(token);
+            i++;
+        }
+
+        return filteredTokens;
+    }
+    }
+
+const mixedTokenizer = new MixedTokenizer();
+
+async function handleFileInput(event) {
+    const files = event.target.files;
+    let fileNames = []; // To keep track of loaded file names
+    for (const file of files) {
+        try {
+            await mixedTokenizer.loadAdditionalDictionary(file);
+            fileNames.push(file.name); // Add file name to the list on successful load
+        } catch (error) {
+            console.error('Error loading additional dictionary file:', file.name, error);
+            alert(`Error loading additional dictionary file: ${file.name} - Please check the file format.`);
+        }
+    }
+    // Update status after all files are processed
+    mixedTokenizer.updateDictionaryStatus();
+    const status = document.getElementById('dictionaryStatus');
+    if (fileNames.length > 0) {
+        status.innerHTML += `<br>補充詞典添好--ah: ${fileNames.join(', ')} - 字詞數量更新.`;
+    }
+}
+
+function processText() {
+    try {
+        const input = document.getElementById('pojInput').value;
+        if (!input.trim()) {
+            document.getElementById('combinedOutput').innerHTML = '<p>Please enter some text to process</p>';
+            document.querySelector('.copy-button').style.display = 'none'; // Hide the copy button
+            return;
+        }
+
+        const tokens = mixedTokenizer.tokenize(input);
+
+        let tokenOutput = '';
+        tokens.forEach(token => {
+            let displayText = token.text;
+            // Replace sequences of hyphens longer than 2 with '--' for display
+            if (displayText.startsWith('--') && displayText.length > 2) {
+                let counter = 0;
+                while (displayText.charAt(counter) === '-') {
+                    counter++;
+                }
+                if (counter > 2) {
+                    displayText = '--' + displayText.substring(counter);
+                }
+            }
+             tokenOutput += `<span class="token ${token.type}">${displayText}</span>`;
+
+        });
+
+         let dictOutput = '';
+         tokens.forEach(token => {
+            let matchingEntries = [];
+            let matchedDictionaryKeys = [];
+
+            if (token.type === 'poj') {
+                const lowerCaseTokenText = token.text.toLowerCase();
+
+                for (const dictKey in mixedTokenizer.dictionary) {
+                    const lowerCaseDictKey = dictKey.toLowerCase();
+                    if (lowerCaseDictKey === lowerCaseTokenText) {
+                        matchingEntries.push(...mixedTokenizer.dictionary[dictKey]);
+                        matchedDictionaryKeys.push(dictKey);
+                    } else {
+                        const noHyphenDictKey = dictKey.replace(/^-+/, '').toLowerCase();
+                        if (noHyphenDictKey === lowerCaseTokenText) {
+                            matchingEntries.push(...mixedTokenizer.dictionary[dictKey]);
+                            matchedDictionaryKeys.push(dictKey);
+                        }
+                    }
+                }
+
+                if (matchingEntries.length > 0) {
+                     const uniqueMatches = Array.from(new Set(matchingEntries.map(JSON.stringify))).map(JSON.parse);
+                     const matchString = uniqueMatches.map((entry, i) => {
+                         let targetValue = entry.hanji; // Default to Hanji
+                         if (entry.isEnglishGloss) {
+                             targetValue = entry.poj; // In Taigi-English mode, 'poj' is English
+                         }
+                         let str = `${i + 1}. ${targetValue}`;
+                         if (showExplanations && entry.pos) {
+                             str += ` (${entry.pos})`;
+                         }
+                         if (showExplanations && entry.definition) {
+                             str += `: ${entry.definition}`;
+                         }
+                         return str;
+                     }).join('; ');
+
+                      const displayKey = matchedDictionaryKeys[0];
+                       dictOutput += `
+                         <div class="hanji-result">
+                             <strong>${displayKey}</strong> → ${matchString}
+                         </div>
+                     `;
+
+                    }
+            } else if (token.type === 'hanji' && token.poj) {
+                const matchString = token.poj.map((entry, i) => {
+                    let targetValue = entry.poj; // Default to POJ
+                    if (entry.isEnglishGloss) {
+                         targetValue = entry.hanji; // In Taigi-English mode, 'hanji' might be Taigi
+                    }
+                    let str = `${i + 1}. ${targetValue}`;
+                    if (showExplanations && entry.pos) {
+                        str += ` (${entry.pos})`;
+                    }
+                    if (showExplanations && entry.definition) {
+                        str += `: ${entry.definition}`;
+                    }
+                    return str;
+                }).join('; ');
+
+               dictOutput += `
+                   <div class="hanji-result">
+                       <strong>${token.text}</strong> → ${matchString}
+                    </div>
+               `;
+              }
+
+            });
+
+        const combinedOutputElement = document.getElementById('combinedOutput');
+        combinedOutputElement.innerHTML = `<h3>切--開 ê 詞:</h3> ${tokenOutput} <div class='output-separator'></div> <h3>漢-lô 對照: <span style="font-size: 22px;">(仝字 kán-ná 一改)</span></h3>${dictOutput}`;
+
+         if(combinedOutputElement.innerHTML === `<h3>切--開 ê 詞:</h3>  <div class='output-separator'></div> <h3>漢-lô 對照: <span style="font-size: 22px;">(仝字 kán-ná 一改)</span></h3>`){
+              combinedOutputElement.innerHTML = '<p>No dictionary matches found</p>'
+              document.querySelector('.copy-button').style.display = 'none'; // Hide the copy button
+             } else{
+                document.querySelector('.copy-button').style.display = 'inline-block'; // Show the copy button if results available
+            }
+        } catch (error) {
+        console.error('Error processing text:', error);
+         document.getElementById('combinedOutput').innerHTML =
+            `<p>Error processing text: ${error.message}</p>`;
+        }
+}
+
+document.getElementById('fileInput').addEventListener('change', handleFileInput);
+
+// Add copy function:
+function copyCombined() {
+    const combinedOutput = document.getElementById('combinedOutput');
+    let textToCopy = '';
+     // Get the inner text of the '切--開 ê 詞'
+    const tokenOutputHeader = combinedOutput.querySelector('h3:first-of-type');
+    if (tokenOutputHeader) {
+        textToCopy += tokenOutputHeader.innerText.trim() + '\n-----------\n';
+    }
+
+    // Get the text of all .token elements
+    const tokenElements = combinedOutput.querySelectorAll('.token');
+    tokenElements.forEach(token => {
+        textToCopy += token.innerText.trim() + ' ';
+    });
+    textToCopy = textToCopy.trim() + '\n';
+     // Add a separator
+    textToCopy += '---------------------------\n\n';
+
+    // Get the inner text of the '漢-lô 對照'
+    const dictOutputHeader = combinedOutput.querySelector('h3:nth-of-type(2)');
+    if (dictOutputHeader) {
+        textToCopy += dictOutputHeader.innerText.trim() + '\n-----------\n';
+    }
+
+    // Get the text of all .hanji-result elements, including explanations if shown
+    const hanjiResults = combinedOutput.querySelectorAll('.hanji-result');
+    hanjiResults.forEach(result => {
+        textToCopy += result.innerText.trim() + '\n';
+        if (showExplanations) {
+            const explanationElements = result.querySelectorAll('.explanation');
+            explanationElements.forEach(explanation => {
+                textToCopy += explanation.innerText.trim() + '\n';
+            });
+        }
+    });
+
+    // Add separator line only once at the end of hanji-result section
+    if (hanjiResults.length > 0) {
+        textToCopy += '---------------------------\n';
+    }
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            alert('Combined results copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy combined results:', err);
+        });
+}
+    </script>
+</body>
+</html>
