@@ -264,52 +264,52 @@ if (savedDifficulty !== null) {
     console.log("Setup completed");
 }
 
-    function draw() {
-        if (isLandscape) {
-            image(spaceImgLandscape, 0, 0, width, height);
-        } else {
-            image(spaceImgPortrait, 0, 0, width, height);
-        }
-        if (!gameOver) {
-            starship.update();
-            starship.show();
-            handleSpaceObjects();
-            difficultyDiv.style('display', 'none');
-            startButton.style.display = 'none';
-            playerGuide.style.display = 'none';
+function draw() {
+    if (isLandscape) {
+        image(spaceImgLandscape, 0, 0, width, height);
+    } else {
+        image(spaceImgPortrait, 0, 0, width, height);
+    }
+    if (!gameOver) {
+        starship.update();
+        starship.show();
+        handleSpaceObjects();
+        difficultyDiv.style('display', 'none');
+        startButton.style.display = 'none';
+        playerGuide.style.display = 'none';
 
-            // Alarm logic
-            if (lives === 1) {
-                if (!alarmTriggered) { // First alarm
+        // Alarm logic
+        if (lives === 1) {
+            if (!alarmTriggered) { // First alarm
+                if (laserSound.isLoaded()) laserSound.play();
+                lastAlarmTime = millis();
+                alarmTriggered = true;
+            } else { // Subsequent alarms
+                if (millis() - lastAlarmTime > ALARM_INTERVAL * 1000) {
                     if (laserSound.isLoaded()) laserSound.play();
                     lastAlarmTime = millis();
-                    alarmTriggered = true;
-                } else { // Subsequent alarms
-                    if (millis() - lastAlarmTime > ALARM_INTERVAL * 1000) {
-                        if (laserSound.isLoaded()) laserSound.play();
-                        lastAlarmTime = millis();
-                    }
                 }
-            } else { // Reset if lives > 1
-                alarmTriggered = false;
             }
-
-            displayScoreAndLives();
-
-            displayPosDef(); // Always display POJ and definition
-
-        } else {
-            startButton.style.display = 'block';
-            difficultyDiv.style('display', 'block');
-            playerGuide.style.display = 'block';
+        } else { // Reset if lives > 1
+            alarmTriggered = false;
         }
 
-        for (let i = effects.length - 1; i >= 0; i--) {
-            effects[i].show();
-            if (effects[i].isExpired()) effects.splice(i, 1);
-        }
+        displayScoreAndLives();
 
+        displayPosDef(); // Always display POJ and definition
+
+    } else {
+        startButton.style.display = 'block'; // Show button first to ensure offsetHeight is accurate
+        difficultyDiv.style('display', 'block');
+        playerGuide.style.display = 'block';
+        updatePlayerGuidePosition(); // Recalculate position after elements are visible
     }
+
+    for (let i = effects.length - 1; i >= 0; i--) {
+        effects[i].show();
+        if (effects[i].isExpired()) effects.splice(i, 1);
+    }
+}
 
     function resetGame() {
         if (starship) previousStarshipY = starship.y;
@@ -553,7 +553,7 @@ if (savedDifficulty !== null) {
 
     function updatePlayerGuidePosition() {
         let canvasTop = (windowHeight - height) / 2;
-        playerGuide.style.top = canvasTop + (height / 2 + startButton.offsetHeight - 45 ) + 'px';
+        playerGuide.style.top = canvasTop + (height / 2 + startButton.offsetHeight - 65 ) + 'px'; // higher while smaller value
         playerGuide.innerHTML = marked.parse(`### **Formosan 太空弄險**  
 **_[難度 lu-chhôe]_** → 倒爿 1 上慢，正爿 3 上刺激  
 **_[起  鼓]_** → 開始𨑨迌, 橫、直攏會耍--chit。  
