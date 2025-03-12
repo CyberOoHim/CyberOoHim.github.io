@@ -1,0 +1,484 @@
+---
+layout: apps
+title: Web World Radio
+version: v0a
+permalink: /pages/web_world_radio.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Radio App</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #222;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      width: 200px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #444;
+      padding-top: 60px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      padding: 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ccc;
+    }
+    main {
+      margin-left: 200px;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      background-color: #555;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      background-color: #777;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+      margin-left: 5px;
+    }
+    button:hover {
+      background-color: #999;
+    }
+    .delete-btn {
+      background-color: #f44336;
+    }
+    .delete-btn:hover {
+      background-color: #d32f2f;
+    }
+    .save-btn {
+      background-color: #4caf50;
+    }
+    .save-btn:hover {
+      background-color: #388e3c;
+    }
+    .clear-btn {
+      background-color: #f44336;
+    }
+    .clear-btn:hover {
+      background-color: #d32f2f;
+    }
+    input, textarea {
+      padding: 5px;
+      margin: 5px 0;
+      border-radius: 3px;
+      border: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    #player-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      padding: 10px 0;
+      text-align: center;
+    }
+    #status-message {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .connecting { color: #ffeb3b; }
+    .playing { color: #4caf50; }
+    .failed { color: #f44336; }
+    .playing {
+      background-color: #90ee90; /* Light green */
+    }
+    .playing:hover {
+      background-color: #7ccd7c; /* Slightly darker light green on hover */
+    }
+    #genre-list a {
+      color: #add8e6; /* Very light yellow */
+    }
+    #genre-list a:hover {
+      color: #e6e6b8; /* Slightly darker very light yellow on hover */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Web Radio App</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#" id="browse-link">Browse by Genre</a></li>
+      <li><a href="#" id="search-link">Search</a></li>
+      <li><a href="#" id="random-link">Random Station</a></li>
+      <li><a href="#" id="add-link">Add Station</a></li>
+      <li><a href="#" id="download-link">Download JSON</a></li>
+      <li><a href="#" id="reload-link">Reload JSON</a></li> <!-- Added Reload JSON link -->
+    </ul>
+  </nav>
+  <main>
+    <section id="browse-section">
+      <h2>Browse by Genre</h2>
+      <ul id="genre-list"></ul>
+    </section>
+    <section id="search-section" style="display: none;">
+      <h2>Search</h2>
+      <input type="text" id="search-input" placeholder="Enter genre, area, or country">
+      <button id="search-button">Search</button>
+      <ul id="search-results"></ul>
+    </section>
+    <section id="random-section" style="display: none;">
+      <h2>Random Station</h2>
+      <div id="random-station"></div>
+    </section>
+    <section id="station-list" style="display: none;">
+      <h2>Stations</h2>
+      <ul id="stations"></ul>
+    </section>
+    <section id="add-section" style="display: none;">
+      <h2>Add Station</h2>
+      <form id="add-station-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre">
+        <label for="area">Area:</label>
+        <input type="text" id="area" name="area">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country">
+        <label for="stream">Stream URL:</label>
+        <input type="text" id="stream" name="stream">
+        <label for="json-input">Or enter JSON:</label>
+        <textarea id="json-input" rows="5" placeholder='[{"name": "Example", "genre": "Rock", "area": "USA", "country": "USA", "stream": "http://example.com/stream"}, ...]'></textarea>
+        <button type="button" class="save-btn" id="save-btn">Save</button>
+        <button type="button" class="clear-btn" id="clear-btn">Clear</button>
+      </form>
+    </section>
+  </main>
+  <div id="player-container">
+    <audio id="player" controls></audio>
+    <div id="status-message"></div>
+  </div>
+<script>
+  let stations = [];
+  let currentPlayButton = null; // Track the currently playing station's Play button
+  let currentGenre = null; // Track the current genre being viewed
+
+  // Load stations from localStorage or fetch JSON file on page load
+  const storedStations = localStorage.getItem('radioStations');
+  if (storedStations) {
+    stations = JSON.parse(storedStations);
+    populateGenres();
+    setupEventListeners();
+  } else {
+    fetch('/assets/web_world_radio/web_world_radio.json')
+      .then(response => response.json())
+      .then(data => {
+        stations = data;
+        localStorage.setItem('radioStations', JSON.stringify(stations));
+        populateGenres();
+        setupEventListeners();
+      })
+      .catch(error => {
+        console.error('Error loading stations:', error);
+        document.getElementById('status-message').textContent = 'Error loading radio stations.';
+      });
+  }
+
+  function populateGenres() {
+    const genres = [...new Set(stations.map(station => station.genre))];
+    const genreList = document.getElementById('genre-list');
+    genreList.innerHTML = '';
+    genres.forEach(genre => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = genre;
+      a.addEventListener('click', () => {
+        currentGenre = genre; // Update current genre
+        showStationsByGenre(genre);
+      });
+      li.appendChild(a);
+      genreList.appendChild(li);
+    });
+  }
+
+  function setupEventListeners() {
+    document.getElementById('browse-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      currentGenre = null; // Reset current genre when going to browse
+      showSection('browse-section');
+    });
+    document.getElementById('search-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showSection('search-section');
+    });
+    document.getElementById('random-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      const randomIndex = Math.floor(Math.random() * stations.length);
+      const randomStation = stations[randomIndex];
+      const randomStationDiv = document.getElementById('random-station');
+      randomStationDiv.innerHTML = `<p>${randomStation.name} - ${randomStation.genre} - ${randomStation.area} - ${randomStation.country}</p>`;
+      const playButton = document.createElement('button');
+      playButton.textContent = 'Play';
+      playButton.addEventListener('click', () => playStation(randomStation, randomStationDiv, playButton));
+      randomStationDiv.appendChild(playButton);
+      showSection('random-section');
+    });
+    document.getElementById('add-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showSection('add-section');
+    });
+    document.getElementById('search-button').addEventListener('click', () => {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const filteredStations = stations.filter(station =>
+        station.genre.toLowerCase().includes(searchTerm) ||
+        station.area.toLowerCase().includes(searchTerm) ||
+        station.country.toLowerCase().includes(searchTerm)
+      );
+      displayStations(filteredStations);
+      showSection('station-list');
+    });
+    document.getElementById('save-btn').addEventListener('click', () => {
+      let newStations;
+      const jsonInput = document.getElementById('json-input').value.trim();
+
+      if (jsonInput) {
+        try {
+          newStations = JSON.parse(jsonInput);
+          if (!Array.isArray(newStations)) {
+            newStations = [newStations];
+          }
+        } catch (error) {
+          alert('Invalid JSON format.');
+          return;
+        }
+      } else {
+        const newStation = {
+          name: document.getElementById('name').value,
+          genre: document.getElementById('genre').value,
+          area: document.getElementById('area').value,
+          country: document.getElementById('country').value,
+          stream: document.getElementById('stream').value
+        };
+        if (!newStation.name || !newStation.stream) {
+          alert('Name and Stream URL are required.');
+          return;
+        }
+        newStations = [newStation];
+      }
+
+      for (const station of newStations) {
+        if (!station.name || !station.stream) {
+          alert('All stations must have a name and stream URL.');
+          return;
+        }
+      }
+
+      stations = [
+        ...stations,
+        ...newStations.filter(newStation =>
+          !stations.some(existing =>
+            existing.name === newStation.name && existing.stream === newStation.stream
+          )
+        )
+      ];
+      updateJsonFile(() => {
+        alert('Stations added successfully.');
+        clearForm();
+        populateGenres();
+        showSection('browse-section');
+      });
+    });
+    document.getElementById('clear-btn').addEventListener('click', clearForm);
+
+    // Download JSON event listener
+    document.getElementById('download-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadJson();
+    });
+
+    // Reload JSON event listener
+    document.getElementById('reload-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (confirm('This will overwrite your current stations with the original JSON file. Are you sure?')) {
+        reloadJson();
+      }
+    });
+  }
+
+  function showStationsByGenre(genre) {
+    const filteredStations = stations.filter(station => station.genre === genre);
+    displayStations(filteredStations);
+    showSection('station-list');
+  }
+
+  function displayStations(stationsToDisplay) {
+    const stationList = document.getElementById('stations');
+    stationList.innerHTML = '';
+    stationsToDisplay.forEach(station => {
+      const li = document.createElement('li');
+      li.textContent = `${station.name} - ${station.genre} - ${station.area} - ${station.country}`;
+      const playButton = document.createElement('button');
+      playButton.textContent = 'Play';
+      playButton.addEventListener('click', () => playStation(station, li, playButton));
+      li.appendChild(playButton);
+      stationList.appendChild(li);
+    });
+  }
+
+  function playStation(station, container, playButton) {
+    const player = document.getElementById('player');
+    const statusMessage = document.getElementById('status-message');
+
+    if (currentPlayButton && currentPlayButton !== playButton) {
+      currentPlayButton.classList.remove('playing');
+    }
+
+    const existingDeleteBtn = container.querySelector('.delete-btn');
+    if (existingDeleteBtn) {
+      existingDeleteBtn.remove();
+    }
+
+    playButton.classList.remove('playing');
+
+    statusMessage.textContent = `Connecting to ${station.name}...`;
+
+    player.pause();
+    player.src = station.stream;
+    player.load();
+
+    player.play()
+      .then(() => {
+        statusMessage.textContent = `Playing ${station.name} smoothly`;
+        playButton.classList.add('playing');
+        currentPlayButton = playButton;
+        const currentDeleteBtn = container.querySelector('.delete-btn');
+        if (currentDeleteBtn) {
+          currentDeleteBtn.remove();
+        }
+      })
+      .catch(error => {
+        statusMessage.textContent = `Failed to connect to ${station.name}. It may be unavailable or behind a paywall.`;
+        playButton.classList.remove('playing');
+        currentPlayButton = null;
+        addDeleteButton(station, container);
+        console.error('Playback error:', error);
+      });
+  }
+
+  function addDeleteButton(station, container) {
+    if (!container.querySelector('.delete-btn')) {
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.className = 'delete-btn';
+      deleteButton.addEventListener('click', () => {
+        if (confirm(`Are you sure you want to delete ${station.name}?`)) {
+          deleteStation(station);
+        }
+      });
+      container.appendChild(deleteButton);
+    }
+  }
+
+  function deleteStation(station) {
+    stations = stations.filter(s => s.name !== station.name);
+    updateJsonFile(() => {
+      alert(`${station.name} deleted successfully.`);
+      populateGenres();
+      if (currentGenre) {
+        showStationsByGenre(currentGenre); // Refresh current genre page
+      } else {
+        showSection('browse-section'); // Fallback to browse if no genre
+      }
+    });
+  }
+
+  function updateJsonFile(callback) {
+    localStorage.setItem('radioStations', JSON.stringify(stations));
+    callback();
+  }
+
+  function downloadJson() {
+    const jsonContent = JSON.stringify(stations, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'WebRadio-updated.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function reloadJson() {
+    fetch('/assets/WebRadio/WebRadio.json')
+      .then(response => response.json())
+      .then(data => {
+        stations = data;
+        localStorage.setItem('radioStations', JSON.stringify(stations));
+        populateGenres();
+        showSection('browse-section');
+        alert('JSON reloaded successfully from original file.');
+      })
+      .catch(error => {
+        console.error('Error reloading JSON:', error);
+        alert('Failed to reload JSON file.');
+      });
+  }
+
+  function clearForm() {
+    document.getElementById('add-station-form').reset();
+    document.getElementById('json-input').value = '';
+  }
+
+  function showSection(sectionId) {
+    const sections = ['browse-section', 'search-section', 'random-section', 'station-list', 'add-section'];
+    sections.forEach(id => {
+      document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+    });
+  }
+
+  showSection('browse-section');
+</script>
+</body>
+</html>
