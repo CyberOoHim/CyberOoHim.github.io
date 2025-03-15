@@ -1,0 +1,1808 @@
+[
+  {
+    "name": "NPR",
+    "genre": "News",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://npr-ice.streamguys1.com/live.mp3"
+  },
+  {
+    "name": "Radio France Internationale",
+    "genre": "News",
+    "area": "Europe",
+    "country": "France",
+    "stream": "http://live02.rfi.fr/rfimonde-96k.mp3"
+  },
+  {
+    "name": "ABC Radio National",
+    "genre": "Talk",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "http://live-radio01.mediahubaustralia.com/RNW/mp3/"
+  },
+  {
+    "name": "NTS Radio",
+    "genre": "Eclectic",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://stream-relay-geo.ntslive.net/stream"
+  },
+  {
+    "name": "Country Legends Radio",
+    "genre": "Country",
+    "area": "Global",
+    "country": "Global",
+    "stream": "http://stream.countrylegendsradio.com:8000/stream"
+  },
+  {
+    "name": "Capital FM",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://media-ssl.musicradio.com/CapitalUK"
+  },
+  {
+    "name": "Worldwide FM",
+    "genre": "Eclectic",
+    "area": "Global",
+    "country": "UK",
+    "stream": "https://worldwidefm.out.airtime.pro/worldwidefm_a"
+  },
+  {
+    "name": "Radio Paradise",
+    "genre": "Eclectic",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.radioparadise.com/mp3-192"
+  },
+  {
+    "name": "FIP",
+    "genre": "Eclectic",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.radiofrance.fr/fip/fip_hifi.m3u8"
+  },
+  {
+    "name": "Sveriges Radio P1",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "Sweden",
+    "stream": "https://sverigesradio.se/topsy/direkt/132-hi-mp3.m3u"
+  },
+  {
+    "name": "SomaFM - Groove Salad",
+    "genre": "Electronic",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://ice1.somafm.com/groovesalad-128-mp3"
+  },
+  {
+    "name": "Triple J",
+    "genre": "Alternative",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "https://live-radio01.mediahubaustralia.com/2TJW/mp3/"
+  },
+  {
+    "name": "KEXP",
+    "genre": "Alternative",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://kexp.streamguys1.com/kexp160.aac"
+  },
+  {
+    "name": "Radio Nova",
+    "genre": "Alternative",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://novazz.ice.infomaniak.ch/novazz-128.mp3"
+  },
+  {
+    "name": "WNYC",
+    "genre": "Public Radio",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://fm939.wnyc.org/wnycfm-web"
+  },
+  {
+    "name": "Radio Clasica RNE",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r2_main.m3u8"
+  },
+  {
+    "name": "WBGO",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://wbgo.streamguys1.com/wbgo"
+  },
+  {
+    "name": "BBC Radio 4",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_6/live/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio=320000.m3u8"
+  },
+  {
+    "name": "Radio Nacional Argentina",
+    "genre": "Talk",
+    "area": "South America",
+    "country": "Argentina",
+    "stream": "https://sa.mp3.icecast.magma.edge-access.net/sc_rad1"
+  },
+  {
+    "name": "Rai Radio 3",
+    "genre": "Cultural",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://icestreaming.rai.it/3.mp3"
+  },
+  {
+    "name": "RTÉ Radio 1",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "Ireland",
+    "stream": "https://www.rte.ie/manifests/radio1.m3u8"
+  },
+  {
+    "name": "KCRW",
+    "genre": "Eclectic",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://kcrw.streamguys1.com/kcrw_192k_mp3_on_air"
+  },
+  {
+    "name": "Deutschlandfunk",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://st01.sslstream.dlf.de/dlf/01/high/aac/stream.aac"
+  },
+  {
+    "name": "CBC Radio One",
+    "genre": "Talk",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://cbcradiolive.akamaized.net/hls/live/2041049/ES_R1TOR/master.m3u8"
+  },
+  {
+    "name": "DR P1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Denmark",
+    "stream": "https://drliveradio.akamaized.net/hls/live/2022411/p1/masterab.m3u8"
+  },
+  {
+    "name": "All India Radio",
+    "genre": "News",
+    "area": "Asia",
+    "country": "India",
+    "stream": "https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8"
+  },
+  {
+    "name": "Smooth FM",
+    "genre": "Easy Listening",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://media-ssl.musicradio.com/SmoothUK"
+  },
+  {
+    "name": "SomaFM - Drone Zone",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://ice1.somafm.com/dronezone-128-mp3"
+  },
+  {
+    "name": "Classic FM",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://media-ssl.musicradio.com/ClassicFM"
+  },
+  {
+    "name": "France Culture",
+    "genre": "Cultural",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.radiofrance.fr/franceculture/franceculture_hifi.m3u8"
+  },
+  {
+    "name": "RSI Rete Uno",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "https://lsaplus.swisstxt.ch/audio/reteuno_96.stream/playlist.m3u8"
+  },
+  {
+    "name": "RTBF La Première",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "Belgium",
+    "stream": "https://radios.rtbf.be/laprem1ere-128.mp3"
+  },
+  {
+    "name": "Radio Progreso",
+    "genre": "Talk",
+    "area": "Caribbean",
+    "country": "Cuba",
+    "stream": "https://icecast.teveo.cu/XjfW7qWN"
+  },
+  {
+    "name": "Absolute Radio",
+    "genre": "Rock",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://ais.absoluteradio.co.uk/absoluteradio.mp3"
+  },
+  {
+    "name": "Radio Nacional de España",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r1_main.m3u8"
+  },
+  {
+    "name": "Deutsche Welle",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://dw.audiostream.io/dw/1024/mp3/english"
+  },
+  {
+    "name": "Polskie Radio 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Poland",
+    "stream": "https://stream11.polskieradio.pl/pr1/pr1.sdp/playlist.m3u8"
+  },
+  {
+    "name": "Radio Maria",
+    "genre": "Religious",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://dreamsiteradiocp5.com/proxy/rmitalia?mp=/stream"
+  },
+  {
+    "name": "CISM",
+    "genre": "Alternative",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://stream03.ustream.ca/cism128.mp3"
+  },
+  {
+    "name": "SBS Radio",
+    "genre": "Multicultural",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "https://sbs-ice.streamguys1.com/sbs-arabic"
+  },
+  {
+    "name": "FluxFM",
+    "genre": "Alternative",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://streams.fluxfm.de/flux-berlin/mp3-320/audio/"
+  },
+  {
+    "name": "Yerevan Nights",
+    "genre": "World",
+    "area": "Asia",
+    "country": "Armenia",
+    "stream": "https://streams.radioyerevan.am/yerevan-nights"
+  },
+  {
+    "name": "NHK FM",
+    "genre": "Various",
+    "area": "Asia",
+    "country": "Japan",
+    "stream": "https://nhkradioakfm-i.akamaihd.net/hls/live/512290/1-fm/1-fm-01.m3u8"
+  },
+  {
+    "name": "SRF 1",
+    "genre": "Talk",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "https://stream.srg-ssr.ch/m/drs1/mp3_128"
+  },
+  {
+    "name": "Radio Havana Cuba",
+    "genre": "News",
+    "area": "Caribbean",
+    "country": "Cuba",
+    "stream": "https://icecast.teveo.cu/McW3fLhs"
+  },
+  {
+    "name": "MDR Kultur",
+    "genre": "Cultural",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://mdr-284310-0.sslcast.mdr.de/mdr/284310/0/mp3/high/stream.mp3"
+  },
+  {
+    "name": "ABC Classic FM",
+    "genre": "Classical",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "https://live-radio01.mediahubaustralia.com/CLSW/mp3/"
+  },
+  {
+    "name": "Radio Nacional del Paraguay",
+    "genre": "News",
+    "area": "South America",
+    "country": "Paraguay",
+    "stream": "https://radio.780am.com.py:9433/stream"
+  },
+  {
+    "name": "Radio Slovenia 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Slovenia",
+    "stream": "https://mp3.rtvslo.si/ra1"
+  },
+  {
+    "name": "Radio Thailand World Service",
+    "genre": "News",
+    "area": "Asia",
+    "country": "Thailand",
+    "stream": "https://cld-streaming.prd.go.th/live/8803725-8K5V96C6D4XXL4.stream/playlist.m3u8"
+  },
+  {
+    "name": "Eco 99FM",
+    "genre": "Alternative",
+    "area": "Middle East",
+    "country": "Israel",
+    "stream": "https://eco01.livecdn.biz/ecolive/99fm/icecast.audio"
+  },
+  {
+    "name": "RÚV Rás 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Iceland",
+    "stream": "https://ruv-radio-live.akamaized.net/streymi/ruv/ras1/0.m3u8"
+  },
+  {
+    "name": "Radio Kosovo",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Kosovo",
+    "stream": "https://stream.rks-gov.net/radio-kosova/"
+  },
+  {
+    "name": "Vietnamese Radio",
+    "genre": "News",
+    "area": "Asia",
+    "country": "Vietnam",
+    "stream": "https://stream1.vov.gov.vn/vovlive/vov1.sdp_aac/playlist.m3u8"
+  },
+  {
+    "name": "TRT FM",
+    "genre": "Various",
+    "area": "Europe",
+    "country": "Turkey",
+    "stream": "https://radio-trtfm.live.trt.com.tr/master.m3u8"
+  },
+  {
+    "name": "FM4",
+    "genre": "Alternative",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://orf-live.ors-shoutcast.at/fm4-q2a"
+  },
+  {
+    "name": "NPR",
+    "genre": "News",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://npr-ice.streamguys1.com/live.mp3"
+  },
+  {
+    "name": "Radio France Internationale",
+    "genre": "News",
+    "area": "Europe",
+    "country": "France",
+    "stream": "http://live02.rfi.fr/rfimonde-96k.mp3"
+  },
+  {
+    "name": "Deutschlandfunk",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://st01.sslstream.dlf.de/dlf/01/high/aac/stream.aac"
+  },
+  {
+    "name": "DR P1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Denmark",
+    "stream": "https://drliveradio.akamaized.net/hls/live/2022411/p1/masterab.m3u8"
+  },
+  {
+    "name": "All India Radio",
+    "genre": "News",
+    "area": "Asia",
+    "country": "India",
+    "stream": "https://air.pc.cdn.bitgravity.com/air/live/pbaudio001/playlist.m3u8"
+  },
+  {
+    "name": "Radio Nacional de España",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r1_main.m3u8"
+  },
+  {
+    "name": "Deutsche Welle",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://dw.audiostream.io/dw/1024/mp3/english"
+  },
+  {
+    "name": "Polskie Radio 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Poland",
+    "stream": "https://stream11.polskieradio.pl/pr1/pr1.sdp/playlist.m3u8"
+  },
+  {
+    "name": "Radio Havana Cuba",
+    "genre": "News",
+    "area": "Caribbean",
+    "country": "Cuba",
+    "stream": "https://icecast.teveo.cu/McW3fLhs"
+  },
+  {
+    "name": "Radio Nacional del Paraguay",
+    "genre": "News",
+    "area": "South America",
+    "country": "Paraguay",
+    "stream": "https://radio.780am.com.py:9433/stream"
+  },
+  {
+    "name": "Radio Slovenia 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Slovenia",
+    "stream": "https://mp3.rtvslo.si/ra1"
+  },
+  {
+    "name": "Radio Thailand World Service",
+    "genre": "News",
+    "area": "Asia",
+    "country": "Thailand",
+    "stream": "https://cld-streaming.prd.go.th/live/8803725-8K5V96C6D4XXL4.stream/playlist.m3u8"
+  },
+  {
+    "name": "RÚV Rás 1",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Iceland",
+    "stream": "https://ruv-radio-live.akamaized.net/streymi/ruv/ras1/0.m3u8"
+  },
+  {
+    "name": "Radio Kosovo",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Kosovo",
+    "stream": "https://stream.rks-gov.net/radio-kosova/"
+  },
+  {
+    "name": "Vietnamese Radio",
+    "genre": "News",
+    "area": "Asia",
+    "country": "Vietnam",
+    "stream": "https://stream1.vov.gov.vn/vovlive/vov1.sdp_aac/playlist.m3u8"
+  },
+  {
+    "name": "BBC World Service",
+    "genre": "News",
+    "area": "Global",
+    "country": "UK",
+    "stream": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service"
+  },
+  {
+    "name": "Al Jazeera English",
+    "genre": "News",
+    "area": "Middle East",
+    "country": "Qatar",
+    "stream": "https://live-hls-audio-web-aje.getaj.net/AJE/index.m3u8"
+  },
+  {
+    "name": "Voice of America",
+    "genre": "News",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://voa-28.akacast.akamaistream.net/7/54/322040/v1/ibb.akacast.akamaistream.net/voa-28"
+  },
+  {
+    "name": "CBC News Network",
+    "genre": "News",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://cbcradiolive.akamaized.net/hls/live/2041050/ES_R2TOR/master.m3u8"
+  },
+  {
+    "name": "ABC News Radio",
+    "genre": "News",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/ABCNEWSRADIO.mp3"
+  },
+  {
+    "name": "RTE News Now",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Ireland",
+    "stream": "https://www.rte.ie/manifests/news.m3u8"
+  },
+  {
+    "name": "Radio Romania International",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Romania",
+    "stream": "https://stream4.srr.ro:8443/romania-international"
+  },
+  {
+    "name": "Radio Exterior de España",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://rtvelivestream.akamaized.net/rtvesec/rne/rne_re_main.m3u8"
+  },
+  {
+    "name": "Antena 1 - Portugal",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Portugal",
+    "stream": "https://streaming-live.rtp.pt/liveradio/antena180a/playlist.m3u8"
+  },
+  {
+    "name": "Radio Televisión Martí",
+    "genre": "News",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://streamingv2.shoutcast.com/radio-marti"
+  },
+  {
+    "name": "VRT NWS",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Belgium",
+    "stream": "https://progressive-audio.lwc.vrtcdn.be/content/fixed/11_11niws-snip_hi.mp3"
+  },
+  {
+    "name": "Radio Free Europe/Radio Liberty",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Czech Republic",
+    "stream": "https://rfe-channel-01.akacast.akamaistream.net/7/369/229671/v1/ibb.akacast.akamaistream.net/rfe_channel_01.mp3"
+  },
+  {
+    "name": "Radio Prague International",
+    "genre": "News",
+    "area": "Europe",
+    "country": "Czech Republic",
+    "stream": "https://rozhlas.stream/cro7_mp3_128.mp3"
+  },
+  {
+    "name": "181.FM Fusion Jazz",
+    "genre": "Jazz Fusion",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://listen.181fm.com/181-fusionjazz_128k.mp3"
+  },
+  {
+    "name": "BBC Radio 1",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_9/live/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio=320000.m3u8"
+  },
+  {
+    "name": "Z100 New York",
+    "genre": "Pop",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.revma.ihrhls.com/zc1469"
+  },
+  {
+    "name": "NRJ France",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://scdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3"
+  },
+  {
+    "name": "KIIS FM Australia",
+    "genre": "Pop",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "https://ais-arn.streamguys1.com/au_001"
+  },
+  {
+    "name": "Europa Plus",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Russia",
+    "stream": "https://ep128.hostingradio.ru:8030/ep128"
+  },
+  {
+    "name": "Radio Globo",
+    "genre": "Pop",
+    "area": "South America",
+    "country": "Brazil",
+    "stream": "https://14553.live.streamtheworld.com/RADIO_GLOBO_RJAAC.aac"
+  },
+  {
+    "name": "J-Wave",
+    "genre": "Pop",
+    "area": "Asia",
+    "country": "Japan",
+    "stream": "https://radiko.jp/station/JWAVE"
+  },
+  {
+    "name": "Los 40 Principales",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3"
+  },
+  {
+    "name": "Kiss FM",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://stream.kissfmuk.com/kissnational.mp3"
+  },
+  {
+    "name": "Hit FM China",
+    "genre": "Pop",
+    "area": "Asia",
+    "country": "China",
+    "stream": "http://sk.cri.cn/887.m3u8"
+  },
+  {
+    "name": "KBS Cool FM",
+    "genre": "Pop",
+    "area": "Asia",
+    "country": "South Korea",
+    "stream": "http://serpent0.duckdns.org:8088/kbs2fm.pls"
+  },
+  {
+    "name": "Virgin Radio Italy",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://icecast.unitedradio.it/Virgin.mp3"
+  },
+  {
+    "name": "Radio MIX FM",
+    "genre": "Pop",
+    "area": "South America",
+    "country": "Brazil",
+    "stream": "https://26593.live.streamtheworld.com/MIXFM_SAOPAULOAAC.aac"
+  },
+  {
+    "name": "RTL 102.5",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://streamingv2.shoutcast.com/rtl-1025"
+  },
+  {
+    "name": "Radio Nova",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Finland",
+    "stream": "https://stream.bauermedia.fi/nova/nova_64.aac"
+  },
+  {
+    "name": "Power FM",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "Turkey",
+    "stream": "https://listen.powerapp.com.tr/powerfm/abr/powerfm/128/playlist.m3u8"
+  },
+  {
+    "name": "Radio Disney",
+    "genre": "Pop",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIODISNEY.mp3"
+  },
+  {
+    "name": "Fun Radio",
+    "genre": "Pop",
+    "area": "Europe",
+    "country": "France",
+    "stream": "http://streaming.radio.funradio.fr/fun-1-44-128"
+  },
+  {
+    "name": "Metro FM",
+    "genre": "Pop",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/METROFM.mp3"
+  },
+  {
+    "name": "AnimeNfo Radio",
+    "genre": "Pop",
+    "area": "Asia",
+    "country": "Japan",
+    "stream": "https://stream.animeradio.de/animeradio.mp3"
+  },
+  {
+    "name": "Radio 5FM",
+    "genre": "Pop",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/5FM.mp3"
+  },
+  {
+    "name": "YFM",
+    "genre": "Urban",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://streaming.fabrik.fm/yfm/echocast/audio/index.m3u8"
+  },
+  {
+    "name": "Radio 2000",
+    "genre": "Variety",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO2000.mp3"
+  },
+  {
+    "name": "East Africa Radio",
+    "genre": "Variety",
+    "area": "Africa",
+    "country": "Tanzania",
+    "stream": "https://eatv.radioca.st/stream"
+  },
+  {
+    "name": "RFI Afrique",
+    "genre": "News/Talk",
+    "area": "Africa",
+    "country": "Pan-African",
+    "stream": "https://rfiafrique64k.ice.infomaniak.ch/rfiafrique-64.mp3"
+  },
+  {
+    "name": "Jacaranda FM",
+    "genre": "Pop/Rock",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://edge.iono.fm/xice/jacarandafm_live_medium.aac"
+  },
+  {
+    "name": "Lesotho National Broadcasting",
+    "genre": "Public Radio",
+    "area": "Africa",
+    "country": "Lesotho",
+    "stream": "http://168.167.134.26:8000/lesotho.mp3"
+  },
+  {
+    "name": "Jazz FM",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://stream-al.planetradio.co.uk/jazz.aac"
+  },
+  {
+    "name": "WBGO Jazz 88.3",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://wbgo.streamguys1.com/wbgo"
+  },
+  {
+    "name": "TSF Jazz",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3"
+  },
+  {
+    "name": "KCSM Jazz 91.1",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice5.securenetsystems.net/KCSM"
+  },
+  {
+    "name": "Jazz Radio",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3"
+  },
+  {
+    "name": "WDCB Jazz",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://wdcb-ice.streamguys1.com/wdcb128"
+  },
+  {
+    "name": "KKJZ Jazz 88.1",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://kkjz.streamguys1.com/kkjz"
+  },
+  {
+    "name": "JAZZ.FM91",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://jazzfm91.streamguys1.com/jazzfm91"
+  },
+  {
+    "name": "Smooth Jazz 24/7",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://smoothjazz.cdnstream1.com/2585_128.mp3"
+  },
+  {
+    "name": "Radio Swiss Jazz",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "https://stream.srg-ssr.ch/m/rsj/mp3_128"
+  },
+  {
+    "name": "WUCF Jazz",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://peridot.streamguys1.com:7835/WUCF"
+  },
+  {
+    "name": "NRK Jazz",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "Norway",
+    "stream": "https://lyd.nrk.no/nrk_radio_jazz_mp3_h"
+  },
+  {
+    "name": "JazzRadio Berlin",
+    "genre": "Jazz",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://streaming.radio.co/s774887f7b/listen"
+  },
+  {
+    "name": "Jazzradio.com",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://streaming.radio.co/s6a93695f3/listen"
+  },
+  {
+    "name": "Calm Radio - Jazz Piano",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://streams.calmradio.com/api/55/128/stream"
+  },
+  {
+    "name": "WRTI Jazz",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/WRTI_JAZZ.mp3"
+  },
+  {
+    "name": "Jazz24",
+    "genre": "Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://live.wostreaming.net/direct/ppm-jazz24aac-ibc1"
+  },
+  {
+    "name": "FM Yokohama JazzClub",
+    "genre": "Jazz",
+    "area": "Asia",
+    "country": "Japan",
+    "stream": "https://radiko.jp/station/YFM"
+  },
+  {
+    "name": "ABC Jazz",
+    "genre": "Jazz",
+    "area": "Oceania",
+    "country": "Australia",
+    "stream": "https://live-radio01.mediahubaustralia.com/JAZW/mp3/"
+  },
+  {
+    "name": "Soma FM Drone Zone",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice6.somafm.com/dronezone-128-mp3"
+  },
+  {
+    "name": "Ambient Sleeping Pill",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://radio.stereoscenic.com/asp-h"
+  },
+  {
+    "name": "Hearts of Space",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://hos.com/player/"
+  },
+  {
+    "name": "Soma FM Space Station",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice6.somafm.com/spacestation-128-mp3"
+  },
+  {
+    "name": "Echoes",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.prx.org/series/38834"
+  },
+  {
+    "name": "Radio Art - Ambient",
+    "genre": "Ambient",
+    "area": "Europe",
+    "country": "Greece",
+    "stream": "https://live.radioart.com/fAmbient.mp3"
+  },
+  {
+    "name": "Blue Mars",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://bluemars.org/bluemars.mp3"
+  },
+  {
+    "name": "Proton Radio",
+    "genre": "Ambient/Electronic",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://icecast.protonradio.com/stream"
+  },
+  {
+    "name": "AmbientRadio.org",
+    "genre": "Ambient",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://uk2.streamingpulse.com/ssl/ambientradio"
+  },
+  {
+    "name": "StillStream",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stillstream.com:8000/stillstream"
+  },
+  {
+    "name": "SleepBot Environmental Broadcast",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://sleepbot.com/ambience/cgi/listen.cgi"
+  },
+  {
+    "name": "Sonidera Paraíso",
+    "genre": "Ambient",
+    "area": "South America",
+    "country": "Mexico",
+    "stream": "https://live.sonidera.com/8000/stream"
+  },
+  {
+    "name": "The Dark Zone",
+    "genre": "Dark Ambient",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://darkradio.stream.laut.fm/darkradio"
+  },
+  {
+    "name": "Terminal Radio",
+    "genre": "Ambient",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://terminal-radio.de:8002/stream"
+  },
+  {
+    "name": "BBC Radio 2",
+    "genre": "Adult Contemporary",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_9/live/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio=320000.m3u8"
+  },
+  {
+    "name": "BBC Radio 4",
+    "genre": "News/Talk",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_9/live/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio=320000.m3u8"
+  },
+  {
+    "name": "CBC Radio One",
+    "genre": "News/Talk",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://cbcliveradio-lh.akamaihd.net/i/CBCR1_TOR@118420/master.m3u8"
+  },
+  {
+    "name": "Classic FM",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://media-ice.musicradio.com/ClassicFMMP3"
+  },
+  {
+    "name": "France Inter",
+    "genre": "News/Talk",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.radiofrance.fr/franceinter/franceinter.m3u8"
+  },
+  {
+    "name": "NHK World Radio Japan",
+    "genre": "News/Talk",
+    "area": "Asia",
+    "country": "Japan",
+    "stream": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8"
+  },
+  {
+    "name": "ABC Radio National",
+    "genre": "News/Talk",
+    "area": "Australia/Oceania",
+    "country": "Australia",
+    "stream": "https://abc.streamguys1.com/rn.mp3"
+  },
+  {
+    "name": "Radio New Zealand National",
+    "genre": "News/Talk",
+    "area": "Australia/Oceania",
+    "country": "New Zealand",
+    "stream": "https://stream.live.rnz.co.nz/national.mp3"
+  },
+  {
+    "name": "Sveriges Radio P1",
+    "genre": "News/Talk",
+    "area": "Europe",
+    "country": "Sweden",
+    "stream": "http://sverigesradio.se/topsy/direkt/132-mp3.m3u"
+  },
+  {
+    "name": "RAI Radio 1",
+    "genre": "News/Talk",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "http://icestreaming.rai.it/1.mp3"
+  },
+  {
+    "name": "WNYC",
+    "genre": "News/Talk",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://fm939.wnyc.org/wnycfm"
+  },
+  {
+    "name": "WQXR",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://stream.wqxr.org/wqxr"
+  },
+  {
+    "name": "BBC World Service",
+    "genre": "News/Talk",
+    "area": "Global",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_9/live/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio=320000.m3u8"
+  },
+  {
+    "name": "Radio Marca",
+    "genre": "Sports",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://radiomarca.streaming-pro.com:6108/radiomarca.mp3"
+  },
+  {
+    "name": "Radio Classique",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "France",
+    "stream": "http://radioclassique.ice.infomaniak.ch/radioclassique-high.mp3"
+  },
+  {
+    "name": "Radio Swiss Classic",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "http://stream.srg-ssr.ch/m/rsc_de/mp3_128"
+  },
+  {
+    "name": "ORF Ö1",
+    "genre": "News/Cultural",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://orf-live.ors-shoutcast.at/oe1-q2a"
+  },
+  {
+    "name": "Bayerischer Rundfunk Klassik",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://dispatcher.rndfnk.com/br/brklassik/live/mp3/high"
+  },
+  {
+    "name": "Venice Classic Radio",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://uk2.streamingpulse.com/ssl/vcr1"
+  },
+  {
+    "name": "NPR Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.weta.org:8443/fmlive"
+  },
+  {
+    "name": "ABC Classic",
+    "genre": "Classical",
+    "area": "Australia/Oceania",
+    "country": "Australia",
+    "stream": "https://abc.streamguys1.com/classic.mp3"
+  },
+  {
+    "name": "MDR Klassik",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://mdr-284320-0.sslcast.mdr.de/mdr/284320/0/mp3/high/stream.mp3"
+  },
+  {
+    "name": "BBC Radio 3",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "http://as-hls-uk-live.akamaized.net/pool_9/live/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio=320000.m3u8"
+  },
+  {
+    "name": "KUSC Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/KUSCMP128.mp3"
+  },
+  {
+    "name": "WFMT",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.wfmt.com/main-mp3"
+  },
+  {
+    "name": "Radio Mozart",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://streaming.radio.co/s79599a4af/listen"
+  },
+  {
+    "name": "Klassik Radio",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://klassikr.streamabc.net/klr-klassikradio-mp3-192-6431329"
+  },
+  {
+    "name": "Minnesota Public Radio Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ycradio.stream.publicradio.org/ycradio.mp3"
+  },
+  {
+    "name": "KDFC Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/KDFCFM.mp3"
+  },
+  {
+    "name": "WGBH Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://audio.wgbh.org:8104/classical-hi"
+  },
+  {
+    "name": "KING FM Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://classicalking.streamguys1.com/king-fm-mp3-128"
+  },
+  {
+    "name": "WCRB Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://audio.wgbh.org:8104/classical-hi"
+  },
+  {
+    "name": "Radio Stephansdom",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://rs11.stream24.net/radio-stephansdom.mp3"
+  },
+  {
+    "name": "Radio Swiss Classic French",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "http://stream.srg-ssr.ch/m/rsc_fr/mp3_128"
+  },
+  {
+    "name": "France Musique",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.radiofrance.fr/francemusique/francemusique.m3u8"
+  },
+  {
+    "name": "Swedish Radio P2",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Sweden",
+    "stream": "http://sverigesradio.se/topsy/direkt/2562-mp3.m3u"
+  },
+  {
+    "name": "RAI Radio 3 Classica",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "http://icestreaming.rai.it/3.mp3"
+  },
+  {
+    "name": "Classical KING FM",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://classicalking.streamguys1.com/king-fm-mp3-128"
+  },
+  {
+    "name": "WCPE Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "http://audio-mp3.ibiblio.org:8000/wcpe.mp3"
+  },
+  {
+    "name": "CBC Music",
+    "genre": "Classical/Various",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://cbcliveradio-lh.akamaihd.net/i/CBCR2_TOR@382863/master.m3u8"
+  },
+  {
+    "name": "Classic Radio Finland",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Finland",
+    "stream": "https://stream.radioplay.fi/classic/classic_64.aac"
+  },
+  {
+    "name": "Radio Clásica RNE",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r2_main.m3u8"
+  },
+  {
+    "name": "Concertzender",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Netherlands",
+    "stream": "http://streams.greenhost.nl:8080/live"
+  },
+  {
+    "name": "Danmarks Radio P2",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Denmark",
+    "stream": "https://drliveradio.akamaized.net/hls/live/2022411/p2/masterab.m3u8"
+  },
+  {
+    "name": "Bartók Rádió",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Hungary",
+    "stream": "https://mr-stream.connectmedia.hu/4741/mr3.mp3"
+  },
+  {
+    "name": "Musiq3",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Belgium",
+    "stream": "https://radios.rtbf.be/musiq3-128.mp3"
+  },
+  {
+    "name": "NRK Klassisk",
+    "genre": "Classical",
+    "area": "Europe",
+    "country": "Norway",
+    "stream": "http://lyd.nrk.no/nrk_radio_klassisk_mp3_h"
+  },
+  {
+    "name": "WRR Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/WRRFM.mp3"
+  },
+  {
+    "name": "CPR Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream1.cprnetwork.org/cpr-classical"
+  },
+  {
+    "name": "WCLV Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://stream.ideastream.org/wclv.mp3"
+  },
+  {
+    "name": "WSHU Classical",
+    "genre": "Classical",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://wshu-iad.streamguys1.com/wshu-classical"
+  },
+  {
+    "name": "TBC Taifa",
+    "genre": "African/Swahili",
+    "area": "Africa",
+    "country": "Tanzania",
+    "stream": "http://s9.voscast.com:8512/stream"
+  },
+  {
+    "name": "Ghana Web Radio",
+    "genre": "African/Highlife",
+    "area": "Africa",
+    "country": "Ghana",
+    "stream": "https://stream.zeno.fm/qps8uy08rm0uv"
+  },
+  {
+    "name": "Smooth FM Nigeria",
+    "genre": "African/R&B",
+    "area": "Africa",
+    "country": "Nigeria",
+    "stream": "https://smoothfm.radiostream.com.ng/stream"
+  },
+  {
+    "name": "Radio Jambo",
+    "genre": "African/Swahili",
+    "area": "Africa",
+    "country": "Kenya",
+    "stream": "https://stream.radiojar.com/7qyvpnex4yzuv"
+  },
+  {
+    "name": "Radio Sénégal International",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Senegal",
+    "stream": "https://stream.zeno.fm/66vqn0v8n98uv"
+  },
+  {
+    "name": "Ukhozi FM",
+    "genre": "African/Zulu",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/UKHOZIFMAAC.aac"
+  },
+  {
+    "name": "Metro FM",
+    "genre": "African/Urban",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/METROFMAAC.aac"
+  },
+  {
+    "name": "YFM",
+    "genre": "African/Hip-Hop",
+    "area": "Africa",
+    "country": "South Africa",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/YFMAAC.aac"
+  },
+  {
+    "name": "CRTV Radio",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Cameroon",
+    "stream": "https://stream.zeno.fm/zbxavcxs01zuv"
+  },
+  {
+    "name": "Joy FM Ghana",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Ghana",
+    "stream": "https://joyfm.radioca.st/stream"
+  },
+  {
+    "name": "Radio Côte d'Ivoire",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Ivory Coast",
+    "stream": "https://stream.zeno.fm/zfkm45nbc0quv"
+  },
+  {
+    "name": "Radio Okapi",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Democratic Republic of Congo",
+    "stream": "https://stream.zeno.fm/pn32qv43pvduv"
+  },
+  {
+    "name": "Citizen Radio",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Kenya",
+    "stream": "https://radio.citizentv.co.ke/radiocitizen/radiocitizen/playlist.m3u8"
+  },
+  {
+    "name": "Radio Phoenix",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Zambia",
+    "stream": "https://stream.zeno.fm/y5r2qe6kd2zuv"
+  },
+  {
+    "name": "Citi FM",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Ghana",
+    "stream": "https://citi973fm.radioca.st/index.html:8443/stream"
+  },
+  {
+    "name": "Lesotho National Broadcasting",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Lesotho",
+    "stream": "https://stream.zeno.fm/pu95k31wd0quv"
+  },
+  {
+    "name": "Radio Botswana",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Botswana",
+    "stream": "https://stream.zeno.fm/u9st2ksy31zuv"
+  },
+  {
+    "name": "Afrobeat Radio",
+    "genre": "African/Afrobeat",
+    "area": "Africa",
+    "country": "Various",
+    "stream": "https://stream.zeno.fm/eyx4a0nv31zuv"
+  },
+  {
+    "name": "Radio Mille Collines",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Rwanda",
+    "stream": "https://stream.zeno.fm/n89c42kdczzuv"
+  },
+  {
+    "name": "Voice of Nigeria",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Nigeria",
+    "stream": "https://stream.zeno.fm/w7kzqabnm1zuv"
+  },
+  {
+    "name": "Radio Miraya",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "South Sudan",
+    "stream": "https://ice31.securenetsystems.net/MIRAYA"
+  },
+  {
+    "name": "Soundcity Radio",
+    "genre": "African/Urban",
+    "area": "Africa",
+    "country": "Nigeria",
+    "stream": "https://stream.soundcityafrica.tv/radio/scityradiofm"
+  },
+  {
+    "name": "Radio Nyala",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Somalia",
+    "stream": "https://stream.zeno.fm/m3q3az8eqzzuv"
+  },
+  {
+    "name": "Radio Tunisia",
+    "genre": "African/Arabic",
+    "area": "Africa",
+    "country": "Tunisia",
+    "stream": "https://stream.zeno.fm/gfrc33fqn1zuv"
+  },
+  {
+    "name": "X FM Ghana",
+    "genre": "African/Urban",
+    "area": "Africa",
+    "country": "Ghana",
+    "stream": "https://stream.zeno.fm/qpqu58dsmzzuv"
+  },
+  {
+    "name": "Soukous Radio",
+    "genre": "African/Soukous",
+    "area": "Africa",
+    "country": "Democratic Republic of Congo",
+    "stream": "https://stream.zeno.fm/nbgzzrm4a5zuv"
+  },
+  {
+    "name": "Radio Mali",
+    "genre": "African/News",
+    "area": "Africa",
+    "country": "Mali",
+    "stream": "https://stream.zeno.fm/ppvzcm18am8uv"
+  },
+  {
+    "name": "Afro Diaspora Radio",
+    "genre": "African/Diaspora",
+    "area": "Africa",
+    "country": "Various",
+    "stream": "https://stream.radiojar.com/n6c576nrga0uv"
+  },
+  {
+    "name": "SomaFM Groove Salad",
+    "genre": "Lounge/Ambient",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice1.somafm.com/groovesalad-256-mp3"
+  },
+  {
+    "name": "Lounge FM",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://s37.derstreamt.de/lounge128.mp3"
+  },
+  {
+    "name": "Cafe del Mar Radio",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://streams.radio.co/se1a320b47/listen"
+  },
+  {
+    "name": "Monte Carlo Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Russia",
+    "stream": "https://rusradio.hostingradio.ru/montecarlo96.aacp"
+  },
+  {
+    "name": "Lounge Radio",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://stream.laut.fm/lounge-radio"
+  },
+  {
+    "name": "SmoothLounge.com",
+    "genre": "Lounge/Smooth Jazz",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://smoothlounge.com/stream/smoothlounge_128.pls"
+  },
+  {
+    "name": "Ibiza Sonica Radio",
+    "genre": "Lounge/Electronic",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://stream.radio.co/s83eb8ff39/listen"
+  },
+  {
+    "name": "Radio Swiss Chill",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "http://stream.srg-ssr.ch/m/rsc_de/mp3_128"
+  },
+  {
+    "name": "1.FM Chillout Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Switzerland",
+    "stream": "https://strm112.1.fm/chilloutlounge_mobile_mp3"
+  },
+  {
+    "name": "SomaFM Secret Agent",
+    "genre": "Lounge/Soundtrack",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice1.somafm.com/secretagent-128-mp3"
+  },
+  {
+    "name": "Buddha Bar Radio",
+    "genre": "Lounge/World",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://buddharadio.stream.laut.fm/buddharadio"
+  },
+  {
+    "name": "Lounge FM 100% Chill",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://s37.derstreamt.de/100chill.mp3"
+  },
+  {
+    "name": "Costa Del Mar",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://radio4.cdm-radio.com:18024/stream-mp3-Chill"
+  },
+  {
+    "name": "Addict Radio Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.rcs.revma.com/v0mdu24q54zuv"
+  },
+  {
+    "name": "Radio Nature Lounge",
+    "genre": "Lounge/Nature",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://stream.radiojar.com/qn41b222aruvv"
+  },
+  {
+    "name": "Calm Radio Lounge",
+    "genre": "Lounge/Chill",
+    "area": "North America",
+    "country": "Canada",
+    "stream": "https://streams.calmradio.com:20028/stream"
+  },
+  {
+    "name": "Lounge FM Terrace",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://s37.derstreamt.de/terrace.mp3"
+  },
+  {
+    "name": "Ibiza Global Radio",
+    "genre": "Lounge/House",
+    "area": "Europe",
+    "country": "Spain",
+    "stream": "https://listenssl.ibizaglobalradio.com:8024/stream"
+  },
+  {
+    "name": "Chill-Out Radio",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Netherlands",
+    "stream": "https://streamingv2.shoutcast.com/Chill-OutRadio"
+  },
+  {
+    "name": "The Chill Lounge",
+    "genre": "Lounge/Chill",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://strm112.1.fm/chilloutlounge_mobile_mp3"
+  },
+  {
+    "name": "ABC Lounge",
+    "genre": "Lounge/Smooth Jazz",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://streams.egofm.de/egoLOUNGE-hq"
+  },
+  {
+    "name": "SomaFM Fluid",
+    "genre": "Lounge/Electronic",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://ice1.somafm.com/fluid-128-mp3"
+  },
+  {
+    "name": "Jazz Lounge",
+    "genre": "Lounge/Jazz",
+    "area": "Europe",
+    "country": "UK",
+    "stream": "https://stream.laut.fm/jazzlounge"
+  },
+  {
+    "name": "Nostalgie Lounge",
+    "genre": "Lounge/Various",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://scdn.nrjaudio.fm/adwz1/fr/31161/mp3_128.mp3"
+  },
+  {
+    "name": "Sunset Lounge Radio",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://stream.laut.fm/sunsetlounge"
+  },
+  {
+    "name": "Radio Nula Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Croatia",
+    "stream": "https://stream.zeno.fm/rn43u5ab2tzuv"
+  },
+  {
+    "name": "RMF Chillout",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Poland",
+    "stream": "https://rs6-krk2.rmfstream.pl/CHILLOUT"
+  },
+  {
+    "name": "Cool FM Cafe",
+    "genre": "Lounge/Smooth Jazz",
+    "area": "Europe",
+    "country": "Italy",
+    "stream": "https://ice07.fluidstream.net/cfm2.mp3"
+  },
+  {
+    "name": "Lounge FM Digital",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Ukraine",
+    "stream": "https://cast.radiogroup.com.ua/loungefm"
+  },
+  {
+    "name": "FM4 Sunny Side Up",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Austria",
+    "stream": "https://orf-live.ors-shoutcast.at/fm4-q2a"
+  },
+  {
+    "name": "Vanilla Radio Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Greece",
+    "stream": "http://vanilla.stream.laut.fm/vanilla"
+  },
+  {
+    "name": "NRJ Lounge",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "France",
+    "stream": "https://scdn.nrjaudio.fm/adwz1/fr/31161/mp3_128.mp3"
+  },
+  {
+    "name": "Luxury Lounge Radio",
+    "genre": "Lounge/Chill",
+    "area": "Europe",
+    "country": "Germany",
+    "stream": "https://stream.laut.fm/luxury-lounge"
+  },
+  {
+    "name": "Electro Lounge",
+    "genre": "Lounge/Electronic",
+    "area": "North America",
+    "country": "USA",
+    "stream": "https://wjct.streamguys1.com/wjct-elec"
+  }
+]
