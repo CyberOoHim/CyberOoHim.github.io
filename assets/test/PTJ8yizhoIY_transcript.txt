@@ -1,0 +1,420 @@
+TITLE: 5 New Startups That Explain AI's Most Important Trends
+
+[0:00] welcome back to the AI Daily Brief every
+[0:02] day it feels like a million new cool AI
+[0:04] startups launch so much so that it's
+[0:07] actually pretty rare that we dig deep
+[0:08] and cover brand new companies on this
+[0:10] show and yet over the past couple of
+[0:12] days I've seen a handful of companies
+[0:15] that are on the one hand just very
+[0:17] impressive and interesting and seemingly
+[0:18] high potential and additionally really
+[0:22] reflect and tell the story of key trends
+[0:24] shaping AI right now so what we're going
+[0:27] to do today is look at these five or so
+[0:28] new companies all of which have been
+[0:30] announced literally over the last 48
+[0:31] hours or so talk about them or their new
+[0:33] products that have been announced but
+[0:35] then also put them in the larger context
+[0:38] first up we have General Agents ceo
+[0:40] Sergio Ojair formerly of Tesla and
+[0:42] Google DeepMind writes "Today I'm
+[0:44] launching my new company General Agents
+[0:46] and our first product introducing Ace
+[0:48] the first real-time computer autopilot
+[0:51] ace is not a chatbot ace performs tasks
+[0:53] for you on your computer using your
+[0:56] mouse and keyboard at superhuman speeds
+[0:59] now by the way this is a show that's
+[1:00] going to be much better if you watch it
+[1:02] because there's lots of examples going
+[1:03] on you should be able to watch it in the
+[1:05] Spotify app or on YouTube but Sherjo
+[1:08] goes on Ace can use all the tools on
+[1:10] your computer and the video shared shows
+[1:12] it grabbing images dropping them into
+[1:14] Google Drive and generally doing the
+[1:15] types of things that a human would do
+[1:17] their preview videos also show the
+[1:19] method of interaction in Premiere Pro it
+[1:21] shows a user using the Ace bar to for
+[1:24] example slow the video clip down to 50%
+[1:26] split the clip once with the cut tool
+[1:28] and then export it and again you're
+[1:30] using verbal instructions and then
+[1:32] letting ACE actually do the work they
+[1:34] point out that this can be really
+[1:35] helpful not just for increasing your
+[1:36] speed and efficiency but also for tools
+[1:38] that you're still learning how to use
+[1:40] there's a bunch of other things about
+[1:41] ACE as well but the big thing that
+[1:43] they're hammering is that it's fast in
+[1:45] fact they claim 20 times faster than
+[1:46] competing agents making it as they say
+[1:49] more practical for everyday use speed is
+[1:51] definitely what caught people's
+[1:52] attention with this replet CEO Amjad
+[1:55] Msad said "Insane speed computer use
+[1:57] models have not seen major commercial
+[1:59] breakthrough because they're slow and
+[2:00] expensive this is a huge unlock."
+[2:03] William Gus a former research scientist
+[2:05] at OpenAI who's now a general agent as
+[2:07] well writes "Ace is the world's fastest
+[2:09] AI computer use agent this is
+[2:10] fundamentally a new way to use computers
+[2:13] when someone asked "How does it work?"
+[2:15] William responded "It takes in pixels
+[2:17] and instructions and outputs click drag
+[2:18] keyboard etc actions at 300 milliseconds
+[2:20] roundtrip latency." In other words it's
+[2:23] doing full screenshot image processing
+[2:24] extremely quickly now in terms of the
+[2:26] discussion around this outside of it
+[2:28] just being fast some people pointed out
+[2:30] that advances coming from startups like
+[2:32] this mean that it's not just the big
+[2:33] labs that are going to have all the fun
+[2:34] in the new era f schuman on Twitter also
+[2:37] pointed out that the expansion of human
+[2:38] creativity to go with a theme from
+[2:40] yesterday's show is one of the
+[2:41] byproducts of this type of computer use
+[2:43] tool where as he puts it anyone can now
+[2:45] operate software without even knowing
+[2:47] how to operate it that is a huge
+[2:49] breakthrough and certainly wasn't on my
+[2:50] bingo card for this year so there are
+[2:52] obviously a lot of themes that I think
+[2:54] this startup represents broadly speaking
+[2:57] of course agents the most important most
+[2:58] dominant category of AI advancements
+[3:01] right now but more specifically this
+[3:03] idea of expanding agent capabilities
+[3:04] through computer use this is something
+[3:06] that we started to see inklings of at
+[3:08] the end of last year and this appears to
+[3:09] be a major jump forward on that
+[3:11] obviously if you listen to yesterday's
+[3:13] show about the five fastchanging AI
+[3:14] transformations that'll keep you up at
+[3:16] night you'll have heard me talk about
+[3:17] the expansion of human creativity and as
+[3:20] we just heard being able to talk at
+[3:21] software and have your agent do it with
+[3:23] you does absolutely expand which
+[3:24] software tools a person can use lastly
+[3:28] the fact that the speed of computer use
+[3:30] is now exceeding humans I think gives us
+[3:32] a glimpse into the future where AI and
+[3:34] agents aren't just as performant as
+[3:35] people but are actually better at things
+[3:38] now obviously AI is better at many
+[3:39] things already but this is a highly
+[3:41] visual example of that another theme
+[3:44] which it's a little too early to explore
+[3:45] is whether US state-of-the-art agent
+[3:47] capabilities can drive as much virality
+[3:49] as recent releases from China like Manis
+[3:51] we might be a little constrained in this
+[3:53] case because general agents is only
+[3:54] available as a research preview not as a
+[3:56] full product but still that's something
+[3:58] that I'll be watching next up we have
+[4:00] Lindy and of course while Lindy isn't
+[4:02] new its new swarms feature is i won't
+[4:05] spend a ton of time on this because I
+[4:06] got into it yesterday but I think
+[4:07] co-founder Lindy Drop actually does a
+[4:09] great job explaining this she writes
+[4:11] "This AI agent turns one workflow into a
+[4:14] multi- aent empire working in parallel
+[4:16] fed it one event URL and here's what
+[4:18] happened it extracted every speaker's
+[4:20] details deep researched each person
+[4:22] using LinkedIn news and PR found and
+[4:24] transcribed their podcast appearances
+[4:26] crafted emails with their exact quotes
+[4:28] making them impossible to ignore
+[4:30] identified lookalike profiles and
+[4:32] repeated the process on autopilot the
+[4:34] net result she says it just sent 370
+[4:37] impossible to ignore personalized emails
+[4:39] in seconds versus an entire day of
+[4:41] manual work we're building AI employees
+[4:44] that run entire companies autonomously
+[4:46] what about someone outside the company
+[4:48] michael Raspusi writes "First test using
+[4:50] Lindy Loops trying out a series of
+[4:52] custom deep research agents using
+[4:53] Perplexity and Anthropic context: We're
+[4:55] prepping for our next AI and health hack
+[4:57] so I want a quick update across
+[4:58] different non-invasive imaging
+[5:00] modalities i texted at LFUS FNIRS and
+[5:03] ultrasound and it cooked what would have
+[5:05] taken 1 to two hours manually 25 minutes
+[5:07] with AI tools took 2 minutes with Lindy
+[5:09] AI one more test from Alex Carson they
+[5:12] write "Agent swarms let AI agents
+[5:14] duplicate themselves to tackle hundreds
+[5:15] of tasks simultaneously the new
+[5:17] capability immediately scales what's
+[5:19] possible with AI automation by allowing
+[5:21] agents to divide and conquer across
+[5:22] large data sets without complex coding
+[5:24] or custom API connections you provide a
+[5:26] list of tasks and Lindy automatically
+[5:27] spawns duplicate agents to handle each
+[5:29] item concurrently
+[5:30] testing this feature with a YouTube to
+[5:32] blog post workflow showed the impressive
+[5:34] potential i created a simple flow that
+[5:36] triggers when new URLs are added to a
+[5:37] spreadsheet creates a loop that
+[5:39] processes each URL simultaneously
+[5:41] transcribes each video and generates a
+[5:42] professionally formatted blog post and
+[5:44] then returns all completed posts and
+[5:45] chat messages and so what's the theme
+[5:48] here it's not just agents obviously
+[5:50] we've already covered agents as the big
+[5:51] dominant theme no what's interesting to
+[5:53] me is this is effectively my Doctor
+[5:55] Strange theory of AI agent work come to
+[5:57] life this is not a onetoone replacement
+[6:00] for existing work this is the very early
+[6:02] innings of what you can do if you were
+[6:04] able to hire hundreds of people instead
+[6:05] of just one for a particular task those
+[6:08] 370 personalized emails that Lindy sent
+[6:10] is an example of how you would apply
+[6:12] this to sales i think we are going to
+[6:14] see so much more of this in the next few
+[6:15] months and it's actually going to take
+[6:17] the new capabilities being available
+[6:18] before people can even come close to
+[6:20] figuring out how to actually take full
+[6:21] advantage
+[6:23] startup number three is called Paid and
+[6:26] a very appropriate name it is manny
+[6:28] Medina writes "I'm officially launching
+[6:30] my new company Paid we just raised€ 10
+[6:32] million euro to solve the biggest
+[6:33] problem no one's talking about in AI ai
+[6:35] agents are growing fast but face a
+[6:37] critical challenge how to monetize and
+[6:39] capture the value they create
+[6:40] traditional software billing doesn't
+[6:42] solve this problem at Paid we're solving
+[6:44] this problem by smart pricing that
+[6:45] aligns with actual value creation
+[6:47] real-time margin tracking to ensure
+[6:49] profitability clear dashboards that
+[6:50] demonstrate ROI to customers billing
+[6:52] invoicing revenue recovery taxes and all
+[6:54] the back office needs in a single pane
+[6:55] of glass with just a few lines of codes
+[6:57] AI builders can focus on creating
+[6:59] amazing agents while we handle the
+[7:00] business engine behind them summing it
+[7:03] up even more clearly their website calls
+[7:04] this the business engine for AI agents
+[7:06] to me this is reflective of the fact
+[7:08] that agents are now officially shifting
+[7:10] from interesting toys and novelties to
+[7:12] actual productionready tools that are
+[7:14] going to go in and change how we do work
+[7:17] paid is an example of the critical
+[7:18] infrastructure that is being built to
+[7:20] enable agents to live up to their full
+[7:22] potential effectively everything that
+[7:24] human employees do now every service
+[7:26] that we have around them is going to
+[7:28] have some proximate version in the agent
+[7:30] world this is going to be an incredibly
+[7:32] rich vein for startups in the coming
+[7:33] years and as you can see is already
+[7:35] happening with Gusto right now next up
+[7:37] we're moving on from agents at least
+[7:39] sort of to another huge theme of the
+[7:41] moment which is of course vibe coding
+[7:43] and for that we turn to the company
+[7:45] called yes vibe code they write in order
+[7:49] for billions of people to vibe code we
+[7:50] need a tool with the power of cursor and
+[7:52] the simplicity of chat GBT that they
+[7:54] argue is the new app that they've built
+[7:56] vibe code now this comes from Riley
+[7:58] Brown and his co-founders riley was and
+[8:00] is I think the world's biggest AI Tik
+[8:02] Tocker but over the past six months or
+[8:04] so has really gone allin on vibe coding
+[8:07] he's been building things for himself
+[8:09] using content to come up with new
+[8:10] theories of how creators are going to
+[8:12] code things in the future and this is
+[8:13] the app that he and some friends
+[8:15] basically built for himself to do what
+[8:17] he wanted to do one of the examples he
+[8:19] showed off was vibe coding a mobile
+[8:20] video game in a single prompt and what's
+[8:22] cool about this if you've used something
+[8:23] like Lovable and Bolt is that this is a
+[8:25] native mobile interface instead of
+[8:27] focusing on web applications Vive Code
+[8:30] is starting with a focus on mobile
+[8:31] applications and when excited users
+[8:33] started posting on the announcement
+[8:34] thread that signup wasn't working Vive
+[8:36] Code basically said that they were
+[8:37] already full up so in terms of the
+[8:39] themes here obviously Vive coding in
+[8:41] general is a big one but the mobile
+[8:43] integration is really fascinating as
+[8:44] well as Eddie Yun points out right now
+[8:47] the average interaction with vibe coding
+[8:49] is still via text but imagine vibe
+[8:51] coding with voice funny enough when
+[8:53] Andre Karpathy originally talked about
+[8:55] vibe coding he talked about how he was
+[8:57] using whisper to talk to his computer to
+[8:59] do it so in some ways this would be an
+[9:01] actual instantiation of where the whole
+[9:02] thing started vibe codeandanda writes
+[9:04] "The best feeling in the world is when
+[9:06] you build something and others can use
+[9:07] it with vibe code we hope to enable
+[9:09] anyone get that feeling." And of course
+[9:11] that is the big resonance of vibe coding
+[9:14] with people is this expansion of human
+[9:15] creativity and creative capacity and
+[9:18] that was not the only example one of the
+[9:20] challenges for vibe coders is that there
+[9:22] are a whole bunch of pieces beyond just
+[9:24] writing the code and some of those
+[9:26] things remain outside of people's
+[9:27] technical capacities now of course you
+[9:29] can use vibe coding tools or separate
+[9:31] LLMs to get help with those things and
+[9:32] all of the vibe coding tools have some
+[9:34] version of a single button push to
+[9:36] publish still Andre Carpathy summed up a
+[9:38] lot of people's feelings when he tweeted
+[9:39] about a week ago "The reality of
+[9:41] building web apps in 2025 is that it's a
+[9:43] bit like assembling IKEA furniture
+[9:45] there's no full stack product with
+[9:46] batteries included you have to piece
+[9:48] together and configure many individual
+[9:49] services front end and back end hosting
+[9:52] database authentication blob storage
+[9:54] email payments background jobs analytics
+[9:55] monitoring dev tools secrets etc he
+[9:57] continues i'm relatively new to modern
+[9:59] webdev and find the above a bit
+[10:00] overwhelming eg i'm embarrassed to share
+[10:02] it took me 3 hours the other day to
+[10:04] create and configure a superbase with a
+[10:05] Versell app and resolve a few errors the
+[10:07] second you stray just slightly from the
+[10:09] getting started tutorial in the docs
+[10:10] you're suddenly in the wilderness it's
+[10:12] not even code it's configurations
+[10:14] plumbing orchestration workflows best
+[10:15] practices a lot of glory will go to
+[10:17] whoever figures out how to make it
+[10:18] accessible and just work out of the box
+[10:20] for both humans and increasingly and
+[10:22] especially AIs now a lot of the vibe
+[10:24] coding platforms showed up in the
+[10:26] comments saying "Keep an eye out." Anton
+[10:28] from Lovable said "Exactly what we're
+[10:30] building at Lovable." One of the
+[10:31] respondents though was Nicholas Charier
+[10:33] who wrote "This is exactly our vision
+[10:34] for Mocha not glued together developer
+[10:36] tools all made slightly easier but a
+[10:38] fully integrated one-stop shop." And
+[10:40] this company Mocha was also just
+[10:42] announced a couple of days ago nicholas
+[10:44] writes "Introducing Mocha we're
+[10:45] incredibly excited to launch the
+[10:47] absolute best way to build full stack
+[10:48] web apps no code no templates just
+[10:50] describe what you want and watch it come
+[10:52] to life he continues "For too long ideas
+[10:54] have died because building products
+[10:55] require too much technical knowledge
+[10:57] we're changing this describe your vision
+[10:59] in human terms get a complete working
+[11:00] product in minutes keep ittering and
+[11:02] adding features then deploy in one click
+[11:04] all integrated unlike other website
+[11:06] builders Mocha aims to be fully
+[11:08] integrated you won't need to pay and
+[11:09] connect five services to get off
+[11:10] databases front-end hosting email etc
+[11:12] just one we take a highly opinionated
+[11:15] approach based on our experience
+[11:16] building top web products like Pinterest
+[11:17] and Next Door you describe outcomes
+[11:19] Mocha handles the rest they even gave an
+[11:21] example of what you could do nicholas
+[11:23] calls out Tom a small business owner in
+[11:25] Texas who operates an HVAC servicing
+[11:26] company tom used Mocha to build
+[11:28] customtailored web apps for each
+[11:30] customer with personalized branding and
+[11:31] functionality which he said increased
+[11:33] deal conversion customer satisfaction
+[11:34] and velocity by 200% and indeed he sums
+[11:37] up our theme here at the end we're
+[11:38] entering an era where everyone not just
+[11:40] engineers can build personal software
+[11:42] the era of idea people and personal
+[11:44] software we couldn't be more excited now
+[11:47] I haven't had a chance to dig into Mocha
+[11:49] yet but in terms of us looking at
+[11:50] startups both as very cool things on
+[11:52] their own but also as reflective of
+[11:53] trends it is so clear that this is where
+[11:55] vibe coding is heading this is
+[11:57] absolutely the next frontier the thing
+[11:59] for people who are trying to push things
+[12:00] beyond just prototyping and into
+[12:01] production i think it is no mean feat to
+[12:04] actually integrate this entire
+[12:05] experience end to end but I also think
+[12:07] that this is going to be completely
+[12:09] table stakes for these companies it is
+[12:11] going to be an absolute onslaught race
+[12:13] between Bolt and Lovable and Mocha and
+[12:15] the big beneficiary is all of us who get
+[12:17] to build things that were never possible
+[12:18] before so that is the list five startups
+[12:21] that have come out in the past week that
+[12:23] reflect some of AI's most important
+[12:24] trends again we had General Agents who
+[12:27] released ACE the real-time computer
+[12:29] autopilot lindy who announced their
+[12:31] agent swarms basically if you ever
+[12:32] wanted your own army of employees now
+[12:34] you can have it paid which is building
+[12:36] agent infrastructure making it easier
+[12:38] for agents to actually interact with
+[12:40] financial rails vibe Code which is
+[12:42] taking the vibe coding world onto mobile
+[12:44] and Mocha which is advancing vibe coding
+[12:46] entirely by moving towards an endto-end
+[12:49] experience ai remains the most
+[12:51] interesting and exciting space in the
+[12:53] world and I'm thrilled to be able to
+[12:54] share it with you every day for now
+[12:56] that's going to do it for today's AI
+[12:57] daily brief appreciate you listening or
+[12:59] watching as always and until next time
+[13:01] peace

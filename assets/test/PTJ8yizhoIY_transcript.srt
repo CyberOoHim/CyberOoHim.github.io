@@ -1,0 +1,1671 @@
+1
+00:00:00,000 --> 00:00:02,000
+welcome back to the AI Daily Brief every
+
+2
+00:00:02,000 --> 00:00:04,000
+day it feels like a million new cool AI
+
+3
+00:00:04,000 --> 00:00:07,000
+startups launch so much so that it's
+
+4
+00:00:07,000 --> 00:00:08,000
+actually pretty rare that we dig deep
+
+5
+00:00:08,000 --> 00:00:10,000
+and cover brand new companies on this
+
+6
+00:00:10,000 --> 00:00:12,000
+show and yet over the past couple of
+
+7
+00:00:12,000 --> 00:00:15,000
+days I've seen a handful of companies
+
+8
+00:00:15,000 --> 00:00:17,000
+that are on the one hand just very
+
+9
+00:00:17,000 --> 00:00:18,000
+impressive and interesting and seemingly
+
+10
+00:00:18,000 --> 00:00:22,000
+high potential and additionally really
+
+11
+00:00:22,000 --> 00:00:24,000
+reflect and tell the story of key trends
+
+12
+00:00:24,000 --> 00:00:27,000
+shaping AI right now so what we're going
+
+13
+00:00:27,000 --> 00:00:28,000
+to do today is look at these five or so
+
+14
+00:00:28,000 --> 00:00:30,000
+new companies all of which have been
+
+15
+00:00:30,000 --> 00:00:31,000
+announced literally over the last 48
+
+16
+00:00:31,000 --> 00:00:33,000
+hours or so talk about them or their new
+
+17
+00:00:33,000 --> 00:00:35,000
+products that have been announced but
+
+18
+00:00:35,000 --> 00:00:38,000
+then also put them in the larger context
+
+19
+00:00:38,000 --> 00:00:40,000
+first up we have General Agents ceo
+
+20
+00:00:40,000 --> 00:00:42,000
+Sergio Ojair formerly of Tesla and
+
+21
+00:00:42,000 --> 00:00:44,000
+Google DeepMind writes "Today I'm
+
+22
+00:00:44,000 --> 00:00:46,000
+launching my new company General Agents
+
+23
+00:00:46,000 --> 00:00:48,000
+and our first product introducing Ace
+
+24
+00:00:48,000 --> 00:00:51,000
+the first real-time computer autopilot
+
+25
+00:00:51,000 --> 00:00:53,000
+ace is not a chatbot ace performs tasks
+
+26
+00:00:53,000 --> 00:00:56,000
+for you on your computer using your
+
+27
+00:00:56,000 --> 00:00:59,000
+mouse and keyboard at superhuman speeds
+
+28
+00:00:59,000 --> 00:01:00,000
+now by the way this is a show that's
+
+29
+00:01:00,000 --> 00:01:02,000
+going to be much better if you watch it
+
+30
+00:01:02,000 --> 00:01:03,000
+because there's lots of examples going
+
+31
+00:01:03,000 --> 00:01:05,000
+on you should be able to watch it in the
+
+32
+00:01:05,000 --> 00:01:08,000
+Spotify app or on YouTube but Sherjo
+
+33
+00:01:08,000 --> 00:01:10,000
+goes on Ace can use all the tools on
+
+34
+00:01:10,000 --> 00:01:12,000
+your computer and the video shared shows
+
+35
+00:01:12,000 --> 00:01:14,000
+it grabbing images dropping them into
+
+36
+00:01:14,000 --> 00:01:15,000
+Google Drive and generally doing the
+
+37
+00:01:15,000 --> 00:01:17,000
+types of things that a human would do
+
+38
+00:01:17,000 --> 00:01:19,000
+their preview videos also show the
+
+39
+00:01:19,000 --> 00:01:21,000
+method of interaction in Premiere Pro it
+
+40
+00:01:21,000 --> 00:01:24,000
+shows a user using the Ace bar to for
+
+41
+00:01:24,000 --> 00:01:26,000
+example slow the video clip down to 50%
+
+42
+00:01:26,000 --> 00:01:28,000
+split the clip once with the cut tool
+
+43
+00:01:28,000 --> 00:01:30,000
+and then export it and again you're
+
+44
+00:01:30,000 --> 00:01:32,000
+using verbal instructions and then
+
+45
+00:01:32,000 --> 00:01:34,000
+letting ACE actually do the work they
+
+46
+00:01:34,000 --> 00:01:35,000
+point out that this can be really
+
+47
+00:01:35,000 --> 00:01:36,000
+helpful not just for increasing your
+
+48
+00:01:36,000 --> 00:01:38,000
+speed and efficiency but also for tools
+
+49
+00:01:38,000 --> 00:01:40,000
+that you're still learning how to use
+
+50
+00:01:40,000 --> 00:01:41,000
+there's a bunch of other things about
+
+51
+00:01:41,000 --> 00:01:43,000
+ACE as well but the big thing that
+
+52
+00:01:43,000 --> 00:01:45,000
+they're hammering is that it's fast in
+
+53
+00:01:45,000 --> 00:01:46,000
+fact they claim 20 times faster than
+
+54
+00:01:46,000 --> 00:01:49,000
+competing agents making it as they say
+
+55
+00:01:49,000 --> 00:01:51,000
+more practical for everyday use speed is
+
+56
+00:01:51,000 --> 00:01:52,000
+definitely what caught people's
+
+57
+00:01:52,000 --> 00:01:55,000
+attention with this replet CEO Amjad
+
+58
+00:01:55,000 --> 00:01:57,000
+Msad said "Insane speed computer use
+
+59
+00:01:57,000 --> 00:01:59,000
+models have not seen major commercial
+
+60
+00:01:59,000 --> 00:02:00,000
+breakthrough because they're slow and
+
+61
+00:02:00,000 --> 00:02:03,000
+expensive this is a huge unlock."
+
+62
+00:02:03,000 --> 00:02:05,000
+William Gus a former research scientist
+
+63
+00:02:05,000 --> 00:02:07,000
+at OpenAI who's now a general agent as
+
+64
+00:02:07,000 --> 00:02:09,000
+well writes "Ace is the world's fastest
+
+65
+00:02:09,000 --> 00:02:10,000
+AI computer use agent this is
+
+66
+00:02:10,000 --> 00:02:13,000
+fundamentally a new way to use computers
+
+67
+00:02:13,000 --> 00:02:15,000
+when someone asked "How does it work?"
+
+68
+00:02:15,000 --> 00:02:17,000
+William responded "It takes in pixels
+
+69
+00:02:17,000 --> 00:02:18,000
+and instructions and outputs click drag
+
+70
+00:02:18,000 --> 00:02:20,000
+keyboard etc actions at 300 milliseconds
+
+71
+00:02:20,000 --> 00:02:23,000
+roundtrip latency." In other words it's
+
+72
+00:02:23,000 --> 00:02:24,000
+doing full screenshot image processing
+
+73
+00:02:24,000 --> 00:02:26,000
+extremely quickly now in terms of the
+
+74
+00:02:26,000 --> 00:02:28,000
+discussion around this outside of it
+
+75
+00:02:28,000 --> 00:02:30,000
+just being fast some people pointed out
+
+76
+00:02:30,000 --> 00:02:32,000
+that advances coming from startups like
+
+77
+00:02:32,000 --> 00:02:33,000
+this mean that it's not just the big
+
+78
+00:02:33,000 --> 00:02:34,000
+labs that are going to have all the fun
+
+79
+00:02:34,000 --> 00:02:37,000
+in the new era f schuman on Twitter also
+
+80
+00:02:37,000 --> 00:02:38,000
+pointed out that the expansion of human
+
+81
+00:02:38,000 --> 00:02:40,000
+creativity to go with a theme from
+
+82
+00:02:40,000 --> 00:02:41,000
+yesterday's show is one of the
+
+83
+00:02:41,000 --> 00:02:43,000
+byproducts of this type of computer use
+
+84
+00:02:43,000 --> 00:02:45,000
+tool where as he puts it anyone can now
+
+85
+00:02:45,000 --> 00:02:47,000
+operate software without even knowing
+
+86
+00:02:47,000 --> 00:02:49,000
+how to operate it that is a huge
+
+87
+00:02:49,000 --> 00:02:50,000
+breakthrough and certainly wasn't on my
+
+88
+00:02:50,000 --> 00:02:52,000
+bingo card for this year so there are
+
+89
+00:02:52,000 --> 00:02:54,000
+obviously a lot of themes that I think
+
+90
+00:02:54,000 --> 00:02:57,000
+this startup represents broadly speaking
+
+91
+00:02:57,000 --> 00:02:58,000
+of course agents the most important most
+
+92
+00:02:58,000 --> 00:03:01,000
+dominant category of AI advancements
+
+93
+00:03:01,000 --> 00:03:03,000
+right now but more specifically this
+
+94
+00:03:03,000 --> 00:03:04,000
+idea of expanding agent capabilities
+
+95
+00:03:04,000 --> 00:03:06,000
+through computer use this is something
+
+96
+00:03:06,000 --> 00:03:08,000
+that we started to see inklings of at
+
+97
+00:03:08,000 --> 00:03:09,000
+the end of last year and this appears to
+
+98
+00:03:09,000 --> 00:03:11,000
+be a major jump forward on that
+
+99
+00:03:11,000 --> 00:03:13,000
+obviously if you listen to yesterday's
+
+100
+00:03:13,000 --> 00:03:14,000
+show about the five fastchanging AI
+
+101
+00:03:14,000 --> 00:03:16,000
+transformations that'll keep you up at
+
+102
+00:03:16,000 --> 00:03:17,000
+night you'll have heard me talk about
+
+103
+00:03:17,000 --> 00:03:20,000
+the expansion of human creativity and as
+
+104
+00:03:20,000 --> 00:03:21,000
+we just heard being able to talk at
+
+105
+00:03:21,000 --> 00:03:23,000
+software and have your agent do it with
+
+106
+00:03:23,000 --> 00:03:24,000
+you does absolutely expand which
+
+107
+00:03:24,000 --> 00:03:28,000
+software tools a person can use lastly
+
+108
+00:03:28,000 --> 00:03:30,000
+the fact that the speed of computer use
+
+109
+00:03:30,000 --> 00:03:32,000
+is now exceeding humans I think gives us
+
+110
+00:03:32,000 --> 00:03:34,000
+a glimpse into the future where AI and
+
+111
+00:03:34,000 --> 00:03:35,000
+agents aren't just as performant as
+
+112
+00:03:35,000 --> 00:03:38,000
+people but are actually better at things
+
+113
+00:03:38,000 --> 00:03:39,000
+now obviously AI is better at many
+
+114
+00:03:39,000 --> 00:03:41,000
+things already but this is a highly
+
+115
+00:03:41,000 --> 00:03:44,000
+visual example of that another theme
+
+116
+00:03:44,000 --> 00:03:45,000
+which it's a little too early to explore
+
+117
+00:03:45,000 --> 00:03:47,000
+is whether US state-of-the-art agent
+
+118
+00:03:47,000 --> 00:03:49,000
+capabilities can drive as much virality
+
+119
+00:03:49,000 --> 00:03:51,000
+as recent releases from China like Manis
+
+120
+00:03:51,000 --> 00:03:53,000
+we might be a little constrained in this
+
+121
+00:03:53,000 --> 00:03:54,000
+case because general agents is only
+
+122
+00:03:54,000 --> 00:03:56,000
+available as a research preview not as a
+
+123
+00:03:56,000 --> 00:03:58,000
+full product but still that's something
+
+124
+00:03:58,000 --> 00:04:00,000
+that I'll be watching next up we have
+
+125
+00:04:00,000 --> 00:04:02,000
+Lindy and of course while Lindy isn't
+
+126
+00:04:02,000 --> 00:04:05,000
+new its new swarms feature is i won't
+
+127
+00:04:05,000 --> 00:04:06,000
+spend a ton of time on this because I
+
+128
+00:04:06,000 --> 00:04:07,000
+got into it yesterday but I think
+
+129
+00:04:07,000 --> 00:04:09,000
+co-founder Lindy Drop actually does a
+
+130
+00:04:09,000 --> 00:04:11,000
+great job explaining this she writes
+
+131
+00:04:11,000 --> 00:04:14,000
+"This AI agent turns one workflow into a
+
+132
+00:04:14,000 --> 00:04:16,000
+multi- aent empire working in parallel
+
+133
+00:04:16,000 --> 00:04:18,000
+fed it one event URL and here's what
+
+134
+00:04:18,000 --> 00:04:20,000
+happened it extracted every speaker's
+
+135
+00:04:20,000 --> 00:04:22,000
+details deep researched each person
+
+136
+00:04:22,000 --> 00:04:24,000
+using LinkedIn news and PR found and
+
+137
+00:04:24,000 --> 00:04:26,000
+transcribed their podcast appearances
+
+138
+00:04:26,000 --> 00:04:28,000
+crafted emails with their exact quotes
+
+139
+00:04:28,000 --> 00:04:30,000
+making them impossible to ignore
+
+140
+00:04:30,000 --> 00:04:32,000
+identified lookalike profiles and
+
+141
+00:04:32,000 --> 00:04:34,000
+repeated the process on autopilot the
+
+142
+00:04:34,000 --> 00:04:37,000
+net result she says it just sent 370
+
+143
+00:04:37,000 --> 00:04:39,000
+impossible to ignore personalized emails
+
+144
+00:04:39,000 --> 00:04:41,000
+in seconds versus an entire day of
+
+145
+00:04:41,000 --> 00:04:44,000
+manual work we're building AI employees
+
+146
+00:04:44,000 --> 00:04:46,000
+that run entire companies autonomously
+
+147
+00:04:46,000 --> 00:04:48,000
+what about someone outside the company
+
+148
+00:04:48,000 --> 00:04:50,000
+michael Raspusi writes "First test using
+
+149
+00:04:50,000 --> 00:04:52,000
+Lindy Loops trying out a series of
+
+150
+00:04:52,000 --> 00:04:53,000
+custom deep research agents using
+
+151
+00:04:53,000 --> 00:04:55,000
+Perplexity and Anthropic context: We're
+
+152
+00:04:55,000 --> 00:04:57,000
+prepping for our next AI and health hack
+
+153
+00:04:57,000 --> 00:04:58,000
+so I want a quick update across
+
+154
+00:04:58,000 --> 00:05:00,000
+different non-invasive imaging
+
+155
+00:05:00,000 --> 00:05:03,000
+modalities i texted at LFUS FNIRS and
+
+156
+00:05:03,000 --> 00:05:05,000
+ultrasound and it cooked what would have
+
+157
+00:05:05,000 --> 00:05:07,000
+taken 1 to two hours manually 25 minutes
+
+158
+00:05:07,000 --> 00:05:09,000
+with AI tools took 2 minutes with Lindy
+
+159
+00:05:09,000 --> 00:05:12,000
+AI one more test from Alex Carson they
+
+160
+00:05:12,000 --> 00:05:14,000
+write "Agent swarms let AI agents
+
+161
+00:05:14,000 --> 00:05:15,000
+duplicate themselves to tackle hundreds
+
+162
+00:05:15,000 --> 00:05:17,000
+of tasks simultaneously the new
+
+163
+00:05:17,000 --> 00:05:19,000
+capability immediately scales what's
+
+164
+00:05:19,000 --> 00:05:21,000
+possible with AI automation by allowing
+
+165
+00:05:21,000 --> 00:05:22,000
+agents to divide and conquer across
+
+166
+00:05:22,000 --> 00:05:24,000
+large data sets without complex coding
+
+167
+00:05:24,000 --> 00:05:26,000
+or custom API connections you provide a
+
+168
+00:05:26,000 --> 00:05:27,000
+list of tasks and Lindy automatically
+
+169
+00:05:27,000 --> 00:05:29,000
+spawns duplicate agents to handle each
+
+170
+00:05:29,000 --> 00:05:30,000
+item concurrently
+
+171
+00:05:30,000 --> 00:05:32,000
+testing this feature with a YouTube to
+
+172
+00:05:32,000 --> 00:05:34,000
+blog post workflow showed the impressive
+
+173
+00:05:34,000 --> 00:05:36,000
+potential i created a simple flow that
+
+174
+00:05:36,000 --> 00:05:37,000
+triggers when new URLs are added to a
+
+175
+00:05:37,000 --> 00:05:39,000
+spreadsheet creates a loop that
+
+176
+00:05:39,000 --> 00:05:41,000
+processes each URL simultaneously
+
+177
+00:05:41,000 --> 00:05:42,000
+transcribes each video and generates a
+
+178
+00:05:42,000 --> 00:05:44,000
+professionally formatted blog post and
+
+179
+00:05:44,000 --> 00:05:45,000
+then returns all completed posts and
+
+180
+00:05:45,000 --> 00:05:48,000
+chat messages and so what's the theme
+
+181
+00:05:48,000 --> 00:05:50,000
+here it's not just agents obviously
+
+182
+00:05:50,000 --> 00:05:51,000
+we've already covered agents as the big
+
+183
+00:05:51,000 --> 00:05:53,000
+dominant theme no what's interesting to
+
+184
+00:05:53,000 --> 00:05:55,000
+me is this is effectively my Doctor
+
+185
+00:05:55,000 --> 00:05:57,000
+Strange theory of AI agent work come to
+
+186
+00:05:57,000 --> 00:06:00,000
+life this is not a onetoone replacement
+
+187
+00:06:00,000 --> 00:06:02,000
+for existing work this is the very early
+
+188
+00:06:02,000 --> 00:06:04,000
+innings of what you can do if you were
+
+189
+00:06:04,000 --> 00:06:05,000
+able to hire hundreds of people instead
+
+190
+00:06:05,000 --> 00:06:08,000
+of just one for a particular task those
+
+191
+00:06:08,000 --> 00:06:10,000
+370 personalized emails that Lindy sent
+
+192
+00:06:10,000 --> 00:06:12,000
+is an example of how you would apply
+
+193
+00:06:12,000 --> 00:06:14,000
+this to sales i think we are going to
+
+194
+00:06:14,000 --> 00:06:15,000
+see so much more of this in the next few
+
+195
+00:06:15,000 --> 00:06:17,000
+months and it's actually going to take
+
+196
+00:06:17,000 --> 00:06:18,000
+the new capabilities being available
+
+197
+00:06:18,000 --> 00:06:20,000
+before people can even come close to
+
+198
+00:06:20,000 --> 00:06:21,000
+figuring out how to actually take full
+
+199
+00:06:21,000 --> 00:06:23,000
+advantage
+
+200
+00:06:23,000 --> 00:06:26,000
+startup number three is called Paid and
+
+201
+00:06:26,000 --> 00:06:28,000
+a very appropriate name it is manny
+
+202
+00:06:28,000 --> 00:06:30,000
+Medina writes "I'm officially launching
+
+203
+00:06:30,000 --> 00:06:32,000
+my new company Paid we just raised€ 10
+
+204
+00:06:32,000 --> 00:06:33,000
+million euro to solve the biggest
+
+205
+00:06:33,000 --> 00:06:35,000
+problem no one's talking about in AI ai
+
+206
+00:06:35,000 --> 00:06:37,000
+agents are growing fast but face a
+
+207
+00:06:37,000 --> 00:06:39,000
+critical challenge how to monetize and
+
+208
+00:06:39,000 --> 00:06:40,000
+capture the value they create
+
+209
+00:06:40,000 --> 00:06:42,000
+traditional software billing doesn't
+
+210
+00:06:42,000 --> 00:06:44,000
+solve this problem at Paid we're solving
+
+211
+00:06:44,000 --> 00:06:45,000
+this problem by smart pricing that
+
+212
+00:06:45,000 --> 00:06:47,000
+aligns with actual value creation
+
+213
+00:06:47,000 --> 00:06:49,000
+real-time margin tracking to ensure
+
+214
+00:06:49,000 --> 00:06:50,000
+profitability clear dashboards that
+
+215
+00:06:50,000 --> 00:06:52,000
+demonstrate ROI to customers billing
+
+216
+00:06:52,000 --> 00:06:54,000
+invoicing revenue recovery taxes and all
+
+217
+00:06:54,000 --> 00:06:55,000
+the back office needs in a single pane
+
+218
+00:06:55,000 --> 00:06:57,000
+of glass with just a few lines of codes
+
+219
+00:06:57,000 --> 00:06:59,000
+AI builders can focus on creating
+
+220
+00:06:59,000 --> 00:07:00,000
+amazing agents while we handle the
+
+221
+00:07:00,000 --> 00:07:03,000
+business engine behind them summing it
+
+222
+00:07:03,000 --> 00:07:04,000
+up even more clearly their website calls
+
+223
+00:07:04,000 --> 00:07:06,000
+this the business engine for AI agents
+
+224
+00:07:06,000 --> 00:07:08,000
+to me this is reflective of the fact
+
+225
+00:07:08,000 --> 00:07:10,000
+that agents are now officially shifting
+
+226
+00:07:10,000 --> 00:07:12,000
+from interesting toys and novelties to
+
+227
+00:07:12,000 --> 00:07:14,000
+actual productionready tools that are
+
+228
+00:07:14,000 --> 00:07:17,000
+going to go in and change how we do work
+
+229
+00:07:17,000 --> 00:07:18,000
+paid is an example of the critical
+
+230
+00:07:18,000 --> 00:07:20,000
+infrastructure that is being built to
+
+231
+00:07:20,000 --> 00:07:22,000
+enable agents to live up to their full
+
+232
+00:07:22,000 --> 00:07:24,000
+potential effectively everything that
+
+233
+00:07:24,000 --> 00:07:26,000
+human employees do now every service
+
+234
+00:07:26,000 --> 00:07:28,000
+that we have around them is going to
+
+235
+00:07:28,000 --> 00:07:30,000
+have some proximate version in the agent
+
+236
+00:07:30,000 --> 00:07:32,000
+world this is going to be an incredibly
+
+237
+00:07:32,000 --> 00:07:33,000
+rich vein for startups in the coming
+
+238
+00:07:33,000 --> 00:07:35,000
+years and as you can see is already
+
+239
+00:07:35,000 --> 00:07:37,000
+happening with Gusto right now next up
+
+240
+00:07:37,000 --> 00:07:39,000
+we're moving on from agents at least
+
+241
+00:07:39,000 --> 00:07:41,000
+sort of to another huge theme of the
+
+242
+00:07:41,000 --> 00:07:43,000
+moment which is of course vibe coding
+
+243
+00:07:43,000 --> 00:07:45,000
+and for that we turn to the company
+
+244
+00:07:45,000 --> 00:07:49,000
+called yes vibe code they write in order
+
+245
+00:07:49,000 --> 00:07:50,000
+for billions of people to vibe code we
+
+246
+00:07:50,000 --> 00:07:52,000
+need a tool with the power of cursor and
+
+247
+00:07:52,000 --> 00:07:54,000
+the simplicity of chat GBT that they
+
+248
+00:07:54,000 --> 00:07:56,000
+argue is the new app that they've built
+
+249
+00:07:56,000 --> 00:07:58,000
+vibe code now this comes from Riley
+
+250
+00:07:58,000 --> 00:08:00,000
+Brown and his co-founders riley was and
+
+251
+00:08:00,000 --> 00:08:02,000
+is I think the world's biggest AI Tik
+
+252
+00:08:02,000 --> 00:08:04,000
+Tocker but over the past six months or
+
+253
+00:08:04,000 --> 00:08:07,000
+so has really gone allin on vibe coding
+
+254
+00:08:07,000 --> 00:08:09,000
+he's been building things for himself
+
+255
+00:08:09,000 --> 00:08:10,000
+using content to come up with new
+
+256
+00:08:10,000 --> 00:08:12,000
+theories of how creators are going to
+
+257
+00:08:12,000 --> 00:08:13,000
+code things in the future and this is
+
+258
+00:08:13,000 --> 00:08:15,000
+the app that he and some friends
+
+259
+00:08:15,000 --> 00:08:17,000
+basically built for himself to do what
+
+260
+00:08:17,000 --> 00:08:19,000
+he wanted to do one of the examples he
+
+261
+00:08:19,000 --> 00:08:20,000
+showed off was vibe coding a mobile
+
+262
+00:08:20,000 --> 00:08:22,000
+video game in a single prompt and what's
+
+263
+00:08:22,000 --> 00:08:23,000
+cool about this if you've used something
+
+264
+00:08:23,000 --> 00:08:25,000
+like Lovable and Bolt is that this is a
+
+265
+00:08:25,000 --> 00:08:27,000
+native mobile interface instead of
+
+266
+00:08:27,000 --> 00:08:30,000
+focusing on web applications Vive Code
+
+267
+00:08:30,000 --> 00:08:31,000
+is starting with a focus on mobile
+
+268
+00:08:31,000 --> 00:08:33,000
+applications and when excited users
+
+269
+00:08:33,000 --> 00:08:34,000
+started posting on the announcement
+
+270
+00:08:34,000 --> 00:08:36,000
+thread that signup wasn't working Vive
+
+271
+00:08:36,000 --> 00:08:37,000
+Code basically said that they were
+
+272
+00:08:37,000 --> 00:08:39,000
+already full up so in terms of the
+
+273
+00:08:39,000 --> 00:08:41,000
+themes here obviously Vive coding in
+
+274
+00:08:41,000 --> 00:08:43,000
+general is a big one but the mobile
+
+275
+00:08:43,000 --> 00:08:44,000
+integration is really fascinating as
+
+276
+00:08:44,000 --> 00:08:47,000
+well as Eddie Yun points out right now
+
+277
+00:08:47,000 --> 00:08:49,000
+the average interaction with vibe coding
+
+278
+00:08:49,000 --> 00:08:51,000
+is still via text but imagine vibe
+
+279
+00:08:51,000 --> 00:08:53,000
+coding with voice funny enough when
+
+280
+00:08:53,000 --> 00:08:55,000
+Andre Karpathy originally talked about
+
+281
+00:08:55,000 --> 00:08:57,000
+vibe coding he talked about how he was
+
+282
+00:08:57,000 --> 00:08:59,000
+using whisper to talk to his computer to
+
+283
+00:08:59,000 --> 00:09:01,000
+do it so in some ways this would be an
+
+284
+00:09:01,000 --> 00:09:02,000
+actual instantiation of where the whole
+
+285
+00:09:02,000 --> 00:09:04,000
+thing started vibe codeandanda writes
+
+286
+00:09:04,000 --> 00:09:06,000
+"The best feeling in the world is when
+
+287
+00:09:06,000 --> 00:09:07,000
+you build something and others can use
+
+288
+00:09:07,000 --> 00:09:09,000
+it with vibe code we hope to enable
+
+289
+00:09:09,000 --> 00:09:11,000
+anyone get that feeling." And of course
+
+290
+00:09:11,000 --> 00:09:14,000
+that is the big resonance of vibe coding
+
+291
+00:09:14,000 --> 00:09:15,000
+with people is this expansion of human
+
+292
+00:09:15,000 --> 00:09:18,000
+creativity and creative capacity and
+
+293
+00:09:18,000 --> 00:09:20,000
+that was not the only example one of the
+
+294
+00:09:20,000 --> 00:09:22,000
+challenges for vibe coders is that there
+
+295
+00:09:22,000 --> 00:09:24,000
+are a whole bunch of pieces beyond just
+
+296
+00:09:24,000 --> 00:09:26,000
+writing the code and some of those
+
+297
+00:09:26,000 --> 00:09:27,000
+things remain outside of people's
+
+298
+00:09:27,000 --> 00:09:29,000
+technical capacities now of course you
+
+299
+00:09:29,000 --> 00:09:31,000
+can use vibe coding tools or separate
+
+300
+00:09:31,000 --> 00:09:32,000
+LLMs to get help with those things and
+
+301
+00:09:32,000 --> 00:09:34,000
+all of the vibe coding tools have some
+
+302
+00:09:34,000 --> 00:09:36,000
+version of a single button push to
+
+303
+00:09:36,000 --> 00:09:38,000
+publish still Andre Carpathy summed up a
+
+304
+00:09:38,000 --> 00:09:39,000
+lot of people's feelings when he tweeted
+
+305
+00:09:39,000 --> 00:09:41,000
+about a week ago "The reality of
+
+306
+00:09:41,000 --> 00:09:43,000
+building web apps in 2025 is that it's a
+
+307
+00:09:43,000 --> 00:09:45,000
+bit like assembling IKEA furniture
+
+308
+00:09:45,000 --> 00:09:46,000
+there's no full stack product with
+
+309
+00:09:46,000 --> 00:09:48,000
+batteries included you have to piece
+
+310
+00:09:48,000 --> 00:09:49,000
+together and configure many individual
+
+311
+00:09:49,000 --> 00:09:52,000
+services front end and back end hosting
+
+312
+00:09:52,000 --> 00:09:54,000
+database authentication blob storage
+
+313
+00:09:54,000 --> 00:09:55,000
+email payments background jobs analytics
+
+314
+00:09:55,000 --> 00:09:57,000
+monitoring dev tools secrets etc he
+
+315
+00:09:57,000 --> 00:09:59,000
+continues i'm relatively new to modern
+
+316
+00:09:59,000 --> 00:10:00,000
+webdev and find the above a bit
+
+317
+00:10:00,000 --> 00:10:02,000
+overwhelming eg i'm embarrassed to share
+
+318
+00:10:02,000 --> 00:10:04,000
+it took me 3 hours the other day to
+
+319
+00:10:04,000 --> 00:10:05,000
+create and configure a superbase with a
+
+320
+00:10:05,000 --> 00:10:07,000
+Versell app and resolve a few errors the
+
+321
+00:10:07,000 --> 00:10:09,000
+second you stray just slightly from the
+
+322
+00:10:09,000 --> 00:10:10,000
+getting started tutorial in the docs
+
+323
+00:10:10,000 --> 00:10:12,000
+you're suddenly in the wilderness it's
+
+324
+00:10:12,000 --> 00:10:14,000
+not even code it's configurations
+
+325
+00:10:14,000 --> 00:10:15,000
+plumbing orchestration workflows best
+
+326
+00:10:15,000 --> 00:10:17,000
+practices a lot of glory will go to
+
+327
+00:10:17,000 --> 00:10:18,000
+whoever figures out how to make it
+
+328
+00:10:18,000 --> 00:10:20,000
+accessible and just work out of the box
+
+329
+00:10:20,000 --> 00:10:22,000
+for both humans and increasingly and
+
+330
+00:10:22,000 --> 00:10:24,000
+especially AIs now a lot of the vibe
+
+331
+00:10:24,000 --> 00:10:26,000
+coding platforms showed up in the
+
+332
+00:10:26,000 --> 00:10:28,000
+comments saying "Keep an eye out." Anton
+
+333
+00:10:28,000 --> 00:10:30,000
+from Lovable said "Exactly what we're
+
+334
+00:10:30,000 --> 00:10:31,000
+building at Lovable." One of the
+
+335
+00:10:31,000 --> 00:10:33,000
+respondents though was Nicholas Charier
+
+336
+00:10:33,000 --> 00:10:34,000
+who wrote "This is exactly our vision
+
+337
+00:10:34,000 --> 00:10:36,000
+for Mocha not glued together developer
+
+338
+00:10:36,000 --> 00:10:38,000
+tools all made slightly easier but a
+
+339
+00:10:38,000 --> 00:10:40,000
+fully integrated one-stop shop." And
+
+340
+00:10:40,000 --> 00:10:42,000
+this company Mocha was also just
+
+341
+00:10:42,000 --> 00:10:44,000
+announced a couple of days ago nicholas
+
+342
+00:10:44,000 --> 00:10:45,000
+writes "Introducing Mocha we're
+
+343
+00:10:45,000 --> 00:10:47,000
+incredibly excited to launch the
+
+344
+00:10:47,000 --> 00:10:48,000
+absolute best way to build full stack
+
+345
+00:10:48,000 --> 00:10:50,000
+web apps no code no templates just
+
+346
+00:10:50,000 --> 00:10:52,000
+describe what you want and watch it come
+
+347
+00:10:52,000 --> 00:10:54,000
+to life he continues "For too long ideas
+
+348
+00:10:54,000 --> 00:10:55,000
+have died because building products
+
+349
+00:10:55,000 --> 00:10:57,000
+require too much technical knowledge
+
+350
+00:10:57,000 --> 00:10:59,000
+we're changing this describe your vision
+
+351
+00:10:59,000 --> 00:11:00,000
+in human terms get a complete working
+
+352
+00:11:00,000 --> 00:11:02,000
+product in minutes keep ittering and
+
+353
+00:11:02,000 --> 00:11:04,000
+adding features then deploy in one click
+
+354
+00:11:04,000 --> 00:11:06,000
+all integrated unlike other website
+
+355
+00:11:06,000 --> 00:11:08,000
+builders Mocha aims to be fully
+
+356
+00:11:08,000 --> 00:11:09,000
+integrated you won't need to pay and
+
+357
+00:11:09,000 --> 00:11:10,000
+connect five services to get off
+
+358
+00:11:10,000 --> 00:11:12,000
+databases front-end hosting email etc
+
+359
+00:11:12,000 --> 00:11:15,000
+just one we take a highly opinionated
+
+360
+00:11:15,000 --> 00:11:16,000
+approach based on our experience
+
+361
+00:11:16,000 --> 00:11:17,000
+building top web products like Pinterest
+
+362
+00:11:17,000 --> 00:11:19,000
+and Next Door you describe outcomes
+
+363
+00:11:19,000 --> 00:11:21,000
+Mocha handles the rest they even gave an
+
+364
+00:11:21,000 --> 00:11:23,000
+example of what you could do nicholas
+
+365
+00:11:23,000 --> 00:11:25,000
+calls out Tom a small business owner in
+
+366
+00:11:25,000 --> 00:11:26,000
+Texas who operates an HVAC servicing
+
+367
+00:11:26,000 --> 00:11:28,000
+company tom used Mocha to build
+
+368
+00:11:28,000 --> 00:11:30,000
+customtailored web apps for each
+
+369
+00:11:30,000 --> 00:11:31,000
+customer with personalized branding and
+
+370
+00:11:31,000 --> 00:11:33,000
+functionality which he said increased
+
+371
+00:11:33,000 --> 00:11:34,000
+deal conversion customer satisfaction
+
+372
+00:11:34,000 --> 00:11:37,000
+and velocity by 200% and indeed he sums
+
+373
+00:11:37,000 --> 00:11:38,000
+up our theme here at the end we're
+
+374
+00:11:38,000 --> 00:11:40,000
+entering an era where everyone not just
+
+375
+00:11:40,000 --> 00:11:42,000
+engineers can build personal software
+
+376
+00:11:42,000 --> 00:11:44,000
+the era of idea people and personal
+
+377
+00:11:44,000 --> 00:11:47,000
+software we couldn't be more excited now
+
+378
+00:11:47,000 --> 00:11:49,000
+I haven't had a chance to dig into Mocha
+
+379
+00:11:49,000 --> 00:11:50,000
+yet but in terms of us looking at
+
+380
+00:11:50,000 --> 00:11:52,000
+startups both as very cool things on
+
+381
+00:11:52,000 --> 00:11:53,000
+their own but also as reflective of
+
+382
+00:11:53,000 --> 00:11:55,000
+trends it is so clear that this is where
+
+383
+00:11:55,000 --> 00:11:57,000
+vibe coding is heading this is
+
+384
+00:11:57,000 --> 00:11:59,000
+absolutely the next frontier the thing
+
+385
+00:11:59,000 --> 00:12:00,000
+for people who are trying to push things
+
+386
+00:12:00,000 --> 00:12:01,000
+beyond just prototyping and into
+
+387
+00:12:01,000 --> 00:12:04,000
+production i think it is no mean feat to
+
+388
+00:12:04,000 --> 00:12:05,000
+actually integrate this entire
+
+389
+00:12:05,000 --> 00:12:07,000
+experience end to end but I also think
+
+390
+00:12:07,000 --> 00:12:09,000
+that this is going to be completely
+
+391
+00:12:09,000 --> 00:12:11,000
+table stakes for these companies it is
+
+392
+00:12:11,000 --> 00:12:13,000
+going to be an absolute onslaught race
+
+393
+00:12:13,000 --> 00:12:15,000
+between Bolt and Lovable and Mocha and
+
+394
+00:12:15,000 --> 00:12:17,000
+the big beneficiary is all of us who get
+
+395
+00:12:17,000 --> 00:12:18,000
+to build things that were never possible
+
+396
+00:12:18,000 --> 00:12:21,000
+before so that is the list five startups
+
+397
+00:12:21,000 --> 00:12:23,000
+that have come out in the past week that
+
+398
+00:12:23,000 --> 00:12:24,000
+reflect some of AI's most important
+
+399
+00:12:24,000 --> 00:12:27,000
+trends again we had General Agents who
+
+400
+00:12:27,000 --> 00:12:29,000
+released ACE the real-time computer
+
+401
+00:12:29,000 --> 00:12:31,000
+autopilot lindy who announced their
+
+402
+00:12:31,000 --> 00:12:32,000
+agent swarms basically if you ever
+
+403
+00:12:32,000 --> 00:12:34,000
+wanted your own army of employees now
+
+404
+00:12:34,000 --> 00:12:36,000
+you can have it paid which is building
+
+405
+00:12:36,000 --> 00:12:38,000
+agent infrastructure making it easier
+
+406
+00:12:38,000 --> 00:12:40,000
+for agents to actually interact with
+
+407
+00:12:40,000 --> 00:12:42,000
+financial rails vibe Code which is
+
+408
+00:12:42,000 --> 00:12:44,000
+taking the vibe coding world onto mobile
+
+409
+00:12:44,000 --> 00:12:46,000
+and Mocha which is advancing vibe coding
+
+410
+00:12:46,000 --> 00:12:49,000
+entirely by moving towards an endto-end
+
+411
+00:12:49,000 --> 00:12:51,000
+experience ai remains the most
+
+412
+00:12:51,000 --> 00:12:53,000
+interesting and exciting space in the
+
+413
+00:12:53,000 --> 00:12:54,000
+world and I'm thrilled to be able to
+
+414
+00:12:54,000 --> 00:12:56,000
+share it with you every day for now
+
+415
+00:12:56,000 --> 00:12:57,000
+that's going to do it for today's AI
+
+416
+00:12:57,000 --> 00:12:59,000
+daily brief appreciate you listening or
+
+417
+00:12:59,000 --> 00:13:01,000
+watching as always and until next time
+
+418
+00:13:01,000 --> 00:13:06,000
+peace
