@@ -1,0 +1,533 @@
+---
+layout: apps
+title: Taigi FB Post Consolidator
+version: r0a
+permalink: /pages/taigi_fb_post_consolidator.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taigi FB Post Consolidator</title>
+    <style>
+        /* CSS Styles (mostly same as before) */
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 95%;
+            min-height: 150px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        button {
+            padding: 10px 18px;
+            margin: 8px 5px 8px 0;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.2s ease;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        input[type="file"] {
+            margin-top: 5px;
+            display: block;
+            margin-bottom: 15px;
+        }
+        /* Slider Styles */
+        .slider-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .slider-container label {
+             display: block; /* Ensure label is on its own line */
+             margin-bottom: 8px;
+             font-weight: bold;
+        }
+        input[type="range"] {
+            width: 80%; /* Adjust width as needed */
+            margin-right: 10px;
+            vertical-align: middle; /* Align slider with text */
+        }
+        #similarityValue { /* Style the displayed value */
+            font-weight: bold;
+            min-width: 40px; /* Ensure space for the number */
+            display: inline-block;
+            vertical-align: middle;
+            font-family: monospace;
+        }
+
+        #outputPreview {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .hidden { display: none; }
+        #statusMessage {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status-info { background-color: #cce5ff; color: #004085; border: 1px solid #b8daff; }
+        .status-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+        }
+        .flashing { animation: flash 1.5s linear infinite; }
+
+        h1, h2, h3 { margin-top: 20px; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { text-align: center; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        .button-group { text-align: center; margin-top: 15px; }
+        .button-group button { background-color: #28a745; }
+        .button-group button:hover:not(:disabled) { background-color: #218838; }
+    </style>
+    <script src="https://unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Facebook Post Consolidator</h1>
+        <p>Paste your 'edits_you_made_to_posts.json' content below or upload the file. The script will identify the latest version of posts edited within 24 hours based on text similarity, attempting to fix potential text encoding issues. Uploaded files take priority.</p>
+
+        <div>
+            <label for="jsonInput">Paste JSON here:</label>
+            <textarea id="jsonInput" placeholder="Paste JSON content..."></textarea>
+        </div>
+
+        <div>
+            <label for="jsonFile">Or Upload .json file:</label>
+            <input type="file" id="jsonFile" accept=".json">
+        </div>
+
+        <!-- Similarity Slider Control -->
+        <div class="slider-container">
+            <label for="similaritySlider">Similarity Threshold to filter edited posts:</label>
+            <input type="range" id="similaritySlider" min="0.20" max="0.80" step="0.01" value="0.25">
+            <span id="similarityValue">0.33</span>
+        </div>
+
+
+        <button id="processButton">Process Data</button>
+
+         <div id="statusMessage" class="hidden"></div>
+
+        <div id="results" class="hidden">
+            <h3>Partial Preview (First & Last 10 Posts)</h3>
+            <div id="outputPreview"></div>
+            <div class="button-group">
+                <button id="copyButton">Copy Full Text</button>
+                <button id="downloadButton">Download Full Text (.txt)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants ---
+        const TIME_THRESHOLD = 24 * 60 * 60;
+        // SIMILARITY_THRESHOLD is now dynamic from the slider
+        const DEFAULT_OUTPUT_FILENAME_BASE = "latest_facebook_posts"; // Base name without extension
+
+        // --- DOM Elements ---
+        const jsonInput = document.getElementById('jsonInput');
+        const jsonFile = document.getElementById('jsonFile');
+        const processButton = document.getElementById('processButton');
+        const resultsDiv = document.getElementById('results');
+        const outputPreview = document.getElementById('outputPreview');
+        const copyButton = document.getElementById('copyButton');
+        const downloadButton = document.getElementById('downloadButton');
+        const statusMessage = document.getElementById('statusMessage');
+        const similaritySlider = document.getElementById('similaritySlider');
+        const similarityValueSpan = document.getElementById('similarityValue');
+
+
+        // --- Global variables ---
+        let fullOutputText = '';
+        let inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Store the base name for download
+        let currentSimilarityThreshold = parseFloat(similaritySlider.value); // Store current threshold
+
+        // --- Event Listeners ---
+        processButton.addEventListener('click', handleProcess);
+        jsonFile.addEventListener('change', handleFileSelect);
+        jsonInput.addEventListener('input', handleTextInput); // Listen for typing/pasting
+        similaritySlider.addEventListener('input', handleSliderInput); // Update value display
+        copyButton.addEventListener('click', copyToClipboard);
+        downloadButton.addEventListener('click', downloadTextFile);
+
+        // --- Initial Setup ---
+        similarityValueSpan.textContent = parseFloat(similaritySlider.value).toFixed(2); // Initial display
+
+
+        // --- Core Logic Functions ---
+
+        function fixEncodingJS(text) {
+            if (typeof text !== 'string') return text;
+            try {
+                let potentiallyFixable = true;
+                for (let i = 0; i < text.length; i++) {
+                    if (text.charCodeAt(i) > 255) {
+                        potentiallyFixable = false;
+                        break;
+                    }
+                }
+                if (!potentiallyFixable) return text;
+                const bytes = new Uint8Array(text.length);
+                for (let i = 0; i < text.length; i++) {
+                    bytes[i] = text.charCodeAt(i);
+                }
+                const decoder = new TextDecoder('utf-8', { fatal: true });
+                return decoder.decode(bytes);
+            } catch (e) {
+                return text;
+            }
+        }
+
+        function setStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('flashing');
+            statusMessage.className = `status-${type}`;
+            statusMessage.classList.remove('hidden');
+        }
+
+        function clearStatus() {
+            statusMessage.textContent = '';
+            statusMessage.className = 'hidden';
+        }
+
+        function parseJsonInput(jsonString) {
+            try {
+                let data = JSON.parse(jsonString);
+                if (!Array.isArray(data)) {
+                    setStatus('Error: Input JSON must be an array of post objects.', 'error');
+                    return null;
+                 }
+                return data;
+            } catch (e) {
+                setStatus(`Error parsing JSON: ${e.message}`, 'error');
+                console.error("JSON Parsing Error:", e);
+                return null;
+            }
+        }
+
+        function getLatestPosts(postsData, threshold) { // Accept threshold as argument
+            if (!Array.isArray(postsData) || postsData.length === 0) return [];
+
+            const validPosts = postsData.filter(post =>
+                typeof post === 'object' && post !== null &&
+                typeof post.timestamp === 'number' &&
+                Array.isArray(post.label_values) &&
+                post.label_values.length > 0 &&
+                typeof post.label_values[0] === 'object' && post.label_values[0] !== null &&
+                typeof post.label_values[0].value === 'string'
+            ).sort((a, b) => b.timestamp - a.timestamp);
+
+            if (validPosts.length === 0) return [];
+
+            const latestPosts = [];
+            const discardedIndices = new Set();
+            const numPosts = validPosts.length;
+
+            for (let i = 0; i < numPosts; i++) {
+                if (discardedIndices.has(i)) continue;
+                const currentPost = validPosts[i];
+                latestPosts.push(currentPost);
+
+                const currentText = fixEncodingJS(currentPost.label_values[0].value || "");
+
+                for (let j = i + 1; j < numPosts; j++) {
+                    if (discardedIndices.has(j)) continue;
+                    const potentialOlderPost = validPosts[j];
+                    const timeDifference = currentPost.timestamp - potentialOlderPost.timestamp;
+
+                    if (timeDifference <= TIME_THRESHOLD) {
+                        const olderText = fixEncodingJS(potentialOlderPost.label_values[0].value || "");
+
+                        try {
+                            if (typeof stringSimilarity === 'undefined') {
+                                throw new Error("string-similarity library not loaded.");
+                            }
+                            if (currentText === olderText) {
+                                discardedIndices.add(j);
+                                continue;
+                            }
+                            // *** Use the passed threshold ***
+                            const similarity = stringSimilarity.compareTwoStrings(currentText, olderText);
+                            if (similarity >= threshold) {
+                                discardedIndices.add(j);
+                            }
+                        } catch (e) {
+                            console.error(`Error calculating similarity between post ${i} and ${j}:`, e);
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            console.log(`Filtered ${postsData.length} posts down to ${latestPosts.length} latest versions using threshold ${threshold}.`);
+            return latestPosts;
+        }
+
+        function formatOutputText(finalPosts) {
+            const outputLines = ['Facebook Post in Taigi', '---'];
+            const postContentLines = [];
+            if (!Array.isArray(finalPosts)) {
+                console.error('Internal Error: formatOutputText received non-array');
+                return { fullText: outputLines.join('\n'), contentLines: [] };
+            }
+
+            let postIndex = 0;
+            finalPosts.forEach((post) => {
+                let rawText = post?.label_values?.[0]?.value ?? '';
+                let text = fixEncodingJS(rawText);
+                if (text.trim()) {
+                    postContentLines.push(`${postIndex}. ${text}`);
+                    postIndex++;
+                }
+            });
+
+            let fullText;
+             if (postContentLines.length > 0) {
+                fullText = outputLines[0] + '\n' + outputLines[1] + '\n\n' + postContentLines.join('\n\n');
+             } else {
+                fullText = outputLines[0] + '\n' + outputLines[1];
+             }
+            return { fullText: fullText, contentLines: postContentLines };
+        }
+
+        // --- UI Update Functions ---
+        function displayResults(contentLines) {
+            const numPosts = contentLines.length;
+            let previewText = '';
+
+            if (numPosts === 0) {
+                previewText = "No valid, non-empty posts found after filtering.";
+                setStatus("Processing complete. No posts remained after filtering.", "warning");
+            } else {
+                setStatus(`Processing complete. Found ${numPosts} unique, non-empty posts.`, "success");
+                if (numPosts <= 20) {
+                    previewText = contentLines.join('\n\n');
+                } else {
+                    const firstTen = contentLines.slice(0, 10).join('\n\n');
+                    const lastTen = contentLines.slice(-10).join('\n\n');
+                    previewText = `--- First 10 Posts ---\n\n${firstTen}\n\n...\n\n--- Last 10 Posts ---\n\n${lastTen}`;
+                }
+            }
+
+            outputPreview.textContent = previewText;
+            resultsDiv.classList.remove('hidden');
+            copyButton.disabled = numPosts === 0;
+            downloadButton.disabled = numPosts === 0;
+        }
+
+        // --- Event Handlers ---
+
+        function handleSliderInput(event) {
+            currentSimilarityThreshold = parseFloat(event.target.value);
+            similarityValueSpan.textContent = currentSimilarityThreshold.toFixed(2);
+        }
+
+        function handleFileSelect(event) {
+            // Clear previous state ONLY related to input source
+            clearStatus();
+            resultsDiv.classList.add('hidden'); // Hide results on new file selection
+            jsonInput.value = ''; // Clear textarea to give file priority
+
+            const file = event.target.files[0];
+            if (file && file.type === "application/json") {
+                 // Extract base name (remove .json)
+                const fileName = file.name;
+                inputFileNameBase = fileName.endsWith('.json') ? fileName.slice(0, -5) : fileName;
+                setStatus(`File '${fileName}' selected. Click 'Process Data'.`, 'info');
+            } else if (file) {
+                setStatus('Please select a valid .json file.', 'warning');
+                jsonFile.value = ''; // Clear invalid selection
+                inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default
+            } else {
+                 // File selection was cancelled or cleared
+                 clearStatus();
+                 inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default
+            }
+        }
+
+        function handleTextInput() {
+            // If user starts typing/pasting, clear the file input and reset filename
+             if (jsonInput.value.trim() !== '') {
+                 if(jsonFile.value) { // Only clear if a file was actually selected
+                    jsonFile.value = ''; // Clear file selection visually
+                     setStatus('Pasted text will be used. File selection cleared.', 'info');
+                 }
+                 inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default for pasted text
+             }
+        }
+
+        function processInputData(jsonDataString, sourceNameBase) {
+            // Set the filename base for potential download *before* processing starts
+            inputFileNameBase = sourceNameBase;
+
+            resultsDiv.classList.add('hidden');
+            outputPreview.textContent = '';
+            fullOutputText = '';
+            copyButton.disabled = true;
+            downloadButton.disabled = true;
+
+            setStatus('Please wait patiently...', 'info');
+            statusMessage.classList.add('flashing');
+            processButton.disabled = true;
+
+             setTimeout(() => {
+                 let processingError = false;
+                 try {
+                     const postsData = parseJsonInput(jsonDataString);
+
+                     if (postsData === null) {
+                          processingError = true;
+                     } else {
+                        // *** Pass the current slider threshold ***
+                        const finalPosts = getLatestPosts(postsData, currentSimilarityThreshold);
+                        if (postsData.length > 0 && finalPosts.length === 0) {
+                             console.log("All posts were filtered out or invalid.");
+                        }
+                        const { fullText, contentLines } = formatOutputText(finalPosts);
+                        fullOutputText = fullText;
+                        displayResults(contentLines);
+                     }
+                 } catch (e) {
+                      setStatus(`Critical Error during processing: ${e.message}`, 'error');
+                      console.error("Processing Error:", e);
+                      resultsDiv.classList.add('hidden');
+                      processingError = true;
+                 } finally {
+                     processButton.disabled = false;
+                     statusMessage.classList.remove('flashing');
+                 }
+            }, 50);
+         }
+
+         function handleProcess() {
+             const pastedJson = jsonInput.value.trim();
+             const selectedFile = jsonFile.files[0];
+
+             // *** PRIORITY LOGIC ***
+             if (selectedFile && selectedFile.type === "application/json") {
+                 // Valid file selected - USE IT, ignore textarea
+                 const reader = new FileReader();
+                 const fileNameForProcessing = selectedFile.name.endsWith('.json') ? selectedFile.name.slice(0, -5) : selectedFile.name;
+
+                 reader.onload = function(e) {
+                     // Pass file content and the derived base name
+                     processInputData(e.target.result, fileNameForProcessing);
+                 };
+                 reader.onerror = function(e) {
+                     setStatus(`Error reading file content: ${e.target.error}`, 'error');
+                     console.error("File Reading Error during process:", e);
+                     processButton.disabled = false;
+                     statusMessage.classList.remove('flashing');
+                 };
+                 setStatus('Reading file...', 'info');
+                 statusMessage.classList.add('flashing');
+                 processButton.disabled = true;
+                 reader.readAsText(selectedFile);
+
+             } else if (pastedJson) {
+                 // No valid file selected, but pasted text exists - USE IT
+                 // Pass pasted content and the default base name
+                 processInputData(pastedJson, DEFAULT_OUTPUT_FILENAME_BASE);
+
+             } else {
+                 // Neither valid file nor pasted text
+                 setStatus('Please paste JSON or upload a valid .json file first.', 'warning');
+             }
+         }
+
+
+        // --- Utility Functions ---
+        function copyToClipboard() {
+             if (!fullOutputText || copyButton.disabled) {
+                 setStatus('No text available to copy.', 'warning'); return;
+             }
+             navigator.clipboard.writeText(fullOutputText)
+                .then(() => {
+                    setStatus('Full text copied to clipboard!', 'success');
+                    const originalText = copyButton.textContent;
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => { copyButton.textContent = originalText; }, 2000);
+                })
+                .catch(err => {
+                    setStatus('Failed to copy text. Check browser permissions.', 'error');
+                    console.error('Clipboard Copy Error:', err);
+                });
+        }
+
+        function downloadTextFile() {
+             if (!fullOutputText || downloadButton.disabled) {
+                 setStatus('No text available to download.', 'warning'); return;
+             }
+             try {
+                 // *** Use dynamic filename ***
+                 const finalFileName = `${inputFileNameBase}.txt`;
+
+                 const blob = new Blob([fullOutputText], { type: 'text/plain;charset=utf-8' });
+                 const url = URL.createObjectURL(blob);
+                 const a = document.createElement('a');
+                 a.href = url;
+                 a.download = finalFileName; // Use the constructed name
+                 document.body.appendChild(a);
+                 a.click();
+                 document.body.removeChild(a);
+                 URL.revokeObjectURL(url);
+                 console.log(`Download initiated as ${finalFileName}.`);
+             } catch (e) {
+                 setStatus(`Failed to initiate download: ${e.message}`, 'error');
+                 console.error('Download Error:', e);
+             }
+        }
+
+        // --- Initial State ---
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+
+    </script>
+
+</body>
+</html>
