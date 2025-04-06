@@ -123,6 +123,29 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         .button-group { text-align: center; margin-top: 15px; }
         .button-group button { background-color: #28a745; }
         .button-group button:hover:not(:disabled) { background-color: #218838; }
+
+        /* Style for the details/summary expander */
+        details {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: #0056b3;
+        }
+        summary:hover {
+            text-decoration: underline;
+        }
+        details > p { /* Style the paragraph inside the details */
+             margin-top: 10px;
+             margin-bottom: 0; /* Remove extra bottom margin if needed */
+             color: #333;
+             line-height: 1.5;
+        }
     </style>
     <script src="https://unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
 </head>
@@ -130,7 +153,12 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
 
     <div class="container">
         <h1>Facebook Post Consolidator</h1>
-        <p>Paste your 'edits_you_made_to_posts.json' content below or upload the file. The script will identify the latest version of posts edited within 24 hours based on text similarity, attempting to fix potential text encoding issues. Uploaded files take priority.</p>
+
+        <!-- User Guide Expander -->
+        <details>
+            <summary>User Guide</summary>
+            <p>Paste your 'edits_you_made_to_posts.json' content below or upload the file. The script will identify the latest version of posts edited within 24 hours based on text similarity, attempting to fix potential text encoding issues. Uploaded files take priority.</p>
+        </details>
 
         <div>
             <label for="jsonInput">Paste JSON here:</label>
@@ -146,9 +174,8 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         <div class="slider-container">
             <label for="similaritySlider">Similarity Threshold to filter edited posts:</label>
             <input type="range" id="similaritySlider" min="0.20" max="0.80" step="0.01" value="0.25">
-            <span id="similarityValue">0.33</span>
+            <span id="similarityValue">0.25</span> <!-- Default value updated -->
         </div>
-
 
         <button id="processButton">Process Data</button>
 
@@ -205,30 +232,45 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         function fixEncodingJS(text) {
             if (typeof text !== 'string') return text;
             try {
+                // Attempt to detect if the string might be incorrectly decoded latin1/cp1252
                 let potentiallyFixable = true;
                 for (let i = 0; i < text.length; i++) {
-                    if (text.charCodeAt(i) > 255) {
+                    const charCode = text.charCodeAt(i);
+                    // If we see characters outside the basic latin1 range, assume it's already correct UTF-8
+                    if (charCode > 255) {
                         potentiallyFixable = false;
                         break;
                     }
+                    // Also check for common C1 control characters resulting from bad decoding
+                    if (charCode >= 0x80 && charCode <= 0x9F) {
+                       // Likely mojibake, continue checking
+                    }
                 }
-                if (!potentiallyFixable) return text;
+
+                if (!potentiallyFixable) return text; // Already contains high-code point chars, assume UTF-8
+
+                // Convert the potentially mis-decoded string to a byte array
                 const bytes = new Uint8Array(text.length);
                 for (let i = 0; i < text.length; i++) {
                     bytes[i] = text.charCodeAt(i);
                 }
-                const decoder = new TextDecoder('utf-8', { fatal: true });
+
+                // Try decoding as UTF-8. If it fails, return the original text.
+                const decoder = new TextDecoder('utf-8', { fatal: true }); // fatal:true throws error on invalid sequences
                 return decoder.decode(bytes);
             } catch (e) {
-                return text;
+                 // console.warn("fixEncodingJS failed, returning original text:", e);
+                return text; // If decoding fails, return the original string
             }
         }
 
         function setStatus(message, type = 'info') {
             statusMessage.textContent = message;
             statusMessage.classList.remove('flashing');
-            statusMessage.className = `status-${type}`;
-            statusMessage.classList.remove('hidden');
+            // Ensure all other type classes are removed before adding the new one
+            statusMessage.className = ''; // Clear all existing classes first
+            statusMessage.classList.add(`status-${type}`); // Add the type class
+            statusMessage.classList.remove('hidden'); // Make it visible
         }
 
         function clearStatus() {
@@ -240,8 +282,18 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             try {
                 let data = JSON.parse(jsonString);
                 if (!Array.isArray(data)) {
-                    setStatus('Error: Input JSON must be an array of post objects.', 'error');
-                    return null;
+                    // Check if it's the structure Facebook sometimes provides
+                    if (typeof data === 'object' && data !== null && Array.isArray(data.timeline_edit_history)) {
+                       console.log("Detected 'timeline_edit_history' wrapper, extracting array.");
+                       data = data.timeline_edit_history;
+                       if (!Array.isArray(data)) { // Double-check after extraction
+                           setStatus('Error: Extracted "timeline_edit_history" is not an array.', 'error');
+                           return null;
+                       }
+                    } else {
+                       setStatus('Error: Input JSON must be an array of post objects (or contain a "timeline_edit_history" array).', 'error');
+                       return null;
+                    }
                  }
                 return data;
             } catch (e) {
@@ -251,90 +303,135 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             }
         }
 
-        function getLatestPosts(postsData, threshold) { // Accept threshold as argument
+
+       function getLatestPosts(postsData, threshold) { // Accept threshold as argument
             if (!Array.isArray(postsData) || postsData.length === 0) return [];
 
-            const validPosts = postsData.filter(post =>
-                typeof post === 'object' && post !== null &&
-                typeof post.timestamp === 'number' &&
-                Array.isArray(post.label_values) &&
-                post.label_values.length > 0 &&
-                typeof post.label_values[0] === 'object' && post.label_values[0] !== null &&
-                typeof post.label_values[0].value === 'string'
-            ).sort((a, b) => b.timestamp - a.timestamp);
+            // --- Data Cleaning and Validation ---
+            const validPosts = postsData.map((post, index) => {
+                // Basic structure check
+                if (typeof post !== 'object' || post === null || typeof post.timestamp !== 'number') {
+                    console.warn(`Skipping invalid post structure at index ${index}`);
+                    return null;
+                }
 
-            if (validPosts.length === 0) return [];
+                // Extract and fix text - handle various possible structures
+                let textValue = null;
+                if (Array.isArray(post.label_values) && post.label_values.length > 0 && typeof post.label_values[0]?.value === 'string') {
+                    textValue = post.label_values[0].value;
+                } else if (typeof post.post === 'string') { // Alternative structure check
+                     textValue = post.post;
+                } else if (typeof post.data?.[0]?.post === 'string') { // Another potential structure
+                    textValue = post.data[0].post;
+                }
+                 // Add more potential structure checks here if needed
 
+                if (textValue === null) {
+                    console.warn(`Skipping post at index ${index} due to missing or invalid text field.`);
+                    return null;
+                }
+
+                return {
+                    originalIndex: index, // Keep track for debugging if needed
+                    timestamp: post.timestamp,
+                    text: fixEncodingJS(textValue) // Fix encoding early
+                };
+            }).filter(post => post !== null && typeof post.text === 'string'); // Filter out nulls and ensure text is string
+
+             // --- Sorting ---
+             // Sort descending by timestamp (most recent first)
+            validPosts.sort((a, b) => b.timestamp - a.timestamp);
+
+            if (validPosts.length === 0) {
+                 console.log("No valid posts found after initial cleaning and validation.");
+                 return [];
+             }
+
+            // --- Filtering Logic ---
             const latestPosts = [];
-            const discardedIndices = new Set();
-            const numPosts = validPosts.length;
+            const discardedIndices = new Set(); // Use original index if needed, but position in sorted array is easier
+            const numValidPosts = validPosts.length;
 
-            for (let i = 0; i < numPosts; i++) {
-                if (discardedIndices.has(i)) continue;
+            console.log(`Starting filtering with ${numValidPosts} valid, sorted posts. Threshold: ${threshold}`);
+
+            for (let i = 0; i < numValidPosts; i++) {
+                if (discardedIndices.has(i)) continue; // Skip if already marked as older version
+
                 const currentPost = validPosts[i];
-                latestPosts.push(currentPost);
+                latestPosts.push(currentPost); // Assume it's the latest until proven otherwise
 
-                const currentText = fixEncodingJS(currentPost.label_values[0].value || "");
+                // Compare currentPost with subsequent posts (which are older or same time)
+                for (let j = i + 1; j < numValidPosts; j++) {
+                    if (discardedIndices.has(j)) continue; // Skip if already discarded
 
-                for (let j = i + 1; j < numPosts; j++) {
-                    if (discardedIndices.has(j)) continue;
                     const potentialOlderPost = validPosts[j];
                     const timeDifference = currentPost.timestamp - potentialOlderPost.timestamp;
 
+                    // Only compare if within the time threshold
                     if (timeDifference <= TIME_THRESHOLD) {
-                        const olderText = fixEncodingJS(potentialOlderPost.label_values[0].value || "");
+                        // Check for exact duplicates first (cheaper)
+                        if (currentPost.text === potentialOlderPost.text) {
+                           // console.log(`Discarding post ${j} (time: ${potentialOlderPost.timestamp}) as exact duplicate of post ${i} (time: ${currentPost.timestamp})`);
+                            discardedIndices.add(j);
+                            continue; // Move to the next potential older post
+                        }
 
+                        // Calculate similarity only if texts are different
                         try {
                             if (typeof stringSimilarity === 'undefined') {
                                 throw new Error("string-similarity library not loaded.");
                             }
-                            if (currentText === olderText) {
-                                discardedIndices.add(j);
-                                continue;
-                            }
-                            // *** Use the passed threshold ***
-                            const similarity = stringSimilarity.compareTwoStrings(currentText, olderText);
+                            const similarity = stringSimilarity.compareTwoStrings(currentPost.text, potentialOlderPost.text);
+
+                            // If similar enough, discard the older post
                             if (similarity >= threshold) {
+                                // console.log(`Discarding post ${j} (time: ${potentialOlderPost.timestamp}, sim: ${similarity.toFixed(3)}) as older version of post ${i} (time: ${currentPost.timestamp})`);
                                 discardedIndices.add(j);
-                            }
+                            } else {
+                               // console.log(`Post ${j} (time: ${potentialOlderPost.timestamp}) is within time threshold but not similar enough (sim: ${similarity.toFixed(3)}) to post ${i}.`);
+                           }
                         } catch (e) {
                             console.error(`Error calculating similarity between post ${i} and ${j}:`, e);
+                            // Decide how to handle error: maybe skip comparison, maybe log, etc.
                         }
                     } else {
-                        break;
+                        // Since posts are sorted by time, if this one is outside the threshold,
+                        // all subsequent posts will also be outside the threshold for the current post.
+                         // console.log(`Post ${j} (time: ${potentialOlderPost.timestamp}) is outside time threshold (${timeDifference}s) for post ${i}. Stopping comparison for post ${i}.`);
+                        break; // Stop comparing for the current `i`
                     }
                 }
             }
-            console.log(`Filtered ${postsData.length} posts down to ${latestPosts.length} latest versions using threshold ${threshold}.`);
-            return latestPosts;
+            console.log(`Finished filtering. Kept ${latestPosts.length} latest versions.`);
+            // We only need the text for the final output
+            return latestPosts.map(p => p.text).filter(text => text.trim().length > 0); // Also filter empty strings
         }
 
-        function formatOutputText(finalPosts) {
+
+        function formatOutputText(finalPostTexts) {
             const outputLines = ['Facebook Post in Taigi', '---'];
             const postContentLines = [];
-            if (!Array.isArray(finalPosts)) {
+             if (!Array.isArray(finalPostTexts)) {
                 console.error('Internal Error: formatOutputText received non-array');
-                return { fullText: outputLines.join('\n'), contentLines: [] };
-            }
+                 return { fullText: outputLines.join('\n'), contentLines: [] };
+             }
 
-            let postIndex = 0;
-            finalPosts.forEach((post) => {
-                let rawText = post?.label_values?.[0]?.value ?? '';
-                let text = fixEncodingJS(rawText);
-                if (text.trim()) {
-                    postContentLines.push(`${postIndex}. ${text}`);
-                    postIndex++;
-                }
+            // Add index to non-empty posts
+            finalPostTexts.forEach((text, index) => {
+                if (text && text.trim()) { // Ensure text is not null/undefined and not just whitespace
+                   postContentLines.push(`${index}. ${text.trim()}`); // Use index from the final filtered array
+               }
             });
 
             let fullText;
              if (postContentLines.length > 0) {
-                fullText = outputLines[0] + '\n' + outputLines[1] + '\n\n' + postContentLines.join('\n\n');
-             } else {
-                fullText = outputLines[0] + '\n' + outputLines[1];
-             }
+                 fullText = outputLines[0] + '\n' + outputLines[1] + '\n\n' + postContentLines.join('\n\n');
+            } else {
+                 fullText = outputLines[0] + '\n' + outputLines[1];
+            }
             return { fullText: fullText, contentLines: postContentLines };
         }
+
 
         // --- UI Update Functions ---
         function displayResults(contentLines) {
@@ -366,6 +463,8 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         function handleSliderInput(event) {
             currentSimilarityThreshold = parseFloat(event.target.value);
             similarityValueSpan.textContent = currentSimilarityThreshold.toFixed(2);
+            // Optional: Re-process if data is already loaded? Or just update for next run.
+            // For simplicity, we'll just update the value for the *next* time Process is clicked.
         }
 
         function handleFileSelect(event) {
@@ -378,7 +477,8 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             if (file && file.type === "application/json") {
                  // Extract base name (remove .json)
                 const fileName = file.name;
-                inputFileNameBase = fileName.endsWith('.json') ? fileName.slice(0, -5) : fileName;
+                // Use regex to remove .json extension more robustly
+                inputFileNameBase = fileName.replace(/\.json$/i, ''); // Case-insensitive removal
                 setStatus(`File '${fileName}' selected. Click 'Process Data'.`, 'info');
             } else if (file) {
                 setStatus('Please select a valid .json file.', 'warning');
@@ -397,14 +497,17 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
                  if(jsonFile.value) { // Only clear if a file was actually selected
                     jsonFile.value = ''; // Clear file selection visually
                      setStatus('Pasted text will be used. File selection cleared.', 'info');
+                 } else {
+                     // Only clear status if there wasn't a file previously selected
+                     clearStatus();
                  }
                  inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default for pasted text
              }
         }
 
         function processInputData(jsonDataString, sourceNameBase) {
-            // Set the filename base for potential download *before* processing starts
-            inputFileNameBase = sourceNameBase;
+             // Set the filename base for potential download *before* processing starts
+            inputFileNameBase = sourceNameBase || DEFAULT_OUTPUT_FILENAME_BASE; // Ensure a base name
 
             resultsDiv.classList.add('hidden');
             outputPreview.textContent = '';
@@ -412,25 +515,28 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             copyButton.disabled = true;
             downloadButton.disabled = true;
 
-            setStatus('Please wait patiently...', 'info');
+            setStatus('Processing data... Please wait.', 'info'); // More descriptive message
             statusMessage.classList.add('flashing');
             processButton.disabled = true;
 
+             // Use setTimeout to allow UI update before potentially long processing
              setTimeout(() => {
                  let processingError = false;
                  try {
                      const postsData = parseJsonInput(jsonDataString);
 
                      if (postsData === null) {
-                          processingError = true;
+                          processingError = true; // Error status already set by parseJsonInput
+                          resultsDiv.classList.add('hidden'); // Ensure results are hidden on parse error
                      } else {
                         // *** Pass the current slider threshold ***
-                        const finalPosts = getLatestPosts(postsData, currentSimilarityThreshold);
-                        if (postsData.length > 0 && finalPosts.length === 0) {
-                             console.log("All posts were filtered out or invalid.");
-                        }
-                        const { fullText, contentLines } = formatOutputText(finalPosts);
+                        const finalPostTexts = getLatestPosts(postsData, currentSimilarityThreshold);
+
+                        // Format the output
+                        const { fullText, contentLines } = formatOutputText(finalPostTexts);
                         fullOutputText = fullText;
+
+                        // Display results (handles the 'no posts found' case internally)
                         displayResults(contentLines);
                      }
                  } catch (e) {
@@ -441,43 +547,50 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
                  } finally {
                      processButton.disabled = false;
                      statusMessage.classList.remove('flashing');
+                     // Only clear status if it was an info/wait message and no error occurred
+                     // Success/warning/error messages should persist.
+                     if (!processingError && statusMessage.classList.contains('status-info')) {
+                        // Don't clear success/warning automatically, handled by displayResults
+                        // clearStatus(); // Or let the success/warning from displayResults stay
+                    }
                  }
-            }, 50);
+            }, 50); // Small delay like 50ms is usually enough
          }
 
          function handleProcess() {
              const pastedJson = jsonInput.value.trim();
              const selectedFile = jsonFile.files[0];
 
-             // *** PRIORITY LOGIC ***
+             // --- Input Priority Logic ---
              if (selectedFile && selectedFile.type === "application/json") {
-                 // Valid file selected - USE IT, ignore textarea
+                 // 1. Valid file selected - USE IT
                  const reader = new FileReader();
-                 const fileNameForProcessing = selectedFile.name.endsWith('.json') ? selectedFile.name.slice(0, -5) : selectedFile.name;
+                 // Use regex for robust .json removal, case-insensitive
+                 const fileNameForProcessing = selectedFile.name.replace(/\.json$/i, '');
 
                  reader.onload = function(e) {
                      // Pass file content and the derived base name
                      processInputData(e.target.result, fileNameForProcessing);
                  };
                  reader.onerror = function(e) {
-                     setStatus(`Error reading file content: ${e.target.error}`, 'error');
+                     setStatus(`Error reading file: ${e.target.error?.message || 'Unknown error'}`, 'error');
                      console.error("File Reading Error during process:", e);
-                     processButton.disabled = false;
+                     processButton.disabled = false; // Re-enable button on read error
                      statusMessage.classList.remove('flashing');
                  };
                  setStatus('Reading file...', 'info');
                  statusMessage.classList.add('flashing');
                  processButton.disabled = true;
-                 reader.readAsText(selectedFile);
+                 reader.readAsText(selectedFile); // Consider specifying encoding if needed, e.g., 'UTF-8'
 
              } else if (pastedJson) {
-                 // No valid file selected, but pasted text exists - USE IT
+                 // 2. No valid file, but pasted text exists - USE IT
                  // Pass pasted content and the default base name
                  processInputData(pastedJson, DEFAULT_OUTPUT_FILENAME_BASE);
 
              } else {
-                 // Neither valid file nor pasted text
-                 setStatus('Please paste JSON or upload a valid .json file first.', 'warning');
+                 // 3. Neither valid file nor pasted text
+                 setStatus('Please paste JSON data or upload a valid .json file first.', 'warning');
              }
          }
 
@@ -492,11 +605,37 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
                     setStatus('Full text copied to clipboard!', 'success');
                     const originalText = copyButton.textContent;
                     copyButton.textContent = 'Copied!';
-                    setTimeout(() => { copyButton.textContent = originalText; }, 2000);
+                    // Temporarily disable button to prevent rapid clicks
+                    copyButton.disabled = true;
+                    setTimeout(() => {
+                        copyButton.textContent = originalText;
+                        copyButton.disabled = false; // Re-enable
+                        // Optionally clear the success message after a bit longer
+                        // setTimeout(clearStatus, 3000);
+                    }, 2000); // Reset button text after 2 seconds
                 })
                 .catch(err => {
-                    setStatus('Failed to copy text. Check browser permissions.', 'error');
+                    setStatus('Failed to copy text. Your browser might not support this feature or permissions are denied.', 'error');
                     console.error('Clipboard Copy Error:', err);
+                     // Try fallback for older browsers (less reliable, more intrusive)
+                     try {
+                         const textArea = document.createElement("textarea");
+                         textArea.value = fullOutputText;
+                         textArea.style.position = "fixed"; // Prevent scrolling to bottom
+                         textArea.style.top = "0";
+                         textArea.style.left = "0";
+                         textArea.style.opacity = "0"; // Make it invisible
+                         document.body.appendChild(textArea);
+                         textArea.focus();
+                         textArea.select();
+                         document.execCommand('copy');
+                         document.body.removeChild(textArea);
+                         setStatus('Full text copied (using fallback method)!', 'success');
+                         // ... (button text change logic as above) ...
+                     } catch (fallbackErr) {
+                         console.error('Fallback copy method failed:', fallbackErr);
+                         setStatus('Failed to copy text using all methods.', 'error');
+                     }
                 });
         }
 
@@ -505,19 +644,41 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
                  setStatus('No text available to download.', 'warning'); return;
              }
              try {
-                 // *** Use dynamic filename ***
-                 const finalFileName = `${inputFileNameBase}.txt`;
+                 // Ensure inputFileNameBase is a non-empty string
+                 const safeBaseName = (typeof inputFileNameBase === 'string' && inputFileNameBase.trim())
+                                     ? inputFileNameBase.trim()
+                                     : DEFAULT_OUTPUT_FILENAME_BASE;
+                 // Sanitize filename slightly (replace potential problematic chars)
+                 const sanitizedBaseName = safeBaseName.replace(/[/\\?%*:|"<>]/g, '_');
+                 const finalFileName = `${sanitizedBaseName}.txt`;
+
 
                  const blob = new Blob([fullOutputText], { type: 'text/plain;charset=utf-8' });
-                 const url = URL.createObjectURL(blob);
-                 const a = document.createElement('a');
-                 a.href = url;
-                 a.download = finalFileName; // Use the constructed name
-                 document.body.appendChild(a);
-                 a.click();
-                 document.body.removeChild(a);
-                 URL.revokeObjectURL(url);
-                 console.log(`Download initiated as ${finalFileName}.`);
+
+                 // Use FileSaver.js if available (more robust), otherwise fallback
+                 if (typeof saveAs !== 'undefined') {
+                      saveAs(blob, finalFileName);
+                      console.log(`Download initiated via FileSaver.js as ${finalFileName}.`);
+                 } else {
+                     // Fallback method
+                     const url = URL.createObjectURL(blob);
+                     const a = document.createElement('a');
+                     a.style.display = 'none'; // Hide the link
+                     a.href = url;
+                     a.download = finalFileName; // Use the constructed name
+                     document.body.appendChild(a);
+                     a.click();
+                     // Clean up
+                     window.URL.revokeObjectURL(url);
+                     document.body.removeChild(a);
+                     console.log(`Download initiated via fallback method as ${finalFileName}.`);
+                 }
+                 setStatus('Download initiated.', 'success'); // Provide feedback
+                 setTimeout(() => { // Clear status after a while
+                    if (statusMessage.classList.contains('status-success') && statusMessage.textContent === 'Download initiated.') {
+                        clearStatus();
+                    }
+                 }, 3000);
              } catch (e) {
                  setStatus(`Failed to initiate download: ${e.message}`, 'error');
                  console.error('Download Error:', e);
@@ -527,8 +688,19 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         // --- Initial State ---
         copyButton.disabled = true;
         downloadButton.disabled = true;
+        // Add FileSaver.js script dynamically or include it in the head if preferred
+        // (Example of dynamic loading - place this near the end of the script or in head)
+        /*
+        const fileSaverScript = document.createElement('script');
+        fileSaverScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js';
+        fileSaverScript.integrity = 'sha512-Qlv6VSKh1gDKGoJbnyA5GyLEGOkdSpo6MWQx8NpH+1TКУM6+xQvrFVRRUmMpjioArBCoGP9V/0Tv15AmfGsvbQ=='; // Optional but recommended
+        fileSaverScript.crossOrigin = 'anonymous'; // Optional but recommended
+        document.body.appendChild(fileSaverScript);
+        */
 
     </script>
+    <!-- Consider adding FileSaver.js for more reliable downloads -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
 
 </body>
 </html>
