@@ -1,10 +1,3 @@
----
-layout: apps
-title: YouTube with SRT Subtitles
-version: r0a
-permalink: /pages/youtube_with_srt_subtitles.html
-note: Vibe Coding with Grok 3
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +12,7 @@ note: Vibe Coding with Grok 3
             flex-direction: column;
             align-items: center;
             background-color: #f0f0f0;
+            min-height: 100vh; /* Ensure body takes full height */
         }
         #video-container {
             position: relative;
@@ -42,7 +36,7 @@ note: Vibe Coding with Grok 3
             border-radius: 5px;
         }
         #controls {
-            margin-top: 75px;
+            margin-top: 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -126,6 +120,29 @@ note: Vibe Coding with Grok 3
         select:focus {
             border-color: #007bff;
         }
+        #help {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 640px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        #help h3 {
+            margin-top: 0;
+            font-size: 16px;
+        }
+        #help pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
@@ -147,6 +164,39 @@ note: Vibe Coding with Grok 3
                 <option value="txt" selected>.txt with timestamp</option>
             </select>
         </div>
+    </div>
+    <div id="help">
+        <h3>Format of Subtitle File:</h3>
+        <strong>.txt with timestamp</strong>
+        <pre>
+[0:00] welcome back to the AI Daily Brief every
+[0:02] day it feels like a million new cool AI
+[0:04] startups launch so much so that it's
+[0:07] actually pretty rare that we dig deep
+[0:08] and cover brand new companies on this
+        </pre>
+        <strong>.srt</strong>
+        <pre>
+1
+00:00:00,000 --> 00:00:02,000
+welcome back to the AI Daily Brief every
+
+2
+00:00:02,000 --> 00:00:04,000
+day it feels like a million new cool AI
+
+3
+00:00:04,000 --> 00:00:07,000
+startups launch so much so that it's
+
+4
+00:00:07,000 --> 00:00:08,000
+actually pretty rare that we dig deep
+
+5
+00:00:08,000 --> 00:00:10,000
+and cover brand new companies on this
+        </pre>
     </div>
     
     <script src="https://www.youtube.com/iframe_api"></script>
