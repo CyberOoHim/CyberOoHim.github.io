@@ -53,14 +53,7 @@ note: Vibe Coding with Grok 3
             width: 100%;
             max-width: 640px;
         }
-        .input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            width: 100%;
-            justify-content: center;
-        }
-        .srt-group {
+        .input-group, .srt-group, .url-group {
             display: flex;
             gap: 10px;
             align-items: center;
@@ -96,7 +89,7 @@ note: Vibe Coding with Grok 3
         #srtFile {
             display: none;
         }
-        .custom-file-button {
+        .custom-file-button, .url-upload-button {
             padding: 6px 20px;
             font-size: 16px;
             background-color: #28a745;
@@ -107,7 +100,7 @@ note: Vibe Coding with Grok 3
             transition: background-color 0.3s;
             width: 120px;
         }
-        .custom-file-button:hover {
+        .custom-file-button:hover, .url-upload-button:hover {
             background-color: #218838;
         }
         #srtFileName {
@@ -129,41 +122,41 @@ note: Vibe Coding with Grok 3
         select:focus {
             border-color: #007bff;
         }
-        details { /* Style for the expander */
+        details {
             margin-top: 40px;
             margin-bottom: 20px;
-            padding: 0; /* Remove padding from details */
+            padding: 0;
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 640px;
-            margin-left: auto; /* Explicit centering */
-            margin-right: auto; /* Explicit centering */
+            margin-left: auto;
+            margin-right: auto;
         }
-        details summary { /* Style for the expander summary/title */
+        details summary {
             padding: 15px 20px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            list-style: none; /* Remove default marker */
+            list-style: none;
             outline: none;
         }
-        details summary::-webkit-details-marker { /* Hide marker in Chrome/Safari */
+        details summary::-webkit-details-marker {
            display: none;
         }
-        details summary::before { /* Add custom marker */
+        details summary::before {
             content: '► ';
             margin-right: 5px;
         }
-        details[open] summary::before { /* Change marker when open */
+        details[open] summary::before {
             content: '▼ ';
         }
-        #help { /* Style for the content inside the expander */
-            padding: 0 20px 20px 20px; /* Adjust padding */
+        #help {
+            padding: 0 20px 20px 20px;
             font-size: 14px;
             line-height: 1.5;
-            text-align: left; /* Align text inside to the left */
+            text-align: left;
         }
         #help h3 {
             margin-top: 0;
@@ -197,13 +190,26 @@ note: Vibe Coding with Grok 3
                 <option value="txt" selected>.txt (with timestamps)</option>
             </select>
         </div>
+        <div class="url-group">
+            <input type="text" id="subtitleUrl" placeholder="Enter Subtitle URL" />
+            <button class="url-upload-button" onclick="loadSubtitleFromUrl()">Load from URL</button>
+        </div>
     </div>
 
-    <!-- Help section wrapped in details/summary -->
     <details>
         <summary>User Guide</summary>
         <div id="help">
             <h3>Make sure Format of Subtitle File and its File Name Extension are both correct, and the pulldown menu is selected accordingly:</h3>
+            <h3>
+            <strong>URL for Test</strong>
+            <pre>
+    Video: https://youtu.be/PTJ8yizhoIY?si=JvaNRX3D1idI84Lu
+
+    .txt subtitle: https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/refs/heads/main/assets/test/PTJ8yizhoIY_transcript.txt
+
+    .srt subtitle: https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/refs/heads/main/assets/test/PTJ8yizhoIY_transcript.srt
+            </pre>
+
             <strong>.txt (with timestamps)</strong>
             <pre>
 [0:00] welcome back to the AI Daily Brief every
@@ -234,6 +240,7 @@ actually pretty rare that we dig deep
 00:00:08,000 --> 00:00:10,000
 and cover brand new companies on this
             </pre>
+            </h3>
         </div>
     </details>
 
@@ -294,7 +301,7 @@ and cover brand new companies on this
             const lines = srtContent.trim().split('\n\n');
             for (let block of lines) {
                 const blockParts = block.split('\n');
-                if (blockParts.length >= 3) { // Ensure block has at least id, time, text
+                if (blockParts.length >= 3) {
                     const id = blockParts[0];
                     const time = blockParts[1];
                     const textLines = blockParts.slice(2);
@@ -307,14 +314,13 @@ and cover brand new companies on this
                             text: textLines.join(' ')
                         });
                     } else {
-                         console.warn("Skipping invalid SRT time format:", time);
+                        console.warn("Skipping invalid SRT time format:", time);
                     }
                 } else {
-                     console.warn("Skipping invalid SRT block:", block);
+                    console.warn("Skipping invalid SRT block:", block);
                 }
             }
         }
-
 
         function timeToSeconds(time) {
             const [hours, minutes, seconds] = time.replace(',', '.').split(':');
@@ -328,8 +334,7 @@ and cover brand new companies on this
                 const subtitle = subtitles.find(s => currentTime >= s.start && currentTime <= s.end);
                 document.getElementById('subtitle').textContent = subtitle ? subtitle.text : '';
             } catch (error) {
-                 // Handle potential errors if player state is unexpected
-                 console.error("Error updating subtitles:", error);
+                console.error("Error updating subtitles:", error);
             }
         }
 
@@ -347,7 +352,6 @@ and cover brand new companies on this
                     const [nextFull, nextMin, nextSec] = matches[i + 1];
                     endTime = `00:${nextMin.padStart(2, '0')}:${nextSec.padStart(2, '0')},000`;
                 } else {
-                    // Default duration for the last subtitle (e.g., 5 seconds)
                     let endMinutes = parseInt(minutes);
                     let endSeconds = parseInt(seconds) + 5;
                     if (endSeconds >= 60) {
@@ -359,18 +363,17 @@ and cover brand new companies on this
 
                 srtContent += `${i + 1}\n${startTime} --> ${endTime}\n${text.trim()}\n\n`;
             }
-            return srtContent.trim(); // Trim trailing whitespace
+            return srtContent.trim();
         }
 
         document.getElementById('subtitleFormat').addEventListener('change', (event) => {
             const format = event.target.value;
             const srtFileInput = document.getElementById('srtFile');
             srtFileInput.accept = format === 'srt' ? '.srt' : '.txt';
-            // Reset file input and displayed name when format changes
-            srtFileInput.value = ''; // Clear the selected file
+            srtFileInput.value = '';
             document.getElementById('srtFileName').textContent = '';
-            subtitles = []; // Clear parsed subtitles
-            document.getElementById('subtitle').textContent = ''; // Clear displayed subtitle
+            subtitles = [];
+            document.getElementById('subtitle').textContent = '';
         });
 
         document.getElementById('srtFile').addEventListener('change', (event) => {
@@ -386,27 +389,61 @@ and cover brand new companies on this
                             content = convertTxtToSrt(content);
                         }
                         parseSRT(content);
-                         // Optional: Start playing if video is loaded and paused/ready
-                         // if (player && player.getPlayerState && (player.getPlayerState() === YT.PlayerState.PAUSED || player.getPlayerState() === YT.PlayerState.CUED)) {
-                         //    player.playVideo();
-                         // }
                     } catch (parseError) {
                         alert(`Error parsing subtitle file: ${parseError.message}`);
                         console.error("Subtitle parsing error:", parseError);
-                        subtitles = []; // Clear subtitles on error
+                        subtitles = [];
                         document.getElementById('subtitle').textContent = '';
                     }
                 };
-                 reader.onerror = (e) => {
-                     alert(`Error reading file: ${e.target.error}`);
-                 };
+                reader.onerror = (e) => {
+                    alert(`Error reading file: ${e.target.error}`);
+                };
                 reader.readAsText(file);
             } else {
-                 document.getElementById('srtFileName').textContent = ''; // Clear name if no file selected
-                 subtitles = []; // Clear subtitles
-                 document.getElementById('subtitle').textContent = ''; // Clear displayed subtitle
+                document.getElementById('srtFileName').textContent = '';
+                subtitles = [];
+                document.getElementById('subtitle').textContent = '';
             }
         });
+
+        function loadSubtitleFromUrl() {
+            const url = document.getElementById('subtitleUrl').value.trim();
+            if (!url) {
+                alert('Please enter a subtitle URL');
+                return;
+            }
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(content => {
+                    const format = document.getElementById('subtitleFormat').value;
+                    document.getElementById('srtFileName').textContent = url.split('/').pop() || 'Loaded from URL';
+                    try {
+                        if (format === 'txt') {
+                            content = convertTxtToSrt(content);
+                        }
+                        parseSRT(content);
+                    } catch (parseError) {
+                        alert(`Error parsing subtitle from URL: ${parseError.message}`);
+                        console.error("Subtitle parsing error:", parseError);
+                        subtitles = [];
+                        document.getElementById('subtitle').textContent = '';
+                    }
+                })
+                .catch(error => {
+                    alert(`Error fetching subtitle from URL: ${error.message}`);
+                    console.error("Fetch error:", error);
+                    document.getElementById('srtFileName').textContent = '';
+                    subtitles = [];
+                    document.getElementById('subtitle').textContent = '';
+                });
+        }
     </script>
 </body>
 </html>
