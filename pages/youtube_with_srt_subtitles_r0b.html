@@ -13,7 +13,6 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
     <title>YouTube with SRT Subtitles</title>
     <link href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" rel="stylesheet">
     <style>
-        /* Existing CSS remains unchanged */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -69,12 +68,13 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
             width: 300px;
             outline: none;
             transition: border-color 0.3s;
+            box-sizing: border-box;
         }
         input[type="text"]:focus {
             border-color: #007bff;
         }
         button {
-            padding: 6px 20px;
+            padding: 10px 20px;
             font-size: 16px;
             background-color: #007bff;
             color: white;
@@ -91,7 +91,7 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
             display: none;
         }
         .custom-file-button, .url-upload-button {
-            padding: 6px 20px;
+            padding: 10px 20px;
             font-size: 16px;
             background-color: #28a745;
             color: white;
@@ -105,23 +105,17 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
             background-color: #218838;
         }
         #srtFileName {
+            padding: 10px;
             font-size: 16px;
             color: #333;
-            max-width: 200px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-        }
-        select {
-            padding: 6px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        select:focus {
-            border-color: #007bff;
+            box-sizing: border-box;
         }
         details {
             margin-top: 40px;
@@ -180,27 +174,25 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
     <div id="controls">
         <div class="input-group">
             <input type="text" id="youtubeUrl" placeholder="Enter YouTube URL" />
-            <button onclick="loadVideo()">Load Video</button>
+            <button onclick="loadVideo()">Load YT Video</button>
         </div>
         <div class="srt-group">
             <span id="srtFileName"></span>
-            <input type="file" id="srtFile" accept=".txt" />
-            <button class="custom-file-button" onclick="document.getElementById('srtFile').click()">Upload Subtitle</button>
-            <select id="subtitleFormat">
-                <option value="srt">.srt</option>
-                <option value="txt" selected>.txt (with timestamps)</option>
-            </select>
+            <input type="file" id="srtFile" accept=".srt" /> 
+            <button class="custom-file-button" onclick="document.getElementById('srtFile').click()">Subtitle from Local</button>
         </div>
         <div class="url-group">
             <input type="text" id="subtitleUrl" placeholder="Enter Subtitle URL" />
-            <button class="url-upload-button" onclick="loadSubtitleFromUrl()">Load from URL</button>
+            <button class="url-upload-button" onclick="loadSubtitleFromUrl()">Subtitle from URL</button>
         </div>
     </div>
 
     <details>
-        <summary>User Guide</summary>
+        <summary>User Guide and Examples</summary>
         <div id="help">
-            <h3>Make sure Format of Subtitle File and its File Name Extension are both correct, and the pulldown menu is selected accordingly:</h3>
+            <h2>[ YouTube with SRT Subtitles ]</h2>
+            <h2>
+            <h3>Subtitle format is automatically detected from file extension (.txt or .srt):</h3>
             <h3>
             <strong>URL for Test</strong>
             <pre>
@@ -208,7 +200,7 @@ note: 1. Vibe Coding with Grok 3, 2. with URL parameters videoUrl and subtitleUr
     .txt subtitle: https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/refs/heads/main/assets/test/PTJ8yizhoIY_transcript.txt
     .srt subtitle: https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/refs/heads/main/assets/test/PTJ8yizhoIY_transcript.srt
             </pre>
-            <strong>Example Embedded URL</strong>
+            <strong>Example Embedded URL with URL parameters</strong>
             <pre>
     https://yourdomain.com/pages/youtube_with_srt_subtitles.html?videoUrl=https://youtu.be/PTJ8yizhoIY&subtitleUrl=https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/refs/heads/main/assets/test/PTJ8yizhoIY_transcript.txt
             </pre>
@@ -252,7 +244,6 @@ and cover brand new companies on this
         let subtitles = [];
 
         function onYouTubeIframeAPIReady() {
-            // Player will be initialized when loadVideo is called
             loadFromUrlParams(); // Check URL parameters on page load
         }
 
@@ -369,44 +360,42 @@ and cover brand new companies on this
             return srtContent.trim();
         }
 
-        document.getElementById('subtitleFormat').addEventListener('change', (event) => {
-            const format = event.target.value;
-            const srtFileInput = document.getElementById('srtFile');
-            srtFileInput.accept = format === 'srt' ? '.srt' : '.txt';
-            srtFileInput.value = '';
-            document.getElementById('srtFileName').textContent = '';
+        function clearSubtitles() {
             subtitles = [];
             document.getElementById('subtitle').textContent = '';
-        });
+            document.getElementById('srtFileName').textContent = '';
+            document.getElementById('subtitleUrl').value = '';
+        }
 
         document.getElementById('srtFile').addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
+                clearSubtitles(); // Clear previous subtitles
                 document.getElementById('srtFileName').textContent = file.name;
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    const format = document.getElementById('subtitleFormat').value;
                     let content = e.target.result;
+                    const format = detectSubtitleFormat(file.name);
                     try {
                         if (format === 'txt') {
                             content = convertTxtToSrt(content);
+                        } else if (format !== 'srt') {
+                            throw new Error('Unsupported subtitle format. Only .txt and .srt are supported.');
                         }
                         parseSRT(content);
                     } catch (parseError) {
                         alert(`Error parsing subtitle file: ${parseError.message}`);
                         console.error("Subtitle parsing error:", parseError);
-                        subtitles = [];
-                        document.getElementById('subtitle').textContent = '';
+                        clearSubtitles();
                     }
                 };
                 reader.onerror = (e) => {
                     alert(`Error reading file: ${e.target.error}`);
+                    clearSubtitles();
                 };
                 reader.readAsText(file);
             } else {
-                document.getElementById('srtFileName').textContent = '';
-                subtitles = [];
-                document.getElementById('subtitle').textContent = '';
+                clearSubtitles();
             }
         });
 
@@ -420,6 +409,7 @@ and cover brand new companies on this
         }
 
         function loadSubtitleFromUrlInternal(url) {
+            clearSubtitles(); // Clear previous subtitles
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -428,38 +418,35 @@ and cover brand new companies on this
                     return response.text();
                 })
                 .then(content => {
-                    const format = detectSubtitleFormat(url) || document.getElementById('subtitleFormat').value;
-                    document.getElementById('subtitleFormat').value = format; // Update dropdown
-                    document.getElementById('srtFileName').textContent = url.split('/').pop() || 'Loaded from URL';
+                    const format = detectSubtitleFormat(url);
+                    document.getElementById('srtFileName').textContent = ''; // Keep empty for URL upload
+                    document.getElementById('subtitleUrl').value = url; // Retain the URL in the input
                     try {
                         if (format === 'txt') {
                             content = convertTxtToSrt(content);
+                        } else if (format !== 'srt') {
+                            throw new Error('Unsupported subtitle format. Only .txt and .srt are supported.');
                         }
                         parseSRT(content);
                     } catch (parseError) {
                         alert(`Error parsing subtitle from URL: ${parseError.message}`);
                         console.error("Subtitle parsing error:", parseError);
-                        subtitles = [];
-                        document.getElementById('subtitle').textContent = '';
+                        clearSubtitles();
                     }
                 })
                 .catch(error => {
                     alert(`Error fetching subtitle from URL: ${error.message}`);
                     console.error("Fetch error:", error);
-                    document.getElementById('srtFileName').textContent = '';
-                    subtitles = [];
-                    document.getElementById('subtitle').textContent = '';
+                    clearSubtitles();
                 });
         }
 
-        // New function to detect subtitle format from URL
-        function detectSubtitleFormat(url) {
-            if (url.toLowerCase().endsWith('.srt')) return 'srt';
-            if (url.toLowerCase().endsWith('.txt')) return 'txt';
-            return null; // Fallback to dropdown selection if not detected
+        function detectSubtitleFormat(filename) {
+            if (filename.toLowerCase().endsWith('.srt')) return 'srt';
+            if (filename.toLowerCase().endsWith('.txt')) return 'txt';
+            return null;
         }
 
-        // New function to load video and subtitle from URL parameters
         function loadFromUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('videoUrl');
