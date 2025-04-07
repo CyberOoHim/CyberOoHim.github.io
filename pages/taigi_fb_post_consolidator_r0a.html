@@ -12,7 +12,6 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taigi FB Post Consolidator</title>
     <style>
-        /* CSS Styles (mostly same as before) */
         body {
             font-family: sans-serif;
             line-height: 1.6;
@@ -55,9 +54,27 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             cursor: not-allowed;
             opacity: 0.7;
         }
+        /* Custom Upload Button Styles */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 8px 5px 8px 0;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+        .custom-file-upload:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
         input[type="file"] {
-            margin-top: 5px;
-            display: block;
+            display: none; /* Hide the default file input */
+        }
+        .upload-container {
             margin-bottom: 15px;
         }
         /* Slider Styles */
@@ -69,23 +86,22 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             border-radius: 4px;
         }
         .slider-container label {
-             display: block; /* Ensure label is on its own line */
-             margin-bottom: 8px;
-             font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
         input[type="range"] {
-            width: 80%; /* Adjust width as needed */
+            width: 80%;
             margin-right: 10px;
-            vertical-align: middle; /* Align slider with text */
+            vertical-align: middle;
         }
-        #similarityValue { /* Style the displayed value */
+        #similarityValue {
             font-weight: bold;
-            min-width: 40px; /* Ensure space for the number */
+            min-width: 40px;
             display: inline-block;
             vertical-align: middle;
             font-family: monospace;
         }
-
         #outputPreview {
             border: 1px solid #ccc;
             padding: 15px;
@@ -110,12 +126,10 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .status-info { background-color: #cce5ff; color: #004085; border: 1px solid #b8daff; }
         .status-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-
         @keyframes flash {
             0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
         }
         .flashing { animation: flash 1.5s linear infinite; }
-
         h1, h2, h3 { margin-top: 20px; color: #333; }
         h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
         h3 { text-align: center; }
@@ -123,8 +137,6 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         .button-group { text-align: center; margin-top: 15px; }
         .button-group button { background-color: #28a745; }
         .button-group button:hover:not(:disabled) { background-color: #218838; }
-
-        /* Style for the details/summary expander */
         details {
             background-color: #e9ecef;
             border: 1px solid #ced4da;
@@ -140,17 +152,16 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         summary:hover {
             text-decoration: underline;
         }
-        details > p { /* Style the paragraph inside the details */
-             margin-top: 10px;
-             margin-bottom: 0; /* Remove extra bottom margin if needed */
-             color: #333;
-             line-height: 1.5;
+        details > p {
+            margin-top: 10px;
+            margin-bottom: 0;
+            color: #333;
+            line-height: 1.5;
         }
     </style>
     <script src="https://unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
 </head>
 <body>
-
     <div class="container">
         <h1>Facebook Post Consolidator</h1>
 
@@ -158,28 +169,32 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         <details open>
             <summary>User Guide</summary>
             <p>After downloading your Facebook backup, unzip it. Find the file named 'edits_you_made_to_posts.json' in the 'posts' folder. Paste the content inside of it or upload the file. The script will identify the latest version of posts edited within 24 hours based on text similarity, attempting to fix potential text encoding issues. The similarity slider can be adjusted to fine-tune the result. Uploaded file takes priority.</p>
+            <p>Click 'Process' when the file is uploaded. Then the result can be copied as text or downloaded as a .txt file.</p>
         </details>
 
-        <div>
-            <label for="jsonInput">Paste JSON here:</label>
-            <textarea id="jsonInput" placeholder="Paste JSON content..."></textarea>
+        <!-- Upload Area (Moved Up) -->
+        <div class="upload-container">
+            <label for="jsonFile">Upload .json file:</label>
+            <label class="custom-file-upload" for="jsonFile">Choose File</label>
+            <input type="file" id="jsonFile" accept=".json">
         </div>
 
+        <!-- Text Input Area (Moved Down) -->
         <div>
-            <label for="jsonFile">Or Upload .json file:</label>
-            <input type="file" id="jsonFile" accept=".json">
+            <label for="jsonInput">Or Paste JSON here ( only when no file is uploaded ):</label>
+            <textarea id="jsonInput" placeholder="Paste JSON content..."></textarea>
         </div>
 
         <!-- Similarity Slider Control -->
         <div class="slider-container">
-            <label for="similaritySlider">Similarity Threshold to filter edited posts:</label>
+            <label for="similaritySlider">Similarity Threshold ( smaller potentially filter out more edited posts in a cluster ):</label>
             <input type="range" id="similaritySlider" min="0.20" max="0.80" step="0.01" value="0.25">
-            <span id="similarityValue">0.25</span> <!-- Default value updated -->
+            <span id="similarityValue">0.25</span>
         </div>
 
         <button id="processButton">Process Data</button>
 
-         <div id="statusMessage" class="hidden"></div>
+        <div id="statusMessage" class="hidden"></div>
 
         <div id="results" class="hidden">
             <h3>Partial Preview (First & Last 10 Posts)</h3>
@@ -194,8 +209,7 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
     <script>
         // --- Constants ---
         const TIME_THRESHOLD = 24 * 60 * 60;
-        // SIMILARITY_THRESHOLD is now dynamic from the slider
-        const DEFAULT_OUTPUT_FILENAME_BASE = "latest_facebook_posts"; // Base name without extension
+        const DEFAULT_OUTPUT_FILENAME_BASE = "latest_facebook_posts";
 
         // --- DOM Elements ---
         const jsonInput = document.getElementById('jsonInput');
@@ -209,68 +223,52 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
         const similaritySlider = document.getElementById('similaritySlider');
         const similarityValueSpan = document.getElementById('similarityValue');
 
-
         // --- Global variables ---
         let fullOutputText = '';
-        let inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Store the base name for download
-        let currentSimilarityThreshold = parseFloat(similaritySlider.value); // Store current threshold
+        let inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE;
+        let currentSimilarityThreshold = parseFloat(similaritySlider.value);
 
         // --- Event Listeners ---
         processButton.addEventListener('click', handleProcess);
         jsonFile.addEventListener('change', handleFileSelect);
-        jsonInput.addEventListener('input', handleTextInput); // Listen for typing/pasting
-        similaritySlider.addEventListener('input', handleSliderInput); // Update value display
+        jsonInput.addEventListener('input', handleTextInput);
+        similaritySlider.addEventListener('input', handleSliderInput);
         copyButton.addEventListener('click', copyToClipboard);
         downloadButton.addEventListener('click', downloadTextFile);
 
         // --- Initial Setup ---
-        similarityValueSpan.textContent = parseFloat(similaritySlider.value).toFixed(2); // Initial display
-
+        similarityValueSpan.textContent = parseFloat(similaritySlider.value).toFixed(2);
 
         // --- Core Logic Functions ---
-
         function fixEncodingJS(text) {
             if (typeof text !== 'string') return text;
             try {
-                // Attempt to detect if the string might be incorrectly decoded latin1/cp1252
                 let potentiallyFixable = true;
                 for (let i = 0; i < text.length; i++) {
                     const charCode = text.charCodeAt(i);
-                    // If we see characters outside the basic latin1 range, assume it's already correct UTF-8
                     if (charCode > 255) {
                         potentiallyFixable = false;
                         break;
                     }
-                    // Also check for common C1 control characters resulting from bad decoding
-                    if (charCode >= 0x80 && charCode <= 0x9F) {
-                       // Likely mojibake, continue checking
-                    }
                 }
-
-                if (!potentiallyFixable) return text; // Already contains high-code point chars, assume UTF-8
-
-                // Convert the potentially mis-decoded string to a byte array
+                if (!potentiallyFixable) return text;
                 const bytes = new Uint8Array(text.length);
                 for (let i = 0; i < text.length; i++) {
                     bytes[i] = text.charCodeAt(i);
                 }
-
-                // Try decoding as UTF-8. If it fails, return the original text.
-                const decoder = new TextDecoder('utf-8', { fatal: true }); // fatal:true throws error on invalid sequences
+                const decoder = new TextDecoder('utf-8', { fatal: true });
                 return decoder.decode(bytes);
             } catch (e) {
-                 // console.warn("fixEncodingJS failed, returning original text:", e);
-                return text; // If decoding fails, return the original string
+                return text;
             }
         }
 
         function setStatus(message, type = 'info') {
             statusMessage.textContent = message;
             statusMessage.classList.remove('flashing');
-            // Ensure all other type classes are removed before adding the new one
-            statusMessage.className = ''; // Clear all existing classes first
-            statusMessage.classList.add(`status-${type}`); // Add the type class
-            statusMessage.classList.remove('hidden'); // Make it visible
+            statusMessage.className = '';
+            statusMessage.classList.add(`status-${type}`);
+            statusMessage.classList.remove('hidden');
         }
 
         function clearStatus() {
@@ -282,425 +280,261 @@ note: Vibe Coding with Gemini 2.5 Pro Preview 03-25
             try {
                 let data = JSON.parse(jsonString);
                 if (!Array.isArray(data)) {
-                    // Check if it's the structure Facebook sometimes provides
                     if (typeof data === 'object' && data !== null && Array.isArray(data.timeline_edit_history)) {
-                       console.log("Detected 'timeline_edit_history' wrapper, extracting array.");
-                       data = data.timeline_edit_history;
-                       if (!Array.isArray(data)) { // Double-check after extraction
-                           setStatus('Error: Extracted "timeline_edit_history" is not an array.', 'error');
-                           return null;
-                       }
+                        data = data.timeline_edit_history;
+                        if (!Array.isArray(data)) {
+                            setStatus('Error: Extracted "timeline_edit_history" is not an array.', 'error');
+                            return null;
+                        }
                     } else {
-                       setStatus('Error: Input JSON must be an array of post objects (or contain a "timeline_edit_history" array).', 'error');
-                       return null;
+                        setStatus('Error: Input JSON must be an array or contain "timeline_edit_history" array.', 'error');
+                        return null;
                     }
-                 }
+                }
                 return data;
             } catch (e) {
                 setStatus(`Error parsing JSON: ${e.message}`, 'error');
-                console.error("JSON Parsing Error:", e);
                 return null;
             }
         }
 
-
-       function getLatestPosts(postsData, threshold) { // Accept threshold as argument
+        function getLatestPosts(postsData, threshold) {
             if (!Array.isArray(postsData) || postsData.length === 0) return [];
-
-            // --- Data Cleaning and Validation ---
             const validPosts = postsData.map((post, index) => {
-                // Basic structure check
                 if (typeof post !== 'object' || post === null || typeof post.timestamp !== 'number') {
-                    console.warn(`Skipping invalid post structure at index ${index}`);
                     return null;
                 }
-
-                // Extract and fix text - handle various possible structures
                 let textValue = null;
                 if (Array.isArray(post.label_values) && post.label_values.length > 0 && typeof post.label_values[0]?.value === 'string') {
                     textValue = post.label_values[0].value;
-                } else if (typeof post.post === 'string') { // Alternative structure check
-                     textValue = post.post;
-                } else if (typeof post.data?.[0]?.post === 'string') { // Another potential structure
+                } else if (typeof post.post === 'string') {
+                    textValue = post.post;
+                } else if (typeof post.data?.[0]?.post === 'string') {
                     textValue = post.data[0].post;
                 }
-                 // Add more potential structure checks here if needed
-
-                if (textValue === null) {
-                    console.warn(`Skipping post at index ${index} due to missing or invalid text field.`);
-                    return null;
-                }
-
+                if (textValue === null) return null;
                 return {
-                    originalIndex: index, // Keep track for debugging if needed
+                    originalIndex: index,
                     timestamp: post.timestamp,
-                    text: fixEncodingJS(textValue) // Fix encoding early
+                    text: fixEncodingJS(textValue)
                 };
-            }).filter(post => post !== null && typeof post.text === 'string'); // Filter out nulls and ensure text is string
-
-             // --- Sorting ---
-             // Sort descending by timestamp (most recent first)
+            }).filter(post => post !== null && typeof post.text === 'string');
             validPosts.sort((a, b) => b.timestamp - a.timestamp);
-
-            if (validPosts.length === 0) {
-                 console.log("No valid posts found after initial cleaning and validation.");
-                 return [];
-             }
-
-            // --- Filtering Logic ---
+            if (validPosts.length === 0) return [];
             const latestPosts = [];
-            const discardedIndices = new Set(); // Use original index if needed, but position in sorted array is easier
-            const numValidPosts = validPosts.length;
-
-            console.log(`Starting filtering with ${numValidPosts} valid, sorted posts. Threshold: ${threshold}`);
-
-            for (let i = 0; i < numValidPosts; i++) {
-                if (discardedIndices.has(i)) continue; // Skip if already marked as older version
-
+            const discardedIndices = new Set();
+            for (let i = 0; i < validPosts.length; i++) {
+                if (discardedIndices.has(i)) continue;
                 const currentPost = validPosts[i];
-                latestPosts.push(currentPost); // Assume it's the latest until proven otherwise
-
-                // Compare currentPost with subsequent posts (which are older or same time)
-                for (let j = i + 1; j < numValidPosts; j++) {
-                    if (discardedIndices.has(j)) continue; // Skip if already discarded
-
+                latestPosts.push(currentPost);
+                for (let j = i + 1; j < validPosts.length; j++) {
+                    if (discardedIndices.has(j)) continue;
                     const potentialOlderPost = validPosts[j];
                     const timeDifference = currentPost.timestamp - potentialOlderPost.timestamp;
-
-                    // Only compare if within the time threshold
                     if (timeDifference <= TIME_THRESHOLD) {
-                        // Check for exact duplicates first (cheaper)
                         if (currentPost.text === potentialOlderPost.text) {
-                           // console.log(`Discarding post ${j} (time: ${potentialOlderPost.timestamp}) as exact duplicate of post ${i} (time: ${currentPost.timestamp})`);
                             discardedIndices.add(j);
-                            continue; // Move to the next potential older post
+                            continue;
                         }
-
-                        // Calculate similarity only if texts are different
-                        try {
-                            if (typeof stringSimilarity === 'undefined') {
-                                throw new Error("string-similarity library not loaded.");
-                            }
-                            const similarity = stringSimilarity.compareTwoStrings(currentPost.text, potentialOlderPost.text);
-
-                            // If similar enough, discard the older post
-                            if (similarity >= threshold) {
-                                // console.log(`Discarding post ${j} (time: ${potentialOlderPost.timestamp}, sim: ${similarity.toFixed(3)}) as older version of post ${i} (time: ${currentPost.timestamp})`);
-                                discardedIndices.add(j);
-                            } else {
-                               // console.log(`Post ${j} (time: ${potentialOlderPost.timestamp}) is within time threshold but not similar enough (sim: ${similarity.toFixed(3)}) to post ${i}.`);
-                           }
-                        } catch (e) {
-                            console.error(`Error calculating similarity between post ${i} and ${j}:`, e);
-                            // Decide how to handle error: maybe skip comparison, maybe log, etc.
+                        const similarity = stringSimilarity.compareTwoStrings(currentPost.text, potentialOlderPost.text);
+                        if (similarity >= threshold) {
+                            discardedIndices.add(j);
                         }
                     } else {
-                        // Since posts are sorted by time, if this one is outside the threshold,
-                        // all subsequent posts will also be outside the threshold for the current post.
-                         // console.log(`Post ${j} (time: ${potentialOlderPost.timestamp}) is outside time threshold (${timeDifference}s) for post ${i}. Stopping comparison for post ${i}.`);
-                        break; // Stop comparing for the current `i`
+                        break;
                     }
                 }
             }
-            console.log(`Finished filtering. Kept ${latestPosts.length} latest versions.`);
-            // We only need the text for the final output
-            return latestPosts.map(p => p.text).filter(text => text.trim().length > 0); // Also filter empty strings
+            return latestPosts.map(p => p.text).filter(text => text.trim().length > 0);
         }
-
 
         function formatOutputText(finalPostTexts) {
             const outputLines = ['Facebook Post in Taigi', '---'];
             const postContentLines = [];
-             if (!Array.isArray(finalPostTexts)) {
-                console.error('Internal Error: formatOutputText received non-array');
-                 return { fullText: outputLines.join('\n'), contentLines: [] };
-             }
-
-            // Add index to non-empty posts
+            if (!Array.isArray(finalPostTexts)) return { fullText: outputLines.join('\n'), contentLines: [] };
             finalPostTexts.forEach((text, index) => {
-                if (text && text.trim()) { // Ensure text is not null/undefined and not just whitespace
-                   postContentLines.push(`${index}. ${text.trim()}`); // Use index from the final filtered array
-               }
+                if (text && text.trim()) {
+                    postContentLines.push(`${index}. ${text.trim()}`);
+                }
             });
-
-            let fullText;
-             if (postContentLines.length > 0) {
-                 fullText = outputLines[0] + '\n' + outputLines[1] + '\n\n' + postContentLines.join('\n\n');
-            } else {
-                 fullText = outputLines[0] + '\n' + outputLines[1];
-            }
+            let fullText = postContentLines.length > 0 ? outputLines[0] + '\n' + outputLines[1] + '\n\n' + postContentLines.join('\n\n') : outputLines[0] + '\n' + outputLines[1];
             return { fullText: fullText, contentLines: postContentLines };
         }
 
-
-        // --- UI Update Functions ---
         function displayResults(contentLines) {
             const numPosts = contentLines.length;
-            let previewText = '';
-
-            if (numPosts === 0) {
-                previewText = "No valid, non-empty posts found after filtering.";
-                setStatus("Processing complete. No posts remained after filtering.", "warning");
-            } else {
-                setStatus(`Processing complete. Found ${numPosts} unique, non-empty posts.`, "success");
-                if (numPosts <= 20) {
-                    previewText = contentLines.join('\n\n');
-                } else {
-                    const firstTen = contentLines.slice(0, 10).join('\n\n');
-                    const lastTen = contentLines.slice(-10).join('\n\n');
-                    previewText = `--- First 10 Posts ---\n\n${firstTen}\n\n...\n\n--- Last 10 Posts ---\n\n${lastTen}`;
-                }
-            }
-
+            let previewText = numPosts === 0 ? "No valid, non-empty posts found after filtering." : numPosts <= 20 ? contentLines.join('\n\n') : `--- First 10 Posts ---\n\n${contentLines.slice(0, 10).join('\n\n')}\n\n...\n\n--- Last 10 Posts ---\n\n${contentLines.slice(-10).join('\n\n')}`;
             outputPreview.textContent = previewText;
             resultsDiv.classList.remove('hidden');
             copyButton.disabled = numPosts === 0;
             downloadButton.disabled = numPosts === 0;
+            setStatus(numPosts === 0 ? "Processing complete. No posts remained after filtering." : `Processing complete. Found ${numPosts} unique, non-empty posts.`, numPosts === 0 ? "warning" : "success");
         }
 
         // --- Event Handlers ---
-
         function handleSliderInput(event) {
             currentSimilarityThreshold = parseFloat(event.target.value);
             similarityValueSpan.textContent = currentSimilarityThreshold.toFixed(2);
-            // Optional: Re-process if data is already loaded? Or just update for next run.
-            // For simplicity, we'll just update the value for the *next* time Process is clicked.
         }
 
         function handleFileSelect(event) {
-            // Clear previous state ONLY related to input source
             clearStatus();
-            resultsDiv.classList.add('hidden'); // Hide results on new file selection
-            jsonInput.value = ''; // Clear textarea to give file priority
-
+            resultsDiv.classList.add('hidden');
+            jsonInput.value = '';
             const file = event.target.files[0];
             if (file && file.type === "application/json") {
-                 // Extract base name (remove .json)
-                const fileName = file.name;
-                // Use regex to remove .json extension more robustly
-                inputFileNameBase = fileName.replace(/\.json$/i, ''); // Case-insensitive removal
-                setStatus(`File '${fileName}' selected. Click 'Process Data'.`, 'info');
+                inputFileNameBase = file.name.replace(/\.json$/i, '');
+                setStatus(`File '${file.name}' selected. Click 'Process Data'.`, 'info');
             } else if (file) {
                 setStatus('Please select a valid .json file.', 'warning');
-                jsonFile.value = ''; // Clear invalid selection
-                inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default
+                jsonFile.value = '';
+                inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE;
             } else {
-                 // File selection was cancelled or cleared
-                 clearStatus();
-                 inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default
+                clearStatus();
+                inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE;
             }
         }
 
         function handleTextInput() {
-            // If user starts typing/pasting, clear the file input and reset filename
-             if (jsonInput.value.trim() !== '') {
-                 if(jsonFile.value) { // Only clear if a file was actually selected
-                    jsonFile.value = ''; // Clear file selection visually
-                     setStatus('Pasted text will be used. File selection cleared.', 'info');
-                 } else {
-                     // Only clear status if there wasn't a file previously selected
-                     clearStatus();
-                 }
-                 inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE; // Reset to default for pasted text
-             }
+            if (jsonInput.value.trim() !== '') {
+                if (jsonFile.value) {
+                    jsonFile.value = '';
+                    setStatus('Pasted text will be used. File selection cleared.', 'info');
+                } else {
+                    clearStatus();
+                }
+                inputFileNameBase = DEFAULT_OUTPUT_FILENAME_BASE;
+            }
         }
 
         function processInputData(jsonDataString, sourceNameBase) {
-             // Set the filename base for potential download *before* processing starts
-            inputFileNameBase = sourceNameBase || DEFAULT_OUTPUT_FILENAME_BASE; // Ensure a base name
-
+            inputFileNameBase = sourceNameBase || DEFAULT_OUTPUT_FILENAME_BASE;
             resultsDiv.classList.add('hidden');
             outputPreview.textContent = '';
             fullOutputText = '';
             copyButton.disabled = true;
             downloadButton.disabled = true;
-
-            setStatus('Processing data... Please wait.', 'info'); // More descriptive message
+            setStatus('Processing data... Please wait.', 'info');
             statusMessage.classList.add('flashing');
             processButton.disabled = true;
-
-             // Use setTimeout to allow UI update before potentially long processing
-             setTimeout(() => {
-                 let processingError = false;
-                 try {
-                     const postsData = parseJsonInput(jsonDataString);
-
-                     if (postsData === null) {
-                          processingError = true; // Error status already set by parseJsonInput
-                          resultsDiv.classList.add('hidden'); // Ensure results are hidden on parse error
-                     } else {
-                        // *** Pass the current slider threshold ***
+            setTimeout(() => {
+                let processingError = false;
+                try {
+                    const postsData = parseJsonInput(jsonDataString);
+                    if (postsData === null) {
+                        processingError = true;
+                    } else {
                         const finalPostTexts = getLatestPosts(postsData, currentSimilarityThreshold);
-
-                        // Format the output
                         const { fullText, contentLines } = formatOutputText(finalPostTexts);
                         fullOutputText = fullText;
-
-                        // Display results (handles the 'no posts found' case internally)
                         displayResults(contentLines);
-                     }
-                 } catch (e) {
-                      setStatus(`Critical Error during processing: ${e.message}`, 'error');
-                      console.error("Processing Error:", e);
-                      resultsDiv.classList.add('hidden');
-                      processingError = true;
-                 } finally {
-                     processButton.disabled = false;
-                     statusMessage.classList.remove('flashing');
-                     // Only clear status if it was an info/wait message and no error occurred
-                     // Success/warning/error messages should persist.
-                     if (!processingError && statusMessage.classList.contains('status-info')) {
-                        // Don't clear success/warning automatically, handled by displayResults
-                        // clearStatus(); // Or let the success/warning from displayResults stay
                     }
-                 }
-            }, 50); // Small delay like 50ms is usually enough
-         }
+                } catch (e) {
+                    setStatus(`Critical Error during processing: ${e.message}`, 'error');
+                    processingError = true;
+                } finally {
+                    processButton.disabled = false;
+                    statusMessage.classList.remove('flashing');
+                    if (!processingError && statusMessage.classList.contains('status-info')) {
+                        // Success/warning messages persist from displayResults
+                    }
+                }
+            }, 50);
+        }
 
-         function handleProcess() {
-             const pastedJson = jsonInput.value.trim();
-             const selectedFile = jsonFile.files[0];
+        function handleProcess() {
+            const pastedJson = jsonInput.value.trim();
+            const selectedFile = jsonFile.files[0];
+            if (selectedFile && selectedFile.type === "application/json") {
+                const reader = new FileReader();
+                const fileNameForProcessing = selectedFile.name.replace(/\.json$/i, '');
+                reader.onload = function(e) {
+                    processInputData(e.target.result, fileNameForProcessing);
+                };
+                reader.onerror = function(e) {
+                    setStatus(`Error reading file: ${e.target.error?.message || 'Unknown error'}`, 'error');
+                    processButton.disabled = false;
+                    statusMessage.classList.remove('flashing');
+                };
+                setStatus('Reading file...', 'info');
+                statusMessage.classList.add('flashing');
+                processButton.disabled = true;
+                reader.readAsText(selectedFile);
+            } else if (pastedJson) {
+                processInputData(pastedJson, DEFAULT_OUTPUT_FILENAME_BASE);
+            } else {
+                setStatus('Please paste JSON data or upload a valid .json file first.', 'warning');
+            }
+        }
 
-             // --- Input Priority Logic ---
-             if (selectedFile && selectedFile.type === "application/json") {
-                 // 1. Valid file selected - USE IT
-                 const reader = new FileReader();
-                 // Use regex for robust .json removal, case-insensitive
-                 const fileNameForProcessing = selectedFile.name.replace(/\.json$/i, '');
-
-                 reader.onload = function(e) {
-                     // Pass file content and the derived base name
-                     processInputData(e.target.result, fileNameForProcessing);
-                 };
-                 reader.onerror = function(e) {
-                     setStatus(`Error reading file: ${e.target.error?.message || 'Unknown error'}`, 'error');
-                     console.error("File Reading Error during process:", e);
-                     processButton.disabled = false; // Re-enable button on read error
-                     statusMessage.classList.remove('flashing');
-                 };
-                 setStatus('Reading file...', 'info');
-                 statusMessage.classList.add('flashing');
-                 processButton.disabled = true;
-                 reader.readAsText(selectedFile); // Consider specifying encoding if needed, e.g., 'UTF-8'
-
-             } else if (pastedJson) {
-                 // 2. No valid file, but pasted text exists - USE IT
-                 // Pass pasted content and the default base name
-                 processInputData(pastedJson, DEFAULT_OUTPUT_FILENAME_BASE);
-
-             } else {
-                 // 3. Neither valid file nor pasted text
-                 setStatus('Please paste JSON data or upload a valid .json file first.', 'warning');
-             }
-         }
-
-
-        // --- Utility Functions ---
         function copyToClipboard() {
-             if (!fullOutputText || copyButton.disabled) {
-                 setStatus('No text available to copy.', 'warning'); return;
-             }
-             navigator.clipboard.writeText(fullOutputText)
+            if (!fullOutputText || copyButton.disabled) {
+                setStatus('No text available to copy.', 'warning');
+                return;
+            }
+            navigator.clipboard.writeText(fullOutputText)
                 .then(() => {
                     setStatus('Full text copied to clipboard!', 'success');
                     const originalText = copyButton.textContent;
                     copyButton.textContent = 'Copied!';
-                    // Temporarily disable button to prevent rapid clicks
                     copyButton.disabled = true;
                     setTimeout(() => {
                         copyButton.textContent = originalText;
-                        copyButton.disabled = false; // Re-enable
-                        // Optionally clear the success message after a bit longer
-                        // setTimeout(clearStatus, 3000);
-                    }, 2000); // Reset button text after 2 seconds
+                        copyButton.disabled = false;
+                    }, 2000);
                 })
                 .catch(err => {
-                    setStatus('Failed to copy text. Your browser might not support this feature or permissions are denied.', 'error');
-                    console.error('Clipboard Copy Error:', err);
-                     // Try fallback for older browsers (less reliable, more intrusive)
-                     try {
-                         const textArea = document.createElement("textarea");
-                         textArea.value = fullOutputText;
-                         textArea.style.position = "fixed"; // Prevent scrolling to bottom
-                         textArea.style.top = "0";
-                         textArea.style.left = "0";
-                         textArea.style.opacity = "0"; // Make it invisible
-                         document.body.appendChild(textArea);
-                         textArea.focus();
-                         textArea.select();
-                         document.execCommand('copy');
-                         document.body.removeChild(textArea);
-                         setStatus('Full text copied (using fallback method)!', 'success');
-                         // ... (button text change logic as above) ...
-                     } catch (fallbackErr) {
-                         console.error('Fallback copy method failed:', fallbackErr);
-                         setStatus('Failed to copy text using all methods.', 'error');
-                     }
+                    setStatus('Failed to copy text.', 'error');
+                    try {
+                        const textArea = document.createElement("textarea");
+                        textArea.value = fullOutputText;
+                        textArea.style.position = "fixed";
+                        textArea.style.opacity = "0";
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        setStatus('Full text copied (fallback method)!', 'success');
+                    } catch (fallbackErr) {
+                        setStatus('Failed to copy text using all methods.', 'error');
+                    }
                 });
         }
 
         function downloadTextFile() {
-             if (!fullOutputText || downloadButton.disabled) {
-                 setStatus('No text available to download.', 'warning'); return;
-             }
-             try {
-                 // Ensure inputFileNameBase is a non-empty string
-                 const safeBaseName = (typeof inputFileNameBase === 'string' && inputFileNameBase.trim())
-                                     ? inputFileNameBase.trim()
-                                     : DEFAULT_OUTPUT_FILENAME_BASE;
-                 // Sanitize filename slightly (replace potential problematic chars)
-                 const sanitizedBaseName = safeBaseName.replace(/[/\\?%*:|"<>]/g, '_');
-                 const finalFileName = `${sanitizedBaseName}.txt`;
-
-
-                 const blob = new Blob([fullOutputText], { type: 'text/plain;charset=utf-8' });
-
-                 // Use FileSaver.js if available (more robust), otherwise fallback
-                 if (typeof saveAs !== 'undefined') {
-                      saveAs(blob, finalFileName);
-                      console.log(`Download initiated via FileSaver.js as ${finalFileName}.`);
-                 } else {
-                     // Fallback method
-                     const url = URL.createObjectURL(blob);
-                     const a = document.createElement('a');
-                     a.style.display = 'none'; // Hide the link
-                     a.href = url;
-                     a.download = finalFileName; // Use the constructed name
-                     document.body.appendChild(a);
-                     a.click();
-                     // Clean up
-                     window.URL.revokeObjectURL(url);
-                     document.body.removeChild(a);
-                     console.log(`Download initiated via fallback method as ${finalFileName}.`);
-                 }
-                 setStatus('Download initiated.', 'success'); // Provide feedback
-                 setTimeout(() => { // Clear status after a while
+            if (!fullOutputText || downloadButton.disabled) {
+                setStatus('No text available to download.', 'warning');
+                return;
+            }
+            try {
+                const safeBaseName = (typeof inputFileNameBase === 'string' && inputFileNameBase.trim()) ? inputFileNameBase.trim() : DEFAULT_OUTPUT_FILENAME_BASE;
+                const sanitizedBaseName = safeBaseName.replace(/[/\\?%*:|"<>]/g, '_');
+                const finalFileName = `${sanitizedBaseName}.txt`;
+                const blob = new Blob([fullOutputText], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = finalFileName;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                setStatus('Download initiated.', 'success');
+                setTimeout(() => {
                     if (statusMessage.classList.contains('status-success') && statusMessage.textContent === 'Download initiated.') {
                         clearStatus();
                     }
-                 }, 3000);
-             } catch (e) {
-                 setStatus(`Failed to initiate download: ${e.message}`, 'error');
-                 console.error('Download Error:', e);
-             }
+                }, 3000);
+            } catch (e) {
+                setStatus(`Failed to initiate download: ${e.message}`, 'error');
+            }
         }
 
         // --- Initial State ---
         copyButton.disabled = true;
         downloadButton.disabled = true;
-        // Add FileSaver.js script dynamically or include it in the head if preferred
-        // (Example of dynamic loading - place this near the end of the script or in head)
-        /*
-        const fileSaverScript = document.createElement('script');
-        fileSaverScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js';
-        fileSaverScript.integrity = 'sha512-Qlv6VSKh1gDKGoJbnyA5GyLEGOkdSpo6MWQx8NpH+1TКУM6+xQvrFVRRUmMpjioArBCoGP9V/0Tv15AmfGsvbQ=='; // Optional but recommended
-        fileSaverScript.crossOrigin = 'anonymous'; // Optional but recommended
-        document.body.appendChild(fileSaverScript);
-        */
-
     </script>
-    <!-- Consider adding FileSaver.js for more reliable downloads -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
-
 </body>
 </html>
