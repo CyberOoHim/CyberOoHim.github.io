@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio with SRT Subtitles</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+        }
+        #subtitle {
+            font-size: 24px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            width: 80%;
+            max-width: 640px;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 640px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #audioFile, #srtFile {
+            display: none;
+        }
+        .custom-file-button {
+            background-color: #28a745;
+        }
+        .custom-file-button:hover {
+            background-color: #218838;
+        }
+        #audioFileName, #srtFileName {
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <audio id="player" controls></audio>
+    <div id="subtitle"></div>
+    <div id="controls">
+        <div class="input-group">
+            <input type="text" id="audioUrl" placeholder="Enter Audio URL (.mp3)" />
+            <button onclick="loadAudioFromUrl()">Load Audio from URL</button>
+        </div>
+        <div class="input-group">
+            <span id="audioFileName"></span>
+            <input type="file" id="audioFile" accept=".mp3" />
+            <button class="custom-file-button" onclick="document.getElementById('audioFile').click()">Load Local Audio</button>
+        </div>
+        <div class="input-group">
+            <input type="text" id="subtitleUrl" placeholder="Enter Subtitle URL" />
+            <button onclick="loadSubtitleFromUrl()">Load Subtitle from URL</button>
+        </div>
+        <div class="input-group">
+            <span id="srtFileName"></span>
+            <input type="file" id="srtFile" accept=".srt" />
+            <button class="custom-file-button" onclick="document.getElementById('srtFile').click()">Load Local Subtitle</button>
+        </div>
+    </div>
+
+    <script>
+        let subtitles = [];
+        let audioUrlObject = null; // To revoke object URL later
+
+        function loadAudioFromUrl() {
+            const url = document.getElementById('audioUrl').value.trim();
+            if (!url) {
+                alert('Please enter an audio URL');
+                return;
+            }
+            const player = document.getElementById('player');
+            if (audioUrlObject) {
+                URL.revokeObjectURL(player.src); // Clean up previous local file URL
+                audioUrlObject = null;
+            }
+            player.src = url;
+            player.load();
+            player.onloadedmetadata = startSubtitleSync;
+            document.getElementById('audioFileName').textContent = ''; // Clear local file name
+        }
+
+        document.getElementById('audioFile').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('audio/mpeg')) {
+                    alert('Please select a valid .mp3 file');
+                    return;
+                }
+                const player = document.getElementById('player');
+                if (audioUrlObject) {
+                    URL.revokeObjectURL(player.src); // Clean up previous local file URL
+                }
+                audioUrlObject = URL.createObjectURL(file);
+                player.src = audioUrlObject;
+                player.load();
+                player.onloadedmetadata = startSubtitleSync;
+                document.getElementById('audioFileName').textContent = file.name;
+                document.getElementById('audioUrl').value = ''; // Clear URL input
+            } else {
+                document.getElementById('audioFileName').textContent = '';
+            }
+        });
+
+        function startSubtitleSync() {
+            setInterval(updateSubtitles, 100);
+        }
+
+        function updateSubtitles() {
+            const player = document.getElementById('player');
+            const currentTime = player.currentTime;
+            const subtitle = subtitles.find(s => currentTime >= s.start && currentTime <= s.end);
+            document.getElementById('subtitle').textContent = subtitle ? subtitle.text : '';
+        }
+
+        function parseSRT(srtContent) {
+            subtitles = [];
+            const lines = srtContent.trim().split('\n\n');
+            for (let block of lines) {
+                const blockParts = block.split('\n');
+                if (blockParts.length >= 3) {
+                    const time = blockParts[1];
+                    const textLines = blockParts.slice(2);
+                    const timeMatch = time.match(/(\d{2}:\d{2}:\d{2}[,.]\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2}[,.]\d{3})/);
+                    if (timeMatch) {
+                        const [_, start, end] = timeMatch;
+                        subtitles.push({
+                            start: timeToSeconds(start),
+                            end: timeToSeconds(end),
+                            text: textLines.join(' ')
+                        });
+                    }
+                }
+            }
+        }
+
+        function timeToSeconds(time) {
+            const [hours, minutes, seconds] = time.replace(',', '.').split(':');
+            return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseFloat(seconds);
+        }
+
+        function loadSubtitleFromUrl() {
+            const url = document.getElementById('subtitleUrl').value.trim();
+            if (!url) {
+                alert('Please enter a subtitle URL');
+                return;
+            }
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(content => {
+                    parseSRT(content);
+                    document.getElementById('srtFileName').textContent = ''; // Clear local file name
+                })
+                .catch(error => {
+                    alert(`Error fetching subtitle: ${error.message}`);
+                    console.error('Fetch error:', error);
+                });
+        }
+
+        document.getElementById('srtFile').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.name.toLowerCase().endsWith('.srt')) {
+                    alert('Please select a valid .srt file');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const content = e.target.result;
+                    parseSRT(content);
+                    document.getElementById('srtFileName').textContent = file.name;
+                    document.getElementById('subtitleUrl').value = ''; // Clear URL input
+                };
+                reader.onerror = (e) => {
+                    alert(`Error reading file: ${e.target.error}`);
+                    document.getElementById('srtFileName').textContent = '';
+                };
+                reader.readAsText(file);
+            } else {
+                document.getElementById('srtFileName').textContent = '';
+            }
+        });
+
+        // Clean up object URL when page unloads
+        window.addEventListener('beforeunload', () => {
+            if (audioUrlObject) {
+                URL.revokeObjectURL(audioUrlObject);
+            }
+        });
+    </script>
+</body>
+</html>
