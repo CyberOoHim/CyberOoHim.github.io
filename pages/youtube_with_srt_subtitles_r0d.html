@@ -723,19 +723,32 @@ and cover brand new companies on this
                 const prefix = subtitleSourceType === 'local' ? '[Local] ' : '[URL] ';
                 let displayFilename = originalSubtitleFilename;
                 if (subtitleSourceType === 'url') {
-                    // Remove http(s):// part for display
-                    displayFilename = displayFilename.replace(/^https?:\/\//, '');
+                    try {
+                        // Extract only the filename part after the last '/' and before any '?'
+                        const urlParts = displayFilename.split('?')[0].split('/');
+                        displayFilename = urlParts[urlParts.length - 1];
+                        if (!displayFilename) { // Handle cases like "https://example.com/"
+                             displayFilename = originalSubtitleFilename.replace(/^https?:\/\//, ''); // Fallback to URL without protocol
+                        }
+                    } catch (e) {
+                         console.error("Error extracting filename from URL:", e);
+                         // Fallback to URL without protocol if parsing fails
+                         displayFilename = displayFilename.replace(/^https?:\/\//, '');
+                    }
                 }
+                // Assign potentially modified filename
                 textElement.textContent = prefix + displayFilename;
+                textElement.title = prefix + originalSubtitleFilename; // Show full original path/URL on hover
+
                 downloadButton.style.display = 'inline-block';
                 container.style.display = 'flex'; // Use flex to show container
             } else {
                 textElement.textContent = '';
+                textElement.title = ''; // Clear title attribute
                 downloadButton.style.display = 'none';
                 container.style.display = 'none'; // Hide container
             }
         }
-
         // --- NEW Function to Update Base Subtitle Name Display ---
         function updateBaseSubtitleNameDisplay() {
              const displayElement = document.getElementById('baseSubtitleNameDisplay');
