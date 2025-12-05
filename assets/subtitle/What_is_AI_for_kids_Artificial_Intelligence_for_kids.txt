@@ -2,367 +2,222 @@ URL: https://www.youtube.com/watch?v=UWeDo09UveM
 TITLE: What is AI for kids? Artificial Intelligence for kids.
 AI 是啥物？ 報人工知能 hō͘ 囡仔 bat。
 
-1
-00:00:00,000 --> 00:00:03,000
-Wait, what if your vacuum could actually
+[0:00] Wait, what if your vacuum could actually
 等--leh！假使你 ê 電suh-á 誠實有才調家己
 
-2
-00:00:03,000 --> 00:00:05,000
-think for itself? What if your teddy bear
+[0:03] think for itself? What if your teddy bear
 思考--leh？假使你 ê Thè-tih 熊
 
-3
-00:00:05,000 --> 00:00:08,000
-could do your homework? Whoa, that sounds
+[0:05] could do your homework? Whoa, that sounds
 會當 kā 你寫宿題(homework)--leh？Óa，he 聽--起來
 
-4
-00:00:08,000 --> 00:00:11,000
-like artificial intelligence.
+[0:08] like artificial intelligence.
 若親像是人工知能(AI)。
 
-5
-00:00:11,000 --> 00:00:13,000
-But is it really that scary or super
+[0:11] But is it really that scary or super
 M̄-koh he 敢有影 hiah-nī 驚--人，
 
-6
-00:00:13,000 --> 00:00:16,000
-cool? Let's find out Todd's and
+[0:13] cool? Let's find out Todd's and
 iah-sī 講 cool kah 無地比？ 咱來用 Todd's kah
 
-7
-00:00:16,000 --> 00:00:19,000
-grade style.
+[0:16] grade style.
 Grades ê su-tài-lù 了解看覓。
 
-8
-00:00:19,000 --> 00:00:22,000
-Artificial intelligence, or AI for short,
+[0:19] Artificial intelligence, or AI for short,
 人工知能，iah-sī 講 AI，
 
-9
-00:00:22,000 --> 00:00:24,000
-is when machines like computers or robots
+[0:22] is when machines like computers or robots
 tō 是機器，親像電腦 he̍k-chiá 機器人，
 
-10
-00:00:24,000 --> 00:00:27,000
-learn how to think, solve problems, and
+[0:24] learn how to think, solve problems, and
 來學 án-chóaⁿ 思考、解決問題、
 
-11
-00:00:27,000 --> 00:00:29,000
-help people just like you do in school.
+[0:27] help people just like you do in school.
 而且 kā 人鬥相共，親像你 tī 學校 án-ne。
 
-12
-00:00:29,000 --> 00:00:32,000
-But don't worry, your fridge is not
+[0:29] But don't worry, your fridge is not
 M̄-koh 免煩惱，你 ê 冰箱
 
-13
-00:00:32,000 --> 00:00:34,000
-planning to steal your snacks. AI can't
+[0:32] planning to steal your snacks. AI can't
 袂按算欲偷提你 ê 四秀仔。AI
 
-14
-00:00:34,000 --> 00:00:37,000
-think like humans yet. It just follows
+[0:34] think like humans yet. It just follows
 iáu 袂曉像人 án-ne 想。伊 kan-ta 會 tòe
 
-15
-00:00:37,000 --> 00:00:39,000
-instructions. Kind of like when mom tells
+[0:37] instructions. Kind of like when mom tells
 指令行。有淡薄仔 sêng 阿母叫
 
-16
-00:00:39,000 --> 00:00:41,000
-you to clean your room and you only do
+[0:39] you to clean your room and you only do
 你去 piàⁿ 房間，ah 你 kan-ta 做
 
-17
-00:00:41,000 --> 00:00:44,000
-half of it. Guess what? AI is
+[0:41] half of it. Guess what? AI is
 一半。你知--bô？AI
 
-18
-00:00:44,000 --> 00:00:46,000
-already all around you. Let's see where
+[0:44] already all around you. Let's see where
 已經 tī 你四篐圍--ah。咱來看
 
-19
-00:00:46,000 --> 00:00:49,000
-it hides. One, voice assistants like
+[0:46] it hides. One, voice assistants like
 伊 bih tī 佗位。頭一項，語音助理，親像
 
-20
-00:00:49,000 --> 00:00:52,000
-Siri or Alexa. I'm Alexa.
-Siri Alexa。「阮是 Alexa。
+[0:49] Siri or Alexa. I'm Alexa.
+Siri  Alexa。「阮是 Alexa。
 
-21
-00:00:52,000 --> 00:00:54,000
-How can I help you today? You say play
+[0:52] How can I help you today? You say play
 今仔日欲 án-chóaⁿ 鬥相共？」你講放送
 
-22
-00:00:54,000 --> 00:00:59,000
-Baby Shark and boom, it plays.
+[0:54] Baby Shark and boom, it plays.
 嬰仔鯊 (歌名)，了後，póng，伊 choân 放--出來。
 
-23
-00:00:59,000 --> 00:01:02,000
-Two, Smart vacuums. They zoom
+[0:59] Two, Smart vacuums. They zoom
 第二，巧電suh-á。In 會四界
 
-24
-00:01:02,000 --> 00:01:04,000
-around and clean the floor or even, the icky
+[1:02] around and clean the floor or even, the icky
 巡，清塗跤，甚至
 
-25
-00:01:04,000 --> 00:01:10,000
-spots under the couch.
+[1:04] spots under the couch.
 清膨椅下跤 lah-sap ê 所在。
 
-26
-00:01:10,000 --> 00:01:13,000
-Three, Video games. AI controls the
-第三，電動 (Video games)。AI 控制內底 ê
+[1:10] Three, Video games. AI controls the
+第三，電動 (Video games)。AI 控制內底 ê 
 
-27
-00:01:13,000 --> 00:01:15,000
-other characters so you can jump, run,
+[1:13] other characters so you can jump, run,
 角色，hō͘ 你有地跳來走去、
 
-28
-00:01:15,000 --> 00:01:19,000
-and score points.
+[1:15] and score points.
 koh 提分。
 
-29
-00:01:19,000 --> 00:01:22,000
-Four. YouTube recommendations.
+[1:19] Four. YouTube recommendations.
 第四，YouTube 推薦。
 
-30
-00:01:22,000 --> 00:01:24,000
-Ever wonder how YouTube knows you love
+[1:22] Ever wonder how YouTube knows you love
 敢有想過 YouTube 哪會知影你愛
 
-31
-00:01:24,000 --> 00:01:27,000
-dinosaur cartoons? Yep, that's AI
+[1:24] dinosaur cartoons? Yep, that's AI
 看恐龍 khah-thong ？無m̄著，he oân-á 是 AI，
 
-32
-00:01:27,000 --> 00:01:30,000
-too, smarty pants. Is AI going to take
+[1:27] too, smarty pants. Is AI going to take
 巧囡仔。AI 敢會
 
-33
-00:01:30,000 --> 00:01:32,000
-over the world? Some cartoons make it look
+[1:30] over the world? Some cartoons make it look
 kā 世界搶--去？有一kóa khah-thong 畫 kah 袂輸
 
-34
-00:01:32,000 --> 00:01:35,000
-like AI wants to rule the world, but
+[1:32] like AI wants to rule the world, but
 AI 想欲統治世界， M̄-koh
 
-35
-00:01:35,000 --> 00:01:38,000
-that's just make-believe.
+[1:35] that's just make-believe.
 he 是空想 niā--lah。
 
-36
-00:01:38,000 --> 00:01:41,000
-AI can't feel emotions. It can't laugh,
+[1:38] AI can't feel emotions. It can't laugh,
 AI 無感情。伊無才調笑、
 
-37
-00:01:41,000 --> 00:01:44,000
-cry, or play tag with you. It can't take
+[1:41] cry, or play tag with you. It can't take
 吼， kap 你做伙耍 掠人遊戲。伊袂去佔
 
-38
-00:01:44,000 --> 00:01:46,000
-over your tree house or eat your cookies.
+[1:44] over your tree house or eat your cookies.
 你 ê 樹頂厝， 食你 ê 餅。iah-sī
 
-39
-00:01:46,000 --> 00:01:49,000
-AI is not magic. It's math, coding, and
+[1:46] AI is not magic. It's math, coding, and
 AI m̄是魔術。伊是數學、是寫khó/程式碼文，koh 有
 
-40
-00:01:49,000 --> 00:01:52,000
-learning from data made by super smart
+[1:49] learning from data made by super smart
 ùi 資料來學習，he 是 siáu 巧 ê
 
-41
-00:01:52,000 --> 00:01:55,000
-people. Like maybe you one day.
+[1:52] people. Like maybe you one day.
 人做--出來--ê。凡勢有一工這 ê 人 tō 是你。
 
-42
-00:01:55,000 --> 00:01:56,000
-Want to sound like a tech genius with
-想欲 tī 四秀仔時間 kap 你 ê
+[1:55] Want to sound like a tech genius with
+想欲 tī 四秀仔時間 kap 你 ê 
 
-43
-00:01:56,000 --> 00:01:58,000
-your friends at snack time? Try these
+[1:56] your friends at snack time? Try these
 朋友講話 ê 時袂輸科技天才--bô？試一下仔 chiah-ê
 
-44
-00:01:58,000 --> 00:02:01,000
-awesome AI words. One,
+[1:58] awesome AI words. One,
 厲害 ê AI 詞。頭 ê，
 
-45
-00:02:01,000 --> 00:02:03,000
-algorithm. A fancy word for a list of
+[2:01] algorithm. A fancy word for a list of
 á-go͘-lī-chō-m̀ (Algorithm)。這塊詞聽--起來足玄奇--ê，其實 tō 是
 
-46
-00:02:03,000 --> 00:02:05,000
-steps to solve a problem, like a recipe,
+[2:03] steps to solve a problem, like a recipe,
 解決問題 ê 步數，像食譜 (recipe) án-ne，
 
-47
-00:02:05,000 --> 00:02:08,000
-but for computers. Two, machine learning.
+[2:05] but for computers. Two, machine learning.
 m̄-koh 是 hō͘ 電腦用--ê。第二，機器學習 (Machine Learning)。
 
-48
-00:02:08,000 --> 00:02:10,000
-This is when computers get smarter by
+[2:08] This is when computers get smarter by
 這 tō 是 hō͘ 電腦愈來愈巧，ùi
 
-49
-00:02:10,000 --> 00:02:13,000
-learning from pictures, words, or videos,
+[2:10] learning from pictures, words, or videos,
 圖片、文字、 影片來學習，
 
-50
-00:02:13,000 --> 00:02:15,000
-just like you learn from your teacher. Three,
+[2:13] just like you learn from your teacher. Three,
 tō kán-ná 你 tòe 老師 teh 學物仔。第三，
 
-51
-00:02:15,000 --> 00:02:17,000
-Robot. A machine that moves and does
+[2:15] Robot. A machine that moves and does
 機器人 (Robot)。一隻會振動、會做穡 ê
 
-52
-00:02:17,000 --> 00:02:22,000
-jobs, sometimes like a human.
+[2:17] jobs, sometimes like a human.
 機器，有當時仔若 sêng 人。
 
-53
-00:02:22,000 --> 00:02:25,000
-Four, code. These are tiny instructions
+[2:22] Four, code. These are tiny instructions
 第四，khó͘/程式碼文 (Code)。這是幼幼仔 ê 指令，
 
-54
-00:02:25,000 --> 00:02:26,000
-that tell computers what to do, like
+[2:25] that tell computers what to do, like
 kā 電腦講伊 ài 愛做啥，親像
 
-55
-00:02:26,000 --> 00:02:29,000
-giving your toy robot a bedtime routine.
+[2:26] giving your toy robot a bedtime routine.
 kā 你 ê chhit-thô機器人規定欲睏進前 ê 程序。
 
-56
-00:02:29,000 --> 00:02:32,000
-So remember, kids, AI isn't a
+[2:29] So remember, kids, AI isn't a
 所以愛會記--leh--o͘h，囡仔朋友，AI m̄是
 
-57
-00:02:32,000 --> 00:02:34,000
-monster. It's a super helpful tool that
+[2:32] monster. It's a super helpful tool that
 怪獸。伊是 siáu 好用 ê ke-si，
 
-58
-00:02:34,000 --> 00:02:37,000
-makes your tablet, video games, smart
+[2:34] makes your tablet, video games, smart
 hō͘ 你 ê 平pang電腦、電動、巧
 
-59
-00:02:37,000 --> 00:02:39,000
-toys, and fun apps work better and
+[2:37] toys, and fun apps work better and
 chhit-thô物仔，kap 好耍 ê App 走 kah 愈四序
 
-60
-00:02:39,000 --> 00:02:42,000
-faster. From your tablet to your talking
+[2:39] faster. From your tablet to your talking
 愈 mé-lia̍h。Ùi 你 ê 平pang到會曉講話 ê
 
-61
-00:02:42,000 --> 00:02:44,000
-teddy, AI is here to make life fun,
+[2:42] teddy, AI is here to make life fun,
 Thè-tih 熊，AI 是來 hō͘ 生活心適、
 
-62
-00:02:44,000 --> 00:02:47,000
-faster, and a little bit smarter. And
+[2:44] faster, and a little bit smarter. And
 khah mé-lia̍h，koh-khah 巧一屑仔--ê。而且
 
-63
-00:02:47,000 --> 00:02:50,000
-guess what? One day you can build robots,
+[2:47] guess what? One day you can build robots,
 你知--bô？有一天你 mā 會當造機器人、
 
-64
-00:02:50,000 --> 00:02:52,000
-write code, and teach machines how to
+[2:50] write code, and teach machines how to
 寫khó͘/程式碼文，牽教機器 án-chóaⁿ
 
-65
-00:02:52,000 --> 00:02:54,000
-help people. If you loved learning about
+[2:52] help people. If you loved learning about
 kā 人鬥相共。若是你有佮意學這號
 
-66
-00:02:54,000 --> 00:02:57,000
-robots and smart machines, hit that like
+[2:54] robots and smart machines, hit that like
 機器人 kap 巧機器 ê 智識，讃 ka chhı̍h--loeh，
 
-67
-00:02:57,000 --> 00:02:59,000
-button like a dancing robot. Don't forget
+[2:57] button like a dancing robot. Don't forget
 像這 sian 跳舞 ê 機器人 án-ne。M̄-thang 袂記--leh
 
-68
-00:02:59,000 --> 00:03:01,000
-to subscribe to Todds and Grades for more
+[2:59] to subscribe to Todds and Grades for more
 訂 Todds 佮 Grades 來聽 koh-khah 濟
 
-69
-00:03:01,000 --> 00:03:04,000
-fun learning videos.
+[3:01] fun learning videos.
 心適 ê 學習影片。
 
-70
-00:03:04,000 --> 00:03:07,000
-And hey, download your free AI for Kids
+[3:04] And hey, download your free AI for Kids
 Koh 有，去下跤 ê 說明 hiah táng-ló͘ (download) 免費 ê「Hō͘ 囡仔朋友 ê AI」
 
-71
-00:03:07,000 --> 00:03:09,000
-worksheet in the description below. It's
+[3:07] worksheet in the description below. It's
 學習單。內底有足濟
 
-72
-00:03:09,000 --> 00:03:12,000
-packed with fun facts, coloring pages,
+[3:09] packed with fun facts, coloring pages,
 趣味 ê 事實、上色 (chiūⁿ-sek) 圖、
 
-73
-00:03:12,000 --> 00:03:15,000
-and activities.
-kap 活動 ŏ͘
+[3:12] and activities.
+kap 活動 ŏ͘。
+
