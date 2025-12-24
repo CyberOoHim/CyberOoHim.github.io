@@ -1,0 +1,36 @@
+---
+layout: default
+title: Web Apps
+permalink: /apps.html
+---
+
+<div class="container">
+    <h1>Web Apps & Tools</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">A collection of our interactive tools and
+        Taigi AI applications.</p>
+
+    <div class="posts">
+        {% assign excluded_pages = 'about,articles,web-apps,downloads' | split: ',' %}
+        {% for item in site.pages %}
+        {% assign item_path_parts = item.path | split: '.' %}
+        {% assign item_extension = item_path_parts | last %}
+        {% assign item_base_name = item.path | split: '/' | last | replace: '.html', '' %}
+
+        {% if item.url contains '/pages/' and item_extension == 'html' %}
+        {% unless excluded_pages contains item_base_name %}
+        <article class="post-card">
+            <h2 class="post-title">
+                <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
+            </h2>
+
+            {% if item.excerpt %}
+            <div class="post-excerpt" style="color: var(--text-secondary); font-size: 0.9rem;">
+                {{ item.excerpt | strip_html | truncatewords: 25 }}
+            </div>
+            {% endif %}
+        </article>
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>

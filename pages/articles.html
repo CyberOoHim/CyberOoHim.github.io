@@ -4,46 +4,47 @@ title: Projects
 permalink: /pages/articles.html
 ---
 
-<div class="projects-container">
-    <h1>Our Projects</h1>
+<div class="container">
+    <h1>Projects & Research</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Showcase of current and past projects,
+        tools, and research.</p>
 
-    <p>Here's a showcase of our current and past projects, including web apps, tools, and research related to Taigi AI.</p>
-
-    <section class="project-list">
+    <div class="posts">
         {% for item in site.pages %}
-            {% assign item_path_parts = item.path | split: '.' %}
-            {% assign item_extension = item_path_parts | last %}
-            {% assign item_base_name = item.path | split: '/' | last | replace: '.md', '' %}
+        {% assign item_path_parts = item.path | split: '.' %}
+        {% assign item_extension = item_path_parts | last %}
+        {% assign item_base_name = item.path | split: '/' | last | replace: '.md', '' %}
 
-            {% if item.url contains '/pages/' and item_extension == 'md' %}
-                {% unless item_base_name == 'about' or item_base_name == 'projects' %}
-                    <article class="project-card">
-                        <h2>
-                            <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
-                        </h2>
+        {% if item.url contains '/pages/' and item_extension == 'md' %}
+        {% unless item_base_name == 'about' or item_base_name == 'projects' %}
+        <article class="post-card">
+            <h2 class="post-title">
+                <a href="{{ item.url | relative_url }}">{{ item.title | default: item.name }}</a>
+            </h2>
 
-                        {% if item.type %}
-                            <p>Type: {{ item.type }}</p>
-                        {% elsif item_extension == 'md' %}
-                            <p>Type: Document/Article</p>
-                        {% endif %}
-
-                        {% if item.excerpt %}
-                            <div class="project-excerpt">
-                                <p>{{ item.excerpt | strip_html | truncatewords: 25 }}</p>
-                            </div>
-                        {% endif %}
-                    </article>
-                {% endunless %}
+            {% if item.type %}
+            <div class="post-meta" style="margin-bottom: 0.5rem;">TYPE: {{ item.type | upcase }}</div>
             {% endif %}
-        {% endfor %}
-    </section>
 
-    <h2>Future Projects</h2>
-    <p>We have many exciting projects planned for the future, including:</p>
-    <ul>
-        <li>[Add a list of your planned projects here]</li>
-        <li>[e.g., A Taigi speech recognition system]</li>
-        <li>[]</li>
-    </ul>
+            {% if item.excerpt %}
+            <div class="post-excerpt" style="color: var(--text-secondary); font-size: 0.9rem;">
+                {{ item.excerpt | strip_html | truncatewords: 25 }}
+            </div>
+            {% endif %}
+        </article>
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Future Projects Section -->
+    <div
+        style="margin-top: var(--spacing-lg); border-top: 1px solid var(--border-color); padding-top: var(--spacing-md);">
+        <h2>Future Projects</h2>
+        <ul style="color: var(--text-secondary); font-family: var(--font-mono); list-style-position: inside;">
+            <li>[Taigi Speech Recognition System]</li>
+            <li>[Taigi Text-to-Speech Engine]</li>
+            <li>[More AI Tools...]</li>
+        </ul>
+    </div>
 </div>
