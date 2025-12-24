@@ -226,7 +226,8 @@ img {
 
 /* Banner */
 .hero-banner {
-    background-image: linear-gradient(rgba(13, 17, 23, 0.4), rgba(13, 17, 23, 0.5)), url('../images/banner.jpg');
+    /* Grey filter overlay: adjust opacity values (0.0-1.0) to control darkness. Lower = lighter, Higher = darker */
+    background-image: linear-gradient(rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 0.5)), url('../images/banner.jpg');
     background-size: cover;
     background-position: center;
     border-bottom: 1px solid var(--border-color);

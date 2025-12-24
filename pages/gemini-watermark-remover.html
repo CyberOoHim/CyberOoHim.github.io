@@ -3,6 +3,7 @@ layout: apps
 title: Gemini Watermark Remover
 version: 0.1a
 permalink: /pages/gemini-watermark-remover.html
+note: adopted from https://github.com/allenk/GeminiWatermarkTool/
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -281,12 +282,12 @@ permalink: /pages/gemini-watermark-remover.html
       /* Darker than element */
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      aspect-ratio: 4 / 3;
       width: 100%;
+      min-height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: auto;
       position: relative;
       /* Checkerboard pattern for transparency */
       background-image:
@@ -299,9 +300,9 @@ permalink: /pages/gemini-watermark-remover.html
     }
 
     .image-preview-box img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+      display: block;
+      width: auto;
+      height: auto;
     }
 
     /* Utilities */
@@ -812,14 +813,44 @@ permalink: /pages/gemini-watermark-remover.html
 
     btnBack.addEventListener('click', showUploadView);
 
-    btnDownload.addEventListener('click', () => {
+    btnDownload.addEventListener('click', async () => {
       if (!currentProcessedUrl) return;
-      const link = document.createElement('a');
-      link.href = currentProcessedUrl;
-      link.download = 'clean_' + currentFileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+
+      try {
+        // Convert data URL to blob for better mobile compatibility
+        const response = await fetch(currentProcessedUrl);
+        const blob = await response.blob();
+
+        // Create object URL from blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Create and trigger download link
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'clean_' + currentFileName;
+
+        // For iOS/mobile: must be added to DOM and use explicit user gesture
+        link.style.display = 'none';
+        document.body.appendChild(link);
+
+        // Trigger download
+        link.click();
+
+        // Clean up
+        setTimeout(() => {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+        }, 100);
+      } catch (err) {
+        console.error('Download failed:', err);
+        // Fallback to simple method
+        const link = document.createElement('a');
+        link.href = currentProcessedUrl;
+        link.download = 'clean_' + currentFileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     });
 
     btnShare.addEventListener('click', async () => {
