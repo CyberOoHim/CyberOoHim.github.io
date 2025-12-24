@@ -1,17 +1,16 @@
 ---
 layout: default
-title: Apps
-permalink: /apps.html
+title: Games
+permalink: /games.html
 ---
 
 <div class="container">
-    <h1>Apps 應用程式</h1>
-    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Taigi AI applications and interactive
-        experiences</p>
+    <h1>Games 遊戲</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Interactive games and practice tools</p>
 
     <div class="posts">
         {% for item in site.data.web_items %}
-        {% if item.category == 'apps' %}
+        {% if item.category == 'games' %}
         <article class="post-card">
             <h2 class="post-title">
                 {% if item.type == 'external' %}

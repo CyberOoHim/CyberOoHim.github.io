@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Apps
-permalink: /apps.html
+title: Tools
+permalink: /tools.html
 ---
 
 <div class="container">
-    <h1>Apps 應用程式</h1>
-    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Taigi AI applications and interactive
-        experiences</p>
+    <h1>Tools 工具</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Helpful utilities and conversion tools
+    </p>
 
     <div class="posts">
         {% for item in site.data.web_items %}
-        {% if item.category == 'apps' %}
+        {% if item.category == 'tools' %}
         <article class="post-card">
             <h2 class="post-title">
                 {% if item.type == 'external' %}
@@ -32,6 +32,13 @@ permalink: /apps.html
             {% if item.description %}
             <div class="post-excerpt" style="color: var(--text-secondary); font-size: 0.9rem;">
                 {{ item.description }}
+            </div>
+            {% endif %}
+
+            {% if item.note %}
+            <div class="post-note"
+                style="color: var(--text-muted); font-size: 0.75rem; font-style: italic; margin-top: 0.5rem;">
+                {{ item.note }}
             </div>
             {% endif %}
         </article>

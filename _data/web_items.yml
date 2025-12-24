@@ -1,0 +1,62 @@
+# _data/web_items.yml
+# Categorized web items (internal pages and external links)
+# Categories: apps, tools, games
+
+# APPS
+- name: "Taigi Digital Rain"
+  category: "apps"
+  type: "internal"
+  url: "/pages/taigi_digital_rain_r0a.html"
+  description: "台語數位雨 - Taigi matrix-style digital rain effect"
+
+- name: "Taigi POJ Art"
+  category: "apps"
+  type: "internal"
+  url: "/pages/taigi_poj_art_r0b.html"
+  description: "台語白話字藝術產生器"
+
+- name: "Taigi Space Catch"
+  category: "apps"
+  type: "internal"
+  url: "/pages/taigi_space_catch_r0i.html"
+  description: "台語太空接字遊戲"
+
+- name: "Web World Radio"
+  category: "apps"
+  type: "internal"
+  url: "/pages/web_world_radio_r0a.html"
+  description: "Online world radio player"
+
+# TOOLS
+- name: "CSV/JSON 互轉"
+  category: "tools"
+  type: "internal"
+  url: "/pages/csv_json_2way_converter.html"
+  description: "CSV and JSON two-way converter tool"
+
+- name: "Gemini Watermark Remover"
+  category: "tools"
+  type: "internal"
+  url: "/pages/gemini-watermark-remover.html"
+  description: "Remove Gemini AI watermarks from images"
+  note: "Adopted from https://github.com/allenk/GeminiWatermarkTool/"
+
+- name: "Terra Player w/ Screenshot"
+  category: "tools"
+  type: "internal"
+  url: "/pages/video-player-screenshot.html"
+  description: "Video player with screenshot capture capability"
+
+# GAMES
+- name: "Taigi POJ Typing Practice"
+  category: "games"
+  type: "internal"
+  url: "/pages/taigi_poj_typing_practice.html"
+  description: "練習台語白話字 POJ typing practice game"
+
+# EXTERNAL LINKS (examples - you can add your own)
+- name: "Taigi Word Card App"
+  category: "games"
+  type: "external"
+  url: "https://taigi-word-card-app.vercel.app"
+  description: "台語單字卡應用程式"

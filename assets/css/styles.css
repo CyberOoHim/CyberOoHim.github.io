@@ -305,6 +305,19 @@ details[open] summary {
     padding-bottom: var(--spacing-sm);
 }
 
+/* External Link Icon */
+.external-link-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.post-title a:hover .external-link-icon {
+    opacity: 1;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     :root {
