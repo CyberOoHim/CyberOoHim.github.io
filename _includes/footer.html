@@ -1,3 +1,10 @@
-<footer>
-    <p>© {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div class="footer-col-wrapper">
+            <span>&copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}</span>
+        </div>
+        <div class="footer-col-wrapper">
+            <span>[System Online]</span>
+        </div>
+    </div>
 </footer>

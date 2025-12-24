@@ -1,9 +1,11 @@
-<header>
-    <nav>
-        <a href="{{ '/' | relative_url }}">Home</a>
-        <a href="{{ '/pages/about.html' | relative_url }}">About</a>
-        <a href="{{ '/pages/articles.html' | relative_url }}">Articles</a>
-        <a href="{{ '/pages/web-apps.html' | relative_url }}">Web Apps</a>
-        <a href="{{ '/pages/downloads.html' | relative_url }}">Downloads</a>
-    </nav>
+<header class="site-header" role="banner">
+    <div class="container">
+        <a class="site-title" rel="author" href="{{ '/' | relative_url }}">
+            &gt; {{ site.title | escape }}<span class="cursor">_</span>
+        </a>
+        <nav class="site-nav">
+            <a class="page-link" href="{{ '/apps.html' | relative_url }}">/apps</a>
+            <!-- Additional links can go here -->
+        </nav>
+    </div>
 </header>

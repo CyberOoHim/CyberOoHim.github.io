@@ -1,17 +1,38 @@
-<!-- _layouts/default.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: " en" }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} - {{ site.title }}</title>
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+
+    <!-- Feed -->
+    <link type="application/atom+xml" rel="alternate" href="{{ 'feed.xml' | relative_url }}" title="{{ site.title }}">
+    {% if jekyll.environment == 'production' and site.google_analytics %}
+    {% include google-analytics.html %}
+    {% endif %}
 </head>
+
 <body>
-   {% include header.html %}
-    <main>
-        {{ content }}
+    {% include header.html %}
+
+    <main class="page-content" aria-label="Content">
+        <div class="container">
+            {{ content }}
+        </div>
     </main>
+
     {% include footer.html %}
 </body>
+
 </html>
