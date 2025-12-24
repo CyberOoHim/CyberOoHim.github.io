@@ -1,0 +1,7 @@
+# _data/downloads_apps.yml
+- name: Taigi-English quiz game (台英奕字）
+  description: An experimental web Apps of Taigi-English quiz game. 用--ê datasets 是 ùi 教育部台語700字，用 Google AI Studio 整理--過 ê 1280 塊台語詞.
+  version: 0f
+  filename: taigi_english_quiz_game_a_v0f.html
+  download_url: https://github.com/CyberOoHim/CyberOoHim.github.io/raw/main/pages/taigi_english_quiz_game_a_v0f.html
+  updated: 2025-01-17

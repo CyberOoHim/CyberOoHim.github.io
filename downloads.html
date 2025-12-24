@@ -1,0 +1,104 @@
+---
+layout: default
+title: Downloads
+permalink: /downloads/
+---
+
+<div class="container">
+    <h1>Downloads</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Datasets, web apps, and tools for Taigi
+        AI research and development.</p>
+
+    <!-- Datasets Section -->
+    {% if site.data.downloads_datasets %}
+    <section style="margin-bottom: var(--spacing-lg);">
+        <h2
+            style="border-bottom: 2px solid var(--border-color); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+            Datasets</h2>
+        <div class="posts">
+            {% for item in site.data.downloads_datasets %}
+            <article class="post-card">
+                <h3 class="post-title" style="font-size: 1.3rem;">
+                    {{ item.name }}
+                </h3>
+                <div class="post-meta">
+                    Version: {{ item.version }} | Updated: {{ item.updated }}
+                </div>
+                <p style="color: var(--text-secondary); margin: var(--spacing-sm) 0;">
+                    {{ item.description }}
+                </p>
+                <div style="margin-top: var(--spacing-sm);">
+                    <a href="{{ item.download_url }}" class="button"
+                        style="display: inline-block; padding: 8px 16px; background: var(--text-link); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem;"
+                        download>
+                        ↓ Download {{ item.filename }}
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Web Apps Section -->
+    {% if site.data.downloads_apps %}
+    <section style="margin-bottom: var(--spacing-lg);">
+        <h2
+            style="border-bottom: 2px solid var(--border-color); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+            Web Apps</h2>
+        <div class="posts">
+            {% for item in site.data.downloads_apps %}
+            <article class="post-card">
+                <h3 class="post-title" style="font-size: 1.3rem;">
+                    {{ item.name }}
+                </h3>
+                <div class="post-meta">
+                    Version: {{ item.version }} | Updated: {{ item.updated }}
+                </div>
+                <p style="color: var(--text-secondary); margin: var(--spacing-sm) 0;">
+                    {{ item.description }}
+                </p>
+                <div style="margin-top: var(--spacing-sm);">
+                    <a href="{{ item.download_url }}" class="button"
+                        style="display: inline-block; padding: 8px 16px; background: var(--text-link); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem;"
+                        download>
+                        ↓ Download {{ item.filename }}
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Tools Section (currently commented out in YAML) -->
+    {% if site.data.downloads.tools %}
+    <section>
+        <h2
+            style="border-bottom: 2px solid var(--border-color); padding-bottom: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+            Tools</h2>
+        <div class="posts">
+            {% for item in site.data.downloads.tools %}
+            <article class="post-card">
+                <h3 class="post-title" style="font-size: 1.3rem;">
+                    {{ item.name }}
+                </h3>
+                <div class="post-meta">
+                    Version: {{ item.version }} | Updated: {{ item.updated }}
+                </div>
+                <p style="color: var(--text-secondary); margin: var(--spacing-sm) 0;">
+                    {{ item.description }}
+                </p>
+                <div style="margin-top: var(--spacing-sm);">
+                    <a href="{{ item.download_url }}" class="button"
+                        style="display: inline-block; padding: 8px 16px; background: var(--text-link); color: var(--bg-primary); border-radius: 4px; text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem;"
+                        download>
+                        ↓ Download {{ item.filename }}
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
