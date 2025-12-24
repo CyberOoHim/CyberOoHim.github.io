@@ -16,7 +16,7 @@
   description: "台語白話字藝術產生器"
 
 - name: "Taigi Space Catch"
-  category: "apps"
+  category: "games"
   type: "internal"
   url: "/pages/taigi_space_catch_r0i.html"
   description: "台語太空接字遊戲"
@@ -56,7 +56,7 @@
 
 # EXTERNAL LINKS (examples - you can add your own)
 - name: "Taigi Word Card App"
-  category: "games"
+  category: "tools"
   type: "external"
   url: "https://taigi-word-card-app.vercel.app"
   description: "台語單字卡應用程式"
