@@ -22,7 +22,7 @@
   description: "台語太空接字遊戲"
 
 - name: "Web World Radio"
-  category: "apps"
+  category: "test"
   type: "internal"
   url: "/pages/web_world_radio_r0a.html"
   description: "Online world radio player"
