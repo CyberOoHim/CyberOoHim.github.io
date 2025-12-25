@@ -1,0 +1,663 @@
+---
+layout: apps
+title: Image Resizer
+version: v0.1
+permalink: /pages/image-resizer.html
+---
+
+<style>
+    /* Scoped styles for Image Resizer - Tech Theme Integration */
+    .resizer-container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    /* Section Cards */
+    .tech-panel {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: var(--spacing-md);
+        position: relative;
+    }
+
+    .tech-panel-header {
+        font-family: var(--font-mono);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-sm);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: var(--spacing-xs);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Upload Area */
+    .upload-area {
+        border: 2px dashed var(--border-color);
+        border-radius: 6px;
+        padding: var(--spacing-lg);
+        text-align: center;
+        transition: all 0.2s ease;
+        background: rgba(22, 27, 34, 0.5);
+        cursor: pointer;
+    }
+
+    .upload-area:hover,
+    .upload-area.drag-over {
+        border-color: var(--text-link);
+        background: rgba(88, 166, 255, 0.05);
+    }
+
+    .upload-icon {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+        display: block;
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .upload-text {
+        color: var(--text-primary);
+        font-family: var(--font-mono);
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .upload-subtext {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Controls */
+    .controls-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .control-label {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .control-value-display {
+        color: var(--text-link);
+        font-weight: bold;
+    }
+
+    /* Custom Input Styling */
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        background: var(--bg-tertiary);
+        border-radius: 3px;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: var(--text-link);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+        background: #79c0ff;
+    }
+
+    select {
+        appearance: none;
+        background-color: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%238b949e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px;
+        padding-right: 30px;
+    }
+
+    /* Preview Area */
+    .preview-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+        .preview-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .image-viewport {
+        background-color: #000;
+        background-image:
+            linear-gradient(45deg, #111 25%, transparent 25%),
+            linear-gradient(-45deg, #111 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #111 75%),
+            linear-gradient(-45deg, transparent 75%, #111 75%);
+        background-size: 20px 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .image-viewport img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        padding: 4px 0;
+        border-bottom: 1px solid var(--bg-tertiary);
+    }
+
+    .stat-row:last-child {
+        border-bottom: none;
+    }
+
+    .stat-val {
+        color: var(--text-primary);
+    }
+
+    .stat-highlight {
+        color: var(--text-accent);
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+        background-color: var(--text-accent);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        background-color: #2ea043;
+        box-shadow: 0 0 10px rgba(46, 160, 67, 0.4);
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        border-color: var(--border-color);
+        color: var(--text-secondary);
+    }
+
+    .btn-outline:hover:not(:disabled) {
+        border-color: var(--text-primary);
+        color: var(--text-primary);
+    }
+
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .action-bar {
+        text-align: center;
+        margin-top: var(--spacing-md);
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    /* States */
+    .hidden {
+        display: none;
+    }
+
+    .processing-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(13, 17, 23, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        backdrop-filter: blur(2px);
+        font-family: var(--font-mono);
+        color: var(--text-link);
+    }
+
+    .info-box {
+        background: rgba(56, 139, 253, 0.1);
+        border: 1px solid rgba(56, 139, 253, 0.4);
+        color: var(--text-link);
+        padding: var(--spacing-sm);
+        border-radius: 6px;
+        font-size: 0.9rem;
+        margin-top: var(--spacing-md);
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+</style>
+
+<div class="container">
+    <h1>Image Resizer</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+        Secure client-side image optimization.
+    </p>
+
+    <div class="resizer-container">
+
+        <!-- Upload Section -->
+        <div class="upload-area" id="drop-zone">
+            <input type="file" id="image-input" class="file-input" accept="image/*">
+            <span class="upload-icon">📁</span>
+            <div class="upload-text">Click or Drag & Drop Image</div>
+            <div class="upload-subtext">JPG, PNG, WebP supported</div>
+            <div id="file-name-display"
+                style="margin-top: 10px; color: var(--text-accent); font-family: var(--font-mono);"></div>
+        </div>
+
+        <div id="error-message" class="info-box"
+            style="display: none; border-color: #f85149; background: rgba(248, 81, 73, 0.1); color: #f85149;">
+            ⚠️ <span id="error-text">Error</span>
+        </div>
+
+        <!-- Main Interface -->
+        <div id="main-interface" class="hidden">
+            <!-- Controls -->
+            <div class="tech-panel">
+                <div class="tech-panel-header">Configuration</div>
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label">
+                            Target Size <span id="target-size-value" class="control-value-display">175 KB</span>
+                        </label>
+                        <input type="range" id="target-size-slider" min="50" max="500" value="175" step="5">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">
+                            Quality <span id="quality-value" class="control-value-display">0.85</span>
+                        </label>
+                        <input type="range" id="quality-slider" min="10" max="100" value="85" step="5">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Format</label>
+                        <select id="format-select">
+                            <option value="auto">Auto (Best Size)</option>
+                            <option value="image/jpeg">JPEG</option>
+                            <option value="image/png">PNG</option>
+                            <option value="image/webp">WebP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-bar" style="margin-top: var(--spacing-sm); margin-bottom: 0;">
+                    <button class="btn btn-primary" id="process-btn">Process Image</button>
+                </div>
+
+                <div id="processing-indicator" class="processing-overlay hidden">
+                    <span>PROCESSING...</span>
+                </div>
+            </div>
+
+            <!-- Previews -->
+            <div class="preview-grid">
+                <!-- Original -->
+                <div class="tech-panel">
+                    <div class="tech-panel-header">Source</div>
+                    <div class="image-viewport">
+                        <img id="original-preview" alt="Original">
+                    </div>
+                    <div class="stat-row">
+                        <span>Dimensions</span>
+                        <span id="original-dimensions" class="stat-val">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Size</span>
+                        <span id="original-size" class="stat-val">-</span>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div class="tech-panel">
+                    <div class="tech-panel-header">Output</div>
+                    <div class="image-viewport">
+                        <img id="resized-preview" class="hidden" alt="Resized">
+                        <span id="resize-placeholder"
+                            style="color: var(--text-secondary); font-family: var(--font-mono);">WAITING...</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Dimensions</span>
+                        <span id="resized-dimensions" class="stat-val">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Size</span>
+                        <span id="resized-size" class="stat-val stat-highlight">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Reduction</span>
+                        <span id="size-reduction" class="stat-val">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="action-bar">
+                <button class="btn btn-primary" id="download-btn" disabled>Download Saved Image</button>
+                <button class="btn btn-outline" id="clear-btn">Reset</button>
+            </div>
+        </div>
+
+        <div class="info-box">
+            ℹ️ <span><strong>Privacy Note:</strong> Processing happens entirely in your browser. No data leaves your
+                device.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DOM Elements
+    const dropZone = document.getElementById('drop-zone');
+    const imageInput = document.getElementById('image-input');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const processingIndicator = document.getElementById('processing-indicator');
+    const mainInterface = document.getElementById('main-interface');
+
+    const targetSizeSlider = document.getElementById('target-size-slider');
+    const targetSizeValue = document.getElementById('target-size-value');
+    const qualitySlider = document.getElementById('quality-slider');
+    const qualityValue = document.getElementById('quality-value');
+    const formatSelect = document.getElementById('format-select');
+    const processBtn = document.getElementById('process-btn');
+
+    const originalPreview = document.getElementById('original-preview');
+    const originalDimensions = document.getElementById('original-dimensions');
+    const originalSize = document.getElementById('original-size');
+
+    const resizedPreview = document.getElementById('resized-preview');
+    const resizedDimensions = document.getElementById('resized-dimensions');
+    const resizedSize = document.getElementById('resized-size');
+    const sizeReduction = document.getElementById('size-reduction');
+    const resizePlaceholder = document.getElementById('resize-placeholder');
+
+    const downloadBtn = document.getElementById('download-btn');
+    const clearBtn = document.getElementById('clear-btn');
+
+    // State
+    let originalImage = null;
+    let originalFileName = '';
+    let originalFileSize = 0;
+    let resizedBlob = null;
+
+    // Drag and drop handlers
+    dropZone.addEventListener('click', () => imageInput.click());
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+        handleFiles(e.dataTransfer.files);
+    });
+
+    imageInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+    function handleFiles(files) {
+        if (!files.length) return;
+        const file = files[0];
+
+        if (!file.type.startsWith('image/')) {
+            showError('Please select a valid image file (JPG, PNG, WebP).');
+            return;
+        }
+
+        hideError();
+        originalFileName = file.name;
+        originalFileSize = file.size;
+        fileNameDisplay.textContent = file.name;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                originalImage = img;
+                displayOriginalImage(img, file.size);
+                mainInterface.classList.remove('hidden');
+
+                // Reset Output
+                resizedPreview.classList.add('hidden');
+                resizePlaceholder.classList.remove('hidden');
+                resizedDimensions.textContent = '-';
+                resizedSize.textContent = '-';
+                sizeReduction.textContent = '-';
+                downloadBtn.disabled = true;
+                resizedBlob = null;
+
+                // Scroll to interface
+                mainInterface.scrollIntoView({ behavior: 'smooth' });
+            };
+            img.onerror = () => showError('Failed to parse image data.');
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    targetSizeSlider.addEventListener('input', (e) => {
+        targetSizeValue.textContent = `${e.target.value} KB`;
+    });
+
+    qualitySlider.addEventListener('input', (e) => {
+        qualityValue.textContent = (e.target.value / 100).toFixed(2);
+    });
+
+    function displayOriginalImage(img, size) {
+        originalPreview.src = img.src;
+        originalDimensions.textContent = `${img.width} × ${img.height}`;
+        originalSize.textContent = formatFileSize(size);
+    }
+
+    processBtn.addEventListener('click', async () => {
+        if (!originalImage) return;
+
+        processingIndicator.classList.remove('hidden');
+        processBtn.disabled = true;
+        hideError();
+
+        // Allow UI to update before blocking
+        setTimeout(async () => {
+            try {
+                const targetSizeKB = parseInt(targetSizeSlider.value);
+                const targetSizeBytes = targetSizeKB * 1024;
+                const quality = parseFloat(qualitySlider.value) / 100;
+                const format = formatSelect.value;
+
+                if (originalFileSize <= targetSizeBytes) {
+                    // Just convert if size is already small enough, or show message?
+                    // Let's force optimization anyway as they asked for it.
+                }
+
+                const result = await resizeImageToTarget(
+                    originalImage,
+                    targetSizeBytes,
+                    quality,
+                    format
+                );
+
+                displayResizedImage(result);
+
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                processingIndicator.classList.add('hidden');
+                processBtn.disabled = false;
+            }
+        }, 50);
+    });
+
+    async function resizeImageToTarget(img, targetSize, initialQuality, format) {
+        let scale = 1.0;
+        let quality = initialQuality;
+        let blob = null;
+        let iterations = 0;
+        const maxIterations = 15;
+
+        // Est. start scale
+        const estScale = Math.sqrt(targetSize / originalFileSize);
+        // If target is bigger than original, start at 1.0 (don't upscale)
+        scale = Math.min(originalFileSize > targetSize ? estScale * 1.1 : 1.0, 1.0);
+
+        let outputFormat = format === 'auto' ? 'image/webp' : format;
+
+        while (iterations < maxIterations) {
+            const w = Math.round(img.width * scale);
+            const h = Math.round(img.height * scale);
+
+            const canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, 0, 0, w, h);
+
+            blob = await new Promise(r => canvas.toBlob(r, outputFormat, quality));
+
+            // Fallback for WebP if browser doesn't support it returning null (rare now)
+            if (!blob && outputFormat === 'image/webp') {
+                outputFormat = 'image/jpeg';
+                blob = await new Promise(r => canvas.toBlob(r, outputFormat, quality));
+            }
+
+            // Check size
+            if (blob.size <= targetSize * 1.05) {
+                // Accept if under or slightly over (5% tolerance is fine for UX)
+                break;
+            }
+
+            // Reduce
+            scale *= 0.9;
+            iterations++;
+        }
+
+        return {
+            blob: blob,
+            width: Math.round(img.width * scale),
+            height: Math.round(img.height * scale),
+            format: outputFormat
+        };
+    }
+
+    function displayResizedImage(result) {
+        resizedBlob = result.blob;
+        const url = URL.createObjectURL(result.blob);
+
+        resizedPreview.src = url;
+        resizedPreview.classList.remove('hidden');
+        resizePlaceholder.classList.add('hidden');
+
+        resizedDimensions.textContent = `${result.width} × ${result.height}`;
+        resizedSize.textContent = formatFileSize(result.blob.size);
+
+        const savings = originalFileSize - result.blob.size;
+        const pct = ((savings / originalFileSize) * 100).toFixed(1);
+        sizeReduction.textContent = savings > 0 ? `-${pct}%` : '+0%';
+
+        downloadBtn.disabled = false;
+    }
+
+    downloadBtn.addEventListener('click', () => {
+        if (!resizedBlob) return;
+        const url = URL.createObjectURL(resizedBlob);
+        const a = document.createElement('a');
+        a.href = url;
+
+        const ext = resizedBlob.type.split('/')[1];
+        const base = originalFileName.split('.').slice(0, -1).join('.');
+        a.download = `${base}_optimized.${ext}`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    clearBtn.addEventListener('click', () => {
+        imageInput.value = '';
+        fileNameDisplay.textContent = '';
+        mainInterface.classList.add('hidden');
+        hideError();
+    });
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function showError(msg) {
+        errorText.textContent = msg;
+        errorMessage.style.display = 'flex';
+    }
+
+    function hideError() {
+        errorMessage.style.display = 'none';
+    }
+</script>

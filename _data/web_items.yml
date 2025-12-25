@@ -41,6 +41,12 @@
   description: "Remove Gemini AI watermarks from images"
   note: "Adopted from https://github.com/allenk/GeminiWatermarkTool/"
 
+- name: "Image Resizer"
+  category: "tools"
+  type: "internal"
+  url: "/pages/image-resizer.html"
+  description: "Reduce image dimensions to target file size (~175KB)"
+
 - name: "Terra Player w/ Screenshot"
   category: "tools"
   type: "internal"
@@ -53,6 +59,13 @@
   type: "internal"
   url: "/pages/taigi_poj_typing_practice.html"
   description: "練習台語白話字 POJ typing practice game"
+
+# TEST (Hidden from main navigation)
+- name: "Test Page"
+  category: "test"
+  type: "internal"
+  url: "/pages/test.html"
+  description: "A hidden test page accessible only via direct link"
 
 # EXTERNAL LINKS (examples - you can add your own)
 - name: "Taigi Word Card App"
