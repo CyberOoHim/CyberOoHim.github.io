@@ -6,19 +6,19 @@
 - name: "Taigi Digital Rain"
   category: "apps"
   type: "internal"
-  url: "/pages/taigi_digital_rain_r0a.html"
+  url: "/pages/taigi_digital_rain.html"
   description: "台語數位雨 - Taigi matrix-style digital rain effect"
 
 - name: "Taigi POJ Art"
   category: "apps"
   type: "internal"
-  url: "/pages/taigi_poj_art_r0b.html"
+  url: "/pages/taigi_poj_art.html"
   description: "台語白話字藝術產生器"
 
 - name: "Taigi Space Catch"
   category: "games"
   type: "internal"
-  url: "/pages/taigi_space_catch_r0i.html"
+  url: "/pages/taigi_space_catch.html"
   description: "台語太空接字遊戲"
 
 - name: "Web World Radio"
@@ -65,7 +65,7 @@
   category: "test"
   type: "internal"
   url: "/test/"
-  description: "A hidden test page accessible only via direct link"
+  description: "Accessible only via direct link"
 
 # EXTERNAL LINKS (examples - you can add your own)
 - name: "Taigi Word Card App"
