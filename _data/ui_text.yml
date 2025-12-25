@@ -1,0 +1,52 @@
+# _data/ui_text.yml
+# Centralized UI Text Configuration
+
+global:
+  nav:
+    apps: "/apps"
+    tools: "/tools"
+    games: "/games"
+    blog: "/blog"
+  footer:
+    system_status: "[System Online]"
+
+home:
+  hero_subtitle: "Tâi-gí AI thit-thô-tiâⁿ"
+  pagination:
+    prev: "< Previous"
+    page_format: "Page {{ page }} of {{ total }}"
+    next: "Next >"
+  license:
+    summary: "License Information"
+    text_1: "The datasets, web apps, tools, and code provided in this repository are free to use, share, and modify under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version, unless specially specified."
+    text_2: "These resources are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
+    text_3: "You should have received a copy of the GNU General Public License along with this repository. If not, see https://www.gnu.org/licenses/."
+    copyright: "Copyright (C) 2025 [Cyber O͘-hîm ki-tē]"
+
+titles:
+  apps: "Apps"
+  tools: "Tools/ke-si"
+  games: "Games/gè-m̀"
+  help: "Help & Documentation"
+  downloads: "Downloads"
+
+descriptions:
+  apps: "Taigi AI applications and interactive experiences"
+  tools: "Helpful utilities and conversion tools"
+  games: "Interactive games and practice tools"
+  downloads: "Datasets, web apps, and tools for Taigi AI research and development."
+
+help:
+  intro: "Short concise guide on using our tools."
+  common_issues: "Common Issues"
+  issues:
+    audio: "Audio not playing: Check browser permissions."
+    display: "Display error: Clear cache or try Dark Mode."
+    clipped: "Display clipped: Adust display scale of browser."
+
+downloads:
+  headers:
+    datasets: "Datasets"
+    web_apps: "Web Apps"
+    tools: "Tools"
+  button_prefix: "↓ Download"
