@@ -1,0 +1,33 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Glow Filter -->
+    <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Bear Head Base (Wider) -->
+    <path d="M10 24C10 16 18 10 32 10C46 10 54 16 54 24V32C54 44 46 54 32 54C18 54 10 44 10 32V24Z" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    
+    <!-- Ears -->
+    <circle cx="10" cy="18" r="7" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <circle cx="54" cy="18" r="7" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    
+     <!-- Forehead overlay -->
+    <path d="M10 24C10 17 18 11 32 11C46 11 54 17 54 24V32C54 43 46 53 32 53C18 53 10 43 10 32V24Z" fill="#161b22"/>
+
+    <!-- The V Shape (Moved Higher) -->
+    <path d="M18 38 L32 46 L46 38 L32 50 Z" fill="#F0F6FC" opacity="0.9"/>
+
+    <!-- Glowing Golden Eyes -->
+    <circle cx="22" cy="28" r="3.5" fill="#FFD700" filter="url(#glow)"/>
+    <circle cx="42" cy="28" r="3.5" fill="#FFD700" filter="url(#glow)"/>
+    
+    <!-- Snout -->
+    <ellipse cx="32" cy="36" rx="8" ry="5" fill="#21262d"/>
+    <ellipse cx="32" cy="35" rx="3" ry="2" fill="#0d1117"/>
+</svg>
