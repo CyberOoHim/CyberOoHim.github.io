@@ -50,6 +50,9 @@ a {
     color: var(--text-link);
     text-decoration: none;
     transition: color 0.2s ease;
+    /* Improve touch responsiveness */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(88, 166, 255, 0.2);
 }
 
 a:hover {
@@ -137,6 +140,11 @@ img {
     color: var(--text-secondary);
     font-family: var(--font-mono);
     font-size: 0.9rem;
+    /* Improve touch targets */
+    padding: 8px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .site-nav a:hover,
@@ -172,11 +180,23 @@ img {
     padding: var(--spacing-md);
     border-radius: 8px;
     transition: transform 0.2s ease, border-color 0.2s ease;
+    position: relative;
 }
 
-.post-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--text-link);
+/* Only apply hover transform on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+    .post-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--text-link);
+    }
+}
+
+/* On touch devices, use active state instead */
+@media (hover: none) and (pointer: coarse) {
+    .post-card:active {
+        border-color: var(--text-link);
+        opacity: 0.9;
+    }
 }
 
 .post-title {
@@ -186,6 +206,16 @@ img {
 .post-title a {
     color: var(--text-primary);
     text-decoration: none;
+    /* Make the entire link area clickable - extend touch target */
+    display: block;
+    min-height: 44px;
+    /* iOS minimum touch target size */
+    padding: 4px 0;
+    /* Prevent text selection issues on touch devices */
+    -webkit-tap-highlight-color: rgba(88, 166, 255, 0.2);
+    /* Ensure smooth touch interactions */
+    touch-action: manipulation;
+    cursor: pointer;
 }
 
 .post-meta {
@@ -323,5 +353,30 @@ details[open] summary {
 @media (max-width: 600px) {
     :root {
         --spacing-lg: 2rem;
+    }
+
+    /* Improve touch targets on mobile */
+    .site-nav {
+        gap: var(--spacing-sm);
+    }
+
+    .site-nav a {
+        font-size: 0.85rem;
+        padding: 10px 6px;
+    }
+
+    /* Ensure post cards are easy to tap */
+    .post-card {
+        padding: var(--spacing-sm);
+    }
+
+    .post-title {
+        font-size: 1.1rem;
+    }
+
+    .post-title a {
+        min-height: 48px;
+        /* Slightly larger on mobile */
+        padding: 6px 0;
     }
 }
