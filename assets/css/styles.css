@@ -1,5 +1,22 @@
 /* CyberOoHim.github.io - Professional Tech Theme */
 
+/* Custom Font Declarations */
+@font-face {
+    font-family: 'ChiayiCity';
+    src: url('../fonts/ChiayiCity.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LessonOne';
+    src: url('../fonts/LessonOne-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
 /* Variables */
 :root {
     --bg-primary: #0d1117;
@@ -13,8 +30,8 @@
 
     --border-color: #30363d;
 
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', monospace;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'LessonOne', 'Noto Sans', sans-serif;
+    --font-sans: 'ChiayiCity', 'Times New Roman', serif;
 
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
