@@ -64,7 +64,7 @@
 - name: "Test Page"
   category: "test"
   type: "internal"
-  url: "/pages/test.html"
+  url: "/test/"
   description: "A hidden test page accessible only via direct link"
 
 # EXTERNAL LINKS (examples - you can add your own)

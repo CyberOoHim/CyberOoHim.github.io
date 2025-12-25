@@ -1,17 +1,42 @@
 ---
 layout: default
 title: Test Page
-permalink: /pages/test.html
+permalink: /test/
 ---
 
 <div class="container">
-    <h1>Test Page</h1>
-    <p>This is a test page in the "test" category.</p>
-    <p>It should not differ from other pages in layout, but it is not listed in the main Apps/Tools/Games lists.</p>
+    <h1>Test Items</h1>
+    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+        Items in the "test" category. These are not listed in the main navigation.
+    </p>
 
-    <div style="margin-top: 2rem; padding: 1rem; background-color: #f0f0f0; border-radius: 8px;">
-        <h3>Debug Info</h3>
-        <p>Category: test</p>
-        <p>layout: default</p>
+    <div class="posts">
+        {% for item in site.data.web_items %}
+        {% if item.category == 'test' %}
+        <article class="post-card">
+            <h2 class="post-title">
+                {% if item.type == 'external' %}
+                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+                    {{ item.name }}
+                    <svg class="external-link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+                {% else %}
+                <a href="{{ item.url | relative_url }}">{{ item.name }}</a>
+                {% endif %}
+            </h2>
+
+            {% if item.description %}
+            <div class="post-excerpt" style="color: var(--text-secondary); font-size: 0.9rem;">
+                {{ item.description }}
+            </div>
+            {% endif %}
+        </article>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
