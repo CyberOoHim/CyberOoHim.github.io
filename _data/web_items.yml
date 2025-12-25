@@ -24,7 +24,7 @@
 - name: "Web World Radio"
   category: "test"
   type: "internal"
-  url: "/pages/web_world_radio_r0a.html"
+  url: "/pages/web_world_radio.html"
   description: "Online world radio player"
 
 # TOOLS
