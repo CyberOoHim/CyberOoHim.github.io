@@ -620,9 +620,9 @@ permalink: /pages/video-player-screenshot.html
             showNotification('<< SEEK: START');
         });
 
-        // Jump to end
+        // Jump to end (use minimal offset to get the true last frame)
         jumpEndBtn.addEventListener('click', () => {
-            video.currentTime = video.duration - 0.1;
+            video.currentTime = video.duration - 0.001;
             showNotification('SEEK: END >>');
         });
 

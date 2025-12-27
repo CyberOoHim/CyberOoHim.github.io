@@ -388,6 +388,130 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
     .hidden {
       display: none !important;
     }
+
+    /* Batch Grid */
+    .batch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .batch-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .batch-card-preview {
+      height: 160px;
+      background-image:
+        linear-gradient(45deg, #1f1f22 25%, transparent 25%),
+        linear-gradient(-45deg, #1f1f22 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1f1f22 75%),
+        linear-gradient(-45deg, transparent 75%, #1f1f22 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .batch-card-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .batch-card-footer {
+      padding: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-element);
+    }
+
+    .batch-filename {
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 120px;
+      color: var(--text-secondary);
+    }
+
+    .status-badge {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: var(--bg-app);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .status-processing {
+      background: var(--accent-blue);
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+
+    .status-done {
+      background: #10b981;
+      color: white;
+    }
+
+    .status-error {
+      background: #ef4444;
+      color: white;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Enhanced Back Button */
+    .btn-back-enhanced {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-element);
+      border: 1px solid var(--text-muted);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-enhanced:hover {
+      background: var(--border-active);
+      border-color: var(--text-primary);
+      transform: translateX(-4px);
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .font-mono {
+      font-family: monospace;
+    }
   </style>
 </head>
 
@@ -433,19 +557,19 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
               </div>
               <div class="dropzone-title">Click to upload or drag and drop</div>
               <div class="dropzone-subtitle">Supports PNG, JPG</div>
-              <input type="file" id="file-input" accept="image/*" style="display: none;">
+              <input type="file" id="file-input" accept="image/*" style="display: none;" multiple>
             </div>
           </div>
 
           <!-- View: Result -->
           <div id="view-result" class="fade-in" style="display: none; width: 100%;">
             <div class="flex-between mb-8">
-              <button id="btn-back" class="btn btn-secondary">
-                <svg class="icon-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <button id="btn-back" class="btn btn-secondary btn-back-enhanced">
+                <svg class="icon-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                     d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                Back
+                <span class="text-lg">Start Over</span>
               </button>
 
               <div class="flex gap-2" style="display: flex; gap: 0.5rem;">
@@ -488,6 +612,36 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- View: Batch Result -->
+          <div id="view-batch" class="fade-in" style="display: none; width: 100%;">
+            <div class="flex-between mb-8">
+              <button id="btn-back-batch" class="btn btn-secondary btn-back-enhanced">
+                <svg class="icon-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="text-lg">Start Over</span>
+              </button>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div id="batch-status" class="text-subtle font-mono">
+                  Processing...
+                </div>
+                <button id="btn-download-all" class="btn btn-primary" style="display: none;">
+                  <span>Download All</span>
+                  <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div id="batch-grid" class="batch-grid">
+              <!-- Batch cards will be injected here -->
             </div>
           </div>
 
@@ -692,6 +846,9 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
 
     const viewUpload = document.getElementById('view-upload');
     const viewResult = document.getElementById('view-result');
+    const viewBatch = document.getElementById('view-batch');
+    const batchGrid = document.getElementById('batch-grid');
+    const batchStatus = document.getElementById('batch-status');
 
     const dropzone = document.getElementById('dropzone');
     const fileInput = document.getElementById('file-input');
@@ -701,11 +858,14 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
     const processedPlaceholder = document.getElementById('processed-placeholder');
 
     const btnBack = document.getElementById('btn-back');
+    const btnBackBatch = document.getElementById('btn-back-batch');
     const btnDownload = document.getElementById('btn-download');
+    const btnDownloadAll = document.getElementById('btn-download-all');
     const btnShare = document.getElementById('btn-share');
 
     let currentFileName = '';
     let currentProcessedUrl = null;
+    let batchResults = []; // Store {filename, url} for download all
 
     // Initialization
     async function init() {
@@ -730,14 +890,19 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
     function showUploadView() {
       viewUpload.style.display = 'block';
       viewResult.style.display = 'none';
+      viewBatch.style.display = 'none';
       currentFileName = '';
       currentProcessedUrl = null;
       fileInput.value = ''; // Reset input
+      batchGrid.innerHTML = '';
+      batchResults = [];
+      btnDownloadAll.style.display = 'none';
     }
 
     function showResultView(originalUrl) {
       viewUpload.style.display = 'none';
       viewResult.style.display = 'block';
+      viewBatch.style.display = 'none';
 
       imgOriginal.src = originalUrl;
       imgProcessed.style.display = 'none';
@@ -749,25 +914,29 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
       btnShare.style.display = canShare ? 'inline-flex' : 'none';
     }
 
-    async function handleFile(file) {
-      if (!file) return;
+    function showBatchView() {
+      viewUpload.style.display = 'none';
+      viewResult.style.display = 'none';
+      viewBatch.style.display = 'block';
+      batchGrid.innerHTML = '';
+      batchStatus.textContent = 'Preparing...';
+    }
+
+    // Single file processing
+    async function handleSingleFile(file) {
       currentFileName = file.name;
 
-      // Show preview immediately
       const originalData = await fileToImageData(file);
       const originalUrl = imageDataToUrl(originalData);
       showResultView(originalUrl);
 
-      // Process
       try {
-        // Deep copy for processing
         const processData = new ImageData(
           new Uint8ClampedArray(originalData.data),
           originalData.width,
           originalData.height
         );
 
-        // Small delay to allow UI render
         await new Promise(r => setTimeout(r, 50));
 
         const result = watermarkEngine.removeWatermark(processData);
@@ -782,6 +951,126 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
         console.error(e);
         alert('Error processing image');
         showUploadView();
+      }
+    }
+
+    // Create a batch card element
+    function createBatchCard(file, index) {
+      const card = document.createElement('div');
+      card.className = 'batch-card fade-in';
+      card.innerHTML = `
+        <div class="batch-card-preview" id="preview-${index}">
+          <div class="spinner"></div>
+        </div>
+        <div class="batch-card-footer">
+          <div class="batch-filename" title="${file.name}">${file.name}</div>
+          <span class="status-badge status-pending" id="status-${index}">Pending</span>
+          <button class="btn btn-primary" id="btn-dl-${index}" style="display:none; padding: 4px 8px; font-size: 0.75rem;">
+            ↓
+          </button>
+        </div>
+      `;
+      return card;
+    }
+
+    // Batch file processing
+    async function handleBatchFiles(files) {
+      showBatchView();
+      batchStatus.textContent = `Queued ${files.length} images...`;
+
+      const fileArray = Array.from(files);
+
+      // Create cards
+      fileArray.forEach((file, index) => {
+        const card = createBatchCard(file, index);
+        batchGrid.appendChild(card);
+      });
+
+      // Process sequentially
+      let processedCount = 0;
+
+      for (let i = 0; i < fileArray.length; i++) {
+        const file = fileArray[i];
+        const statusBadge = document.getElementById(`status-${i}`);
+        const previewContainer = document.getElementById(`preview-${i}`);
+        const btnDl = document.getElementById(`btn-dl-${i}`);
+
+        statusBadge.className = 'status-badge status-processing';
+        statusBadge.textContent = 'Processing';
+        batchStatus.textContent = `Processing ${i + 1}/${files.length}: ${file.name}`;
+
+        try {
+          const originalData = await fileToImageData(file);
+
+          const processData = new ImageData(
+            new Uint8ClampedArray(originalData.data),
+            originalData.width,
+            originalData.height
+          );
+
+          await new Promise(r => setTimeout(r, 50));
+
+          const result = watermarkEngine.removeWatermark(processData);
+
+          if (result.success && result.processedImage) {
+            const resultUrl = imageDataToUrl(result.processedImage);
+
+            previewContainer.innerHTML = `<img src="${resultUrl}" alt="Result">`;
+            statusBadge.className = 'status-badge status-done';
+            statusBadge.textContent = 'Done';
+
+            // Store for download all
+            batchResults.push({ filename: 'clean_' + file.name, url: resultUrl });
+
+            btnDl.style.display = 'inline-flex';
+            btnDl.onclick = async () => {
+              try {
+                const response = await fetch(resultUrl);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = 'clean_' + file.name;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(() => {
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(blobUrl);
+                }, 100);
+              } catch (err) {
+                console.error('Download failed:', err);
+              }
+            };
+          } else {
+            throw new Error(result.message || 'Failed');
+          }
+        } catch (err) {
+          console.error(err);
+          statusBadge.className = 'status-badge status-error';
+          statusBadge.textContent = 'Error';
+          previewContainer.innerHTML = `<span style="color:var(--text-muted); font-size:0.8rem">Failed</span>`;
+        }
+
+        processedCount++;
+      }
+
+      batchStatus.textContent = `Completed ${processedCount} of ${files.length} images.`;
+
+      // Show Download All button if any succeeded
+      if (batchResults.length > 0) {
+        btnDownloadAll.style.display = 'inline-flex';
+      }
+    }
+
+    // Main handler for files
+    function handleFiles(files) {
+      if (!files || files.length === 0) return;
+
+      if (files.length === 1) {
+        handleSingleFile(files[0]);
+      } else {
+        handleBatchFiles(files);
       }
     }
 
@@ -800,50 +1089,65 @@ note: adopted from https://github.com/allenk/GeminiWatermarkTool/
     dropzone.addEventListener('drop', (e) => {
       e.preventDefault();
       dropzone.classList.remove('active');
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        handleFile(e.dataTransfer.files[0]);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        handleFiles(e.dataTransfer.files);
       }
     });
 
     fileInput.addEventListener('change', (e) => {
-      if (e.target.files && e.target.files[0]) {
-        handleFile(e.target.files[0]);
+      if (e.target.files && e.target.files.length > 0) {
+        handleFiles(e.target.files);
       }
     });
 
     btnBack.addEventListener('click', showUploadView);
+    btnBackBatch.addEventListener('click', showUploadView);
+
+    // Download All - triggers sequential downloads
+    btnDownloadAll.addEventListener('click', async () => {
+      if (batchResults.length === 0) return;
+
+      for (let i = 0; i < batchResults.length; i++) {
+        const { filename, url } = batchResults[i];
+        try {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          const blobUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = filename;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+          // Small delay between downloads to avoid browser blocking
+          await new Promise(r => setTimeout(r, 300));
+        } catch (err) {
+          console.error('Download failed for:', filename, err);
+        }
+      }
+    });
 
     btnDownload.addEventListener('click', async () => {
       if (!currentProcessedUrl) return;
 
       try {
-        // Convert data URL to blob for better mobile compatibility
         const response = await fetch(currentProcessedUrl);
         const blob = await response.blob();
-
-        // Create object URL from blob
         const blobUrl = URL.createObjectURL(blob);
-
-        // Create and trigger download link
         const link = document.createElement('a');
         link.href = blobUrl;
         link.download = 'clean_' + currentFileName;
-
-        // For iOS/mobile: must be added to DOM and use explicit user gesture
         link.style.display = 'none';
         document.body.appendChild(link);
-
-        // Trigger download
         link.click();
-
-        // Clean up
         setTimeout(() => {
           document.body.removeChild(link);
           URL.revokeObjectURL(blobUrl);
         }, 100);
       } catch (err) {
         console.error('Download failed:', err);
-        // Fallback to simple method
         const link = document.createElement('a');
         link.href = currentProcessedUrl;
         link.download = 'clean_' + currentFileName;
