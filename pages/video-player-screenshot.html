@@ -120,9 +120,9 @@ permalink: /pages/video-player-screenshot.html
         /* Progress Bar */
         .progress-container {
             width: 100%;
-            height: 6px;
+            height: 16px;
             background: var(--border-color);
-            border-radius: 3px;
+            border-radius: 8px;
             cursor: pointer;
             position: relative;
             margin-bottom: 20px;
@@ -130,15 +130,35 @@ permalink: /pages/video-player-screenshot.html
         }
 
         .progress-container:hover {
-            height: 10px;
+            height: 20px;
         }
 
         .progress-bar {
             height: 100%;
             background: var(--text-link);
             width: 0%;
-            border-radius: 3px;
+            border-radius: 8px;
             position: relative;
+            pointer-events: none;
+        }
+
+        /* Seek handle/thumb */
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .progress-container:hover .progress-bar::after {
+            transform: translateY(-50%) scale(1.2);
         }
 
         /* Time & Inputs */
@@ -155,7 +175,7 @@ permalink: /pages/video-player-screenshot.html
             align-items: center;
             gap: 10px;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
         }
 
@@ -166,8 +186,8 @@ permalink: /pages/video-player-screenshot.html
         }
 
         .time-input {
-            width: 40px;
-            height: 30px;
+            width: 50px;
+            height: 36px;
             padding: 0 5px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
@@ -175,6 +195,7 @@ permalink: /pages/video-player-screenshot.html
             border-radius: 4px;
             text-align: center;
             font-family: var(--font-mono);
+            font-size: 1rem;
         }
 
         .time-input:focus {
@@ -190,19 +211,19 @@ permalink: /pages/video-player-screenshot.html
         }
 
         button {
-            padding: 8px 12px;
+            padding: 10px 16px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             border-radius: 6px;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 40px;
+            min-width: 48px;
         }
 
         button:hover:not(:disabled) {
@@ -321,7 +342,7 @@ permalink: /pages/video-player-screenshot.html
 
                 <div class="btn-group">
                     <button id="screenshotBtn" class="btn-screenshot" disabled title="Take Screenshot">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
                             </path>
@@ -329,7 +350,7 @@ permalink: /pages/video-player-screenshot.html
                         </svg>
                     </button>
                     <button id="muteBtn" disabled>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -421,7 +442,12 @@ permalink: /pages/video-player-screenshot.html
 
         // Update time display
         video.addEventListener('timeupdate', () => {
-            currentTimeDisplay.textContent = formatTime(video.currentTime);
+            // Show actual duration when at or very close to the end
+            if (video.duration - video.currentTime < 0.1) {
+                currentTimeDisplay.textContent = formatTime(video.duration);
+            } else {
+                currentTimeDisplay.textContent = formatTime(video.currentTime);
+            }
             const progress = (video.currentTime / video.duration) * 100;
             progressBar.style.width = progress + '%';
         });
@@ -467,7 +493,7 @@ permalink: /pages/video-player-screenshot.html
             showNotification('Jump to start');
         });
 
-        // Jump to end
+        // Jump to end (tiny offset ensures last frame is displayable, time display compensates)
         jumpEndBtn.addEventListener('click', () => {
             video.currentTime = video.duration - 0.001;
             showNotification('Jump to end');
@@ -480,11 +506,11 @@ permalink: /pages/video-player-screenshot.html
             video.muted = !video.muted;
             if (video.muted) {
                 // Muted icon (crossed out)
-                muteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+                muteBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
                 showNotification('Muted');
             } else {
                 // Volume icon
-                muteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+                muteBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
                 showNotification('Unmuted');
             }
         }
@@ -539,12 +565,45 @@ permalink: /pages/video-player-screenshot.html
             });
         });
 
-        // Progress bar click
-        progressContainer.addEventListener('click', (e) => {
+        // Progress bar click & drag
+        let isDragging = false;
+
+        function seekToPosition(e) {
             if (!video.src) return;
             const rect = progressContainer.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
+            const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
             video.currentTime = percent * video.duration;
+        }
+
+        progressContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            seekToPosition(e);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                seekToPosition(e);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch support for mobile
+        progressContainer.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            seekToPosition(e.touches[0]);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                seekToPosition(e.touches[0]);
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
         });
 
         // Screenshot
