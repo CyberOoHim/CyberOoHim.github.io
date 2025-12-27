@@ -10,503 +10,355 @@ permalink: /pages/video-player-screenshot.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T E R R A P L A Y E R // EARTH</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>Video Player & Screenshot Tool</title>
     <style>
         :root {
-            --neon-pink: #A36653;
-            /* Clay/Rust */
-            --neon-blue: #7BA09E;
-            /* River Teal */
-            --neon-green: #6B8C42;
-            /* Moss */
-            --neon-purple: #8C7B75;
-            /* Taupe/Stone */
-            --neon-yellow: #D9B558;
-            /* Harvest Gold */
-            --bg-dark: #231F1D;
-            /* Deep Soil */
-            --grid-color: rgba(163, 102, 83, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            /* Using main site variables where possible, defining local overrides for specific player needs */
+            --player-bg: #000;
+            --control-bg: var(--bg-secondary);
+            --control-border: var(--border-color);
+            --accent-color: var(--text-link);
         }
 
         body {
-            font-family: 'VT323', monospace;
-            background-color: var(--bg-dark);
-            background-image:
-                linear-gradient(transparent 95%, var(--grid-color) 95%),
-                linear-gradient(90deg, transparent 95%, var(--grid-color) 95%);
-            background-size: 40px 40px;
-            background-position: center;
-            min-height: 100vh;
+            /* Inherit from layout usually, but ensuring defaults here */
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
-            color: var(--neon-blue);
-            overflow-x: hidden;
-            text-transform: uppercase;
-        }
-
-        /* Ambient glow */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(185, 103, 255, 0.1) 0%, rgba(5, 0, 17, 0.6) 100%);
-            pointer-events: none;
-            z-index: -1;
         }
 
         .container {
-            position: relative;
-            background: rgba(10, 10, 20, 0.85);
-            border: 2px solid var(--neon-pink);
-            border-radius: 4px;
-            /* Slightly rounded, not too much */
-            padding: 25px;
-            box-shadow:
-                0 0 10px var(--neon-pink),
-                inset 0 0 20px rgba(255, 113, 206, 0.2),
-                10px 10px 0px rgba(1, 205, 254, 0.3);
-            /* Retro block shadow */
-            max-width: 1200px;
             width: 100%;
-            backdrop-filter: blur(5px);
+            max-width: 1000px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Decorative "screws" or corner pieces */
-        .container::after {
-            content: "PLAYBACK_SYSTEM_TERRA";
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--bg-dark);
-            color: var(--neon-pink);
-            padding: 0 10px;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            border: 1px solid var(--neon-pink);
-            box-shadow: 0 0 5px var(--neon-pink);
+        .player-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 17, 23, 0.5);
         }
 
-        h1 {
-            color: var(--neon-yellow);
-            text-align: center;
-            margin-bottom: 25px;
-            font-family: 'Press Start 2P', cursive;
-            /* More retro pixel title */
-            font-size: 1.8rem;
-            line-height: 1.5;
-            text-shadow:
-                3px 3px 0px var(--neon-purple),
-                -2px -2px 0px var(--neon-blue);
-            letter-spacing: 2px;
+        .player-title {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
         }
 
         .video-wrapper {
-            position: relative;
             background: #000;
-            border: 2px solid var(--neon-blue);
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px var(--neon-blue);
-            /* Overlay scanlines */
-        }
-
-        .video-wrapper::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            position: relative;
         }
 
         video {
             width: 100%;
-            height: auto;
-            display: block;
             max-height: 70vh;
-            filter: contrast(1.1) saturate(1.1);
-            /* Slight boost for that TV look */
+            display: block;
         }
 
+        /* File Input Area */
         .file-input-section {
-            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
             text-align: center;
-            border-bottom: 1px dashed var(--neon-purple);
-            padding-bottom: 20px;
+            position: absolute;
+            z-index: 10;
         }
 
-        .file-input-wrapper {
-            display: inline-block;
-            position: relative;
-        }
-
-        input[type="file"] {
+        /* Hide when video loaded unless empty */
+        video[src]+.file-input-section {
             display: none;
         }
 
         .file-label {
             display: inline-block;
-            padding: 10px 25px;
-            background: transparent;
-            color: var(--neon-green);
-            border: 2px solid var(--neon-green);
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
+            padding: 12px 24px;
+            background: var(--text-link);
+            color: #fff;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s steps(4);
-            text-shadow: 0 0 5px var(--neon-green);
-            box-shadow: 0 0 5px var(--neon-green);
+            transition: all 0.2s ease;
+            border: none;
+            font-size: 0.95rem;
         }
 
         .file-label:hover {
-            background: var(--neon-green);
-            color: var(--bg-dark);
-            transform: translate(-2px, -2px);
-            box-shadow: 4px 4px 0px var(--neon-purple);
-        }
-
-        .file-name {
-            color: var(--neon-pink);
-            margin-top: 15px;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            background: #218bff;
+            /* Lighter blue */
+            transform: translateY(-1px);
         }
 
         .controls {
-            background: rgba(0, 0, 0, 0.4);
             padding: 20px;
-            border: 1px solid var(--neon-purple);
-            box-shadow: inset 0 0 20px rgba(185, 103, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
 
+        /* Progress Bar */
         .progress-container {
             width: 100%;
-            height: 12px;
-            background: #222;
-            border: 1px solid var(--neon-blue);
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
             cursor: pointer;
-            margin-bottom: 20px;
             position: relative;
-            overflow: hidden;
+            margin-bottom: 20px;
+            transition: height 0.1s;
+        }
+
+        .progress-container:hover {
+            height: 10px;
         }
 
         .progress-bar {
             height: 100%;
-            background: repeating-linear-gradient(45deg,
-                    var(--neon-pink),
-                    var(--neon-pink) 10px,
-                    var(--neon-purple) 10px,
-                    var(--neon-purple) 20px);
+            background: var(--text-link);
             width: 0%;
-            transition: width 0.1s linear;
+            border-radius: 3px;
             position: relative;
-            box-shadow: 0 0 10px var(--neon-pink);
         }
 
-        .time-display {
-            color: var(--neon-blue);
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 0 5px var(--neon-blue);
-            letter-spacing: 2px;
+        /* Time & Inputs */
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .time-input-section {
+        .time-group {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            font-family: 'VT323', monospace;
-        }
-
-        .time-input-section label {
-            color: var(--neon-yellow);
-            font-size: 1.2rem;
-            text-decoration: underline;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .time-inputs {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .time-input {
-            width: 65px;
-            padding: 5px;
-            background: #000;
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
+            width: 40px;
+            height: 30px;
+            padding: 0 5px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 4px;
             text-align: center;
-            font-family: 'VT323', monospace;
-            font-size: 1.4rem;
-            box-shadow: 0 0 5px var(--neon-green);
+            font-family: var(--font-mono);
         }
 
         .time-input:focus {
+            border-color: var(--text-link);
             outline: none;
-            background: #111;
-            box-shadow: 0 0 15px var(--neon-green);
         }
 
-        .goto-btn {
-            padding: 5px 15px;
-            background: var(--neon-blue);
-            color: #000;
-            border: none;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.7rem;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        .goto-btn:hover:not(:disabled) {
-            background: #fff;
-            color: var(--neon-blue);
-        }
-
-        .buttons {
+        /* Buttons */
+        .btn-group {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 8px;
             align-items: center;
         }
 
         button {
-            padding: 10px 15px;
-            border: 1px solid var(--neon-pink);
-            background: transparent;
-            color: var(--neon-pink);
-            font-family: 'VT323', monospace;
-            font-size: 1.3rem;
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 80px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
         }
 
         button:hover:not(:disabled) {
-            background: var(--neon-pink);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px var(--neon-pink);
-            transform: translateY(-2px);
-        }
-
-        button:active:not(:disabled) {
-            transform: translateY(0);
+            background: var(--bg-tertiary);
+            border-color: var(--text-secondary);
         }
 
         button:disabled {
-            opacity: 0.3;
+            opacity: 0.5;
             cursor: not-allowed;
-            border-color: #555;
-            color: #555;
-            box-shadow: none;
         }
 
         .btn-primary {
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-            font-weight: bold;
+            background: var(--text-link);
+            color: white;
+            border: none;
+            font-weight: 600;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: var(--neon-blue);
-            color: #000;
-            box-shadow: 0 0 20px var(--neon-blue);
+            background: #218bff;
+            border-color: transparent;
         }
 
         .btn-screenshot {
-            border-color: var(--neon-yellow);
-            color: var(--neon-yellow);
+            border-color: var(--text-accent);
+            color: var(--text-accent);
         }
 
         .btn-screenshot:hover:not(:disabled) {
-            background: var(--neon-yellow);
-            color: #000;
-            box-shadow: 0 0 20px var(--neon-yellow);
+            background: rgba(35, 134, 54, 0.1);
+            border-color: var(--text-accent);
         }
 
-        .btn-muted {
-            background: var(--neon-purple) !important;
-            color: #fff !important;
-            border-color: var(--neon-purple) !important;
-            animation: pulse-border 1.5s infinite;
-        }
-
-        @keyframes pulse-border {
-            0% {
-                box-shadow: 0 0 0 0 rgba(185, 103, 255, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(185, 103, 255, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(185, 103, 255, 0);
-            }
-        }
-
-        .keyboard-hints {
-            margin-top: 25px;
-            padding: 15px;
-            border: 1px dotted var(--neon-green);
-            color: var(--neon-green);
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .keyboard-hints h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-decoration: underline;
-        }
-
-        .keyboard-hints kbd {
-            background: #000;
-            padding: 2px 6px;
-            border: 1px solid var(--neon-green);
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.6rem;
-            color: var(--neon-green);
-            margin: 0 3px;
-        }
-
+        /* Notification Toast */
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: var(--bg-dark);
-            color: var(--neon-pink);
-            border: 2px solid var(--neon-pink);
-            box-shadow: 5px 5px 0px var(--neon-purple);
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             opacity: 0;
-            transform: translateY(-20px);
             transition: all 0.3s ease;
             pointer-events: none;
             z-index: 1000;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.7rem;
-            line-height: 1.5;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .notification.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
 
-        /* Scanline Anim */
-        @keyframes scanline {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            100% {
-                transform: translateY(100%);
-            }
+        /* Keyboard Hints */
+        .keyboard-hints {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
         }
 
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1));
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.3;
+        kbd {
+            font-family: var(--font-mono);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 2px 4px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
 
 <body>
-    <div class="scanlines"></div> <!-- CRT effect overlay -->
     <div class="container">
-        <h1>🌿 TERRAPLAYER 🌿</h1>
-
-        <div class="file-input-section">
-            <div class="file-input-wrapper">
-                <input type="file" id="videoFile" accept="video/mp4,video/*">
-                <label for="videoFile" class="file-label">💾 INSERT_TAPE.EXE</label>
-            </div>
-            <div class="file-name" id="fileName">WAITING FOR INPUT...</div>
+        <div class="player-header">
+            <h1 class="player-title">Video Player & Screenshot Tool</h1>
+            <div id="fileName" style="font-size: 0.85rem; color: var(--text-secondary);">No file selected</div>
         </div>
 
         <div class="video-wrapper">
+            <div class="file-input-section">
+                <input type="file" id="videoFile" accept="video/mp4,video/*" style="display: none;">
+                <label for="videoFile" class="file-label">Select Video File</label>
+            </div>
             <video id="videoPlayer"></video>
         </div>
 
         <div class="controls">
-            <div class="time-display">
-                <span id="currentTime">00:00</span> <span style="color:var(--neon-purple)">//</span> <span
-                    id="duration">00:00</span>
-            </div>
-
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
 
-            <div class="time-input-section">
-                <label for="timeInput">TIME_JUMP_SEQUENCE:</label>
-                <div class="time-inputs">
-                    <input type="number" id="hoursInput" class="time-input" min="0" max="99" placeholder="00" disabled>
-                    <span style="color:var(--neon-green)">:</span>
-                    <input type="number" id="minutesInput" class="time-input" min="0" max="59" placeholder="00"
-                        disabled>
-                    <span style="color:var(--neon-green)">:</span>
-                    <input type="number" id="secondsInput" class="time-input" min="0" max="59" placeholder="00"
-                        disabled>
+            <div class="controls-row">
+                <div class="btn-group">
+                    <button id="jumpStartBtn" disabled title="Start">⇤</button>
+                    <button id="backwardBtn" disabled title="Rewind 10s">-10s</button>
+                    <button id="playPauseBtn" class="btn-primary" disabled>Play</button>
+                    <button id="forwardBtn" disabled title="Fast Fwd 10s">+10s</button>
+                    <button id="jumpEndBtn" disabled title="End">⇥</button>
                 </div>
-                <button id="gotoTimeBtn" class="goto-btn" disabled>EXECUTE</button>
+
+                <div class="time-group">
+                    <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                </div>
+
+                <div class="btn-group">
+                    <button id="screenshotBtn" class="btn-screenshot" disabled title="Take Screenshot">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                            </path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                    </button>
+                    <button id="muteBtn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="buttons">
-                <button id="jumpStartBtn" disabled title="Start">|&lt;&lt;</button>
-                <button id="backwardBtn" disabled title="Rewind 10s">&lt;&lt; REW</button>
-                <button id="playPauseBtn" class="btn-primary" disabled>PLAY ▶</button>
-                <button id="forwardBtn" disabled title="Fast Fwd 10s">FF &gt;&gt;</button>
-                <button id="jumpEndBtn" disabled title="End">&gt;&gt;|</button>
-                <button id="muteBtn" disabled>SOUND ON</button>
-                <button id="screenshotBtn" class="btn-screenshot" disabled>SNAPSHOT</button>
-            </div>
-        </div>
+            <div class="controls-row" style="margin-top: 15px; grid-auto-flow: column;">
+                <div class="time-group">
+                    <span style="font-size:0.8rem;">Jump to:</span>
+                    <div class="time-inputs">
+                        <input type="number" id="hoursInput" class="time-input" min="0" max="99" placeholder="00"
+                            disabled>
+                        <span>:</span>
+                        <input type="number" id="minutesInput" class="time-input" min="0" max="59" placeholder="00"
+                            disabled>
+                        <span>:</span>
+                        <input type="number" id="secondsInput" class="time-input" min="0" max="59" placeholder="00"
+                            disabled>
+                    </div>
+                    <button id="gotoTimeBtn" disabled style="padding: 4px 8px; font-size: 0.75rem;">Go</button>
+                </div>
 
-        <div class="keyboard-hints">
-            <h3>:: SYSTEM COMMANDS ::</h3>
-            <p>
-                <kbd>SPACE</kbd> TOGGLE PLAY •
-                <kbd>←</kbd> REW 10s •
-                <kbd>→</kbd> FF 10s •
-                <kbd>M</kbd> MUTE •
-                <kbd>S</kbd> SNAPSHOT •
-                <kbd>F</kbd> FULLSCREEN
-            </p>
+                <div class="keyboard-hints">
+                    <kbd>Space</kbd> Play/Pause &nbsp; <kbd>←/→</kbd> Seek &nbsp; <kbd>S</kbd> Screenshot &nbsp;
+                    <kbd>F</kbd> Fullscreen
+                </div>
+            </div>
         </div>
     </div>
 
@@ -540,7 +392,7 @@ permalink: /pages/video-player-screenshot.html
             if (file) {
                 const url = URL.createObjectURL(file);
                 video.src = url;
-                fileName.textContent = "> " + file.name.toUpperCase();
+                fileName.textContent = file.name; // Clean name
 
                 // Enable controls
                 playPauseBtn.disabled = false;
@@ -555,7 +407,7 @@ permalink: /pages/video-player-screenshot.html
                 secondsInput.disabled = false;
                 gotoTimeBtn.disabled = false;
 
-                showNotification('TAPE LOADED SUCCESSFULLY');
+                showNotification('Video loaded');
             }
         });
 
@@ -585,45 +437,40 @@ permalink: /pages/video-player-screenshot.html
         function togglePlayPause() {
             if (video.paused) {
                 video.play();
-                playPauseBtn.innerHTML = 'PAUSE ||';
-                playPauseBtn.style.color = 'var(--neon-green)';
-                playPauseBtn.style.borderColor = 'var(--neon-green)';
+                playPauseBtn.innerHTML = 'Pause';
             } else {
                 video.pause();
-                playPauseBtn.innerHTML = 'PLAY ▶';
-                playPauseBtn.style.color = 'var(--neon-blue)';
-                playPauseBtn.style.borderColor = 'var(--neon-blue)';
+                playPauseBtn.innerHTML = 'Play';
             }
         }
 
         // Update button when video ends
         video.addEventListener('ended', () => {
-            playPauseBtn.innerHTML = 'PLAY ▶';
-            playPauseBtn.style.color = 'var(--neon-blue)';
+            playPauseBtn.innerHTML = 'Play';
         });
 
         // Fast backward
         backwardBtn.addEventListener('click', () => {
             video.currentTime = Math.max(0, video.currentTime - 10);
-            showNotification('<< REWIND 10s');
+            showNotification('Rewind 10s');
         });
 
         // Fast forward
         forwardBtn.addEventListener('click', () => {
             video.currentTime = Math.min(video.duration, video.currentTime + 10);
-            showNotification('FAST FWD 10s >>');
+            showNotification('Forward 10s');
         });
 
         // Jump to start
         jumpStartBtn.addEventListener('click', () => {
             video.currentTime = 0;
-            showNotification('<< SEEK: START');
+            showNotification('Jump to start');
         });
 
-        // Jump to end (use minimal offset to get the true last frame)
+        // Jump to end
         jumpEndBtn.addEventListener('click', () => {
             video.currentTime = video.duration - 0.001;
-            showNotification('SEEK: END >>');
+            showNotification('Jump to end');
         });
 
         // Mute/Unmute
@@ -632,13 +479,13 @@ permalink: /pages/video-player-screenshot.html
         function toggleMute() {
             video.muted = !video.muted;
             if (video.muted) {
-                muteBtn.innerHTML = 'MUTED X';
-                muteBtn.classList.add('btn-muted');
-                showNotification('AUDIO: OFF');
+                // Muted icon (crossed out)
+                muteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+                showNotification('Muted');
             } else {
-                muteBtn.innerHTML = 'SOUND ON';
-                muteBtn.classList.remove('btn-muted');
-                showNotification('AUDIO: ON');
+                // Volume icon
+                muteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+                showNotification('Unmuted');
             }
         }
 
@@ -669,12 +516,18 @@ permalink: /pages/video-player-screenshot.html
             const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
             if (totalSeconds > video.duration) {
-                showNotification('ERROR: TIME_OUT_OF_BOUNDS');
+                showNotification('Invalid time');
                 return;
             }
 
             video.currentTime = totalSeconds;
-            showNotification(`SEEKING >> ${hoursInput.value || '00'}:${minutesInput.value || '00'}:${secondsInput.value || '00'}`);
+            // Pad inputs for display
+            /*
+            hoursInput.value = hours.toString().padStart(2, '0');
+            minutesInput.value = minutes.toString().padStart(2, '0');
+            secondsInput.value = seconds.toString().padStart(2, '0');
+            */
+            showNotification(`Jump to ${hours}:${minutes}:${seconds}`);
         }
 
         // Allow Enter key to jump to time
@@ -699,7 +552,7 @@ permalink: /pages/video-player-screenshot.html
 
         function takeScreenshot() {
             if (!video.src || (video.paused && video.currentTime === 0)) {
-                showNotification('ERROR: NO_SIGNAL');
+                showNotification('Nothing to capture');
                 return;
             }
 
@@ -713,13 +566,19 @@ permalink: /pages/video-player-screenshot.html
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
+                // Use original filename base if possible, else default
+                let baseName = 'screenshot';
+                if (videoFile.files[0]) {
+                    baseName = videoFile.files[0].name.replace(/\.[^/.]+$/, "");
+                }
+
                 const timestamp = formatTime(video.currentTime).replace(':', '-');
                 a.href = url;
-                a.download = `TERRA_SNAP_${timestamp}.png`;
+                a.download = `${baseName}_${timestamp}.png`;
                 a.click();
                 URL.revokeObjectURL(url);
 
-                showNotification('IMAGE_SAVED_TO_DISK');
+                showNotification('Screenshot saved');
             }, 'image/png');
         }
 
@@ -736,12 +595,12 @@ permalink: /pages/video-player-screenshot.html
                 case 'arrowleft':
                     e.preventDefault();
                     video.currentTime = Math.max(0, video.currentTime - 10);
-                    showNotification('<< SEEK -10s');
+                    showNotification('-10s');
                     break;
                 case 'arrowright':
                     e.preventDefault();
                     video.currentTime = Math.min(video.duration, video.currentTime + 10);
-                    showNotification('SEEK +10s >>');
+                    showNotification('+10s');
                     break;
                 case 's':
                     e.preventDefault();
@@ -763,10 +622,15 @@ permalink: /pages/video-player-screenshot.html
         });
 
         // Show notification
+        let notificationTimeout;
         function showNotification(message) {
+            // Update icon/text
+            // Simple text notification for now. For icons we could pass HTML.
             notification.textContent = message;
             notification.classList.add('show');
-            setTimeout(() => {
+
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(() => {
                 notification.classList.remove('show');
             }, 2000);
         }
