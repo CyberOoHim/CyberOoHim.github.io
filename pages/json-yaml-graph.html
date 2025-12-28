@@ -1,7 +1,7 @@
 ---
 layout: apps
 title: JSON/YAML Graph Visualizer
-version: v0.2
+version: v0.1
 permalink: /pages/json-yaml-graph.html
 ---
 <!DOCTYPE html>
@@ -1004,8 +1004,38 @@ permalink: /pages/json-yaml-graph.html
                 <option value="null">Null</option>
                 <option value="array">Array []</option>
                 <option value="object">Object {}</option>
+                <option value="image">Image 🖼️</option>
             `;
             form.appendChild(typeSelect);
+
+            // Image file input (hidden)
+            const imageInput = document.createElement('input');
+            imageInput.type = 'file';
+            imageInput.accept = 'image/*';
+            imageInput.style.display = 'none';
+            imageInput.className = 'image-input';
+            form.appendChild(imageInput);
+
+            // Image preview/button
+            const imageBtn = document.createElement('button');
+            imageBtn.type = 'button';
+            imageBtn.textContent = '🖼️ Choose Image';
+            imageBtn.style.display = 'none';
+            imageBtn.onclick = () => imageInput.click();
+            form.appendChild(imageBtn);
+
+            let imageBase64 = null;
+            imageInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        imageBase64 = ev.target.result;
+                        imageBtn.textContent = '✅ Image Selected';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
 
             // Value input (changes based on type)
             const valueInput = document.createElement('input');
@@ -1018,14 +1048,20 @@ permalink: /pages/json-yaml-graph.html
                 const t = typeSelect.value;
                 if (t === 'array' || t === 'object' || t === 'null') {
                     valueInput.style.display = 'none';
+                    imageBtn.style.display = 'none';
+                } else if (t === 'image') {
+                    valueInput.style.display = 'none';
+                    imageBtn.style.display = '';
                 } else if (t === 'boolean') {
                     valueInput.type = 'text';
                     valueInput.placeholder = 'true or false';
                     valueInput.style.display = '';
+                    imageBtn.style.display = 'none';
                 } else {
                     valueInput.type = t === 'number' ? 'number' : 'text';
                     valueInput.placeholder = 'Value';
                     valueInput.style.display = '';
+                    imageBtn.style.display = 'none';
                 }
             };
 
@@ -1063,6 +1099,13 @@ permalink: /pages/json-yaml-graph.html
                         break;
                     case 'object':
                         newValue = {};
+                        break;
+                    case 'image':
+                        if (!imageBase64) {
+                            alert('Please select an image');
+                            return;
+                        }
+                        newValue = imageBase64;
                         break;
                 }
 
@@ -1508,6 +1551,19 @@ permalink: /pages/json-yaml-graph.html
                 };
                 actions.appendChild(delBtn);
             }
+
+            // Add button for objects/arrays
+            if (hasChildren) {
+                const addBtn = document.createElement('button');
+                addBtn.className = 'success';
+                addBtn.textContent = '+';
+                addBtn.title = 'Add item';
+                addBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    showVisualAddForm(node, div);
+                };
+                actions.appendChild(addBtn);
+            }
             header.appendChild(actions);
             div.appendChild(header);
 
@@ -1536,6 +1592,16 @@ permalink: /pages/json-yaml-graph.html
                 } else {
                     content.textContent = formatValue(node.data.value, type);
                 }
+            }
+
+            // Make primitives editable on click
+            if (!hasChildren && type !== 'null') {
+                content.style.cursor = 'pointer';
+                content.title = 'Click to edit';
+                content.onclick = (e) => {
+                    e.stopPropagation();
+                    editVisualValue(node, content);
+                };
             }
             div.appendChild(content);
 
@@ -1734,6 +1800,233 @@ permalink: /pages/json-yaml-graph.html
             visualConnections = visualConnections.filter(c => c !== conn);
             updateConnections();
             saveVisualStateToHistory(); // Save connection deletion
+        }
+
+        function showVisualAddForm(node, nodeDiv) {
+            // Remove any existing visual add forms
+            document.querySelectorAll('.visual-add-form').forEach(f => f.remove());
+
+            const type = getType(node.data.value);
+            const isArray = type === 'array';
+
+            const form = document.createElement('div');
+            form.className = 'visual-add-form';
+            form.style.cssText = 'position:absolute; left:0; right:0; top:100%; background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:6px; padding:8px; z-index:100; display:flex; flex-direction:column; gap:6px;';
+
+            // Key input (not for arrays)
+            if (!isArray) {
+                const keyInput = document.createElement('input');
+                keyInput.type = 'text';
+                keyInput.placeholder = 'Key';
+                keyInput.className = 'visual-key-input';
+                keyInput.style.cssText = 'padding:4px 8px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-primary); color:var(--text-primary);';
+                form.appendChild(keyInput);
+            }
+
+            // Type selector
+            const typeSelect = document.createElement('select');
+            typeSelect.style.cssText = 'padding:4px 8px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-primary); color:var(--text-primary);';
+            typeSelect.innerHTML = `
+                <option value="string">String</option>
+                <option value="number">Number</option>
+                <option value="boolean">Boolean</option>
+                <option value="null">Null</option>
+                <option value="array">Array []</option>
+                <option value="object">Object {}</option>
+                <option value="image">Image 🖼️</option>
+            `;
+            form.appendChild(typeSelect);
+
+            // Image file input (hidden)
+            const imageInput = document.createElement('input');
+            imageInput.type = 'file';
+            imageInput.accept = 'image/*';
+            imageInput.style.display = 'none';
+            form.appendChild(imageInput);
+
+            // Image button
+            const imageBtn = document.createElement('button');
+            imageBtn.type = 'button';
+            imageBtn.textContent = '🖼️ Choose Image';
+            imageBtn.style.cssText = 'padding:4px 8px; display:none;';
+            imageBtn.onclick = (e) => {
+                e.stopPropagation();
+                imageInput.click();
+            };
+            form.appendChild(imageBtn);
+
+            let imageBase64 = null;
+            imageInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        imageBase64 = ev.target.result;
+                        imageBtn.textContent = '✅ Image Selected';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            // Value input
+            const valueInput = document.createElement('input');
+            valueInput.type = 'text';
+            valueInput.placeholder = 'Value';
+            valueInput.style.cssText = 'padding:4px 8px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-primary); color:var(--text-primary);';
+            form.appendChild(valueInput);
+
+            typeSelect.onchange = () => {
+                const t = typeSelect.value;
+                if (t === 'array' || t === 'object' || t === 'null') {
+                    valueInput.style.display = 'none';
+                    imageBtn.style.display = 'none';
+                } else if (t === 'image') {
+                    valueInput.style.display = 'none';
+                    imageBtn.style.display = '';
+                } else {
+                    valueInput.style.display = '';
+                    imageBtn.style.display = 'none';
+                    if (t === 'boolean') valueInput.placeholder = 'true or false';
+                    else valueInput.placeholder = 'Value';
+                }
+            };
+
+            // Buttons
+            const btnRow = document.createElement('div');
+            btnRow.style.cssText = 'display:flex; gap:6px;';
+
+            const addBtn = document.createElement('button');
+            addBtn.textContent = 'Add';
+            addBtn.className = 'success';
+            addBtn.style.cssText = 'flex:1;';
+            addBtn.onclick = (e) => {
+                e.stopPropagation();
+                const keyInput = form.querySelector('.visual-key-input');
+                const key = isArray ? null : (keyInput ? keyInput.value.trim() : '');
+
+                if (!isArray && !key) {
+                    alert('Please enter a key');
+                    return;
+                }
+
+                const valueType = typeSelect.value;
+                let newValue;
+                switch (valueType) {
+                    case 'string': newValue = valueInput.value; break;
+                    case 'number': newValue = parseFloat(valueInput.value) || 0; break;
+                    case 'boolean': newValue = valueInput.value.toLowerCase() === 'true'; break;
+                    case 'null': newValue = null; break;
+                    case 'array': newValue = []; break;
+                    case 'object': newValue = {}; break;
+                    case 'image':
+                        if (!imageBase64) {
+                            alert('Please select an image');
+                            return;
+                        }
+                        newValue = imageBase64;
+                        break;
+                }
+
+                // Add to data
+                const pathParts = node.id === 'root' ? [] : node.id.split('.');
+                let target = currentData;
+                for (const p of pathParts) {
+                    const k = isNaN(p) ? p : parseInt(p);
+                    target = target[k];
+                }
+
+                if (isArray) {
+                    target.push(newValue);
+                } else {
+                    target[key] = newValue;
+                }
+
+                form.remove();
+                syncEditors();
+                renderVisualGraph();
+            };
+            btnRow.appendChild(addBtn);
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.style.cssText = 'flex:1;';
+            cancelBtn.onclick = (e) => {
+                e.stopPropagation();
+                form.remove();
+            };
+            btnRow.appendChild(cancelBtn);
+
+            form.appendChild(btnRow);
+
+            // Prevent form clicks from triggering drag
+            form.onmousedown = (e) => e.stopPropagation();
+            form.ontouchstart = (e) => e.stopPropagation();
+
+            nodeDiv.appendChild(form);
+        }
+
+        function editVisualValue(node, contentEl) {
+            const type = getType(node.data.value);
+            const currentValue = node.data.value;
+
+            // Create input
+            const input = document.createElement('input');
+            input.type = type === 'number' ? 'number' : 'text';
+            input.value = type === 'string' ? currentValue : String(currentValue);
+            input.style.cssText = 'width:100%; padding:4px; border:1px solid var(--text-accent); border-radius:4px; background:var(--bg-primary); color:var(--text-primary); font-family:inherit;';
+
+            const originalContent = contentEl.innerHTML;
+            contentEl.innerHTML = '';
+            contentEl.appendChild(input);
+            input.focus();
+            input.select();
+
+            const save = () => {
+                let newValue;
+                if (type === 'number') {
+                    newValue = parseFloat(input.value) || 0;
+                } else if (type === 'boolean') {
+                    newValue = input.value.toLowerCase() === 'true';
+                } else {
+                    newValue = input.value;
+                }
+
+                // Update data
+                const pathParts = node.id === 'root' ? [] : node.id.split('.');
+                if (pathParts.length > 0) {
+                    let target = currentData;
+                    for (let i = 0; i < pathParts.length - 1; i++) {
+                        const k = isNaN(pathParts[i]) ? pathParts[i] : parseInt(pathParts[i]);
+                        target = target[k];
+                    }
+                    const lastKey = pathParts[pathParts.length - 1];
+                    const k = isNaN(lastKey) ? lastKey : parseInt(lastKey);
+                    target[k] = newValue;
+                }
+
+                syncEditors();
+                renderVisualGraph();
+            };
+
+            const cancel = () => {
+                contentEl.innerHTML = originalContent;
+            };
+
+            input.onblur = save;
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    input.blur();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    input.onblur = null;
+                    cancel();
+                }
+            };
+
+            // Prevent drag while editing
+            input.onmousedown = (e) => e.stopPropagation();
+            input.ontouchstart = (e) => e.stopPropagation();
         }
 
         function deleteVisualNode(node) {
