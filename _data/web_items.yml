@@ -98,8 +98,14 @@
   url: "https://ai-meme-copilot.vercel.app/"
   description: "AI-powered meme generation assistant"
 
+
 - name: "Taigi YT Subtitle Copilot"
   category: "tools"
   type: "external"
   url: "https://taigi-yt-subtitle-copilot.vercel.app/"
   description: "台語 YouTube 字幕助手"
+
+- name: "JSON/YAML Graph"
+  category: "tools"
+  url: "/pages/json-yaml-graph.html"
+  description: "Convert JSON/YAML to an interactive expandable graph"
