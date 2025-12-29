@@ -78,15 +78,19 @@ permalink: /pages/tl_poj_converter.html
         .tab-btn {
             background: transparent;
             border: 1px solid var(--border-color);
-            color: var(--text-secondary);
+            color: var(--text-primary);
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
             cursor: pointer;
             font-family: var(--font-mono);
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .tab-btn:hover {
@@ -147,11 +151,11 @@ permalink: /pages/tl_poj_converter.html
 
         .toolbar label {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: normal;
+            font-weight: 600;
         }
 
         .tool-btn {
@@ -160,9 +164,9 @@ permalink: /pages/tl_poj_converter.html
             border-radius: 4px;
             padding: 4px 8px;
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            color: var(--text-secondary);
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -183,7 +187,7 @@ permalink: /pages/tl_poj_converter.html
             resize: none;
             font-family: var(--font-mono);
             /* Monospace is good for this */
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.6;
             outline: none;
             width: 100%;
@@ -195,6 +199,14 @@ permalink: /pages/tl_poj_converter.html
         textarea:focus {
             border-color: var(--text-link);
             box-shadow: 0 0 0 1px var(--text-link);
+        }
+
+        /* Brighten placeholders */
+        textarea::placeholder,
+        input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.8;
+            font-size: 1rem;
         }
 
         /* File Mode Styles */
@@ -227,7 +239,7 @@ permalink: /pages/tl_poj_converter.html
             display: inline-block;
             padding: 10px 20px;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
@@ -382,7 +394,7 @@ permalink: /pages/tl_poj_converter.html
                 chooseFile: "Ap-ló͘(Upload) 書類",
                 copied: "khó͘ 好--ah!",
                 quickTest: "快 速 測",
-                downloadOffline: "⬇ Táng-ló͘(Download) 家己用"
+                downloadOffline: "⬇ Táng-ló͘(Download)家己用"
             },
             placeholders: {
                 input: "拍/貼 TL he̍k-chiá TL/POJ 標數字調號... (e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 快速測 chhi̍h 下跤 chhi̍h-liú.",
@@ -395,7 +407,8 @@ permalink: /pages/tl_poj_converter.html
             },
             messages: {
                 clipboardError: "無法度自動貼，chhi̍h Ctrl+V 貼看覓。",
-                truncated: "\n... (鉸短先看--一下)"
+                truncated: "\n... (鉸短先看--一下)",
+                downloadConfirm: "Kám 有確定 beh táng-ló͘ tī 家己電腦用？"
             },
             testSample: `=== TL Diacritic Input ===
 TL: Tâi-uân sī chi̍t-ê hó só͘-chāi.
@@ -423,8 +436,14 @@ TL uá (lean) → POJ òa`,
 
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
-            document.getElementById('ui-tab-realtime').innerText = UI_STRINGS.tabs.realtime;
-            document.getElementById('ui-tab-file').innerText = UI_STRINGS.tabs.file;
+
+            // Icons for tabs
+            const iconRealtime = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`;
+            const iconFile = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`;
+
+            document.getElementById('ui-tab-realtime').innerHTML = `${iconRealtime} <span>${UI_STRINGS.tabs.realtime}</span>`;
+            document.getElementById('ui-tab-file').innerHTML = `${iconFile} <span>${UI_STRINGS.tabs.file}</span>`;
+
             document.getElementById('ui-label-input').innerText = UI_STRINGS.labels.input;
             document.getElementById('ui-label-output').innerText = UI_STRINGS.labels.output;
             document.getElementById('ui-label-result').innerText = UI_STRINGS.labels.result;
@@ -803,6 +822,10 @@ TL uá (lean) → POJ òa`,
         // --- UI Logic ---
 
         async function downloadCleanVersion() {
+            if (!confirm(UI_STRINGS.messages.downloadConfirm)) {
+                return;
+            }
+
             try {
                 const btn = document.getElementById('ui-btn-download-offline');
                 const originalText = btn.innerText;
