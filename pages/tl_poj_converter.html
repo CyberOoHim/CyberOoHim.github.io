@@ -267,6 +267,8 @@ permalink: /pages/tl_poj_converter.html
         <div class="tabs">
             <button class="tab-btn active" onclick="switchMode('realtime')" id="ui-tab-realtime"></button>
             <button class="tab-btn" onclick="switchMode('file')" id="ui-tab-file"></button>
+            <button class="tab-btn" id="ui-btn-download-offline" onclick="downloadCleanVersion()"
+                style="border-style: dashed;"></button>
         </div>
 
         <!-- Real-time Panel -->
@@ -375,7 +377,8 @@ permalink: /pages/tl_poj_converter.html
                 download: "Táng-ló͘(Download)",
                 chooseFile: "Ap-ló͘(Upload) 書類",
                 copied: "khó͘ 好--ah!",
-                quickTest: "快速測"
+                quickTest: "快速測",
+                downloadOffline: "⬇ Táng-ló͘(Download) 家己用"
             },
             placeholders: {
                 input: "拍/貼 TL he̍k-chiá TL/POJ 標數字調號... (e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 快速測 chhi̍h 下跤 chhi̍h-liú.",
@@ -428,6 +431,7 @@ TL uá (lean) → POJ òa`
             document.getElementById('ui-btn-download-file').innerText = UI_STRINGS.buttons.download;
             document.getElementById('ui-btn-choose-file').innerText = UI_STRINGS.buttons.chooseFile;
             document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
+            document.getElementById('ui-btn-download-offline').innerText = UI_STRINGS.buttons.downloadOffline;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
             document.getElementById('ui-drop-or').innerText = UI_STRINGS.dropZone.or;
@@ -791,6 +795,39 @@ TL uá (lean) → POJ òa`
         }
 
         // --- UI Logic ---
+
+        async function downloadCleanVersion() {
+            try {
+                const btn = document.getElementById('ui-btn-download-offline');
+                const originalText = btn.innerText;
+                btn.innerText = 'Downloading...';
+                btn.disabled = true;
+
+                const res = await fetch('https://raw.githubusercontent.com/CyberOoHim/CyberOoHim.github.io/main/pages/tl_poj_converter.html');
+                let text = await res.text();
+
+                // Strip Jekyll front matter (---...---) and the HTML comment after it
+                text = text.replace(/^---[\s\S]*?---\n/, '');
+                text = text.replace(/^< !--[\s\S ]*?- ->\n/, '');
+                text = text.trim();
+
+                const blob = new Blob([text], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'tl_poj_converter.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                btn.innerText = originalText;
+                btn.disabled = false;
+            } catch (err) {
+                console.error('Download failed:', err);
+                alert('Download failed. Please try again.');
+            }
+        }
 
         function injectTestText() {
             const rtInput = document.getElementById('rt-input');
