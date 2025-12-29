@@ -57,26 +57,21 @@ permalink: /pages/tl_poj_converter.html
 
         header {
             text-align: center;
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 0;
         }
 
         h1 {
             font-family: var(--font-mono);
             font-size: 2rem;
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 0;
             color: var(--text-primary);
-        }
-
-        .subtitle {
-            font-family: var(--font-mono);
-            color: var(--text-secondary);
         }
 
         /* Tabs */
         .tabs {
             display: flex;
             gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
             justify-content: center;
         }
 
@@ -267,7 +262,6 @@ permalink: /pages/tl_poj_converter.html
     <div class="container">
         <header>
             <h1 id="ui-title"></h1>
-            <p id="ui-subtitle" class="subtitle"></p>
         </header>
 
         <div class="tabs">
@@ -365,37 +359,36 @@ permalink: /pages/tl_poj_converter.html
     <script>
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "TL to POJ Real-time Converter",
-            subtitle: "Convert Tâi-lô to Pe̍h-ōe-jī (POJ)",
+            title: "Tâi-lô -> Pe̍h-ōe-jī (POJ) 隨拍隨轉",
             tabs: {
-                realtime: "Real-time Translation",
-                file: "File Converter"
+                realtime: "隨拍隨轉",
+                file: "書類發落"
             },
             labels: {
-                input: "Tâi-lô (TL) / TL & POJ Number Input",
-                output: "Pe̍h-ōe-jī (POJ) Output",
-                result: "Conversion Result"
+                input: "Tâi-lô (TL) / TL & POJ 帶數字調號",
+                output: "Pe̍h-ōe-jī (POJ) 輸出",
+                result: "轉換結果"
             },
             buttons: {
-                paste: "Paste",
-                copy: "Copy",
-                download: "Download",
-                chooseFile: "Choose File",
-                copied: "Copied!",
-                quickTest: "Quick Test"
+                paste: "貼 TL",
+                copy: "khó͘--起來",
+                download: "Táng-ló͘(Download)",
+                chooseFile: "Ap-ló͘(Upload) 書類",
+                copied: "khó͘ 好--ah!",
+                quickTest: "快速測"
             },
             placeholders: {
                 input: "拍/貼 TL，he̍k-chiá TL/POJ 標數字調號... (e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 快速測試 chhi̍h-liú tī 上下跤.",
-                output: "POJ Output...",
-                preview: "Output will appear here..."
+                output: "POJ 輸出...",
+                preview: "輸出會 tī chia..."
             },
             dropZone: {
-                main: "Drag & Drop a text file here",
-                or: "or"
+                main: "Kā 書類 拖來 chia",
+                or: "ia̍h-sī"
             },
             messages: {
-                clipboardError: "Clipboard access denied. Please press Ctrl+V to paste manually.",
-                truncated: "\n... (truncated for preview)"
+                clipboardError: "無法度自動貼，chhi̍h Ctrl+V 貼看覓。",
+                truncated: "\n... (鉸短先看--一下)"
             },
             testSample: `=== TL Diacritic Input ===
 TL: Tâi-uân sī chi̍t-ê hó só͘-chāi.
@@ -422,7 +415,6 @@ TL uá (lean) → POJ òa`
 
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
-            document.getElementById('ui-subtitle').innerText = UI_STRINGS.subtitle;
             document.getElementById('ui-tab-realtime').innerText = UI_STRINGS.tabs.realtime;
             document.getElementById('ui-tab-file').innerText = UI_STRINGS.tabs.file;
             document.getElementById('ui-label-input').innerText = UI_STRINGS.labels.input;
