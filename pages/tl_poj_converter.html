@@ -12,6 +12,9 @@ permalink: /pages/tl_poj_converter.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TL to POJ Real-time Converter</title>
+    <!-- Google Fonts: Huninn will be loaded dynamically with specific characters -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         /* CSS Variables - From Image Resizer (Tech Theme) */
         :root {
@@ -25,6 +28,7 @@ permalink: /pages/tl_poj_converter.html
             --border-color: #30363d;
             --font-mono: 'Consolas', 'Monaco', monospace;
             --font-sans: 'Segoe UI', system-ui, sans-serif;
+            --font-taigi: 'Huninn', 'Times New Roman', serif;
             --spacing-xs: 0.5rem;
             --spacing-sm: 1rem;
             --spacing-md: 2rem;
@@ -226,8 +230,8 @@ permalink: /pages/tl_poj_converter.html
             border: 1px solid var(--border-color);
             border-radius: 6px;
             resize: none;
-            font-family: var(--font-mono);
-            /* Monospace is good for this */
+            font-family: var(--font-taigi);
+            /* Huninn for Taigi, Times New Roman fallback */
             font-size: 1.4rem;
             line-height: 1.6;
             outline: none;
@@ -442,6 +446,17 @@ permalink: /pages/tl_poj_converter.html
     </div>
 
     <script>
+
+        const taigiCharsToLoad = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáàâāa̍éèêēe̍íìîīi̍óòôōo̍úùûūu̍ÁÀÂĀA̍ÉÈÊĒE̍ÍÌÎĪI̍ÓÒÔŌO̍ÚÙÛŪU̍o͘ó͘ò͘ô͘ō͘o̍͘O͘Ó͘Ò͘Ô͘Ō͘O̍͘aⁿeⁿiⁿoⁿuⁿo͘ⁿAⁿEⁿIⁿOⁿUⁿO̍͘ⁿáⁿàⁿâⁿāⁿa̍ⁿéⁿèⁿêⁿēe̍ⁿíⁿìⁿîⁿīi̍ⁿóⁿòⁿôⁿō͘ⁿo̍͘ⁿúⁿùⁿûⁿūⁿu̍ⁿó͘ⁿò͘ⁿô͘ⁿō͘ⁿo̍͘ⁿÁⁿÀⁿÂⁿĀⁿA̍ⁿÉⁿÈÊⁿĒⁿE̍ⁿÍÌÎĪI̍ⁿÓÒÔŌⁿO̍ⁿÚⁿÙⁿÛⁿŪⁿU̍ⁿÓ͘ⁿÒ͘ⁿÔ͘ⁿŌ͘ⁿO̍͘ⁿăĕĭŏŭŏ͘ĂĔĬŎŬŎ͘ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆-0123456789.,;:?!'\"()[]{}<>@#$%^&*_+=\\|/";
+
+        // Dynamically load Google Font "Huninn" with specific Taigi characters
+        (function loadHuninnFont() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `https://fonts.googleapis.com/css2?family=Huninn&display=swap&text=${encodeURIComponent(taigiCharsToLoad)}`;
+            document.head.appendChild(link);
+        })();
+
         // --- UI Constants ---
         const UI_STRINGS = {
             title: "TL -> POJ 拍隨轉",
@@ -469,7 +484,8 @@ permalink: /pages/tl_poj_converter.html
 1. 拍/貼 TL he̍k-chiá TL/POJ 標數字調號...(e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 
 2. 無 beh 轉 ê 文字 kā 用 \\[ ... ] 包--起來。
 3. 看見本 ia̍h-sī 快速測，chhi̍h 下跤 chhi̍h-liú。
-4. Táng-ló͘(download) 這支 App，上下跤有 chhi̍h-liú。`,
+4. Táng-ló͘(download) 這支 App，上下跤有 chhi̍h-liú。
+5. 毋thang 拍 符號調號 POJ koh 落去轉，無保證結果，mā 無意義。`,
                 output: "POJ 輸出...",
                 preview: "輸出會 tī chia..."
             },
@@ -500,6 +516,9 @@ Tone 4/8: a4, a8 (no stop), ah4, ah8 (stop)
 
 úi óo ông m̂ ǹg n̂g
 m2 ng5 mh8 ngh8
+
+=== Tone Number Tests (1-9) ===
+a1 a2 a3 ah4 a5 a6 a7 ah8 a9
 
 === Tonemark Position (ua→oa, ue→oe) ===
 TL tuà (live) → POJ tòa
@@ -760,7 +779,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC3_Regex('A(i|u)((?:N|ⁿ|nn)?)h4'), s: 'A$1$2h' },
                 // use RC2
                 { r: createRC2('a5'), s: 'â$1$2' }, { r: createRC2('A5'), s: 'Â$1$2' },
-                { r: createRC2('a6'), s: 'ǎ$1$2' }, { r: createRC2('A6'), s: 'Ǎ$1$2' },
+                { r: createRC2('a6'), s: 'á$1$2' }, { r: createRC2('A6'), s: 'Á$1$2' },
                 { r: createRC2('a7'), s: 'ā$1$2' }, { r: createRC2('A7'), s: 'Ā$1$2' },
                 // use RC3
                 { r: createRC3_Regex('a(i|u)h(?:N|ⁿ|nn)8'), s: 'a̍$1hⁿ' },
@@ -779,7 +798,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)4'), s: 'Uih$1' },
                 // use RC2
                 { r: createRC2('u5'), s: 'û$1$2' }, { r: createRC2('U5'), s: 'Û$1$2' },
-                { r: createRC2('u6'), s: 'ǔ$1$2' }, { r: createRC2('U6'), s: 'Ǔ$1$2' },
+                { r: createRC2('u6'), s: 'ú$1$2' }, { r: createRC2('U6'), s: 'Ú$1$2' },
                 { r: createRC2('u7'), s: 'ū$1$2' }, { r: createRC2('U7'), s: 'Ū$1$2' },
                 // use RC3
                 { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)8'), s: 'u̍ih$1' },
@@ -795,8 +814,8 @@ Read a \\[book] (oo->o͘)
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'Ò$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'ô$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'Ô$1$2' },
-                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'ǒ$1$2' },
-                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'Ǒ$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'ó$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'Ó$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'ō$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'Ō$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'ŏ$1$2' },
@@ -808,7 +827,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('a3'), s: 'à$1' }, { r: createRC1('A3'), s: 'À$1' },
                 { r: createRC4('a4'), s: 'a$1' }, { r: createRC4('A4'), s: 'A$1' },
                 { r: createRC1('a5'), s: 'â$1' }, { r: createRC1('A5'), s: 'Â$1' },
-                { r: createRC1('a6'), s: 'ǎ$1' }, { r: createRC1('A6'), s: 'Ǎ$1' },
+                { r: createRC1('a6'), s: 'á$1' }, { r: createRC1('A6'), s: 'Á$1' },
                 { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
                 { r: createRC8('a8'), s: 'a̍$1' }, { r: createRC8('A8'), s: 'A̍$1' },
                 { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
@@ -818,7 +837,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('e3'), s: 'è$1' }, { r: createRC1('E3'), s: 'È$1' },
                 { r: createRC4('e4'), s: 'e$1' }, { r: createRC4('E4'), s: 'E$1' },
                 { r: createRC1('e5'), s: 'ê$1' }, { r: createRC1('E5'), s: 'Ê$1' },
-                { r: createRC1('e6'), s: 'ě$1' }, { r: createRC1('E6'), s: 'Ě$1' },
+                { r: createRC1('e6'), s: 'é$1' }, { r: createRC1('E6'), s: 'É$1' },
                 { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
                 { r: createRC8('e8'), s: 'e̍$1' }, { r: createRC8('E8'), s: 'E̍$1' },
                 { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
@@ -828,7 +847,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('i3'), s: 'ì$1' }, { r: createRC1('I3'), s: 'Ì$1' },
                 { r: createRC4('i4'), s: 'i$1' }, { r: createRC4('I4'), s: 'I$1' },
                 { r: createRC1('i5'), s: 'î$1' }, { r: createRC1('I5'), s: 'Î$1' },
-                { r: createRC1('i6'), s: 'ǐ$1' }, { r: createRC1('I6'), s: 'Ǐ$1' },
+                { r: createRC1('i6'), s: 'í$1' }, { r: createRC1('I6'), s: 'Í$1' },
                 { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
                 { r: createRC8('i8'), s: 'i̍$1' }, { r: createRC8('I8'), s: 'I̍$1' },
                 { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
@@ -839,7 +858,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('o͘3'), s: 'ò͘$1' }, { r: createRC1('O͘3'), s: 'Ò͘$1' },
                 { r: createRC4('o͘4'), s: 'o͘$1' }, { r: createRC4('O͘4'), s: 'O͘$1' },
                 { r: createRC1('o͘5'), s: 'ô͘$1' }, { r: createRC1('O͘5'), s: 'Ô͘$1' },
-                { r: createRC1('o͘6'), s: 'ǒ͘$1' }, { r: createRC1('O͘6'), s: 'Ǒ͘$1' },
+                { r: createRC1('o͘6'), s: 'ó͘$1' }, { r: createRC1('O͘6'), s: 'Ó͘$1' },
                 { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
                 { r: createRC8('o͘8'), s: 'o̍͘$1' }, { r: createRC8('O͘8'), s: 'O̍͘$1' },
                 { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
@@ -849,7 +868,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('o3'), s: 'ò$1' }, { r: createRC1('O3'), s: 'Ò$1' },
                 { r: createRC4('o4'), s: 'o$1' }, { r: createRC4('O4'), s: 'O$1' },
                 { r: createRC1('o5'), s: 'ô$1' }, { r: createRC1('O5'), s: 'Ô$1' },
-                { r: createRC1('o6'), s: 'ǒ$1' }, { r: createRC1('O6'), s: 'Ǒ$1' },
+                { r: createRC1('o6'), s: 'ó$1' }, { r: createRC1('O6'), s: 'Ó$1' },
                 { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
                 { r: createRC8('o8'), s: 'o̍$1' }, { r: createRC8('O8'), s: 'O̍$1' },
                 { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
@@ -859,7 +878,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC1('u3'), s: 'ù$1' }, { r: createRC1('U3'), s: 'Ù$1' },
                 { r: createRC4('u4'), s: 'u$1' }, { r: createRC4('U4'), s: 'U$1' },
                 { r: createRC1('u5'), s: 'û$1' }, { r: createRC1('U5'), s: 'Û$1' },
-                { r: createRC1('u6'), s: 'ǔ$1' }, { r: createRC1('U6'), s: 'Ǔ$1' },
+                { r: createRC1('u6'), s: 'ú$1' }, { r: createRC1('U6'), s: 'Ú$1' },
                 { r: createRC1('u7'), s: 'ū$1' }, { r: createRC1('U7'), s: 'Ū$1' },
                 { r: createRC1('u8'), s: 'u̍$1' }, { r: createRC1('U8'), s: 'U̍$1' },
                 { r: createRC1('u9'), s: 'ŭ$1' }, { r: createRC1('U9'), s: 'Ŭ$1' },
@@ -870,7 +889,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC3_Regex('m3'), s: 'm̀' }, { r: createRC3_Regex('M3'), s: 'M̀' },
                 { r: createRC3_Regex('mh4'), s: 'mh' }, { r: createRC3_Regex('Mh4'), s: 'Mh' },
                 { r: createRC3_Regex('m5'), s: 'm̂' }, { r: createRC3_Regex('M5'), s: 'M̂' },
-                { r: createRC3_Regex('m6'), s: 'm̌' }, { r: createRC3_Regex('M6'), s: 'M̌' },
+                { r: createRC3_Regex('m6'), s: 'ḿ' }, { r: createRC3_Regex('M6'), s: 'Ḿ' },
                 { r: createRC3_Regex('m7'), s: 'm̄' }, { r: createRC3_Regex('M7'), s: 'M̄' },
                 { r: createRC3_Regex('mh8'), s: 'm̍h' }, { r: createRC3_Regex('Mh8'), s: 'M̍h' },
                 { r: createRC3_Regex('m9'), s: 'm̆' }, { r: createRC3_Regex('M9'), s: 'M̆' },
@@ -880,7 +899,7 @@ Read a \\[book] (oo->o͘)
                 { r: createRC3_Regex('ng3'), s: 'ǹg' }, { r: createRC3_Regex('Ng3'), s: 'Ǹg' },
                 { r: createRC3_Regex('ngh4'), s: 'ngh' }, { r: createRC3_Regex('Ngh4'), s: 'Ngh' },
                 { r: createRC3_Regex('ng5'), s: 'n̂g' }, { r: createRC3_Regex('Ng5'), s: 'N̂g' },
-                { r: createRC3_Regex('ng6'), s: 'ňg' }, { r: createRC3_Regex('Ng6'), s: 'Ňg' },
+                { r: createRC3_Regex('ng6'), s: 'ńg' }, { r: createRC3_Regex('Ng6'), s: 'Ńg' },
                 { r: createRC3_Regex('ng7'), s: 'n̄g' }, { r: createRC3_Regex('Ng7'), s: 'N̄g' },
                 { r: createRC3_Regex('ngh8'), s: 'n̍gh' }, { r: createRC3_Regex('Ngh8'), s: 'N̍gh' },
                 { r: createRC3_Regex('ng9'), s: 'n̆g' }, { r: createRC3_Regex('Ng9'), s: 'N̆g' }
@@ -1131,6 +1150,17 @@ Read a \\[book] (oo->o͘)
                 { in: "oo7", out: "ō͘" }, // Numeric oo
                 { in: "m2", out: "ḿ" }, // Syllabic nasal m
                 { in: "ng5", out: "n̂g" }, // Syllabic nasal ng
+
+                // Comprehensive Tone Number Tests (1-9)
+                { in: "a1", out: "a" },
+                { in: "a2", out: "á" },
+                { in: "a3", out: "à" },
+                { in: "ah4", out: "ah" },
+                { in: "a5", out: "â" },
+                { in: "a6", out: "á" }, // Same as tone 2
+                { in: "a7", out: "ā" },
+                { in: "ah8", out: "a̍h" },
+                { in: "a9", out: "ă" },
                 // Tonemark position tests (ua->oa, ue->oe)
                 { in: "tuà", out: "tòa" }, // TL tuà (live) -> POJ tòa
                 { in: "kué", out: "kóe" }, // TL kué (rice pudding) -> POJ kóe  
