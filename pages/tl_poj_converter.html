@@ -3,10 +3,9 @@ layout: apps
 title: TL to POJ Real-time Converter
 version: v0.1
 permalink: /pages/tl_poj_converter.html
-Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop
-files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ.
 ---
 <!DOCTYPE html>
+<!-- Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ. -->
 <html lang="en">
 
 <head>
@@ -293,6 +292,8 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
                         </button>
                     </div>
                     <textarea id="rt-input" placeholder="" spellcheck="false"></textarea>
+                    <button class="tool-btn" id="ui-btn-quick-test" onclick="injectTestText()"
+                        style="margin-top: var(--spacing-xs); align-self: flex-start;"></button>
                 </div>
                 <div class="text-area-container">
                     <div class="toolbar">
@@ -380,10 +381,11 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
                 copy: "Copy",
                 download: "Download",
                 chooseFile: "Choose File",
-                copied: "Copied!"
+                copied: "Copied!",
+                quickTest: "Quick Test"
             },
             placeholders: {
-                input: "Type or paste TL text here... (e.g. Tâi-uân or Tai5-uan5) or POJ number input (e.g. Tai5-oan5)",
+                input: "拍/貼 TL，he̍k-chiá TL/POJ 標數字調號... (e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 快速測試 chhi̍h-liú tī 上下跤.",
                 output: "POJ Output...",
                 preview: "Output will appear here..."
             },
@@ -394,7 +396,28 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
             messages: {
                 clipboardError: "Clipboard access denied. Please press Ctrl+V to paste manually.",
                 truncated: "\n... (truncated for preview)"
-            }
+            },
+            testSample: `=== TL Diacritic Input ===
+TL: Tâi-uân sī chi̍t-ê hó só͘-chāi.
+Tsit-hāng tāi-tsì tsin-tsiànn hó.
+
+POJ: Góa ài lim tê, i ài chia̍h pn̄g.
+
+=== TL/POJ Number Tonemarks ===
+TL: Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
+Chit8-hang7 tai7-chi3 chin-chiann3 ho2.
+
+POJ: Goa2 ai3 lim te5, i ai3 chiah8 png7.
+
+=== Syllabic Nasals & Special Cases ===
+úi óo ông m̂ ǹg n̂g
+m2 ng5 mh8 ngh8
+
+=== Tonemark Position (ua→oa, ue→oe) ===
+TL tuà (live) → POJ tòa
+TL kué (rice pudding) → POJ kóe
+TL suí (pretty) → POJ suí
+TL uá (lean) → POJ òa`
         };
 
         function initUI() {
@@ -412,6 +435,7 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
             document.getElementById('ui-btn-copy-file').innerText = UI_STRINGS.buttons.copy;
             document.getElementById('ui-btn-download-file').innerText = UI_STRINGS.buttons.download;
             document.getElementById('ui-btn-choose-file').innerText = UI_STRINGS.buttons.chooseFile;
+            document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
             document.getElementById('ui-drop-or').innerText = UI_STRINGS.dropZone.or;
@@ -776,6 +800,12 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
 
         // --- UI Logic ---
 
+        function injectTestText() {
+            const rtInput = document.getElementById('rt-input');
+            rtInput.value = UI_STRINGS.testSample;
+            rtInput.dispatchEvent(new Event('input'));
+        }
+
         function switchMode(mode) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -910,42 +940,51 @@ files. 2. The converter will also convert number tonemarks to char tonemarks for
             URL.revokeObjectURL(url);
         }
 
-        // --- Tests ---
-        console.log("Running self-test...");
-        const tests = [
-            { in: "phah", out: "phah" },
-            { in: "Tâi-uân", out: "Tâi-oân" },
-            { in: "tsuí", out: "chuí" },
-            { in: "tshuí", out: "chhuí" },
-            { in: "ing", out: "eng" },
-            { in: "óo", out: "ó͘" }, // Tricky oo case: TL óo -> POJ ó͘
-            { in: "Óo", out: "Ó͘" },
-            { in: "oo", out: "o͘" }, // Plain oo -> o͘
-            { in: "Oo", out: "O͘" }, // Capital Oo -> O͘
-            { in: "o͘", out: "o͘" }, // Already o͘ stays o͘
-            { in: "tsa", out: "cha" },
-            { in: "ua", out: "oa" }, // TL ua -> POJ oa
-            { in: "ue", out: "oe" }, // TL ue -> POJ oe
-            { in: "ik", out: "ek" }, // Robustness check
-            { in: "ík", out: "ék" },  // Robustness check
-            // Numeric Tone Tests
-            { in: "Tai5-uan5", out: "Tâi-oân" },
-            { in: "sui2", out: "suí" },
-            { in: "phah4", out: "phah" }, // Tone 4 (none)
-            { in: "tik8", out: "te̍k" }, // Tone 8 (vertical line)
-            { in: "oo7", out: "ō͘" }, // Numeric oo
-            { in: "m2", out: "ḿ" }, // Syllabic nasal m
-            { in: "ng5", out: "n̂g" } // Syllabic nasal ng
-        ];
+        // --- Tests (set DEBUG_TESTS = true to enable) ---
+        const DEBUG_TESTS = false;
 
-        tests.forEach(t => {
-            const res = TLtiau_2_POJtiau(t.in);
-            if (res !== t.out) {
-                console.error(`Test failed: ${t.in} -> expected ${t.out}, got ${res}`);
-            } else {
-                console.log(`Test passed: ${t.in} -> ${res}`);
-            }
-        });
+        if (DEBUG_TESTS) {
+            console.log("Running self-test...");
+            const tests = [
+                { in: "phah", out: "phah" },
+                { in: "Tâi-uân", out: "Tâi-oân" },
+                { in: "tsuí", out: "chuí" },
+                { in: "tshuí", out: "chhuí" },
+                { in: "ing", out: "eng" },
+                { in: "óo", out: "ó͘" }, // Tricky oo case: TL óo -> POJ ó͘
+                { in: "Óo", out: "Ó͘" },
+                { in: "oo", out: "o͘" }, // Plain oo -> o͘
+                { in: "Oo", out: "O͘" }, // Capital Oo -> O͘
+                { in: "o͘", out: "o͘" }, // Already o͘ stays o͘
+                { in: "tsa", out: "cha" },
+                { in: "ua", out: "oa" }, // TL ua -> POJ oa
+                { in: "ue", out: "oe" }, // TL ue -> POJ oe
+                { in: "ik", out: "ek" }, // Robustness check
+                { in: "ík", out: "ék" },  // Robustness check
+                // Numeric Tone Tests
+                { in: "Tai5-uan5", out: "Tâi-oân" },
+                { in: "sui2", out: "suí" },
+                { in: "phah4", out: "phah" }, // Tone 4 (none)
+                { in: "tik8", out: "te̍k" }, // Tone 8 (vertical line)
+                { in: "oo7", out: "ō͘" }, // Numeric oo
+                { in: "m2", out: "ḿ" }, // Syllabic nasal m
+                { in: "ng5", out: "n̂g" }, // Syllabic nasal ng
+                // Tonemark position tests (ua->oa, ue->oe)
+                { in: "tuà", out: "tòa" }, // TL tuà (live) -> POJ tòa
+                { in: "kué", out: "kóe" }, // TL kué (rice pudding) -> POJ kóe  
+                { in: "suí", out: "suí" }, // TL suí (pretty) -> POJ suí (no change, tone on u)
+                { in: "uá", out: "òa" } // TL uá (lean) -> POJ òa
+            ];
+
+            tests.forEach(t => {
+                const res = TLtiau_2_POJtiau(t.in);
+                if (res !== t.out) {
+                    console.error(`Test failed: ${t.in} -> expected ${t.out}, got ${res}`);
+                } else {
+                    console.log(`Test passed: ${t.in} -> ${res}`);
+                }
+            });
+        }
 
     </script>
 </body>
