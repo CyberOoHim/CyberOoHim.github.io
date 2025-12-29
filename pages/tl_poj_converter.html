@@ -289,7 +289,7 @@ permalink: /pages/tl_poj_converter.html
                     </div>
                     <textarea id="rt-input" placeholder="" spellcheck="false"></textarea>
                     <button class="tool-btn" id="ui-btn-quick-test" onclick="injectTestText()"
-                        style="margin-top: var(--spacing-xs); align-self: flex-start;"></button>
+                        style="margin-top: var(--spacing-xs); align-self: center;"></button>
                 </div>
                 <div class="text-area-container">
                     <div class="toolbar">
@@ -356,6 +356,10 @@ permalink: /pages/tl_poj_converter.html
             </div>
         </div>
 
+        <footer
+            style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.9rem;">
+            <p id="ui-footer"></p>
+        </footer>
     </div>
 
     <script>
@@ -377,7 +381,7 @@ permalink: /pages/tl_poj_converter.html
                 download: "Táng-ló͘(Download)",
                 chooseFile: "Ap-ló͘(Upload) 書類",
                 copied: "khó͘ 好--ah!",
-                quickTest: "快速測",
+                quickTest: "快 速 測",
                 downloadOffline: "⬇ Táng-ló͘(Download) 家己用"
             },
             placeholders: {
@@ -413,7 +417,8 @@ m2 ng5 mh8 ngh8
 TL tuà (live) → POJ tòa
 TL kué (rice pudding) → POJ kóe
 TL suí (pretty) → POJ suí
-TL uá (lean) → POJ òa`
+TL uá (lean) → POJ òa`,
+            footer: "© 2026 Cyber O͘-hîm ki-tē"
         };
 
         function initUI() {
@@ -432,6 +437,7 @@ TL uá (lean) → POJ òa`
             document.getElementById('ui-btn-choose-file').innerText = UI_STRINGS.buttons.chooseFile;
             document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
             document.getElementById('ui-btn-download-offline').innerText = UI_STRINGS.buttons.downloadOffline;
+            document.getElementById('ui-footer').innerText = UI_STRINGS.footer;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
             document.getElementById('ui-drop-or').innerText = UI_STRINGS.dropZone.or;
