@@ -3,7 +3,8 @@ layout: apps
 title: TL to POJ Real-time Converter
 version: v0.1
 permalink: /pages/tl_poj_converter.html
-Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ.
+Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop
+files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ.
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,75 +12,108 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TL to POJ Converter</title>
+    <title>TL to POJ Real-time Converter</title>
     <style>
+        /* CSS Variables - From Image Resizer (Tech Theme) */
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
-            --surface-color: #ffffff;
-            --border-color: #e2e8f0;
-            --text-color: #1e293b;
-            --text-secondary: #64748b;
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-link: #58a6ff;
+            --text-accent: #238636;
+            --border-color: #30363d;
+            --font-mono: 'Consolas', 'Monaco', monospace;
+            --font-sans: 'Segoe UI', system-ui, sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --primary-color: var(--text-link);
+            /* Mapping for backward compatibility if needed */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 2rem;
-            line-height: 1.5;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: var(--spacing-md);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
         }
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: var(--spacing-sm);
         }
 
         h1 {
+            font-family: var(--font-mono);
             font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
         }
 
         .subtitle {
+            font-family: var(--font-mono);
             color: var(--text-secondary);
         }
 
+        /* Tabs */
         .tabs {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
             justify-content: center;
         }
 
         .tab-btn {
-            background: var(--surface-color);
+            background: transparent;
             border: 1px solid var(--border-color);
+            color: var(--text-secondary);
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
         }
 
         .tab-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+            background: var(--bg-tertiary);
+            /* Active state */
+            color: var(--text-link);
+            border-color: var(--text-link);
         }
 
+        /* Panels */
         .panel {
             display: none;
-            background: var(--surface-color);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: var(--spacing-md);
         }
 
         .panel.active {
@@ -90,93 +124,131 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
         .split-view {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: var(--spacing-md);
             height: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .split-view {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
         }
 
         .text-area-container {
             display: flex;
             flex-direction: column;
             position: relative;
+            height: 100%;
         }
 
         .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
-            height: 28px;
+            margin-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .toolbar label {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: normal;
         }
 
         .tool-btn {
             background: transparent;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            padding: 2px 8px;
+            padding: 4px 8px;
+            font-family: var(--font-mono);
             font-size: 0.8rem;
             cursor: pointer;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            transition: all 0.2s;
         }
 
         .tool-btn:hover {
-            background: var(--bg-color);
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        label {
-            font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            border-color: var(--text-primary);
         }
 
         textarea {
             flex: 1;
-            padding: 1rem;
+            padding: var(--spacing-sm);
+            background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
+            border-radius: 6px;
             resize: none;
-            font-family: inherit;
+            font-family: var(--font-mono);
+            /* Monospace is good for this */
             font-size: 1rem;
             line-height: 1.6;
             outline: none;
             width: 100%;
+            color: var(--text-primary);
             box-sizing: border-box;
+            min-height: 200px;
         }
 
         textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgb(37 99 235 / 0.1);
+            border-color: var(--text-link);
+            box-shadow: 0 0 0 1px var(--text-link);
         }
 
         /* File Mode Styles */
         .file-drop-zone {
             border: 2px dashed var(--border-color);
-            border-radius: 1rem;
-            padding: 4rem 2rem;
+            border-radius: 6px;
+            padding: var(--spacing-lg);
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 2rem;
+            transition: all 0.2s ease;
+            background: rgba(22, 27, 34, 0.5);
+            /* Semi-transparent like upload area */
+            margin-bottom: var(--spacing-md);
         }
 
         .file-drop-zone:hover,
         .file-drop-zone.drag-over {
-            border-color: var(--primary-color);
-            background: rgb(37 99 235 / 0.05);
+            border-color: var(--text-link);
+            background: rgba(88, 166, 255, 0.05);
+        }
+
+        .file-drop-zone p {
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xs);
         }
 
         .btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            display: inline-block;
+            padding: 10px 20px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 500;
-            font-size: 1rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background-color: var(--text-accent);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: #2ea043;
+            box-shadow: 0 0 10px rgba(46, 160, 67, 0.4);
         }
 
         .btn:disabled {
@@ -195,14 +267,13 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
 
     <div class="container">
         <header>
-            <h1>TL to POJ Converter</h1>
-            <p class="subtitle">Convert Taiwanese Romanization (Tâi-lô) to Pe̍h-ōe-jī (POJ)</p>
+            <h1 id="ui-title"></h1>
+            <p id="ui-subtitle" class="subtitle"></p>
         </header>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchMode('realtime')" id="tab-realtime">Real-time
-                Translation</button>
-            <button class="tab-btn" onclick="switchMode('file')" id="tab-file">File Converter</button>
+            <button class="tab-btn active" onclick="switchMode('realtime')" id="ui-tab-realtime"></button>
+            <button class="tab-btn" onclick="switchMode('file')" id="ui-tab-file"></button>
         </div>
 
         <!-- Real-time Panel -->
@@ -210,7 +281,7 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
             <div class="split-view">
                 <div class="text-area-container">
                     <div class="toolbar">
-                        <label for="rt-input">Tâi-lô (TL) / TL & POJ Number Input</label>
+                        <label for="rt-input" id="ui-label-input"></label>
                         <button class="tool-btn" onclick="pasteFromClipboard('rt-input')">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -218,23 +289,22 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
                                 </path>
                                 <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                             </svg>
-                            Paste
+                            <span id="ui-btn-paste"></span>
                         </button>
                     </div>
-                    <textarea id="rt-input" placeholder="Type or paste TL text here... (e.g. Tâi-uân or Tai5-uan5)"
-                        spellcheck="false"></textarea>
+                    <textarea id="rt-input" placeholder="" spellcheck="false"></textarea>
                 </div>
                 <div class="text-area-container">
                     <div class="toolbar">
-                        <label for="rt-output">Pe̍h-ōe-jī (POJ) Output</label>
+                        <label for="rt-output" id="ui-label-output"></label>
                         <div style="display: flex; gap: 0.5rem;">
-                            <button class="tool-btn" onclick="copyToClipboard('rt-output')">
+                            <button class="tool-btn" onclick="copyToClipboard('rt-output', 'ui-btn-copy-rt')">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
-                                Copy
+                                <span id="ui-btn-copy-rt"></span>
                             </button>
                             <button class="tool-btn" onclick="downloadText('rt-output', 'poj_conversion.txt')">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -243,11 +313,11 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
                                     <polyline points="7 10 12 15 17 10"></polyline>
                                     <line x1="12" y1="15" x2="12" y2="3"></line>
                                 </svg>
-                                Download
+                                <span id="ui-btn-download-rt"></span>
                             </button>
                         </div>
                     </div>
-                    <textarea id="rt-output" readonly placeholder="POJ Output..." spellcheck="false"></textarea>
+                    <textarea id="rt-output" readonly placeholder="" spellcheck="false"></textarea>
                 </div>
             </div>
         </div>
@@ -255,23 +325,24 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
         <!-- File Converter Panel -->
         <div id="panel-file" class="panel">
             <div class="file-drop-zone" id="dropZone">
-                <p>Drag & Drop a text file here</p>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;">or</p>
+                <p id="ui-drop-text"></p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;" id="ui-drop-or"></p>
                 <input type="file" id="fileInput" accept=".txt,.html,.md" style="display: none;">
-                <button class="btn" onclick="document.getElementById('fileInput').click()">Choose File</button>
+                <button class="btn" onclick="document.getElementById('fileInput').click()"
+                    id="ui-btn-choose-file"></button>
             </div>
 
             <div id="fileOutputSection" style="display: none;">
                 <div class="toolbar">
-                    <label>Conversion Result</label>
+                    <label id="ui-label-result"></label>
                     <div style="display: flex; gap: 0.5rem;">
-                        <button class="tool-btn" onclick="copyToClipboard('outputPreview')">
+                        <button class="tool-btn" onclick="copyToClipboard('outputPreview', 'ui-btn-copy-file')">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                             </svg>
-                            Copy
+                            <span id="ui-btn-copy-file"></span>
                         </button>
                         <button class="tool-btn" onclick="downloadText('outputPreview', 'converted_file.txt')">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -280,17 +351,78 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
                                 <polyline points="7 10 12 15 17 10"></polyline>
                                 <line x1="12" y1="15" x2="12" y2="3"></line>
                             </svg>
-                            Download
+                            <span id="ui-btn-download-file"></span>
                         </button>
                     </div>
                 </div>
-                <textarea id="outputPreview" readonly placeholder="Output will appear here..."></textarea>
+                <textarea id="outputPreview" readonly placeholder=""></textarea>
             </div>
         </div>
 
     </div>
 
     <script>
+        // --- UI Constants ---
+        const UI_STRINGS = {
+            title: "TL to POJ Real-time Converter",
+            subtitle: "Convert Tâi-lô to Pe̍h-ōe-jī (POJ)",
+            tabs: {
+                realtime: "Real-time Translation",
+                file: "File Converter"
+            },
+            labels: {
+                input: "Tâi-lô (TL) / TL & POJ Number Input",
+                output: "Pe̍h-ōe-jī (POJ) Output",
+                result: "Conversion Result"
+            },
+            buttons: {
+                paste: "Paste",
+                copy: "Copy",
+                download: "Download",
+                chooseFile: "Choose File",
+                copied: "Copied!"
+            },
+            placeholders: {
+                input: "Type or paste TL text here... (e.g. Tâi-uân or Tai5-uan5) or POJ number input (e.g. Tai5-oan5)",
+                output: "POJ Output...",
+                preview: "Output will appear here..."
+            },
+            dropZone: {
+                main: "Drag & Drop a text file here",
+                or: "or"
+            },
+            messages: {
+                clipboardError: "Clipboard access denied. Please press Ctrl+V to paste manually.",
+                truncated: "\n... (truncated for preview)"
+            }
+        };
+
+        function initUI() {
+            document.getElementById('ui-title').innerText = UI_STRINGS.title;
+            document.getElementById('ui-subtitle').innerText = UI_STRINGS.subtitle;
+            document.getElementById('ui-tab-realtime').innerText = UI_STRINGS.tabs.realtime;
+            document.getElementById('ui-tab-file').innerText = UI_STRINGS.tabs.file;
+            document.getElementById('ui-label-input').innerText = UI_STRINGS.labels.input;
+            document.getElementById('ui-label-output').innerText = UI_STRINGS.labels.output;
+            document.getElementById('ui-label-result').innerText = UI_STRINGS.labels.result;
+
+            document.getElementById('ui-btn-paste').innerText = UI_STRINGS.buttons.paste;
+            document.getElementById('ui-btn-copy-rt').innerText = UI_STRINGS.buttons.copy;
+            document.getElementById('ui-btn-download-rt').innerText = UI_STRINGS.buttons.download;
+            document.getElementById('ui-btn-copy-file').innerText = UI_STRINGS.buttons.copy;
+            document.getElementById('ui-btn-download-file').innerText = UI_STRINGS.buttons.download;
+            document.getElementById('ui-btn-choose-file').innerText = UI_STRINGS.buttons.chooseFile;
+
+            document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
+            document.getElementById('ui-drop-or').innerText = UI_STRINGS.dropZone.or;
+
+            document.getElementById('rt-input').placeholder = UI_STRINGS.placeholders.input;
+            document.getElementById('rt-output').placeholder = UI_STRINGS.placeholders.output;
+            document.getElementById('outputPreview').placeholder = UI_STRINGS.placeholders.preview;
+        }
+
+        document.addEventListener('DOMContentLoaded', initUI);
+
         // --- Converter Logic (Ported from Python) ---
 
         // Constants for regex tails
@@ -648,7 +780,7 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
 
-            document.getElementById(`tab-${mode}`).classList.add('active');
+            document.getElementById(`ui-tab-${mode}`).classList.add('active');
             document.getElementById(`panel-${mode}`).classList.add('active');
         }
 
@@ -704,12 +836,12 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
         let currentFileOutput = '';
         function showFileResult(text) {
             currentFileOutput = text;
-            outputPreview.value = text.slice(0, 10000) + (text.length > 10000 ? '\n... (truncated for preview)' : '');
+            outputPreview.value = text.slice(0, 10000) + (text.length > 10000 ? UI_STRINGS.messages.truncated : '');
             fileOutputSection.style.display = 'block';
         }
 
         // Clipboard and Download Helpers
-        async function copyToClipboard(elementId) {
+        async function copyToClipboard(elementId, feedbackElementId) {
             const el = document.getElementById(elementId);
             if (!el) return;
 
@@ -727,10 +859,14 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
                 await navigator.clipboard.writeText(textToCopy);
 
                 // Visual feedback (optional)
-                const btn = document.activeElement;
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = 'Copied!';
-                setTimeout(() => btn.innerHTML = originalHTML, 2000);
+                if (feedbackElementId) {
+                    const btnSpan = document.getElementById(feedbackElementId);
+                    if (btnSpan) {
+                        const originalText = btnSpan.innerText;
+                        btnSpan.innerText = UI_STRINGS.buttons.copied;
+                        setTimeout(() => btnSpan.innerText = originalText, 2000);
+                    }
+                }
 
             } catch (err) {
                 console.error('Failed to copy: ', err);
@@ -751,7 +887,7 @@ Note: 1. This is a real-time converter. It will convert the text as you type, pa
                 }
             } catch (err) {
                 console.error('Failed to read clipboard: ', err);
-                alert('Clipboard access denied. Please press Ctrl+V to paste manually.');
+                alert(UI_STRINGS.messages.clipboardError);
             }
         }
 
