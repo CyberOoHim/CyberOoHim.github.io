@@ -52,7 +52,7 @@ permalink: /pages/tl_poj_converter.html
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-md);
+            gap: var(--spacing-xs);
         }
 
         header {
@@ -62,7 +62,7 @@ permalink: /pages/tl_poj_converter.html
 
         h1 {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 1.2rem;
             margin-bottom: 0;
             color: var(--text-primary);
         }
@@ -71,7 +71,7 @@ permalink: /pages/tl_poj_converter.html
         .tabs {
             display: flex;
             gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: 0;
             justify-content: center;
         }
 
@@ -83,7 +83,7 @@ permalink: /pages/tl_poj_converter.html
             border-radius: 6px;
             cursor: pointer;
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -111,7 +111,7 @@ permalink: /pages/tl_poj_converter.html
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: var(--spacing-md);
+            padding: var(--spacing-sm);
         }
 
         .panel.active {
@@ -133,6 +133,46 @@ permalink: /pages/tl_poj_converter.html
             }
         }
 
+        /* Handset Vertical Optimization */
+        @media (max-width: 480px) {
+            body {
+                padding: var(--spacing-sm);
+                /* Reduce body padding */
+            }
+
+            .container {
+                gap: 0.25rem;
+                /* Tighter vertical gaps */
+            }
+
+            h1 {
+                font-size: 1.1rem;
+                /* Slightly smaller title */
+            }
+
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                /* Smaller tabs */
+                font-size: 1rem;
+            }
+
+            .toolbar {
+                flex-wrap: wrap;
+                /* Allow toolbar items to wrap if needed */
+                gap: 0.5rem;
+            }
+
+            .toolbar label {
+                font-size: 1rem;
+            }
+
+            textarea {
+                font-size: 1.2rem;
+                /* Slightly smaller text for mobile readability */
+                padding: 0.75rem;
+            }
+        }
+
         .text-area-container {
             display: flex;
             flex-direction: column;
@@ -151,7 +191,7 @@ permalink: /pages/tl_poj_converter.html
 
         .toolbar label {
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -163,8 +203,9 @@ permalink: /pages/tl_poj_converter.html
             border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 4px 8px;
+            padding: 4px 8px;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             cursor: pointer;
             color: var(--text-primary);
             display: flex;
@@ -187,7 +228,7 @@ permalink: /pages/tl_poj_converter.html
             resize: none;
             font-family: var(--font-mono);
             /* Monospace is good for this */
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             line-height: 1.6;
             outline: none;
             width: 100%;
@@ -206,7 +247,7 @@ permalink: /pages/tl_poj_converter.html
         input::placeholder {
             color: var(--text-secondary);
             opacity: 0.8;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
         /* File Mode Styles */
@@ -231,15 +272,14 @@ permalink: /pages/tl_poj_converter.html
         .file-drop-zone p {
             color: var(--text-primary);
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             margin-bottom: var(--spacing-xs);
         }
 
         .btn {
-            display: inline-block;
             padding: 10px 20px;
             font-family: var(--font-mono);
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
@@ -279,8 +319,6 @@ permalink: /pages/tl_poj_converter.html
         <div class="tabs">
             <button class="tab-btn active" onclick="switchMode('realtime')" id="ui-tab-realtime"></button>
             <button class="tab-btn" onclick="switchMode('file')" id="ui-tab-file"></button>
-            <button class="tab-btn" id="ui-btn-download-offline" onclick="downloadCleanVersion()"
-                style="border-style: dashed;"></button>
         </div>
 
         <!-- Real-time Panel -->
@@ -289,15 +327,25 @@ permalink: /pages/tl_poj_converter.html
                 <div class="text-area-container">
                     <div class="toolbar">
                         <label for="rt-input" id="ui-label-input"></label>
-                        <button class="tool-btn" onclick="pasteFromClipboard('rt-input')">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
-                                </path>
-                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                            </svg>
-                            <span id="ui-btn-paste"></span>
-                        </button>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button class="tool-btn" onclick="pasteFromClipboard('rt-input')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                    </path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                </svg>
+                                <span id="ui-btn-paste"></span>
+                            </button>
+                            <button class="tool-btn" onclick="clearInput('rt-input')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                <span id="ui-btn-clear"></span>
+                            </button>
+                        </div>
                     </div>
                     <textarea id="rt-input" placeholder="" spellcheck="false"></textarea>
                     <button class="tool-btn" id="ui-btn-quick-test" onclick="injectTestText()"
@@ -338,7 +386,14 @@ permalink: /pages/tl_poj_converter.html
                 <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;" id="ui-drop-or"></p>
                 <input type="file" id="fileInput" accept=".txt,.html,.md" style="display: none;">
                 <button class="btn" onclick="document.getElementById('fileInput').click()"
-                    id="ui-btn-choose-file"></button>
+                    style="display: inline-flex; align-items: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span id="ui-btn-choose-file"></span>
+                </button>
             </div>
 
             <div id="fileOutputSection" style="display: none;">
@@ -368,6 +423,18 @@ permalink: /pages/tl_poj_converter.html
             </div>
         </div>
 
+        <div style="text-align: center; margin-top: var(--spacing-sm);">
+            <button class="tool-btn" id="ui-btn-download-offline" onclick="downloadCleanVersion()"
+                style="padding: 10px 20px; display: inline-flex; border-style: dashed;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span id="ui-btn-download-offline-text"></span>
+            </button>
+        </div>
+
         <footer
             style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.9rem;">
             <p id="ui-footer"></p>
@@ -377,27 +444,32 @@ permalink: /pages/tl_poj_converter.html
     <script>
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "Tâi-lô -> Pe̍h-ōe-jī (POJ) 隨拍隨轉",
+            title: "TL -> POJ 拍隨轉",
             tabs: {
-                realtime: "隨拍隨轉",
-                file: "書類發落"
+                realtime: "拍隨轉",
+                file: "轉書類"
             },
             labels: {
-                input: "Tâi-lô (TL) / TL & POJ 帶數字調號",
-                output: "Pe̍h-ōe-jī (POJ) 輸出",
+                input: "TL / TL & POJ 帶數字調號",
+                output: "POJ 輸出",
                 result: "轉換結果"
             },
             buttons: {
                 paste: "貼 TL",
                 copy: "khó͘--起來",
-                download: "Táng-ló͘(Download)",
-                chooseFile: "Ap-ló͘(Upload) 書類",
+                download: "Táng-ló͘",
+                chooseFile: "Ap-ló͘ 書類",
                 copied: "khó͘ 好--ah!",
-                quickTest: "快 速 測",
-                downloadOffline: "⬇ Táng-ló͘(Download)家己用"
+                quickTest: "看見本/快速測",
+                downloadOffline: "⬇ Táng-ló͘ App 家己電腦用",
+                clear: "總清"
             },
             placeholders: {
-                input: "拍/貼 TL he̍k-chiá TL/POJ 標數字調號... (e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 快速測 chhi̍h 下跤 chhi̍h-liú.",
+                input: `說明：
+1. 拍/貼 TL he̍k-chiá TL/POJ 標數字調號...(e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 
+2. 無 beh 轉 ê 文字 kā 用 \\[ ... ] 包--起來。
+3. 看見本 ia̍h-sī 快速測，chhi̍h 下跤 chhi̍h-liú。
+4. Táng-ló͘(download) 這支 App，上下跤有 chhi̍h-liú。`,
                 output: "POJ 輸出...",
                 preview: "輸出會 tī chia..."
             },
@@ -412,7 +484,7 @@ permalink: /pages/tl_poj_converter.html
             },
             testSample: `=== TL Diacritic Input ===
 TL: Tâi-uân sī chi̍t-ê hó só͘-chāi.
-Tsit-hāng tāi-tsì tsin-tsiànn hó.
+Tsi̍t-hāng tāi-tsì tsin-tsiànn hó.
 
 POJ: Góa ài lim tê, i ài chia̍h pn̄g.
 
@@ -423,6 +495,9 @@ Chit8-hang7 tai7-chi3 chin-chiann3 ho2.
 POJ: Goa2 ai3 lim te5, i ai3 chiah8 png7.
 
 === Syllabic Nasals & Special Cases ===
+Nasal: sann, sinn, hnn
+Tone 4/8: a4, a8 (no stop), ah4, ah8 (stop)
+
 úi óo ông m̂ ǹg n̂g
 m2 ng5 mh8 ngh8
 
@@ -430,7 +505,15 @@ m2 ng5 mh8 ngh8
 TL tuà (live) → POJ tòa
 TL kué (rice pudding) → POJ kóe
 TL suí (pretty) → POJ suí
-TL uá (lean) → POJ òa`,
+TL uá (lean) → POJ òa
+
+=== False Positives (Need Escape to preserved as-is) ===
+\\[cats] (ts->ch)
+Read a \\[book] (oo->o͘)
+\\[Google] (oo->o͘)
+\\[Blue] sky (ue->oe)
+\\[Singing] (ing->eng)
+\\[Wiki] (ik->ek)`,
             footer: "© 2026 Cyber O͘-hîm ki-tē"
         };
 
@@ -455,7 +538,8 @@ TL uá (lean) → POJ òa`,
             document.getElementById('ui-btn-download-file').innerText = UI_STRINGS.buttons.download;
             document.getElementById('ui-btn-choose-file').innerText = UI_STRINGS.buttons.chooseFile;
             document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
-            document.getElementById('ui-btn-download-offline').innerText = UI_STRINGS.buttons.downloadOffline;
+            document.getElementById('ui-btn-download-offline-text').innerText = UI_STRINGS.buttons.downloadOffline;
+            document.getElementById('ui-btn-clear').innerText = UI_STRINGS.buttons.clear;
             document.getElementById('ui-footer').innerText = UI_STRINGS.footer;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
@@ -726,7 +810,7 @@ TL uá (lean) → POJ òa`,
                 { r: createRC1('a5'), s: 'â$1' }, { r: createRC1('A5'), s: 'Â$1' },
                 { r: createRC1('a6'), s: 'ǎ$1' }, { r: createRC1('A6'), s: 'Ǎ$1' },
                 { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
-                { r: createRC1('a8'), s: 'a̍$1' }, { r: createRC1('A8'), s: 'A̍$1' },
+                { r: createRC8('a8'), s: 'a̍$1' }, { r: createRC8('A8'), s: 'A̍$1' },
                 { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
 
                 { r: createRC1('e1'), s: 'e$1' }, { r: createRC1('E1'), s: 'E$1' },
@@ -736,7 +820,7 @@ TL uá (lean) → POJ òa`,
                 { r: createRC1('e5'), s: 'ê$1' }, { r: createRC1('E5'), s: 'Ê$1' },
                 { r: createRC1('e6'), s: 'ě$1' }, { r: createRC1('E6'), s: 'Ě$1' },
                 { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
-                { r: createRC1('e8'), s: 'e̍$1' }, { r: createRC1('E8'), s: 'E̍$1' },
+                { r: createRC8('e8'), s: 'e̍$1' }, { r: createRC8('E8'), s: 'E̍$1' },
                 { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
 
                 { r: createRC1('i1'), s: 'i$1' }, { r: createRC1('I1'), s: 'I$1' },
@@ -746,7 +830,7 @@ TL uá (lean) → POJ òa`,
                 { r: createRC1('i5'), s: 'î$1' }, { r: createRC1('I5'), s: 'Î$1' },
                 { r: createRC1('i6'), s: 'ǐ$1' }, { r: createRC1('I6'), s: 'Ǐ$1' },
                 { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
-                { r: createRC1('i8'), s: 'i̍$1' }, { r: createRC1('I8'), s: 'I̍$1' },
+                { r: createRC8('i8'), s: 'i̍$1' }, { r: createRC8('I8'), s: 'I̍$1' },
                 { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
 
                 // o͘ handling
@@ -757,7 +841,7 @@ TL uá (lean) → POJ òa`,
                 { r: createRC1('o͘5'), s: 'ô͘$1' }, { r: createRC1('O͘5'), s: 'Ô͘$1' },
                 { r: createRC1('o͘6'), s: 'ǒ͘$1' }, { r: createRC1('O͘6'), s: 'Ǒ͘$1' },
                 { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
-                { r: createRC1('o͘8'), s: 'o̍͘$1' }, { r: createRC1('O͘8'), s: 'O̍͘$1' },
+                { r: createRC8('o͘8'), s: 'o̍͘$1' }, { r: createRC8('O͘8'), s: 'O̍͘$1' },
                 { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
 
                 { r: createRC1('o1'), s: 'o$1' }, { r: createRC1('O1'), s: 'O$1' },
@@ -767,7 +851,7 @@ TL uá (lean) → POJ òa`,
                 { r: createRC1('o5'), s: 'ô$1' }, { r: createRC1('O5'), s: 'Ô$1' },
                 { r: createRC1('o6'), s: 'ǒ$1' }, { r: createRC1('O6'), s: 'Ǒ$1' },
                 { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
-                { r: createRC1('o8'), s: 'o̍$1' }, { r: createRC1('O8'), s: 'O̍$1' },
+                { r: createRC8('o8'), s: 'o̍$1' }, { r: createRC8('O8'), s: 'O̍$1' },
                 { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
 
                 { r: createRC1('u1'), s: 'u$1' }, { r: createRC1('U1'), s: 'U$1' },
@@ -810,16 +894,36 @@ TL uá (lean) → POJ òa`,
         }
 
         function TLtiau_2_POJtiau(tl_tiau) {
+            // 0. Handle escape sequences: \[text] is preserved as-is
+            const escapeRegex = /\\\[([^\]]*)\]/g;
+            const escapes = [];
+            let processedInput = tl_tiau.replace(escapeRegex, (match, content) => {
+                escapes.push(content);
+                return `⟪ESC${escapes.length - 1}⟫`;
+            });
+
             // 1. Convert TL-style tone marks to corresponding numbers
-            const tl_soo = TLtiau_2_TLsoo(tl_tiau);
+            const tl_soo = TLtiau_2_TLsoo(processedInput);
             // 2. Convert TL number-style to POJ number-style
             const poj_soo = TLsoo_2_POJsoo(tl_soo);
             // 3. Convert POJ number-style to POJ tone marks
-            const poj_tiau = POJsoo_2_POJtiau(poj_soo);
+            let poj_tiau = POJsoo_2_POJtiau(poj_soo);
+
+            // 4. Restore escaped content
+            poj_tiau = poj_tiau.replace(/⟪ESC(\d+)⟫/g, (match, index) => {
+                return escapes[parseInt(index)];
+            });
+
             return poj_tiau;
         }
 
         // --- UI Logic ---
+
+        function clearInput(id) {
+            const el = document.getElementById(id);
+            el.value = '';
+            el.dispatchEvent(new Event('input'));
+        }
 
         async function downloadCleanVersion() {
             if (!confirm(UI_STRINGS.messages.downloadConfirm)) {
@@ -1006,8 +1110,8 @@ TL uá (lean) → POJ òa`,
             const tests = [
                 { in: "phah", out: "phah" },
                 { in: "Tâi-uân", out: "Tâi-oân" },
-                { in: "tsuí", out: "chuí" },
-                { in: "tshuí", out: "chhuí" },
+                { in: "tsuí", out: "chúi" },
+                { in: "tshuí", out: "chhúi" },
                 { in: "ing", out: "eng" },
                 { in: "óo", out: "ó͘" }, // Tricky oo case: TL óo -> POJ ó͘
                 { in: "Óo", out: "Ó͘" },
@@ -1018,10 +1122,10 @@ TL uá (lean) → POJ òa`,
                 { in: "ua", out: "oa" }, // TL ua -> POJ oa
                 { in: "ue", out: "oe" }, // TL ue -> POJ oe
                 { in: "ik", out: "ek" }, // Robustness check
-                { in: "ík", out: "ék" },  // Robustness check
+                { in: "i̍k", out: "e̍k" },  // Robustness check
                 // Numeric Tone Tests
                 { in: "Tai5-uan5", out: "Tâi-oân" },
-                { in: "sui2", out: "suí" },
+                { in: "sui2", out: "súi" },
                 { in: "phah4", out: "phah" }, // Tone 4 (none)
                 { in: "tik8", out: "te̍k" }, // Tone 8 (vertical line)
                 { in: "oo7", out: "ō͘" }, // Numeric oo
@@ -1030,8 +1134,25 @@ TL uá (lean) → POJ òa`,
                 // Tonemark position tests (ua->oa, ue->oe)
                 { in: "tuà", out: "tòa" }, // TL tuà (live) -> POJ tòa
                 { in: "kué", out: "kóe" }, // TL kué (rice pudding) -> POJ kóe  
-                { in: "suí", out: "suí" }, // TL suí (pretty) -> POJ suí (no change, tone on u)
-                { in: "uá", out: "òa" } // TL uá (lean) -> POJ òa
+                { in: "suí", out: "súi" }, // TL suí (pretty) -> POJ súi (no change, tone on u)
+                { in: "uá", out: "óa" }, // TL uá (lean) -> POJ óa
+
+                // Tone 4 vs 8 Rules
+                { in: "a4", out: "a4" },   // TL a4 (no stop)
+                { in: "a8", out: "a8" },   // TL a8 (no stop)
+                { in: "ah4", out: "ah" },  // TL ah4 (stop)
+                { in: "ah8", out: "a̍h" },   // TL ah8 (stop)
+
+                // Escape syntax tests
+                { in: "ts\\[ts]ts", out: "chtsch" },  // Edge case: \[ts] preserved, bare ts converted
+
+                // English False Positives (Escaped)
+                { in: "\\[cats]", out: "cats" },
+                { in: "Read a \\[book]", out: "Read a book" },
+                { in: "\\[Google]", out: "Google" },
+                { in: "\\[Blue] sky", out: "Blue sky" },
+                { in: "\\[Singing]", out: "Singing" },
+                { in: "\\[Wiki]", out: "Wiki" }
             ];
 
             tests.forEach(t => {
