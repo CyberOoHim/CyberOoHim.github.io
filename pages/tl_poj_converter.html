@@ -1,0 +1,817 @@
+---
+layout: apps
+title: TL to POJ Real-time Converter
+version: v0.1
+permalink: /pages/tl_poj_converter.html
+Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ.
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TL to POJ Converter</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --border-color: #e2e8f0;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .panel {
+            display: none;
+            background: var(--surface-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* Real-time Mode Styles */
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 600px;
+        }
+
+        .text-area-container {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            height: 28px;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tool-btn:hover {
+            background: var(--bg-color);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        textarea {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgb(37 99 235 / 0.1);
+        }
+
+        /* File Mode Styles */
+        .file-drop-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: 1rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .file-drop-zone:hover,
+        .file-drop-zone.drag-over {
+            border-color: var(--primary-color);
+            background: rgb(37 99 235 / 0.05);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #outputPreview {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>TL to POJ Converter</h1>
+            <p class="subtitle">Convert Taiwanese Romanization (Tâi-lô) to Pe̍h-ōe-jī (POJ)</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchMode('realtime')" id="tab-realtime">Real-time
+                Translation</button>
+            <button class="tab-btn" onclick="switchMode('file')" id="tab-file">File Converter</button>
+        </div>
+
+        <!-- Real-time Panel -->
+        <div id="panel-realtime" class="panel active">
+            <div class="split-view">
+                <div class="text-area-container">
+                    <div class="toolbar">
+                        <label for="rt-input">Tâi-lô (TL) / TL & POJ Number Input</label>
+                        <button class="tool-btn" onclick="pasteFromClipboard('rt-input')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                </path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            Paste
+                        </button>
+                    </div>
+                    <textarea id="rt-input" placeholder="Type or paste TL text here... (e.g. Tâi-uân or Tai5-uan5)"
+                        spellcheck="false"></textarea>
+                </div>
+                <div class="text-area-container">
+                    <div class="toolbar">
+                        <label for="rt-output">Pe̍h-ōe-jī (POJ) Output</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="tool-btn" onclick="copyToClipboard('rt-output')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy
+                            </button>
+                            <button class="tool-btn" onclick="downloadText('rt-output', 'poj_conversion.txt')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="rt-output" readonly placeholder="POJ Output..." spellcheck="false"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Converter Panel -->
+        <div id="panel-file" class="panel">
+            <div class="file-drop-zone" id="dropZone">
+                <p>Drag & Drop a text file here</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;">or</p>
+                <input type="file" id="fileInput" accept=".txt,.html,.md" style="display: none;">
+                <button class="btn" onclick="document.getElementById('fileInput').click()">Choose File</button>
+            </div>
+
+            <div id="fileOutputSection" style="display: none;">
+                <div class="toolbar">
+                    <label>Conversion Result</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="tool-btn" onclick="copyToClipboard('outputPreview')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copy
+                        </button>
+                        <button class="tool-btn" onclick="downloadText('outputPreview', 'converted_file.txt')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <textarea id="outputPreview" readonly placeholder="Output will appear here..."></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Converter Logic (Ported from Python) ---
+
+        // Constants for regex tails
+        // TL_bue: Syllable endings used for tone mark positioning
+        // Updated to include p,t,k,h (entering tone endings) to allow non-standard tone/syllable combinations (e.g., ík -> ék)
+        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nnh|nn|ⁿ|N|hN|p|t|k|h)?)';
+
+        // Helper to escape regex special characters in a string
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Helper to create replacement regex from TL vowel + optional trailing consonants
+        // Matches the Python RC_ function: vowel + optional tail chars
+        function createRC(char) {
+            // Matches vowel followed by optional consonant-like chars (for tone number placement)
+            return new RegExp(char + '([aAeEgGhHiIkKmMnNoOpPtTuU]*)', 'g');
+        }
+
+        // Helper for RC1 (tailo[:-1] + TL_bue + tailo[-1])
+        function createRC1(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + TL_bue + lastChar, 'g');
+        }
+
+        // Helper for RC2 (tailo[0] + '(u|i)((?:N|ⁿ|nn)?)' + tailo[1])
+        function createRC2(tailo) {
+            return new RegExp(tailo[0] + '(u|i)((?:N|ⁿ|nn)?)' + tailo[1], 'g');
+        }
+
+        // Helper for RC3 (simple)
+        function createRC3(tailo) {
+            // Python regexes had re.A (ASCII only) but here we trust the input range or JS regex default
+            // We ensure we match exact sequences. 
+            // Note: Python's re.sub matches literal strings if not regex. 
+            // But here we are building regexes. 
+            return new RegExp(tailo, 'g');
+        }
+
+        function createRC3_Regex(pattern) {
+            return new RegExp(pattern, 'g');
+        }
+
+        // Helper for RC4
+        function createRC4(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|p|t|k)' + lastChar + '?', 'g');
+        }
+
+        // Helper for RC8
+        function createRC8(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|p|t|k)' + lastChar, 'g');
+        }
+
+        // 1. TL Tone Marks -> TL Numbers
+        function TLtiau_2_TLsoo(tl_tiau, nasal = 'nn', use14 = false) {
+            let tl_soo = tl_tiau;
+            if (!tl_soo) return '';
+
+            // Mapping table (regex, replacement string)
+            // Note: In JS replacement string, $1 refers to capture group 1.
+
+            const TL_T2S = [
+                { r: createRC('á'), s: 'a$12' }, { r: createRC('Á'), s: 'A$12' },
+                { r: createRC('à'), s: 'a$13' }, { r: createRC('À'), s: 'A$13' },
+                { r: createRC('â'), s: 'a$15' }, { r: createRC('Â'), s: 'A$15' },
+                { r: createRC('ǎ'), s: 'a$16' }, { r: createRC('Ǎ'), s: 'A$16' },
+                { r: createRC('ā'), s: 'a$17' }, { r: createRC('Ā'), s: 'A$17' },
+                { r: createRC('a̍'), s: 'a$18' }, { r: createRC('A̍'), s: 'A$18' },
+                { r: createRC('a̋'), s: 'a$19' }, { r: createRC('A̋'), s: 'A$19' },
+                { r: createRC('é'), s: 'e$12' }, { r: createRC('É'), s: 'E$12' },
+                { r: createRC('è'), s: 'e$13' }, { r: createRC('È'), s: 'E$13' },
+                { r: createRC('ê'), s: 'e$15' }, { r: createRC('Ê'), s: 'E$15' },
+                { r: createRC('ě'), s: 'e$16' }, { r: createRC('Ě'), s: 'E$16' },
+                { r: createRC('ē'), s: 'e$17' }, { r: createRC('Ē'), s: 'E$17' },
+                { r: createRC('e̍'), s: 'e$18' }, { r: createRC('E̍'), s: 'E$18' },
+                { r: createRC('e̋'), s: 'e$19' }, { r: createRC('E̋'), s: 'E$19' },
+                { r: createRC('í'), s: 'i$12' }, { r: createRC('Í'), s: 'I$12' },
+                { r: createRC('ì'), s: 'i$13' }, { r: createRC('Ì'), s: 'I$13' },
+                { r: createRC('î'), s: 'i$15' }, { r: createRC('Î'), s: 'I$15' },
+                { r: createRC('ǐ'), s: 'i$16' }, { r: createRC('Ǐ'), s: 'I$16' },
+                { r: createRC('ī'), s: 'i$17' }, { r: createRC('Ī'), s: 'I$17' },
+                { r: createRC('i̍'), s: 'i$18' }, { r: createRC('I̍'), s: 'I$18' },
+                { r: createRC('i̋'), s: 'i$19' }, { r: createRC('I̋'), s: 'I$19' },
+                // oo chars - specific casing
+                { r: createRC('ó͘'), s: 'oo$12' }, { r: createRC('Ó͘'), s: 'Oo$12' },
+                { r: createRC('ò͘'), s: 'oo$13' }, { r: createRC('Ò͘'), s: 'Oo$13' },
+                { r: createRC('ô͘'), s: 'oo$15' }, { r: createRC('Ô͘'), s: 'Oo$15' },
+                { r: createRC('ǒ͘'), s: 'oo$16' }, { r: createRC('Ǒ͘'), s: 'Oo$16' },
+                { r: createRC('ō͘'), s: 'oo$17' }, { r: createRC('Ō͘'), s: 'Oo$17' },
+                { r: createRC('o̍͘'), s: 'oo$18' }, { r: createRC('O̍͘'), s: 'Oo$18' },
+                { r: createRC('ő͘'), s: 'oo$19' }, { r: createRC('Ő͘'), s: 'Oo$19' },
+                // straight o
+                { r: createRC('ó'), s: 'o$12' }, { r: createRC('Ó'), s: 'O$12' },
+                { r: createRC('ò'), s: 'o$13' }, { r: createRC('Ò'), s: 'O$13' },
+                { r: createRC('ô'), s: 'o$15' }, { r: createRC('Ô'), s: 'O$15' },
+                { r: createRC('ǒ'), s: 'o$16' }, { r: createRC('Ǒ'), s: 'O$16' },
+                { r: createRC('ō'), s: 'o$17' }, { r: createRC('Ō'), s: 'O$17' },
+                { r: createRC('o̍'), s: 'o$18' }, { r: createRC('O̍'), s: 'O$18' },
+                { r: createRC('ő'), s: 'o$19' }, { r: createRC('Ő'), s: 'O$19' },
+                // u
+                { r: createRC('ú'), s: 'u$12' }, { r: createRC('Ú'), s: 'U$12' },
+                { r: createRC('ù'), s: 'u$13' }, { r: createRC('Ù'), s: 'U$13' },
+                { r: createRC('û'), s: 'u$15' }, { r: createRC('Û'), s: 'U$15' },
+                { r: createRC('ǔ'), s: 'u$16' }, { r: createRC('Ǔ'), s: 'U$16' },
+                { r: createRC('ū'), s: 'u$17' }, { r: createRC('Ū'), s: 'U$17' },
+                { r: createRC('u̍'), s: 'u$18' }, { r: createRC('U̍'), s: 'U$18' },
+                { r: createRC('ű'), s: 'u$19' }, { r: createRC('Ű'), s: 'U$19' },
+                // m
+                { r: createRC('ḿ'), s: 'm$12' }, { r: createRC('Ḿ'), s: 'M$12' },
+                { r: createRC('m̀'), s: 'm$13' }, { r: createRC('M̀'), s: 'M$13' },
+                { r: createRC('m̂'), s: 'm$15' }, { r: createRC('M̂'), s: 'M$15' },
+                { r: createRC('m̌'), s: 'm$16' }, { r: createRC('M̌'), s: 'M$16' },
+                { r: createRC('m̄'), s: 'm$17' }, { r: createRC('M̄'), s: 'M$17' },
+                { r: createRC('m̍'), s: 'm$18' }, { r: createRC('M̍'), s: 'M$18' },
+                { r: createRC('m̋'), s: 'm$19' }, { r: createRC('M̋'), s: 'M$19' },
+                // n
+                { r: createRC('ń'), s: 'n$12' }, { r: createRC('Ń'), s: 'N$12' },
+                { r: createRC('ǹ'), s: 'n$13' }, { r: createRC('Ǹ'), s: 'N$13' },
+                { r: createRC('n̂'), s: 'n$15' }, { r: createRC('N̂'), s: 'N$15' },
+                { r: createRC('ň'), s: 'n$16' }, { r: createRC('N̋'), s: 'N$16' },
+                { r: createRC('n̄'), s: 'n$17' }, { r: createRC('N̄'), s: 'N$17' },
+                { r: createRC('n̍'), s: 'n$18' }, { r: createRC('N̍'), s: 'N$18' },
+                { r: createRC('n̋'), s: 'n$19' }, { r: createRC('N̋'), s: 'N$19' }
+            ];
+
+            for (const map of TL_T2S) {
+                tl_soo = tl_soo.replace(map.r, map.s);
+            }
+
+            // Handle plain o͘ (no tone mark) -> oo. Must come after toned o͘ conversions.
+            tl_soo = tl_soo.replace(/o͘/g, 'oo');
+            tl_soo = tl_soo.replace(/O͘/g, 'Oo');
+
+            tl_soo = tl_soo.replace(/ⁿ/g, 'nn');
+
+            if (nasal === 'N') {
+                tl_soo = tl_soo.replace(/(?<=[aeiouAEIOU])nn/g, 'N'); // Lookbehind support in modern JS
+            }
+
+            if (use14) {
+                const add1 = /(a|A|e|E|i|I|o|O|u|U|m|M|ng|Ng|n)\b/g;
+                const add4 = /(h|p|t|k)\b/g;
+                tl_soo = tl_soo.replace(add1, '$11');
+                tl_soo = tl_soo.replace(add4, '$14');
+            }
+
+            return tl_soo;
+        }
+
+        // 2. TL Numbers -> POJ Numbers
+        function TLsoo_2_POJsoo(tailo_soo, keep14 = false) {
+            if (!tailo_soo) return '';
+
+            let poj_soo = tailo_soo;
+
+            if (!keep14) {
+                const remove1 = /([aeiouAEIOU](?:nn|N)?|[aeiouAEIOU](?:ng|n|m)|(?:p|P|ph|Ph|m|M|b|B|t|T|th|Th|n|N|l|L|k|K|kh|Kh|ng|Ng|g|G|s|S|h|H)?(?:ng|Ng|m|M))1/g;
+                poj_soo = poj_soo.replace(remove1, '$1');
+
+                const remove4 = /([aeiouAEIOU](?:(?:nn|N)?h|p|t|k)|(?:m|M|ng|Ng)h)4/g;
+                poj_soo = poj_soo.replace(remove4, '$1');
+            }
+
+            // String replacements
+            const tailo2poj = [
+                ['oonn', 'o͘N'], ['Oonn', 'O͘N'],
+                ['onn', 'o͘N'], ['Onn', 'O͘N'],
+                ['ts', 'ch'], ['Ts', 'Ch'],
+                ['oo', 'o͘'], ['Oo', 'O͘'],
+                ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
+                ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
+                ['nnh', 'hN'], ['Nh', 'hN'], ['hnn', 'hN']
+            ];
+
+            for (const [k, v] of tailo2poj) {
+                poj_soo = poj_soo.replace(new RegExp(k, 'g'), v); // Use regex for global replace
+            }
+
+            const nn_2_N = /([aeiouAEIOU])(?:nn|N)(h?\d?)\b/g;
+            poj_soo = poj_soo.replace(nn_2_N, '$1N$2');
+
+            return poj_soo;
+        }
+
+        // 3. POJ Numbers -> POJ Tone Marks
+        function POJsoo_2_POJtiau(poj_soo) {
+            if (!poj_soo) return '';
+            let poj_tiau = poj_soo;
+
+            const N_2_n = /(?:N|nn)(\d?)\b/g;
+            poj_tiau = poj_tiau.replace(N_2_n, 'ⁿ$1');
+
+            // Mapping
+            const POJ_S2T = [
+                // use RC2
+                { r: createRC2('a1'), s: 'a$1$2' }, { r: createRC2('A1'), s: 'A$1$2' },
+                { r: createRC2('a2'), s: 'á$1$2' }, { r: createRC2('A2'), s: 'Á$1$2' },
+                { r: createRC2('a3'), s: 'à$1$2' }, { r: createRC2('A3'), s: 'À$1$2' },
+                // use RC3
+                { r: createRC3_Regex('a(i|u)((?:N|ⁿ|nn)?)h4'), s: 'a$1$2h' },
+                { r: createRC3_Regex('A(i|u)((?:N|ⁿ|nn)?)h4'), s: 'A$1$2h' },
+                // use RC2
+                { r: createRC2('a5'), s: 'â$1$2' }, { r: createRC2('A5'), s: 'Â$1$2' },
+                { r: createRC2('a6'), s: 'ǎ$1$2' }, { r: createRC2('A6'), s: 'Ǎ$1$2' },
+                { r: createRC2('a7'), s: 'ā$1$2' }, { r: createRC2('A7'), s: 'Ā$1$2' },
+                // use RC3
+                { r: createRC3_Regex('a(i|u)h(?:N|ⁿ|nn)8'), s: 'a̍$1hⁿ' },
+                { r: createRC3_Regex('A(i|u)h(?:N|ⁿ|nn)8'), s: 'A̍$1hⁿ' },
+                { r: createRC3_Regex('a(i|u)h8'), s: 'a̍$1h' },
+                { r: createRC3_Regex('A(i|u)h8'), s: 'A̍$1h' },
+                // use RC2
+                { r: createRC2('a9'), s: 'ă$1$2' }, { r: createRC2('A9'), s: 'Ă$1$2' },
+
+                // use RC2
+                { r: createRC2('u1'), s: 'u$1$2' }, { r: createRC2('U1'), s: 'U$1$2' },
+                { r: createRC2('u2'), s: 'ú$1$2' }, { r: createRC2('U2'), s: 'Ú$1$2' },
+                { r: createRC2('u3'), s: 'ù$1$2' }, { r: createRC2('U3'), s: 'Ù$1$2' },
+                // use RC3
+                { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)4'), s: 'uih$1' },
+                { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)4'), s: 'Uih$1' },
+                // use RC2
+                { r: createRC2('u5'), s: 'û$1$2' }, { r: createRC2('U5'), s: 'Û$1$2' },
+                { r: createRC2('u6'), s: 'ǔ$1$2' }, { r: createRC2('U6'), s: 'Ǔ$1$2' },
+                { r: createRC2('u7'), s: 'ū$1$2' }, { r: createRC2('U7'), s: 'Ū$1$2' },
+                // use RC3
+                { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)8'), s: 'u̍ih$1' },
+                { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)8'), s: 'U̍ih$1' },
+                // use RC2
+                { r: createRC2('u9'), s: 'ŭ$1$2' }, { r: createRC2('U9'), s: 'Ŭ$1$2' },
+
+                // use RC3 - Complex O/o handling (oa, oe diphthongs)
+                { r: createRC3_Regex('(o|O)([ae])((?:N|ⁿ|nn)?)1?\\b'), s: '$1$2$3' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'ó$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'Ó$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'ò$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'Ò$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'ô$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'Ô$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'ǒ$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'Ǒ$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'ō$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'Ō$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'ŏ$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'Ŏ$1$2' },
+
+                // use RC1
+                { r: createRC1('a1'), s: 'a$1' }, { r: createRC1('A1'), s: 'A$1' },
+                { r: createRC1('a2'), s: 'á$1' }, { r: createRC1('A2'), s: 'Á$1' },
+                { r: createRC1('a3'), s: 'à$1' }, { r: createRC1('A3'), s: 'À$1' },
+                { r: createRC4('a4'), s: 'a$1' }, { r: createRC4('A4'), s: 'A$1' },
+                { r: createRC1('a5'), s: 'â$1' }, { r: createRC1('A5'), s: 'Â$1' },
+                { r: createRC1('a6'), s: 'ǎ$1' }, { r: createRC1('A6'), s: 'Ǎ$1' },
+                { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
+                { r: createRC1('a8'), s: 'a̍$1' }, { r: createRC1('A8'), s: 'A̍$1' },
+                { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
+
+                { r: createRC1('e1'), s: 'e$1' }, { r: createRC1('E1'), s: 'E$1' },
+                { r: createRC1('e2'), s: 'é$1' }, { r: createRC1('E2'), s: 'É$1' },
+                { r: createRC1('e3'), s: 'è$1' }, { r: createRC1('E3'), s: 'È$1' },
+                { r: createRC4('e4'), s: 'e$1' }, { r: createRC4('E4'), s: 'E$1' },
+                { r: createRC1('e5'), s: 'ê$1' }, { r: createRC1('E5'), s: 'Ê$1' },
+                { r: createRC1('e6'), s: 'ě$1' }, { r: createRC1('E6'), s: 'Ě$1' },
+                { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
+                { r: createRC1('e8'), s: 'e̍$1' }, { r: createRC1('E8'), s: 'E̍$1' },
+                { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
+
+                { r: createRC1('i1'), s: 'i$1' }, { r: createRC1('I1'), s: 'I$1' },
+                { r: createRC1('i2'), s: 'í$1' }, { r: createRC1('I2'), s: 'Í$1' },
+                { r: createRC1('i3'), s: 'ì$1' }, { r: createRC1('I3'), s: 'Ì$1' },
+                { r: createRC4('i4'), s: 'i$1' }, { r: createRC4('I4'), s: 'I$1' },
+                { r: createRC1('i5'), s: 'î$1' }, { r: createRC1('I5'), s: 'Î$1' },
+                { r: createRC1('i6'), s: 'ǐ$1' }, { r: createRC1('I6'), s: 'Ǐ$1' },
+                { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
+                { r: createRC1('i8'), s: 'i̍$1' }, { r: createRC1('I8'), s: 'I̍$1' },
+                { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
+
+                // o͘ handling
+                { r: createRC1('o͘1'), s: 'o͘$1' }, { r: createRC1('O͘1'), s: 'O͘$1' },
+                { r: createRC1('o͘2'), s: 'ó͘$1' }, { r: createRC1('O͘2'), s: 'Ó͘$1' },
+                { r: createRC1('o͘3'), s: 'ò͘$1' }, { r: createRC1('O͘3'), s: 'Ò͘$1' },
+                { r: createRC4('o͘4'), s: 'o͘$1' }, { r: createRC4('O͘4'), s: 'O͘$1' },
+                { r: createRC1('o͘5'), s: 'ô͘$1' }, { r: createRC1('O͘5'), s: 'Ô͘$1' },
+                { r: createRC1('o͘6'), s: 'ǒ͘$1' }, { r: createRC1('O͘6'), s: 'Ǒ͘$1' },
+                { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
+                { r: createRC1('o͘8'), s: 'o̍͘$1' }, { r: createRC1('O͘8'), s: 'O̍͘$1' },
+                { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
+
+                { r: createRC1('o1'), s: 'o$1' }, { r: createRC1('O1'), s: 'O$1' },
+                { r: createRC1('o2'), s: 'ó$1' }, { r: createRC1('O2'), s: 'Ó$1' },
+                { r: createRC1('o3'), s: 'ò$1' }, { r: createRC1('O3'), s: 'Ò$1' },
+                { r: createRC4('o4'), s: 'o$1' }, { r: createRC4('O4'), s: 'O$1' },
+                { r: createRC1('o5'), s: 'ô$1' }, { r: createRC1('O5'), s: 'Ô$1' },
+                { r: createRC1('o6'), s: 'ǒ$1' }, { r: createRC1('O6'), s: 'Ǒ$1' },
+                { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
+                { r: createRC1('o8'), s: 'o̍$1' }, { r: createRC1('O8'), s: 'O̍$1' },
+                { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
+
+                { r: createRC1('u1'), s: 'u$1' }, { r: createRC1('U1'), s: 'U$1' },
+                { r: createRC1('u2'), s: 'ú$1' }, { r: createRC1('U2'), s: 'Ú$1' },
+                { r: createRC1('u3'), s: 'ù$1' }, { r: createRC1('U3'), s: 'Ù$1' },
+                { r: createRC4('u4'), s: 'u$1' }, { r: createRC4('U4'), s: 'U$1' },
+                { r: createRC1('u5'), s: 'û$1' }, { r: createRC1('U5'), s: 'Û$1' },
+                { r: createRC1('u6'), s: 'ǔ$1' }, { r: createRC1('U6'), s: 'Ǔ$1' },
+                { r: createRC1('u7'), s: 'ū$1' }, { r: createRC1('U7'), s: 'Ū$1' },
+                { r: createRC1('u8'), s: 'u̍$1' }, { r: createRC1('U8'), s: 'U̍$1' },
+                { r: createRC1('u9'), s: 'ŭ$1' }, { r: createRC1('U9'), s: 'Ŭ$1' },
+
+                // use RC3 mappings
+                { r: createRC3_Regex('m1'), s: 'm' }, { r: createRC3_Regex('M1'), s: 'M' },
+                { r: createRC3_Regex('m2'), s: 'ḿ' }, { r: createRC3_Regex('M2'), s: 'Ḿ' },
+                { r: createRC3_Regex('m3'), s: 'm̀' }, { r: createRC3_Regex('M3'), s: 'M̀' },
+                { r: createRC3_Regex('mh4'), s: 'mh' }, { r: createRC3_Regex('Mh4'), s: 'Mh' },
+                { r: createRC3_Regex('m5'), s: 'm̂' }, { r: createRC3_Regex('M5'), s: 'M̂' },
+                { r: createRC3_Regex('m6'), s: 'm̌' }, { r: createRC3_Regex('M6'), s: 'M̌' },
+                { r: createRC3_Regex('m7'), s: 'm̄' }, { r: createRC3_Regex('M7'), s: 'M̄' },
+                { r: createRC3_Regex('mh8'), s: 'm̍h' }, { r: createRC3_Regex('Mh8'), s: 'M̍h' },
+                { r: createRC3_Regex('m9'), s: 'm̆' }, { r: createRC3_Regex('M9'), s: 'M̆' },
+
+                { r: createRC3_Regex('ng1'), s: 'ng' }, { r: createRC3_Regex('Ng1'), s: 'Ng' },
+                { r: createRC3_Regex('ng2'), s: 'ńg' }, { r: createRC3_Regex('Ng2'), s: 'Ńg' },
+                { r: createRC3_Regex('ng3'), s: 'ǹg' }, { r: createRC3_Regex('Ng3'), s: 'Ǹg' },
+                { r: createRC3_Regex('ngh4'), s: 'ngh' }, { r: createRC3_Regex('Ngh4'), s: 'Ngh' },
+                { r: createRC3_Regex('ng5'), s: 'n̂g' }, { r: createRC3_Regex('Ng5'), s: 'N̂g' },
+                { r: createRC3_Regex('ng6'), s: 'ňg' }, { r: createRC3_Regex('Ng6'), s: 'Ňg' },
+                { r: createRC3_Regex('ng7'), s: 'n̄g' }, { r: createRC3_Regex('Ng7'), s: 'N̄g' },
+                { r: createRC3_Regex('ngh8'), s: 'n̍gh' }, { r: createRC3_Regex('Ngh8'), s: 'N̍gh' },
+                { r: createRC3_Regex('ng9'), s: 'n̆g' }, { r: createRC3_Regex('Ng9'), s: 'N̆g' }
+            ];
+
+            for (const map of POJ_S2T) {
+                poj_tiau = poj_tiau.replace(map.r, map.s);
+            }
+
+            return poj_tiau;
+        }
+
+        function TLtiau_2_POJtiau(tl_tiau) {
+            // 1. Convert TL-style tone marks to corresponding numbers
+            const tl_soo = TLtiau_2_TLsoo(tl_tiau);
+            // 2. Convert TL number-style to POJ number-style
+            const poj_soo = TLsoo_2_POJsoo(tl_soo);
+            // 3. Convert POJ number-style to POJ tone marks
+            const poj_tiau = POJsoo_2_POJtiau(poj_soo);
+            return poj_tiau;
+        }
+
+        // --- UI Logic ---
+
+        function switchMode(mode) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+            document.getElementById(`tab-${mode}`).classList.add('active');
+            document.getElementById(`panel-${mode}`).classList.add('active');
+        }
+
+        // Real-time conversion
+        const rtInput = document.getElementById('rt-input');
+        const rtOutput = document.getElementById('rt-output');
+
+        rtInput.addEventListener('input', (e) => {
+            const text = e.target.value;
+            const converted = TLtiau_2_POJtiau(text);
+            rtOutput.value = converted;
+        });
+
+        // File conversion
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const outputPreview = document.getElementById('outputPreview');
+        const fileOutputSection = document.getElementById('fileOutputSection');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file) processFile(file);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) processFile(e.target.files[0]);
+        });
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                // For large files, we might want to chunk it, but for text files <10MB this is instant
+                const converted = TLtiau_2_POJtiau(content);
+                showFileResult(converted);
+            };
+            reader.readAsText(file);
+        }
+
+        let currentFileOutput = '';
+        function showFileResult(text) {
+            currentFileOutput = text;
+            outputPreview.value = text.slice(0, 10000) + (text.length > 10000 ? '\n... (truncated for preview)' : '');
+            fileOutputSection.style.display = 'block';
+        }
+
+        // Clipboard and Download Helpers
+        async function copyToClipboard(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            // For textarea, we can select and copy, or use Clipboard API
+            // Clipboard API is cleaner
+            try {
+                // If it's the preview showing truncated text, we should copy the FULL text if possible
+                // But we store full text in variables for file mode.
+                // For RT, the textarea has the full text.
+                let textToCopy = el.value;
+                if (elementId === 'outputPreview' && currentFileOutput) {
+                    textToCopy = currentFileOutput; // Copy full file content
+                }
+
+                await navigator.clipboard.writeText(textToCopy);
+
+                // Visual feedback (optional)
+                const btn = document.activeElement;
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = 'Copied!';
+                setTimeout(() => btn.innerHTML = originalHTML, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                // Fallback: select and execCommand
+                el.select();
+                document.execCommand('copy');
+            }
+        }
+
+        async function pasteFromClipboard(elementId) {
+            try {
+                const text = await navigator.clipboard.readText();
+                const el = document.getElementById(elementId);
+                if (el) {
+                    el.value = text;
+                    // Trigger input event for real-time conversion
+                    el.dispatchEvent(new Event('input'));
+                }
+            } catch (err) {
+                console.error('Failed to read clipboard: ', err);
+                alert('Clipboard access denied. Please press Ctrl+V to paste manually.');
+            }
+        }
+
+        function downloadText(elementId, filename) {
+            let content = '';
+            if (elementId === 'outputPreview' && currentFileOutput) {
+                content = currentFileOutput;
+            } else {
+                content = document.getElementById(elementId).value;
+            }
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- Tests ---
+        console.log("Running self-test...");
+        const tests = [
+            { in: "phah", out: "phah" },
+            { in: "Tâi-uân", out: "Tâi-oân" },
+            { in: "tsuí", out: "chuí" },
+            { in: "tshuí", out: "chhuí" },
+            { in: "ing", out: "eng" },
+            { in: "óo", out: "ó͘" }, // Tricky oo case: TL óo -> POJ ó͘
+            { in: "Óo", out: "Ó͘" },
+            { in: "oo", out: "o͘" }, // Plain oo -> o͘
+            { in: "Oo", out: "O͘" }, // Capital Oo -> O͘
+            { in: "o͘", out: "o͘" }, // Already o͘ stays o͘
+            { in: "tsa", out: "cha" },
+            { in: "ua", out: "oa" }, // TL ua -> POJ oa
+            { in: "ue", out: "oe" }, // TL ue -> POJ oe
+            { in: "ik", out: "ek" }, // Robustness check
+            { in: "ík", out: "ék" },  // Robustness check
+            // Numeric Tone Tests
+            { in: "Tai5-uan5", out: "Tâi-oân" },
+            { in: "sui2", out: "suí" },
+            { in: "phah4", out: "phah" }, // Tone 4 (none)
+            { in: "tik8", out: "te̍k" }, // Tone 8 (vertical line)
+            { in: "oo7", out: "ō͘" }, // Numeric oo
+            { in: "m2", out: "ḿ" }, // Syllabic nasal m
+            { in: "ng5", out: "n̂g" } // Syllabic nasal ng
+        ];
+
+        tests.forEach(t => {
+            const res = TLtiau_2_POJtiau(t.in);
+            if (res !== t.out) {
+                console.error(`Test failed: ${t.in} -> expected ${t.out}, got ${res}`);
+            } else {
+                console.log(`Test passed: ${t.in} -> ${res}`);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
