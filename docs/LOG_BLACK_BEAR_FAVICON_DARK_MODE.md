@@ -57,62 +57,47 @@ Instead of inverting the colors of the SVG itself, we implemented a **Halo/Outli
 To ensure the logo sits perfectly adjacent to the text:
 
 1. **Size**: Increased to **40px** (up from 32px) to better match the visual weight of the header text.
-2. **Alignment**: Used `items-center` for the flex container combined with a specific `mb-2` (8px) bottom margin on the logo. This "lifts" the logo visually so its bottom aligns flush with the text baseline, compensating for the text's line-height/descender space.
+2. **Alignment**: Used `margin-bottom: 6px` on the logo. This "lifts" the logo visually so its bottom aligns flush with the text baseline, compensating for the text's line-height/descender space.
 
 ### Cyberpunk "Glitch" Styling (Final)
 
-To align with a more modern, edgy aesthetic, we evolved the visibility strategy from a simple outline to a **Chromatic Aberration (Glitch)** effect.
-
-* **Light Mode**: Offsets Cyan (`-2px`) and Magenta (`+2px`) shadows to create a visible print-registration error look.
-* **Dark Mode**: Adds a third layer—a 5px Neon Cyan ambient glow—to the glitch effect, simulating a glowing screen.
+To align with a more modern, edgy aesthetic, we evolved the visibility strategy from a simple white outline to a **Chromatic Aberration (Glitch)** effect.
 
 ### Technical Implementation
 
-In `client/src/components/Navigation.tsx`, using Tailwind JIT arbitrary values:
+In `assets/css/styles.css`, we implemented the effects using standard CSS `filter: drop-shadow`:
 
-```tsx
-<Link
-    to="/"
-    className="flex items-center text-2xl font-display text-text-light dark:text-text-dark hover:opacity-70 transition-opacity"
->
-    <img 
-        src={logo} 
-        alt="Logo" 
-        className="mr-3 mb-2 flex-shrink-0 [filter:drop-shadow(-2px_0_0_#00e5ff)_drop-shadow(2px_0_0_#ff0055)] dark:[filter:drop-shadow(-2px_0_0_#00e5ff)_drop-shadow(2px_0_0_#ff0055)_drop-shadow(0_0_5px_rgba(0,229,255,0.3))]" 
-        style={{ width: '40px', height: '40px' }} 
-    />
-    {t('brand')}
-</Link>
+#### Light Mode (Base)
+
+High-contrast, solid offsets for a crisp "print error" look.
+
+```css
+.site-logo {
+    /* ... size & alignment ... */
+    filter: drop-shadow(-2px 0 0 #32cd32) drop-shadow(2px 0 0 #ff6347);
+}
 ```
 
-### Technical Implementation (Refined Intensity)
+#### Dark Mode (Dimmer Glitch)
 
-To address feedback that the effect was too strong in dark mode, we adjusted the opacities:
+Initial tests showed that solid colors were too distracting in dark mode. We refined the intensity by **dimming** the effect:
 
-* **Offsets**: Reduced to 50% opacity (`rgba(..., 0.5)`).
-* **Glow**: Reduced to 15% transparency (`rgba(..., 0.15)`).
+* **Translucent Offsets**: Reduced opacity to 50% (`0.5`) so the glitch doesn't overpower the logo.
+* **Subtle Glow**: Added a third shadow layer (`0 0 5px`) at 15% opacity to simulate a faint CRT screen glow without reducing legibility.
 
-```tsx
-<img 
-    src={logo} 
-    alt="Logo" 
-    className="mr-3 mb-2 flex-shrink-0 [filter:drop-shadow(-2px_0_0_#00e5ff)_drop-shadow(2px_0_0_#ff0055)] dark:[filter:drop-shadow(-2px_0_0_rgba(0,229,255,0.5))_drop-shadow(2px_0_0_rgba(255,0,85,0.5))_drop-shadow(0_0_5px_rgba(0,229,255,0.15))]" 
-    style={{ width: '40px', height: '40px' }} 
-/>
+```css
+@media (prefers-color-scheme: dark) {
+    .site-logo {
+        filter: drop-shadow(-2px 0 0 rgba(50, 205, 50, 0.5)) 
+                drop-shadow(2px 0 0 rgba(255, 99, 71, 0.5)) 
+                drop-shadow(0 0 5px rgba(50, 205, 50, 0.15));
+    }
+}
 ```
 
 ### Why Glitch over Glow?
 
-The glitch effect provides high contrast borders (blue/red) against both white and black backgrounds while adding unique character ("cyberpunk/tech") that a simple white halo lacks.
-
-### Why Double Drop-Shadow?
-
-We used a stacked `drop-shadow` approach to achieve a crisp but soft outline:
-
-1. **First Layer**: `drop-shadow(0_0_1px_rgba(255,255,255,0.9))`
-    * Creates a crisp, high-opacity 1px border.
-2. **Second Layer**: `drop-shadow(0_0_2px_rgba(255,255,255,0.6))`
-    * Adds a softer 2px glow to smooth the transition and increase visibility on very dark backgrounds.
+The glitch effect provides high contrast borders (green/orange) against both white and black backgrounds while adding unique character ("cyberpunk/tech") that a simple white halo lacks.
 
 ## Outcome
 
