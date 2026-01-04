@@ -1,8 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.1
+version: v0.2
 permalink: /pages/tl_poj_converter.html
+updated: 2026-01-04
+note: 1. Enhanced file conversion feature with multiple file types support.
 ---
 <!DOCTYPE html>
 <!-- Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ. -->
@@ -310,6 +312,102 @@ permalink: /pages/tl_poj_converter.html
             width: 100%;
             height: 400px;
         }
+
+        /* Expander Styles */
+        details {
+            margin-bottom: 0.5rem;
+        }
+
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            user-select: none;
+            color: var(--text-primary);
+        }
+
+        /* Options Panel */
+        .options-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .options-panel label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: var(--font-mono);
+        }
+
+        .options-panel input[type="checkbox"],
+        .options-panel input[type="radio"] {
+            accent-color: var(--text-link);
+        }
+
+        /* Columns/Keys List */
+        .columns-list {
+            max-height: 150px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 4px;
+            background: var(--bg-primary);
+        }
+
+        /* Table Preview */
+        #csv-preview-table-container {
+            display: none;
+            flex: 1;
+            overflow: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            max-height: 400px;
+        }
+
+        #csv-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        #csv-preview-table th,
+        #csv-preview-table td {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        #csv-preview-table th {
+            background: var(--bg-tertiary);
+            position: sticky;
+            top: 0;
+        }
+
+        #csv-preview-table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Warning Messages */
+        #preview-messages {
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        #msg-specific-warning {
+            color: #f0ad4e;
+        }
     </style>
 </head>
 
@@ -385,26 +483,116 @@ permalink: /pages/tl_poj_converter.html
 
         <!-- File Converter Panel -->
         <div id="panel-file" class="panel">
-            <div class="file-drop-zone" id="dropZone">
-                <p id="ui-drop-text"></p>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;" id="ui-drop-or"></p>
-                <input type="file" id="fileInput" accept=".txt,.html,.md" style="display: none;">
-                <button class="btn" onclick="document.getElementById('fileInput').click()"
-                    style="display: inline-flex; align-items: center; gap: 8px;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                    <span id="ui-btn-choose-file"></span>
-                </button>
-            </div>
+            <!-- File Upload Section -->
+            <details id="file-upload-expander" open>
+                <summary id="ui-file-upload-header">📁 Ap-ló͘ 書類</summary>
+                <div class="file-drop-zone" id="dropZone">
+                    <p id="ui-drop-text"></p>
+                    <input type="file" id="fileInput" accept=".txt,.md,.srt,.vtt,.csv,.tsv,.json,.pdf"
+                        style="display: none;">
+                    <button class="btn" id="btn-choose-file"
+                        style="display: inline-flex; align-items: center; gap: 8px; margin-top: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span id="ui-btn-choose-file"></span>
+                    </button>
+                </div>
+            </details>
 
+            <!-- CSV Options Section -->
+            <details id="csv-options-expander" style="display: none;">
+                <summary id="ui-csv-options-header">⚙️ CSV/TSV 設定</summary>
+                <div class="options-panel">
+                    <label id="lbl-select-columns" style="font-weight: bold;"></label>
+                    <div id="csv-columns-list" class="columns-list"></div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label id="lbl-output-mode" style="font-weight: bold;"></label>
+                        <label><input type="radio" name="csv-mode" value="only" checked> <span
+                                class="csv-mode-only"></span></label>
+                        <label><input type="radio" name="csv-mode" value="original-plus"> <span
+                                class="csv-mode-original-plus"></span></label>
+                        <label><input type="radio" name="csv-mode" value="insert"> <span
+                                class="csv-mode-insert"></span></label>
+                    </div>
+
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                        <button id="btn-convert-csv" class="btn" style="flex: 1;"></button>
+                        <button id="btn-reset-csv" class="tool-btn"></button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- JSON Options Section -->
+            <details id="json-options-expander" style="display: none;">
+                <summary id="ui-json-options-header">⚙️ JSON 設定</summary>
+                <div class="options-panel">
+                    <label id="lbl-select-keys" style="font-weight: bold;"></label>
+                    <div id="json-keys-list" class="columns-list" style="font-family: monospace; font-size: 0.85rem;">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label id="lbl-json-output-mode" style="font-weight: bold;"></label>
+                        <label><input type="radio" name="json-mode" value="only" checked> <span
+                                class="json-mode-only"></span></label>
+                        <label><input type="radio" name="json-mode" value="original-plus"> <span
+                                class="json-mode-original-plus"></span></label>
+                        <label><input type="radio" name="json-mode" value="insert"> <span
+                                class="json-mode-insert"></span></label>
+                    </div>
+
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                        <button id="btn-convert-json" class="btn" style="flex: 1;"></button>
+                        <button id="btn-reset-json" class="tool-btn"></button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Subtitle Options Section -->
+            <details id="subtitle-options-expander" style="display: none;">
+                <summary id="ui-subtitle-options-header">⚙️ 字幕設定</summary>
+                <div class="options-panel">
+                    <label id="lbl-select-lines" style="font-weight: bold;"></label>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label><input type="radio" name="subtitle-mode" value="all" checked> <span
+                                class="subtitle-mode-all"></span></label>
+                        <label><input type="radio" name="subtitle-mode" value="line1"> <span
+                                class="subtitle-mode-line1"></span></label>
+                        <label><input type="radio" name="subtitle-mode" value="line2"> <span
+                                class="subtitle-mode-line2"></span></label>
+                        <label><input type="radio" name="subtitle-mode" value="line3plus"> <span
+                                class="subtitle-mode-line3plus"></span></label>
+                    </div>
+
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                        <button id="btn-convert-subtitle" class="btn" style="flex: 1;"></button>
+                        <button id="btn-reset-subtitle" class="tool-btn"></button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Output Section -->
             <div id="fileOutputSection" style="display: none;">
+                <div id="preview-messages">
+                    <span id="msg-general-warning"></span>
+                    <span id="msg-specific-warning" style="display: none;"></span>
+                </div>
                 <div class="toolbar">
                     <label id="ui-label-result"></label>
                     <div style="display: flex; gap: 0.5rem;">
-                        <button class="tool-btn" onclick="copyToClipboard('outputPreview', 'ui-btn-copy-file')">
+                        <button class="tool-btn" id="btn-reset-file" title="Ap-ló͘ 新 ê 書類">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </button>
+                        <button class="tool-btn" id="btn-copy-file">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -412,7 +600,7 @@ permalink: /pages/tl_poj_converter.html
                             </svg>
                             <span id="ui-btn-copy-file"></span>
                         </button>
-                        <button class="tool-btn" onclick="downloadText('outputPreview', 'converted_file.txt')">
+                        <button class="tool-btn" id="btn-download-file">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -424,6 +612,7 @@ permalink: /pages/tl_poj_converter.html
                     </div>
                 </div>
                 <textarea id="outputPreview" readonly placeholder=""></textarea>
+                <div id="csv-preview-table-container"></div>
             </div>
         </div>
 
@@ -459,7 +648,7 @@ permalink: /pages/tl_poj_converter.html
 
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "TL -> POJ 拍隨轉",
+            title: "TL -> POJ 隨時轉",
             tabs: {
                 realtime: "拍隨轉",
                 file: "轉書類"
@@ -467,17 +656,18 @@ permalink: /pages/tl_poj_converter.html
             labels: {
                 input: "TL / TL & POJ 帶數字調號",
                 output: "POJ 輸出",
-                result: "轉換結果"
+                result: "轉soah結果"
             },
             buttons: {
                 paste: "貼 TL",
                 copy: "kho͘--起來",
                 download: "Táng-ló͘",
-                chooseFile: "Ap-ló͘ 書類",
+                chooseFile: "Ap-ló͘",
                 copied: "kho͘ 好--ah!",
                 quickTest: "看見本/快速測",
                 downloadOffline: "⬇ Táng-ló͘ App 家己電腦用",
-                clear: "總清"
+                clear: "總清",
+                cancel: "Chhú-siau"
             },
             placeholders: {
                 input: `說明：
@@ -490,8 +680,52 @@ permalink: /pages/tl_poj_converter.html
                 preview: "輸出會 tī chia..."
             },
             dropZone: {
-                main: "Kā 書類 拖來 chia",
-                or: "ia̍h-sī"
+                main: "Kā 書類 拖來 chia, ia̍h-sī chhi̍h Ap-ló͘ 揀書類。.txt/.md/.srt/.vtt/.csv/.tsv/.json/.pdf lóng 會使。"
+            },
+            file: {
+                uploadHeader: "📁 Ap-ló͘ 書類",
+                previewLabel: "轉soah結果",
+                fileTypes: {
+                    csv: " (CSV 表格)",
+                    tsv: " (TSV 表格)",
+                    json: " (JSON 資料)",
+                    pdf: " (PDF 文件)",
+                    text: " (Text 文件)",
+                    md: " (Markdown 文件)",
+                    srt: " (SRT 字幕)",
+                    vtt: " (VTT 字幕)"
+                },
+                messages: {
+                    general: "* Ài 細膩，英文 a̍h-sī 其他外語 ê 羅馬字 kám 有誤轉。",
+                    pdf: "* 排版若走精--去，會用得提去 hō͘ AI 重排。"
+                }
+            },
+            csv: {
+                optionsHeader: "⚙️ CSV/TSV 設定",
+                selectColumns: "揀欲轉 ê 直逝:",
+                outputMode: "Output 模式:",
+                modeOnly: "kan-ta 轉好--ê",
+                modeOriginalPlus: "原直逝 + 轉好--ê",
+                modeInsert: "插 tī 原直逝後壁",
+                btnConvert: "開始轉 CSV"
+            },
+            json: {
+                optionsHeader: "⚙️ JSON 設定",
+                selectKeys: "揀欲轉 ê Key:",
+                outputMode: "Output 模式:",
+                modeOnly: "kan-ta 轉好--ê",
+                modeOriginalPlus: "原 Key + 轉好--ê",
+                modeInsert: "插 tī 原 Key 後壁",
+                btnConvert: "開始轉 JSON"
+            },
+            subtitle: {
+                optionsHeader: "⚙️ 字幕設定",
+                selectLines: "揀欲轉佗一逝:",
+                modeAll: "Lóng-chóng",
+                modeLine1: "kan-ta 頭逝",
+                modeLine2: "kan-ta 第 2 逝",
+                modeLine3Plus: "kan-ta 第 3 逝以後",
+                btnConvert: "開始轉字幕"
             },
             messages: {
                 clipboardError: "無法度自動貼，chhi̍h Ctrl+V 貼看覓。",
@@ -562,11 +796,44 @@ TL uá (lean) → POJ òa
             document.getElementById('ui-footer').innerText = UI_STRINGS.footer;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
-            document.getElementById('ui-drop-or').innerText = UI_STRINGS.dropZone.or;
 
             document.getElementById('rt-input').placeholder = UI_STRINGS.placeholders.input;
             document.getElementById('rt-output').placeholder = UI_STRINGS.placeholders.output;
             document.getElementById('outputPreview').placeholder = UI_STRINGS.placeholders.preview;
+
+            // File upload header
+            document.getElementById('ui-file-upload-header').innerText = UI_STRINGS.file.uploadHeader;
+            document.getElementById('msg-general-warning').innerText = UI_STRINGS.file.messages.general;
+
+            // CSV Options
+            document.getElementById('ui-csv-options-header').innerText = UI_STRINGS.csv.optionsHeader;
+            document.getElementById('lbl-select-columns').innerText = UI_STRINGS.csv.selectColumns;
+            document.getElementById('lbl-output-mode').innerText = UI_STRINGS.csv.outputMode;
+            document.querySelector('.csv-mode-only').innerText = UI_STRINGS.csv.modeOnly;
+            document.querySelector('.csv-mode-original-plus').innerText = UI_STRINGS.csv.modeOriginalPlus;
+            document.querySelector('.csv-mode-insert').innerText = UI_STRINGS.csv.modeInsert;
+            document.getElementById('btn-convert-csv').innerText = UI_STRINGS.csv.btnConvert;
+            document.getElementById('btn-reset-csv').innerText = UI_STRINGS.buttons.cancel;
+
+            // JSON Options
+            document.getElementById('ui-json-options-header').innerText = UI_STRINGS.json.optionsHeader;
+            document.getElementById('lbl-select-keys').innerText = UI_STRINGS.json.selectKeys;
+            document.getElementById('lbl-json-output-mode').innerText = UI_STRINGS.json.outputMode;
+            document.querySelector('.json-mode-only').innerText = UI_STRINGS.json.modeOnly;
+            document.querySelector('.json-mode-original-plus').innerText = UI_STRINGS.json.modeOriginalPlus;
+            document.querySelector('.json-mode-insert').innerText = UI_STRINGS.json.modeInsert;
+            document.getElementById('btn-convert-json').innerText = UI_STRINGS.json.btnConvert;
+            document.getElementById('btn-reset-json').innerText = UI_STRINGS.buttons.cancel;
+
+            // Subtitle Options
+            document.getElementById('ui-subtitle-options-header').innerText = UI_STRINGS.subtitle.optionsHeader;
+            document.getElementById('lbl-select-lines').innerText = UI_STRINGS.subtitle.selectLines;
+            document.querySelector('.subtitle-mode-all').innerText = UI_STRINGS.subtitle.modeAll;
+            document.querySelector('.subtitle-mode-line1').innerText = UI_STRINGS.subtitle.modeLine1;
+            document.querySelector('.subtitle-mode-line2').innerText = UI_STRINGS.subtitle.modeLine2;
+            document.querySelector('.subtitle-mode-line3plus').innerText = UI_STRINGS.subtitle.modeLine3Plus;
+            document.getElementById('btn-convert-subtitle').innerText = UI_STRINGS.subtitle.btnConvert;
+            document.getElementById('btn-reset-subtitle').innerText = UI_STRINGS.buttons.cancel;
         }
 
         document.addEventListener('DOMContentLoaded', initUI);
@@ -1005,12 +1272,37 @@ TL uá (lean) → POJ òa
             rtOutput.value = converted;
         });
 
-        // File conversion
+        // File conversion - State variables
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
         const outputPreview = document.getElementById('outputPreview');
         const fileOutputSection = document.getElementById('fileOutputSection');
+        const btnChooseFile = document.getElementById('btn-choose-file');
 
+        let currentFileOutput = '';
+        let currentFileName = 'poj_output.txt';
+
+        // CSV State
+        let currentCsvData = null;
+        let currentCsvSeparator = ',';
+        const csvColumnsList = document.getElementById('csv-columns-list');
+
+        // JSON State
+        let currentJsonData = null;
+        let currentJsonRawContent = '';
+        let currentJsonPaths = [];
+        let currentJsonIsArray = false;
+
+        // Subtitle State
+        let currentSubtitleData = null;
+        let currentSubtitleRawContent = '';
+        let currentSubtitleExt = 'srt';
+
+        // Event Listeners
+        btnChooseFile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
         dropZone.addEventListener('click', () => fileInput.click());
 
         dropZone.addEventListener('dragover', (e) => {
@@ -1033,23 +1325,693 @@ TL uá (lean) → POJ òa
             if (e.target.files.length) processFile(e.target.files[0]);
         });
 
+        // Reset View
+        function resetFileView() {
+            const expander = document.getElementById('file-upload-expander');
+            if (expander) expander.open = true;
+            document.getElementById('csv-options-expander').style.display = 'none';
+            document.getElementById('json-options-expander').style.display = 'none';
+            document.getElementById('subtitle-options-expander').style.display = 'none';
+            fileOutputSection.style.display = 'none';
+            document.getElementById('csv-preview-table-container').style.display = 'none';
+            outputPreview.style.display = 'block';
+            currentCsvData = null;
+            currentJsonData = null;
+            currentJsonPaths = [];
+            currentSubtitleData = null;
+            fileInput.value = '';
+            currentFileOutput = '';
+        }
+
+        // Helper: Dynamically load a script
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Reset button handlers
+        document.getElementById('btn-reset-csv').addEventListener('click', resetFileView);
+        document.getElementById('btn-reset-json').addEventListener('click', resetFileView);
+        document.getElementById('btn-reset-subtitle').addEventListener('click', resetFileView);
+        document.getElementById('btn-reset-file').addEventListener('click', resetFileView);
+
+        // Copy/Download for file output
+        document.getElementById('btn-copy-file').addEventListener('click', async () => {
+            if (currentFileOutput) {
+                await navigator.clipboard.writeText(currentFileOutput);
+                const btn = document.getElementById('ui-btn-copy-file');
+                const original = btn.innerText;
+                btn.innerText = UI_STRINGS.buttons.copied;
+                setTimeout(() => btn.innerText = original, 2000);
+            }
+        });
+
+        document.getElementById('btn-download-file').addEventListener('click', () => {
+            if (currentFileOutput) {
+                downloadTextContent(currentFileOutput, currentFileName);
+            }
+        });
+
+        // Helper: Download text content
+        function downloadTextContent(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Helper: Update preview label with file type
+        function updatePreviewLabel(type) {
+            const label = document.getElementById('ui-label-result');
+            if (label && UI_STRINGS.file.fileTypes[type]) {
+                label.innerText = UI_STRINGS.file.previewLabel + UI_STRINGS.file.fileTypes[type];
+            } else if (label) {
+                label.innerText = UI_STRINGS.file.previewLabel + UI_STRINGS.file.fileTypes.text;
+            }
+
+            // Toggle specific messages
+            const msgSpecific = document.getElementById('msg-specific-warning');
+            if (msgSpecific) {
+                if (type === 'pdf') {
+                    msgSpecific.innerText = ' ' + UI_STRINGS.file.messages.pdf;
+                    msgSpecific.style.display = 'inline';
+                } else {
+                    msgSpecific.style.display = 'none';
+                }
+            }
+        }
+
+        // Parse CSV/TSV
+        function parseCSV(text, separator) {
+            const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+            if (lines.length === 0) return null;
+
+            const headers = lines[0].split(separator).map(h => h.trim());
+            const rows = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(separator);
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((h, index) => {
+                        row[h] = values[index];
+                    });
+                    rows.push(row);
+                }
+            }
+            return { headers, rows, rawLines: lines };
+        }
+
+        // Generate CSV
+        function generateCSV(headers, rows, separator) {
+            const headerLine = headers.join(separator);
+            const dataLines = rows.map(row => {
+                return headers.map(h => row[h] || '').join(separator);
+            }).join('\n');
+            return headerLine + '\n' + dataLines;
+        }
+
+        // Render Table
+        function renderTable(headers, rows) {
+            const table = document.createElement('table');
+            table.id = 'csv-preview-table';
+
+            const thead = document.createElement('thead');
+            const trHead = document.createElement('tr');
+            headers.forEach(h => {
+                const th = document.createElement('th');
+                th.textContent = h;
+                trHead.appendChild(th);
+            });
+            thead.appendChild(trHead);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            rows.slice(0, 100).forEach(row => {
+                const tr = document.createElement('tr');
+                headers.forEach(h => {
+                    const td = document.createElement('td');
+                    td.textContent = row[h];
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            return table;
+        }
+
+        // Extract JSON Keys
+        function extractJsonKeys(obj) {
+            const keys = [];
+
+            if (Array.isArray(obj) && obj.length > 0 && typeof obj[0] === 'object' && obj[0] !== null) {
+                currentJsonIsArray = true;
+                const schemaKeys = Object.keys(obj[0]);
+                schemaKeys.forEach(key => {
+                    if (typeof obj[0][key] === 'string') {
+                        const count = obj.filter(item => typeof item[key] === 'string').length;
+                        keys.push({
+                            key: key,
+                            isArrayKey: true,
+                            sampleValue: obj[0][key],
+                            count: count
+                        });
+                    }
+                });
+            } else if (typeof obj === 'object' && obj !== null) {
+                currentJsonIsArray = false;
+                function traverse(current, path) {
+                    if (typeof current === 'string') {
+                        keys.push({
+                            key: path,
+                            isArrayKey: false,
+                            sampleValue: current,
+                            count: 1
+                        });
+                    } else if (Array.isArray(current)) {
+                        current.forEach((item, i) => {
+                            traverse(item, `${path}[${i}]`);
+                        });
+                    } else if (current !== null && typeof current === 'object') {
+                        Object.keys(current).forEach(k => {
+                            const newPath = path ? `${path}.${k}` : k;
+                            traverse(current[k], newPath);
+                        });
+                    }
+                }
+                traverse(obj, '');
+            }
+
+            return keys;
+        }
+
+        // Set nested value in object
+        function setNestedValue(obj, path, value) {
+            const parts = path.replace(/\[(\d+)\]/g, '.$1').split('.');
+            let current = obj;
+            for (let i = 0; i < parts.length - 1; i++) {
+                const key = parts[i];
+                const nextKey = parts[i + 1];
+                if (!(key in current)) {
+                    current[key] = /^\d+$/.test(nextKey) ? [] : {};
+                }
+                current = current[key];
+            }
+            current[parts[parts.length - 1]] = value;
+        }
+
+        // Parse Subtitle (SRT/VTT)
+        function parseSubtitle(content, ext) {
+            const lines = content.split(/\r?\n/);
+            const blocks = [];
+            let i = 0;
+
+            // Skip VTT header
+            if (ext === 'vtt') {
+                while (i < lines.length && !lines[i].includes('-->')) {
+                    i++;
+                }
+                if (i > 0) i--;
+            }
+
+            while (i < lines.length) {
+                while (i < lines.length && lines[i].trim() === '') i++;
+                if (i >= lines.length) break;
+
+                const block = { cueId: '', timestamp: '', textLines: [], rawLines: [] };
+
+                if (lines[i].includes('-->')) {
+                    block.timestamp = lines[i];
+                    block.rawLines.push(lines[i]);
+                    i++;
+                } else {
+                    block.cueId = lines[i];
+                    block.rawLines.push(lines[i]);
+                    i++;
+
+                    if (i < lines.length && lines[i].includes('-->')) {
+                        block.timestamp = lines[i];
+                        block.rawLines.push(lines[i]);
+                        i++;
+                    }
+                }
+
+                while (i < lines.length && lines[i].trim() !== '') {
+                    const line = lines[i];
+                    block.rawLines.push(line);
+
+                    if (/^url:/i.test(line.trim())) {
+                        block.textLines.push({ text: line, isUrl: true });
+                    } else {
+                        block.textLines.push({ text: line, isUrl: false });
+                    }
+                    i++;
+                }
+
+                if (block.timestamp) {
+                    blocks.push(block);
+                }
+            }
+
+            return { blocks };
+        }
+
+        // Convert Subtitle based on mode
+        function convertSubtitle(parsed, mode) {
+            const resultLines = [];
+
+            parsed.blocks.forEach(block => {
+                if (block.cueId) resultLines.push(block.cueId);
+                resultLines.push(block.timestamp);
+
+                block.textLines.forEach((lineObj, lineIndex) => {
+                    if (lineObj.isUrl) {
+                        resultLines.push(lineObj.text);
+                    } else {
+                        const lineNum = lineIndex + 1;
+                        let shouldConvert = false;
+
+                        if (mode === 'all') shouldConvert = true;
+                        else if (mode === 'line1' && lineNum === 1) shouldConvert = true;
+                        else if (mode === 'line2' && lineNum === 2) shouldConvert = true;
+                        else if (mode === 'line3plus' && lineNum >= 3) shouldConvert = true;
+
+                        if (shouldConvert) {
+                            resultLines.push(TLtiau_2_POJtiau(lineObj.text));
+                        } else {
+                            resultLines.push(lineObj.text);
+                        }
+                    }
+                });
+
+                resultLines.push('');
+            });
+
+            return resultLines.join('\n');
+        }
+
+        // Main File Processor
         function processFile(file) {
+            const allowedExtensions = ['.txt', '.md', '.srt', '.vtt', '.csv', '.tsv', '.json', '.pdf'];
+            const fileName = file.name.toLowerCase();
+
+            const namePart = file.name.substring(0, file.name.lastIndexOf('.'));
+            const extPart = file.name.substring(file.name.lastIndexOf('.'));
+            currentFileName = `${namePart}_POJ${extPart}`;
+
+            const isValid = allowedExtensions.some(ext => fileName.endsWith(ext));
+            if (!isValid) {
+                alert('File type not supported. Please upload one of: ' + allowedExtensions.join(', '));
+                return;
+            }
+
+            const isCsv = fileName.endsWith('.csv') || fileName.endsWith('.tsv');
+            const isPdf = fileName.endsWith('.pdf');
+            const separator = fileName.endsWith('.tsv') ? '\t' : ',';
+
+            // Handle PDF separately with ArrayBuffer reader
+            if (isPdf) {
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        // Dynamically load PDF.js if not already loaded
+                        if (typeof pdfjsLib === 'undefined') {
+                            await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+                            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        }
+
+                        const pdf = await pdfjsLib.getDocument({ data: e.target.result }).promise;
+                        let fullText = '';
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            const page = await pdf.getPage(i);
+                            const textContent = await page.getTextContent();
+                            const pageText = textContent.items.map(item => item.str).join(' ');
+                            fullText += pageText + '\n';
+                        }
+
+                        // Collapse upload expander
+                        document.getElementById('file-upload-expander').open = false;
+                        document.getElementById('csv-options-expander').style.display = 'none';
+                        document.getElementById('json-options-expander').style.display = 'none';
+                        document.getElementById('subtitle-options-expander').style.display = 'none';
+
+                        const converted = TLtiau_2_POJtiau(fullText);
+                        currentFileOutput = converted;
+                        updatePreviewLabel('pdf');
+                        document.getElementById('csv-preview-table-container').style.display = 'none';
+                        outputPreview.style.display = 'block';
+                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                        fileOutputSection.style.display = 'block';
+                    } catch (error) {
+                        console.error('PDF parsing error:', error);
+                        alert('Failed to parse PDF: ' + error.message);
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = (e) => {
                 const content = e.target.result;
-                // For large files, we might want to chunk it, but for text files <10MB this is instant
-                const converted = TLtiau_2_POJtiau(content);
-                showFileResult(converted);
+
+                // Collapse upload expander
+                document.getElementById('file-upload-expander').open = false;
+
+                if (isCsv) {
+                    // CSV/TSV Mode
+                    currentCsvSeparator = separator;
+                    const parsed = parseCSV(content, separator);
+                    if (parsed && parsed.headers.length > 0) {
+                        currentCsvData = parsed;
+
+                        updatePreviewLabel(fileName.endsWith('.tsv') ? 'tsv' : 'csv');
+
+                        document.getElementById('csv-options-expander').style.display = 'block';
+                        document.getElementById('csv-options-expander').open = true;
+                        document.getElementById('json-options-expander').style.display = 'none';
+                        document.getElementById('subtitle-options-expander').style.display = 'none';
+                        fileOutputSection.style.display = 'none';
+
+                        // Populate columns
+                        csvColumnsList.innerHTML = '';
+                        parsed.headers.forEach(header => {
+                            const div = document.createElement('div');
+                            div.style.display = 'flex';
+                            div.style.alignItems = 'center';
+                            div.style.gap = '0.5rem';
+
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.value = header;
+                            checkbox.id = `col-${header}`;
+
+                            const label = document.createElement('label');
+                            label.htmlFor = `col-${header}`;
+                            label.textContent = header;
+                            label.style.cursor = 'pointer';
+
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+                            csvColumnsList.appendChild(div);
+                        });
+                    }
+                } else if (fileName.endsWith('.json')) {
+                    // JSON Mode
+                    try {
+                        const jsonData = JSON.parse(content);
+                        currentJsonData = jsonData;
+                        currentJsonRawContent = content;
+
+                        updatePreviewLabel('json');
+
+                        document.getElementById('csv-options-expander').style.display = 'none';
+                        document.getElementById('json-options-expander').style.display = 'block';
+                        document.getElementById('json-options-expander').open = true;
+                        document.getElementById('subtitle-options-expander').style.display = 'none';
+                        fileOutputSection.style.display = 'none';
+
+                        const keys = extractJsonKeys(jsonData);
+                        currentJsonPaths = keys;
+
+                        const jsonKeysList = document.getElementById('json-keys-list');
+                        jsonKeysList.innerHTML = '';
+                        keys.forEach((keyInfo, index) => {
+                            const div = document.createElement('div');
+                            div.style.display = 'flex';
+                            div.style.alignItems = 'flex-start';
+                            div.style.gap = '0.5rem';
+
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.value = index;
+                            checkbox.id = `json-key-${index}`;
+
+                            const label = document.createElement('label');
+                            label.htmlFor = `json-key-${index}`;
+                            label.style.cursor = 'pointer';
+                            label.style.wordBreak = 'break-all';
+
+                            const preview = keyInfo.sampleValue.length > 25 ? keyInfo.sampleValue.slice(0, 25) + '...' : keyInfo.sampleValue;
+                            if (keyInfo.isArrayKey) {
+                                label.textContent = `${keyInfo.key} (×${keyInfo.count}): "${preview}"`;
+                            } else {
+                                label.textContent = `${keyInfo.key}: "${preview}"`;
+                            }
+
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+                            jsonKeysList.appendChild(div);
+                        });
+                    } catch (err) {
+                        alert('Failed to parse JSON: ' + err.message);
+                    }
+                } else if (fileName.endsWith('.srt') || fileName.endsWith('.vtt')) {
+                    // Subtitle Mode
+                    const ext = fileName.endsWith('.vtt') ? 'vtt' : 'srt';
+                    updatePreviewLabel(ext);
+
+                    const parsedSubtitle = parseSubtitle(content, ext);
+                    currentSubtitleData = parsedSubtitle;
+                    currentSubtitleRawContent = content;
+                    currentSubtitleExt = ext;
+
+                    const hasMultiLine = parsedSubtitle.blocks.some(b => b.textLines.length > 1);
+
+                    document.getElementById('csv-options-expander').style.display = 'none';
+                    document.getElementById('json-options-expander').style.display = 'none';
+
+                    if (hasMultiLine) {
+                        document.getElementById('subtitle-options-expander').style.display = 'block';
+                        document.getElementById('subtitle-options-expander').open = true;
+                        fileOutputSection.style.display = 'none';
+                    } else {
+                        document.getElementById('subtitle-options-expander').style.display = 'none';
+                        const converted = convertSubtitle(parsedSubtitle, 'all');
+                        currentFileOutput = converted;
+                        document.getElementById('csv-preview-table-container').style.display = 'none';
+                        outputPreview.style.display = 'block';
+                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                        fileOutputSection.style.display = 'block';
+                    }
+                } else {
+                    // Standard Mode (txt, md)
+                    const ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+                    updatePreviewLabel(ext === 'md' ? 'md' : 'text');
+
+                    document.getElementById('csv-options-expander').style.display = 'none';
+                    document.getElementById('json-options-expander').style.display = 'none';
+                    document.getElementById('subtitle-options-expander').style.display = 'none';
+                    document.getElementById('csv-preview-table-container').style.display = 'none';
+                    outputPreview.style.display = 'block';
+
+                    const converted = TLtiau_2_POJtiau(content);
+                    currentFileOutput = converted;
+                    outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                    fileOutputSection.style.display = 'block';
+                }
             };
             reader.readAsText(file);
         }
 
-        let currentFileOutput = '';
-        function showFileResult(text) {
-            currentFileOutput = text;
-            outputPreview.value = text.slice(0, 10000) + (text.length > 10000 ? UI_STRINGS.messages.truncated : '');
+        // CSV Convert Button
+        document.getElementById('btn-convert-csv').addEventListener('click', () => {
+            if (!currentCsvData) return;
+
+            const checkboxes = csvColumnsList.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedCols = Array.from(checkboxes).map(cb => cb.value);
+
+            if (selectedCols.length === 0) {
+                alert("Please select at least one column to convert.");
+                return;
+            }
+
+            const mode = document.querySelector('input[name="csv-mode"]:checked').value;
+
+            // Convert selected columns
+            const convertedData = {};
+            selectedCols.forEach(col => {
+                const colValues = currentCsvData.rows.map(r => r[col] || '');
+                const combinedText = colValues.join('\n:::SEP:::\n');
+                const convertedCombined = TLtiau_2_POJtiau(combinedText);
+                convertedData[col] = convertedCombined.split('\n:::SEP:::\n');
+            });
+
+            // Build new headers and rows
+            const newHeaders = [];
+            const finalRows = currentCsvData.rows.map(() => ({}));
+
+            if (mode === 'insert') {
+                currentCsvData.headers.forEach(h => {
+                    newHeaders.push(h);
+                    currentCsvData.rows.forEach((row, i) => {
+                        finalRows[i][h] = row[h];
+                    });
+
+                    if (selectedCols.includes(h)) {
+                        const pojColName = h + '_POJ';
+                        newHeaders.push(pojColName);
+                        currentCsvData.rows.forEach((row, i) => {
+                            finalRows[i][pojColName] = convertedData[h][i] || '';
+                        });
+                    }
+                });
+            } else if (mode === 'original-plus') {
+                selectedCols.forEach(col => {
+                    newHeaders.push(col);
+                    currentCsvData.rows.forEach((row, i) => {
+                        finalRows[i][col] = row[col];
+                    });
+
+                    const pojColName = col + '_POJ';
+                    newHeaders.push(pojColName);
+                    currentCsvData.rows.forEach((row, i) => {
+                        finalRows[i][pojColName] = convertedData[col][i] || '';
+                    });
+                });
+            } else {
+                // 'only' mode
+                selectedCols.forEach(col => {
+                    const pojColName = col + '_POJ';
+                    newHeaders.push(pojColName);
+                    currentCsvData.rows.forEach((row, i) => {
+                        finalRows[i][pojColName] = convertedData[col][i] || '';
+                    });
+                });
+            }
+
+            const resultCSV = generateCSV(newHeaders, finalRows, currentCsvSeparator);
+            currentFileOutput = resultCSV;
+
+            const tableContainer = document.getElementById('csv-preview-table-container');
+            tableContainer.innerHTML = '';
+            tableContainer.appendChild(renderTable(newHeaders, finalRows));
+            tableContainer.style.display = 'block';
+            outputPreview.style.display = 'none';
+
+            document.getElementById('csv-options-expander').open = false;
             fileOutputSection.style.display = 'block';
-        }
+        });
+
+        // JSON Convert Button
+        document.getElementById('btn-convert-json').addEventListener('click', () => {
+            if (!currentJsonData) return;
+
+            const jsonKeysList = document.getElementById('json-keys-list');
+            const checkboxes = jsonKeysList.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedIndices = Array.from(checkboxes).map(cb => parseInt(cb.value));
+
+            if (selectedIndices.length === 0) {
+                alert("Please select at least one key to convert.");
+                return;
+            }
+
+            const mode = document.querySelector('input[name="json-mode"]:checked').value;
+            const selectedKeys = selectedIndices.map(i => currentJsonPaths[i]);
+
+            let result;
+
+            if (currentJsonIsArray) {
+                const convertedData = {};
+
+                selectedKeys.forEach(keyInfo => {
+                    const values = currentJsonData.map(item => item[keyInfo.key] || '');
+                    const combined = values.join('\n:::JSON_SEP:::\n');
+                    const converted = TLtiau_2_POJtiau(combined);
+                    convertedData[keyInfo.key] = converted.split('\n:::JSON_SEP:::\n');
+                });
+
+                if (mode === 'only') {
+                    result = currentJsonData.map((item, i) => {
+                        const newItem = {};
+                        selectedKeys.forEach(keyInfo => {
+                            newItem[keyInfo.key + '_POJ'] = convertedData[keyInfo.key][i] || '';
+                        });
+                        return newItem;
+                    });
+                } else if (mode === 'original-plus') {
+                    result = currentJsonData.map((item, i) => {
+                        const newItem = {};
+                        selectedKeys.forEach(keyInfo => {
+                            newItem[keyInfo.key] = item[keyInfo.key];
+                            newItem[keyInfo.key + '_POJ'] = convertedData[keyInfo.key][i] || '';
+                        });
+                        return newItem;
+                    });
+                } else {
+                    const selectedKeyNames = new Set(selectedKeys.map(k => k.key));
+                    result = currentJsonData.map((item, i) => {
+                        const newItem = {};
+                        Object.keys(item).forEach(key => {
+                            newItem[key] = item[key];
+                            if (selectedKeyNames.has(key)) {
+                                newItem[key + '_POJ'] = convertedData[key][i] || '';
+                            }
+                        });
+                        return newItem;
+                    });
+                }
+            } else {
+                const combinedText = selectedKeys.map(k => k.sampleValue).join('\n:::JSON_SEP:::\n');
+                const convertedCombined = TLtiau_2_POJtiau(combinedText);
+                const convertedValues = convertedCombined.split('\n:::JSON_SEP:::\n');
+
+                if (mode === 'only') {
+                    result = {};
+                    selectedKeys.forEach((keyInfo, i) => {
+                        setNestedValue(result, keyInfo.key + '_POJ', convertedValues[i] || '');
+                    });
+                } else if (mode === 'original-plus') {
+                    result = {};
+                    selectedKeys.forEach((keyInfo, i) => {
+                        setNestedValue(result, keyInfo.key, keyInfo.sampleValue);
+                        setNestedValue(result, keyInfo.key + '_POJ', convertedValues[i] || '');
+                    });
+                } else {
+                    result = JSON.parse(JSON.stringify(currentJsonData));
+                    selectedKeys.forEach((keyInfo, i) => {
+                        setNestedValue(result, keyInfo.key + '_POJ', convertedValues[i] || '');
+                    });
+                }
+            }
+
+            const prettyJson = JSON.stringify(result, null, 2);
+            currentFileOutput = prettyJson;
+
+            document.getElementById('csv-preview-table-container').style.display = 'none';
+            outputPreview.style.display = 'block';
+            outputPreview.value = prettyJson.slice(0, 5000) + (prettyJson.length > 5000 ? '\n...(truncated)' : '');
+
+            document.getElementById('json-options-expander').open = false;
+            fileOutputSection.style.display = 'block';
+        });
+
+        // Subtitle Convert Button
+        document.getElementById('btn-convert-subtitle').addEventListener('click', () => {
+            if (!currentSubtitleData) return;
+
+            const mode = document.querySelector('input[name="subtitle-mode"]:checked').value;
+            const converted = convertSubtitle(currentSubtitleData, mode);
+            currentFileOutput = converted;
+
+            document.getElementById('csv-preview-table-container').style.display = 'none';
+            outputPreview.style.display = 'block';
+            outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+
+            document.getElementById('subtitle-options-expander').open = false;
+            fileOutputSection.style.display = 'block';
+        });
 
         // Clipboard and Download Helpers
         async function copyToClipboard(elementId, feedbackElementId) {
