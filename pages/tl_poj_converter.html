@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2
+version: v0.2a
 permalink: /pages/tl_poj_converter.html
 updated: 2026-01-04
-note: 1. Enhanced file conversion feature with multiple file types support.
+note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files.
 ---
 <!DOCTYPE html>
 <!-- Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ. -->
@@ -725,11 +725,12 @@ note: 1. Enhanced file conversion feature with multiple file types support.
                 modeLine1: "kan-ta 頭逝",
                 modeLine2: "kan-ta 第 2 逝",
                 modeLine3Plus: "kan-ta 第 3 逝以後",
-                btnConvert: "開始轉字幕"
+                btnConvert: "開始轉字幕",
+                detectPrompt: "這份 .txt 看起來有字幕時標，kàm beh 用字幕模式轉？"
             },
             messages: {
                 clipboardError: "無法度自動貼，chhi̍h Ctrl+V 貼看覓。",
-                truncated: "\n... (鉸短先看--一下)",
+                truncated: "\n\n...\n\n----------\n\n↑ 先看--一下爾，完整--ê ài táng-ló͘...",
                 downloadConfirm: "Kám 有確定 beh táng-ló͘ tī 家己電腦用？"
             },
             testSample: `=== TL Diacritic Input ===
@@ -1531,27 +1532,76 @@ TL uá (lean) → POJ òa
             current[parts[parts.length - 1]] = value;
         }
 
-        // Parse Subtitle (SRT/VTT)
+        // Helper to detect timecode lines (both standard and bracket formats)
+        function isTimecode(line) {
+            if (!line) return false;
+            // Standard SRT/VTT: 00:00:00,000 --> 00:00:00,000
+            if (line.includes('-->')) return true;
+            // Bracket style: [00:00] or [00:00:00]
+            if (/^\s*\[\d{1,2}:\d{2}(?::\d{2})?\]/.test(line)) return true;
+            return false;
+        }
+
+        // Smart detection for subtitle format in .txt files
+        function detectSubtitleFormat(content) {
+            const lines = content.split(/\r?\n/).slice(0, 50);
+
+            // VTT header check
+            if (lines[0]?.trim().toUpperCase() === 'WEBVTT') return 'vtt';
+
+            // SRT/VTT timecode pattern
+            const srtTimecodePattern = /\d{1,2}:\d{2}(?::\d{2})?[,.:]\d{3}\s*-->/;
+            const bracketTimecodePattern = /^\s*\[\d{1,2}:\d{2}(?::\d{2})?\]/;
+
+            let bracketCount = 0;
+            for (const line of lines) {
+                if (srtTimecodePattern.test(line)) return 'srt';
+                if (bracketTimecodePattern.test(line)) bracketCount++;
+            }
+
+            if (bracketCount >= 3) return 'srt';
+            return null;
+        }
+
+        // Parse Subtitle (SRT/VTT) with bracket timecode and header support
         function parseSubtitle(content, ext) {
             const lines = content.split(/\r?\n/);
             const blocks = [];
             let i = 0;
+            const headerLines = { urlLines: [], titleBlock: null };
 
-            // Skip VTT header
-            if (ext === 'vtt') {
-                while (i < lines.length && !lines[i].includes('-->')) {
+            // Parse header section (before first timecode) for URL and TITLE
+            while (i < lines.length && !isTimecode(lines[i])) {
+                const line = lines[i].trim();
+                if (/^url:/i.test(line)) {
+                    headerLines.urlLines.push(lines[i]);
+                } else if (/^title:/i.test(line)) {
+                    const match = lines[i].match(/^(title:\s*)/i);
+                    const prefix = match ? match[1] : 'TITLE: ';
+                    const firstLineContent = lines[i].substring(prefix.length);
+                    const titleTextLines = [];
+                    if (firstLineContent.trim() !== '') {
+                        titleTextLines.push(firstLineContent);
+                    }
                     i++;
+                    while (i < lines.length && lines[i].trim() !== '' && !isTimecode(lines[i])) {
+                        titleTextLines.push(lines[i]);
+                        i++;
+                    }
+                    headerLines.titleBlock = { prefix, textLines: titleTextLines };
+                    continue;
                 }
-                if (i > 0) i--;
+                i++;
             }
 
+            // Parse subtitle blocks
             while (i < lines.length) {
                 while (i < lines.length && lines[i].trim() === '') i++;
                 if (i >= lines.length) break;
 
                 const block = { cueId: '', timestamp: '', textLines: [], rawLines: [] };
 
-                if (lines[i].includes('-->')) {
+                if (isTimecode(lines[i])) {
                     block.timestamp = lines[i];
                     block.rawLines.push(lines[i]);
                     i++;
@@ -1560,45 +1610,44 @@ TL uá (lean) → POJ òa
                     block.rawLines.push(lines[i]);
                     i++;
 
-                    if (i < lines.length && lines[i].includes('-->')) {
+                    if (i < lines.length && isTimecode(lines[i])) {
                         block.timestamp = lines[i];
                         block.rawLines.push(lines[i]);
                         i++;
                     }
                 }
 
-                while (i < lines.length && lines[i].trim() !== '') {
+                // Text lines until empty line or next timecode
+                while (i < lines.length && lines[i].trim() !== '' && !isTimecode(lines[i])) {
                     const line = lines[i];
                     block.rawLines.push(line);
-
-                    if (/^url:/i.test(line.trim())) {
-                        block.textLines.push({ text: line, isUrl: true });
-                    } else {
-                        block.textLines.push({ text: line, isUrl: false });
-                    }
+                    block.textLines.push({ text: line, isUrl: false });
                     i++;
                 }
 
-                if (block.timestamp) {
+                if (block.timestamp || block.textLines.length > 0) {
                     blocks.push(block);
                 }
             }
 
-            return { blocks };
+            return { blocks, headerLines };
         }
 
         // Convert Subtitle based on mode
         function convertSubtitle(parsed, mode) {
             const resultLines = [];
 
-            parsed.blocks.forEach(block => {
-                if (block.cueId) resultLines.push(block.cueId);
-                resultLines.push(block.timestamp);
+            // Add header lines first
+            // URL lines - preserved as-is
+            if (parsed.headerLines) {
+                parsed.headerLines.urlLines.forEach(line => {
+                    resultLines.push(line);
+                });
 
-                block.textLines.forEach((lineObj, lineIndex) => {
-                    if (lineObj.isUrl) {
-                        resultLines.push(lineObj.text);
-                    } else {
+                // TITLE block - apply same line selection rules as subtitle blocks
+                if (parsed.headerLines.titleBlock) {
+                    const titleBlock = parsed.headerLines.titleBlock;
+                    titleBlock.textLines.forEach((lineText, lineIndex) => {
                         const lineNum = lineIndex + 1;
                         let shouldConvert = false;
 
@@ -1607,11 +1656,38 @@ TL uá (lean) → POJ òa
                         else if (mode === 'line2' && lineNum === 2) shouldConvert = true;
                         else if (mode === 'line3plus' && lineNum >= 3) shouldConvert = true;
 
+                        const prefix = lineIndex === 0 ? titleBlock.prefix : '';
                         if (shouldConvert) {
-                            resultLines.push(TLtiau_2_POJtiau(lineObj.text));
+                            resultLines.push(prefix + TLtiau_2_POJtiau(lineText));
                         } else {
-                            resultLines.push(lineObj.text);
+                            resultLines.push(prefix + lineText);
                         }
+                    });
+                }
+
+                // Add blank line after header if there were header lines
+                if (parsed.headerLines.urlLines.length > 0 || parsed.headerLines.titleBlock) {
+                    resultLines.push('');
+                }
+            }
+
+            parsed.blocks.forEach(block => {
+                if (block.cueId) resultLines.push(block.cueId);
+                resultLines.push(block.timestamp);
+
+                block.textLines.forEach((lineObj, lineIndex) => {
+                    const lineNum = lineIndex + 1;
+                    let shouldConvert = false;
+
+                    if (mode === 'all') shouldConvert = true;
+                    else if (mode === 'line1' && lineNum === 1) shouldConvert = true;
+                    else if (mode === 'line2' && lineNum === 2) shouldConvert = true;
+                    else if (mode === 'line3plus' && lineNum >= 3) shouldConvert = true;
+
+                    if (shouldConvert) {
+                        resultLines.push(TLtiau_2_POJtiau(lineObj.text));
+                    } else {
+                        resultLines.push(lineObj.text);
                     }
                 });
 
@@ -1656,7 +1732,14 @@ TL uá (lean) → POJ òa
                         for (let i = 1; i <= pdf.numPages; i++) {
                             const page = await pdf.getPage(i);
                             const textContent = await page.getTextContent();
-                            const pageText = textContent.items.map(item => item.str).join(' ');
+                            // Preserve newlines by checking hasEOL property on each text item
+                            let pageText = '';
+                            textContent.items.forEach(item => {
+                                pageText += item.str;
+                                if (item.hasEOL) {
+                                    pageText += '\n';
+                                }
+                            });
                             fullText += pageText + '\n';
                         }
 
@@ -1671,7 +1754,7 @@ TL uá (lean) → POJ òa
                         updatePreviewLabel('pdf');
                         document.getElementById('csv-preview-table-container').style.display = 'none';
                         outputPreview.style.display = 'block';
-                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? UI_STRINGS.messages.truncated : '');
                         fileOutputSection.style.display = 'block';
                     } catch (error) {
                         console.error('PDF parsing error:', error);
@@ -1802,12 +1885,54 @@ TL uá (lean) → POJ òa
                         currentFileOutput = converted;
                         document.getElementById('csv-preview-table-container').style.display = 'none';
                         outputPreview.style.display = 'block';
-                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                        outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? UI_STRINGS.messages.truncated : '');
                         fileOutputSection.style.display = 'block';
                     }
                 } else {
-                    // Standard Mode (txt, md)
+                    // Standard Mode (txt, md) - with smart subtitle detection for .txt
                     const ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+
+                    // Smart detect subtitle format in .txt files
+                    if (ext === 'txt') {
+                        const detectedFormat = detectSubtitleFormat(content);
+                        if (detectedFormat) {
+                            // Show confirmation dialog
+                            const useSubtitleMode = confirm(UI_STRINGS.subtitle?.detectPrompt || "這份 .txt 看起來有字幕時標，kàm beh 用字幕模式轉？");
+                            if (useSubtitleMode) {
+                                // User chose subtitle mode
+                                currentFileName = currentFileName.replace(/\.txt$/i, '.' + detectedFormat);
+                                updatePreviewLabel(detectedFormat);
+
+                                const parsedSubtitle = parseSubtitle(content, detectedFormat);
+                                currentSubtitleData = parsedSubtitle;
+                                currentSubtitleRawContent = content;
+                                currentSubtitleExt = detectedFormat;
+
+                                const hasMultiLine = parsedSubtitle.blocks.some(b => b.textLines.length > 1);
+
+                                document.getElementById('csv-options-expander').style.display = 'none';
+                                document.getElementById('json-options-expander').style.display = 'none';
+
+                                if (hasMultiLine) {
+                                    document.getElementById('subtitle-options-expander').style.display = 'block';
+                                    document.getElementById('subtitle-options-expander').open = true;
+                                    fileOutputSection.style.display = 'none';
+                                } else {
+                                    document.getElementById('subtitle-options-expander').style.display = 'none';
+                                    const converted = convertSubtitle(parsedSubtitle, 'all');
+                                    currentFileOutput = converted;
+                                    document.getElementById('csv-preview-table-container').style.display = 'none';
+                                    outputPreview.style.display = 'block';
+                                    outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? UI_STRINGS.messages.truncated : '');
+                                    fileOutputSection.style.display = 'block';
+                                }
+                                return; // Exit, async subtitle handling done
+                            }
+                            // User chose plain text mode - fall through
+                        }
+                    }
+
+                    // Process as plain text (md or txt without subtitle format)
                     updatePreviewLabel(ext === 'md' ? 'md' : 'text');
 
                     document.getElementById('csv-options-expander').style.display = 'none';
@@ -1818,7 +1943,7 @@ TL uá (lean) → POJ òa
 
                     const converted = TLtiau_2_POJtiau(content);
                     currentFileOutput = converted;
-                    outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? '\n...' : '');
+                    outputPreview.value = converted.slice(0, 2000) + (converted.length > 2000 ? UI_STRINGS.messages.truncated : '');
                     fileOutputSection.style.display = 'block';
                 }
             };
