@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2b
+version: v0.2c
 permalink: /pages/tl_poj_converter.html
-updated: 2026-01-04
-note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files. 3. fix some tonemark bugs
+updated: 2026-01-05
+note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files. 3. fix some tonemark bugs 4. add two flags to finetune conversion
 ---
 <!DOCTYPE html>
 <!-- Note: 1. This is a real-time TL -> POJ converter. -->
@@ -418,9 +418,15 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
             <h1 id="ui-title"></h1>
         </header>
 
-        <div class="tabs">
+        <div class="tabs" style="justify-content: center; align-items: center;">
             <button class="tab-btn active" onclick="switchMode('realtime')" id="ui-tab-realtime"></button>
             <button class="tab-btn" onclick="switchMode('file')" id="ui-tab-file"></button>
+            <label
+                style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 1.1rem; margin-left: 2rem; color: var(--text-secondary);">
+                <input type="checkbox" id="nasal-superscript-toggle" checked
+                    style="accent-color: var(--text-link); width: 18px; height: 18px;">
+                <span id="ui-nasal-toggle-label"></span>
+            </label>
         </div>
 
         <!-- Real-time Panel -->
@@ -485,7 +491,7 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
         <div id="panel-file" class="panel">
             <!-- File Upload Section -->
             <details id="file-upload-expander" open>
-                <summary id="ui-file-upload-header">📁 Ap-ló͘ 書類</summary>
+                <summary id="ui-file-upload-header" style="font-size: 1.2rem;">📁 Ap-ló͘ 書類</summary>
                 <div class="file-drop-zone" id="dropZone">
                     <p id="ui-drop-text"></p>
                     <input type="file" id="fileInput" accept=".txt,.md,.srt,.vtt,.csv,.tsv,.json,.pdf"
@@ -508,6 +514,12 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
                 <summary id="ui-csv-options-header">⚙️ CSV/TSV 設定</summary>
                 <div class="options-panel">
                     <label id="lbl-select-columns" style="font-weight: bold;"></label>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.25rem;">
+                        <button type="button" id="btn-csv-select-all" class="tool-btn"
+                            style="font-size: 0.75rem;">全揀</button>
+                        <button type="button" id="btn-csv-deselect-all" class="tool-btn"
+                            style="font-size: 0.75rem;">全消</button>
+                    </div>
                     <div id="csv-columns-list" class="columns-list"></div>
 
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -532,6 +544,12 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
                 <summary id="ui-json-options-header">⚙️ JSON 設定</summary>
                 <div class="options-panel">
                     <label id="lbl-select-keys" style="font-weight: bold;"></label>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.25rem;">
+                        <button type="button" id="btn-json-select-all" class="tool-btn"
+                            style="font-size: 0.75rem;">全揀</button>
+                        <button type="button" id="btn-json-deselect-all" class="tool-btn"
+                            style="font-size: 0.75rem;">全消</button>
+                    </div>
                     <div id="json-keys-list" class="columns-list" style="font-family: monospace; font-size: 0.85rem;">
                     </div>
 
@@ -768,6 +786,9 @@ TL uá (lean) → POJ òa
 \\[Blue] sky (Blue sky)
 \\[Singing] (Singing)
 \\[Wiki] (Wiki)`,
+            nasalSuperscript: {
+                toggle: "N→細ⁿ"
+            },
             footer: "© 2026 Cyber O͘-hîm ki-tē"
         };
 
@@ -794,6 +815,7 @@ TL uá (lean) → POJ òa
             document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
             document.getElementById('ui-btn-download-offline-text').innerText = UI_STRINGS.buttons.downloadOffline;
             document.getElementById('ui-btn-clear').innerText = UI_STRINGS.buttons.clear;
+            document.getElementById('ui-nasal-toggle-label').innerText = UI_STRINGS.nasalSuperscript.toggle;
             document.getElementById('ui-footer').innerText = UI_STRINGS.footer;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
@@ -839,12 +861,43 @@ TL uá (lean) → POJ òa
 
         document.addEventListener('DOMContentLoaded', initUI);
 
+        // --- Nasal Superscript Toggle (N → ⁿ) ---
+        window.TL_USE_NASAL_SUPERSCRIPT = true; // Default ON
+        document.getElementById('nasal-superscript-toggle')?.addEventListener('change', (e) => {
+            window.TL_USE_NASAL_SUPERSCRIPT = e.target.checked;
+            // Re-trigger conversion if there's input
+            const rtInput = document.getElementById('rt-input');
+            if (rtInput && rtInput.value) {
+                document.getElementById('rt-output').value = TLtiau_2_POJtiau(rtInput.value);
+            }
+        });
+
+        // --- Tone 6 Caron Flag (default OFF = use acute like tone 2) ---
+        window.TL_TONE6_USE_CARON = false; // Set to true for caron (ǎ) instead of acute (á)
+
+        // --- All-Caps Support Flag (default OFF) ---
+        window.TL_ALL_CAPS_SUPPORT = true; // Set to true to enable all-caps conversion (OO→O͘, TS→CH, etc.)
+
+        // --- CSV/JSON Select All / Deselect All ---
+        document.getElementById('btn-csv-select-all')?.addEventListener('click', () => {
+            document.getElementById('csv-columns-list')?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+        });
+        document.getElementById('btn-csv-deselect-all')?.addEventListener('click', () => {
+            document.getElementById('csv-columns-list')?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+        document.getElementById('btn-json-select-all')?.addEventListener('click', () => {
+            document.getElementById('json-keys-list')?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+        });
+        document.getElementById('btn-json-deselect-all')?.addEventListener('click', () => {
+            document.getElementById('json-keys-list')?.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+
         // --- Converter Logic (Ported from Python) ---
 
         // Constants for regex tails
         // TL_bue: Syllable endings used for tone mark positioning
         // Updated to include p,t,k,h (entering tone endings) to allow non-standard tone/syllable combinations (e.g., ík -> ék)
-        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nn|ⁿ|N)?)';
+        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nnh|nn|ⁿ|N)?)';
 
         // Helper to escape regex special characters in a string
         function escapeRegExp(string) {
@@ -1017,6 +1070,16 @@ TL uá (lean) → POJ òa
                 ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
                 ['nnh', 'hN'], ['Nh', 'hN'], ['hnn', 'hN']
             ];
+            // Add all-caps variants if flag enabled
+            if (window.TL_ALL_CAPS_SUPPORT) {
+                tailo2poj.push(
+                    ['OONN', 'O͘N'], ['ONN', 'O͘N'],
+                    ['TS', 'CH'], ['OO', 'O͘'],
+                    ['UA', 'OA'], ['UE', 'OE'],
+                    ['ING', 'ENG'], ['IK', 'EK'],
+                    ['NNH', 'HN'], ['HNN', 'HN']
+                );
+            }
 
             for (const [k, v] of tailo2poj) {
                 poj_soo = poj_soo.replace(new RegExp(k, 'g'), v); // Use regex for global replace
@@ -1033,8 +1096,21 @@ TL uá (lean) → POJ òa
             if (!poj_soo) return '';
             let poj_tiau = poj_soo;
 
-            const N_2_n = /(?:N|nn)(\d?)\b/g;
-            poj_tiau = poj_tiau.replace(N_2_n, 'ⁿ$1');
+            // Conditionally convert N/nn to superscript ⁿ based on user preference
+            const useNasalSuperscript = typeof window !== 'undefined' &&
+                window.TL_USE_NASAL_SUPERSCRIPT !== false;
+            if (useNasalSuperscript) {
+                const N_2_n = /(?:N|nn)(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(N_2_n, 'ⁿ$1');
+            }
+
+            // Tone 6 character selection: caron (ǎ) or acute (á) like tone 2
+            // Default is false = use acute (same as tone 2)
+            const useTone6Caron = typeof window !== 'undefined' &&
+                window.TL_TONE6_USE_CARON === true;
+            const t6 = useTone6Caron
+                ? { a: 'ǎ', A: 'Ǎ', e: 'ě', E: 'Ě', i: 'ǐ', I: 'Ǐ', o: 'ǒ', O: 'Ǒ', u: 'ǔ', U: 'Ǔ', 'o͘': 'ǒ͘', 'O͘': 'Ǒ͘', m: 'm̌', M: 'M̌', n: 'ň', N: 'Ň' }
+                : { a: 'á', A: 'Á', e: 'é', E: 'É', i: 'í', I: 'Í', o: 'ó', O: 'Ó', u: 'ú', U: 'Ú', 'o͘': 'ó͘', 'O͘': 'Ó͘', m: 'ḿ', M: 'Ḿ', n: 'ń', N: 'Ń' };
 
             // Mapping
             const POJ_S2T = [
@@ -1047,7 +1123,7 @@ TL uá (lean) → POJ òa
                 { r: createRC3_Regex('A(i|u)((?:N|ⁿ|nn)?)h4'), s: 'A$1$2h' },
                 // use RC2
                 { r: createRC2('a5'), s: 'â$1$2' }, { r: createRC2('A5'), s: 'Â$1$2' },
-                { r: createRC2('a6'), s: 'á$1$2' }, { r: createRC2('A6'), s: 'Á$1$2' },
+                { r: createRC2('a6'), s: t6.a + '$1$2' }, { r: createRC2('A6'), s: t6.A + '$1$2' },
                 { r: createRC2('a7'), s: 'ā$1$2' }, { r: createRC2('A7'), s: 'Ā$1$2' },
                 // use RC3
                 { r: createRC3_Regex('a(i|u)h(?:N|ⁿ|nn)8'), s: 'a̍$1hⁿ' },
@@ -1066,7 +1142,7 @@ TL uá (lean) → POJ òa
                 { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)4'), s: 'Uih$1' },
                 // use RC2
                 { r: createRC2('u5'), s: 'û$1$2' }, { r: createRC2('U5'), s: 'Û$1$2' },
-                { r: createRC2('u6'), s: 'ú$1$2' }, { r: createRC2('U6'), s: 'Ú$1$2' },
+                { r: createRC2('u6'), s: t6.u + '$1$2' }, { r: createRC2('U6'), s: t6.U + '$1$2' },
                 { r: createRC2('u7'), s: 'ū$1$2' }, { r: createRC2('U7'), s: 'Ū$1$2' },
                 // use RC3
                 { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)8'), s: 'u̍ih$1' },
@@ -1082,8 +1158,8 @@ TL uá (lean) → POJ òa
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'Ò$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'ô$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'Ô$1$2' },
-                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'ó$1$2' },
-                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: 'Ó$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: t6.o + '$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: t6.O + '$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'ō$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'Ō$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'ŏ$1$2' },
@@ -1095,7 +1171,7 @@ TL uá (lean) → POJ òa
                 { r: createRC1('a3'), s: 'à$1' }, { r: createRC1('A3'), s: 'À$1' },
                 { r: createRC4('a4'), s: 'a$1' }, { r: createRC4('A4'), s: 'A$1' },
                 { r: createRC1('a5'), s: 'â$1' }, { r: createRC1('A5'), s: 'Â$1' },
-                { r: createRC1('a6'), s: 'á$1' }, { r: createRC1('A6'), s: 'Á$1' },
+                { r: createRC1('a6'), s: t6.a + '$1' }, { r: createRC1('A6'), s: t6.A + '$1' },
                 { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
                 { r: createRC8('a8'), s: 'a̍$1' }, { r: createRC8('A8'), s: 'A̍$1' },
                 { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
@@ -1105,7 +1181,7 @@ TL uá (lean) → POJ òa
                 { r: createRC1('e3'), s: 'è$1' }, { r: createRC1('E3'), s: 'È$1' },
                 { r: createRC4('e4'), s: 'e$1' }, { r: createRC4('E4'), s: 'E$1' },
                 { r: createRC1('e5'), s: 'ê$1' }, { r: createRC1('E5'), s: 'Ê$1' },
-                { r: createRC1('e6'), s: 'é$1' }, { r: createRC1('E6'), s: 'É$1' },
+                { r: createRC1('e6'), s: t6.e + '$1' }, { r: createRC1('E6'), s: t6.E + '$1' },
                 { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
                 { r: createRC8('e8'), s: 'e̍$1' }, { r: createRC8('E8'), s: 'E̍$1' },
                 { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
@@ -1115,7 +1191,7 @@ TL uá (lean) → POJ òa
                 { r: createRC1('i3'), s: 'ì$1' }, { r: createRC1('I3'), s: 'Ì$1' },
                 { r: createRC4('i4'), s: 'i$1' }, { r: createRC4('I4'), s: 'I$1' },
                 { r: createRC1('i5'), s: 'î$1' }, { r: createRC1('I5'), s: 'Î$1' },
-                { r: createRC1('i6'), s: 'í$1' }, { r: createRC1('I6'), s: 'Í$1' },
+                { r: createRC1('i6'), s: t6.i + '$1' }, { r: createRC1('I6'), s: t6.I + '$1' },
                 { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
                 { r: createRC8('i8'), s: 'i̍$1' }, { r: createRC8('I8'), s: 'I̍$1' },
                 { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
@@ -1126,7 +1202,7 @@ TL uá (lean) → POJ òa
                 { r: createRC1('o͘3'), s: 'ò͘$1' }, { r: createRC1('O͘3'), s: 'Ò͘$1' },
                 { r: createRC4('o͘4'), s: 'o͘$1' }, { r: createRC4('O͘4'), s: 'O͘$1' },
                 { r: createRC1('o͘5'), s: 'ô͘$1' }, { r: createRC1('O͘5'), s: 'Ô͘$1' },
-                { r: createRC1('o͘6'), s: 'ó͘$1' }, { r: createRC1('O͘6'), s: 'Ó͘$1' },
+                { r: createRC1('o͘6'), s: t6['o͘'] + '$1' }, { r: createRC1('O͘6'), s: t6['O͘'] + '$1' },
                 { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
                 { r: createRC8('o͘8'), s: 'o̍͘$1' }, { r: createRC8('O͘8'), s: 'O̍͘$1' },
                 { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
@@ -1136,7 +1212,7 @@ TL uá (lean) → POJ òa
                 { r: createRC1('o3'), s: 'ò$1' }, { r: createRC1('O3'), s: 'Ò$1' },
                 { r: createRC4('o4'), s: 'o$1' }, { r: createRC4('O4'), s: 'O$1' },
                 { r: createRC1('o5'), s: 'ô$1' }, { r: createRC1('O5'), s: 'Ô$1' },
-                { r: createRC1('o6'), s: 'ó$1' }, { r: createRC1('O6'), s: 'Ó$1' },
+                { r: createRC1('o6'), s: t6.o + '$1' }, { r: createRC1('O6'), s: t6.O + '$1' },
                 { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
                 { r: createRC8('o8'), s: 'o̍$1' }, { r: createRC8('O8'), s: 'O̍$1' },
                 { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
@@ -1146,9 +1222,9 @@ TL uá (lean) → POJ òa
                 { r: createRC1('u3'), s: 'ù$1' }, { r: createRC1('U3'), s: 'Ù$1' },
                 { r: createRC4('u4'), s: 'u$1' }, { r: createRC4('U4'), s: 'U$1' },
                 { r: createRC1('u5'), s: 'û$1' }, { r: createRC1('U5'), s: 'Û$1' },
-                { r: createRC1('u6'), s: 'ú$1' }, { r: createRC1('U6'), s: 'Ú$1' },
+                { r: createRC1('u6'), s: t6.u + '$1' }, { r: createRC1('U6'), s: t6.U + '$1' },
                 { r: createRC1('u7'), s: 'ū$1' }, { r: createRC1('U7'), s: 'Ū$1' },
-                { r: createRC1('u8'), s: 'u̍$1' }, { r: createRC1('U8'), s: 'U̍$1' },
+                { r: createRC8('u8'), s: 'u̍$1' }, { r: createRC8('U8'), s: 'U̍$1' },
                 { r: createRC1('u9'), s: 'ŭ$1' }, { r: createRC1('U9'), s: 'Ŭ$1' },
 
                 // use RC3 mappings
@@ -1157,7 +1233,7 @@ TL uá (lean) → POJ òa
                 { r: createRC3_Regex('m3'), s: 'm̀' }, { r: createRC3_Regex('M3'), s: 'M̀' },
                 { r: createRC3_Regex('mh4'), s: 'mh' }, { r: createRC3_Regex('Mh4'), s: 'Mh' },
                 { r: createRC3_Regex('m5'), s: 'm̂' }, { r: createRC3_Regex('M5'), s: 'M̂' },
-                { r: createRC3_Regex('m6'), s: 'ḿ' }, { r: createRC3_Regex('M6'), s: 'Ḿ' },
+                { r: createRC3_Regex('m6'), s: t6.m }, { r: createRC3_Regex('M6'), s: t6.M },
                 { r: createRC3_Regex('m7'), s: 'm̄' }, { r: createRC3_Regex('M7'), s: 'M̄' },
                 { r: createRC3_Regex('mh8'), s: 'm̍h' }, { r: createRC3_Regex('Mh8'), s: 'M̍h' },
                 { r: createRC3_Regex('m9'), s: 'm̆' }, { r: createRC3_Regex('M9'), s: 'M̆' },
@@ -1167,11 +1243,25 @@ TL uá (lean) → POJ òa
                 { r: createRC3_Regex('ng3'), s: 'ǹg' }, { r: createRC3_Regex('Ng3'), s: 'Ǹg' },
                 { r: createRC3_Regex('ngh4'), s: 'ngh' }, { r: createRC3_Regex('Ngh4'), s: 'Ngh' },
                 { r: createRC3_Regex('ng5'), s: 'n̂g' }, { r: createRC3_Regex('Ng5'), s: 'N̂g' },
-                { r: createRC3_Regex('ng6'), s: 'ńg' }, { r: createRC3_Regex('Ng6'), s: 'Ńg' },
+                { r: createRC3_Regex('ng6'), s: t6.n + 'g' }, { r: createRC3_Regex('Ng6'), s: t6.N + 'g' },
                 { r: createRC3_Regex('ng7'), s: 'n̄g' }, { r: createRC3_Regex('Ng7'), s: 'N̄g' },
                 { r: createRC3_Regex('ngh8'), s: 'n̍gh' }, { r: createRC3_Regex('Ngh8'), s: 'N̍gh' },
                 { r: createRC3_Regex('ng9'), s: 'n̆g' }, { r: createRC3_Regex('Ng9'), s: 'N̆g' }
             ];
+            // Add all-caps NG rules if flag enabled
+            if (window.TL_ALL_CAPS_SUPPORT) {
+                POJ_S2T.push(
+                    { r: createRC3_Regex('NG1'), s: 'NG' },
+                    { r: createRC3_Regex('NG2'), s: t6.N + 'G' },
+                    { r: createRC3_Regex('NG3'), s: 'ǸG' },
+                    { r: createRC3_Regex('NGH4'), s: 'NGH' },
+                    { r: createRC3_Regex('NG5'), s: 'N̂G' },
+                    { r: createRC3_Regex('NG6'), s: t6.N + 'G' },
+                    { r: createRC3_Regex('NG7'), s: 'N̄G' },
+                    { r: createRC3_Regex('NGH8'), s: 'N̍GH' },
+                    { r: createRC3_Regex('NG9'), s: 'N̆G' }
+                );
+            }
 
             for (const map of POJ_S2T) {
                 poj_tiau = poj_tiau.replace(map.r, map.s);
