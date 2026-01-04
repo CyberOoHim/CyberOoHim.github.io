@@ -1,13 +1,13 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2a
+version: v0.2b
 permalink: /pages/tl_poj_converter.html
 updated: 2026-01-04
-note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files.
+note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files. 3. fix some tonemark bugs
 ---
 <!DOCTYPE html>
-<!-- Note: 1. This is a real-time converter. It will convert the text as you type, paste from clipboard, or drag and drop files. 2. The converter will also convert number tonemarks to char tonemarks for both POJ and TL-POJ. -->
+<!-- Note: 1. This is a real-time TL -> POJ converter. -->
 <html lang="en">
 
 <head>
@@ -844,7 +844,7 @@ TL uá (lean) → POJ òa
         // Constants for regex tails
         // TL_bue: Syllable endings used for tone mark positioning
         // Updated to include p,t,k,h (entering tone endings) to allow non-standard tone/syllable combinations (e.g., ík -> ék)
-        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nnh|nn|ⁿ|N|hN|p|t|k|h)?)';
+        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nn|ⁿ|N)?)';
 
         // Helper to escape regex special characters in a string
         function escapeRegExp(string) {
@@ -887,14 +887,14 @@ TL uá (lean) → POJ òa
         function createRC4(tailo) {
             const prefix = tailo.slice(0, -1);
             const lastChar = tailo.slice(-1);
-            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|p|t|k)' + lastChar + '?', 'g');
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar + '?', 'g');
         }
 
         // Helper for RC8
         function createRC8(tailo) {
             const prefix = tailo.slice(0, -1);
             const lastChar = tailo.slice(-1);
-            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|p|t|k)' + lastChar, 'g');
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar, 'g');
         }
 
         // 1. TL Tone Marks -> TL Numbers
@@ -985,7 +985,7 @@ TL uá (lean) → POJ òa
 
             if (use14) {
                 const add1 = /(a|A|e|E|i|I|o|O|u|U|m|M|ng|Ng|n)\b/g;
-                const add4 = /(h|p|t|k)\b/g;
+                const add4 = /(h|H|p|P|t|T|k|K)\b/g;
                 tl_soo = tl_soo.replace(add1, '$11');
                 tl_soo = tl_soo.replace(add4, '$14');
             }
@@ -1003,7 +1003,7 @@ TL uá (lean) → POJ òa
                 const remove1 = /([aeiouAEIOU](?:nn|N)?|[aeiouAEIOU](?:ng|n|m)|(?:p|P|ph|Ph|m|M|b|B|t|T|th|Th|n|N|l|L|k|K|kh|Kh|ng|Ng|g|G|s|S|h|H)?(?:ng|Ng|m|M))1/g;
                 poj_soo = poj_soo.replace(remove1, '$1');
 
-                const remove4 = /([aeiouAEIOU](?:(?:nn|N)?h|p|t|k)|(?:m|M|ng|Ng)h)4/g;
+                const remove4 = /([aeiouAEIOU](?:(?:nn|N)?(?:h|H)|p|P|t|T|k|K)|(?:m|M|ng|Ng)(?:h|H))4/g;
                 poj_soo = poj_soo.replace(remove4, '$1');
             }
 
@@ -1703,7 +1703,13 @@ TL uá (lean) → POJ òa
             const fileName = file.name.toLowerCase();
 
             const namePart = file.name.substring(0, file.name.lastIndexOf('.'));
-            const extPart = file.name.substring(file.name.lastIndexOf('.'));
+            let extPart = file.name.substring(file.name.lastIndexOf('.'));
+
+            // If PDF, change extension to .txt for the output file
+            if (extPart.toLowerCase() === '.pdf') {
+                extPart = '.txt';
+            }
+
             currentFileName = `${namePart}_POJ${extPart}`;
 
             const isValid = allowedExtensions.some(ext => fileName.endsWith(ext));
@@ -1733,11 +1739,14 @@ TL uá (lean) → POJ òa
                             const page = await pdf.getPage(i);
                             const textContent = await page.getTextContent();
                             // Preserve newlines by checking hasEOL property on each text item
+                            // Also add spaces between items to prevent word concatenation
                             let pageText = '';
-                            textContent.items.forEach(item => {
+                            textContent.items.forEach((item, idx) => {
                                 pageText += item.str;
                                 if (item.hasEOL) {
                                     pageText += '\n';
+                                } else if (idx < textContent.items.length - 1) {
+                                    pageText += ' ';
                                 }
                             });
                             fullText += pageText + '\n';
@@ -2259,6 +2268,9 @@ TL uá (lean) → POJ òa
                 { in: "a8", out: "a8" },   // TL a8 (no stop)
                 { in: "ah4", out: "ah" },  // TL ah4 (stop)
                 { in: "ah8", out: "a̍h" },   // TL ah8 (stop)
+                { in: "ah3", out: "ah3" },  // TL ah3 (no stop)
+                { in: "ak7", out: "ak7" },   // TL ak7 (no stop)
+                { in: "SUT8", out: "SU̍T" },   // TL SUT8 (stop)
 
                 // Escape syntax tests
                 { in: "ts\\[ts]ts", out: "chtsch" },  // Edge case: \[ts] preserved, bare ts converted
