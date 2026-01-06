@@ -4,7 +4,7 @@ title: TL to POJ Real-time Converter
 version: v0.2d
 permalink: /pages/tl_poj_converter.html
 updated: 2026-01-06
-note: 1. Enhance edge cases conversion 2. add settings/help tab
+note: 1. Enhance edge cases conversion 2. enhance help message and sample test text
 ---
 <!DOCTYPE html>
 <!--
@@ -951,13 +951,17 @@ note: 1. Enhance edge cases conversion 2. add settings/help tab
             },
             help: {
                 rtTitle: "1. 拍隨轉 (Real-time Mode)",
-                rtText: `Input TL or POJ with numeric tones.<br>
-- Input box: Type/Paste text.<br>
-- Output box: View converted POJ.`,
-                fileTitle: "2. 轉書類 (File Mode)",
-                fileText: `Convert files in bulk.<br>
-- Supported: .txt, .md, .srt, .vtt, .csv, .tsv, .json, .pdf<br>
-- Preview and download converted results.`
+                rtText: `簡單 ê TL 轉 POJ ke-si，支援符號調號 TL 和數字調號 POJ。<br>
+• <strong>輸入</strong>: Tiàm 左邊框á拍字 (例: Tye5-uan5 / Tâi-uân)。<br>
+• <strong>輸出</strong>: 右邊框á會隨顯示轉好 ê POJ。<br>`,
+                fileTitle: "2. 書類處理 (File Mode)",
+                fileText: `轉資料檔案。<br>
+• <strong>Ap-ló͘(Upload)</strong>: Kā 檔案 khiú--入來，a̍h-sī chhi̍h chhi̍h-liú-á 去 檔案窗á掠。<br>
+• <strong>格式</strong>: 支援 .txt (純文字), .md (Markdown 文字), .srt/.vtt/.txt (字幕), .csv/.tsc (表格), .json (JSON 資料), .pdf (PDF 文件)。<br>
+• <strong>Táng-ló͘(Download)</strong>: 轉好 ê 檔案會當 download， khiām--起來。<br><br>
+<strong>註:</strong><br>
+1. 若是用 iPad ê 時，掠無 .srt，kā 副檔名改做 .vtt a̍h-sī .txt。<br>
+2. PDF 是直接用 browser 簡單發落，假使排版較複雜 ê 書類讀了無好勢，chiah 另外 kā 文字先 chhoân 好來轉。`
             },
             about: {
                 title: "About",
@@ -991,60 +995,56 @@ Licensed under SIL Open Font License 1.1`
                 downloadFailed: "Táng-ló͘ 失敗。koh 試看覓。",
                 downloading: "Tng teh táng-ló͘ ..."
             },
-            testSample: `=== TL Diacritic Input ===
-TL: Tâi-uân sī chi̍t-ê hó só͘-chāi.
-Tsi̍t-hāng tāi-tsì tsin-tsiànn hó.
+            testSample: `=== TL 符號調輸入 (Diacritics) ===
+Tâi-uân sī chi̍t-ê hó só͘-chāi. (台灣是一个好所在)
+Tsit-hāng tāi-tsì tsin-tsiànn hó. (這項代誌真正好)
+Góa ài lim tê, i ài chia̍h pn̄g. (我愛啉茶，伊愛食飯)
 
-POJ: Góa ài lim tê, i ài chia̍h pn̄g.
+=== TL/POJ 數字調輸入 (Numeric) ===
+Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
+Goa2 ai3 lim te5, i ai3 chiah8 png7.
 
-=== TL/POJ Number Tonemarks ===
-TL: Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
-Chit8-hang7 tai7-chi3 chin-chiann3 ho2.
-
-POJ: Goa2 ai3 lim te5, i ai3 chiah8 png7.
-
-=== Syllabic Nasals & Special Cases ===
-Nasal: sann, sinn, a̍hnn
-Nasal h-stop: annh→ahⁿ(always), aNh→ahⁿ(toggle ON)/aNh(toggle OFF)
-Tone 4/8: a4, a8 (no stop), ah4, ah8 (stop)
-
-úi óo ông m̂ ǹg n̂g
-m2 ng5 mh8 ngh8
-
-=== Tone Number Tests (1-9) ===
+=== 調號 1-9 (Tones) ===
 a1 a2 a3 ah4 a5 a6 a7 ah8 a9
 A1 A2 A3 AH4 A5 A6 A7 AH8 A9
+e1 e2 e3 eh4 e5 e6 e7 eh8 e9
+o1 o2 o3 oh4 o5 o6 o7 oh8 o9
 
-=== Settings Toggle Tests ===
-1. Nasal Toggle (尾N->ⁿ):
-   - annh -> ahⁿ (Always converted)
-   - aNh -> ahⁿ (Toggle ON) / aNh (Toggle OFF)
-   - inh -> ihⁿ (Toggle ON) / inh (Toggle OFF)
+=== TL→POJ 音素轉換 (Phonemes) ===
+ts→ch: tsuí→chúi (水), tsit→chit (這)
+tsh→chh: tshut→chhut (出), tshài→chhài (菜)
+oo→o͘: oo→o͘ (烏), hōo→hō͘ (予)
+j→j: jī→jī (字), jia̍t→jia̍t (熱) (無變)
 
-2. Tone 6 Toggle (ǎ vs á):
-   - a6 -> ǎ (Caron ON) / á (Acute OFF)
-   - ng6 -> nnǧ (Caron ON) / nnǵ (Acute OFF)
+=== 鼻音 (nn / N) ===
+[Toggle: 尾N→ⁿ]
+nn尾 (lóng 轉): sann→saⁿ (三), sinn→siⁿ (鮮)
+N尾 ON: saN→saⁿ, siN→siⁿ, a̍hN→a̍hⁿ
+N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN
+(注意: 頭前 n 無變: na -> na)
 
-3. All Caps Toggle:
-   - TSUI -> CHUI (Toggle ON) / TSUI (Toggle OFF)
-   - TSHUT -> CHHUT (Toggle ON) / TSHUT (Toggle OFF)
-   - OO -> O͘ (Toggle ON) / OO (Toggle OFF)
+=== 第六調 (Tone 6) ===
+[Toggle: 第6調 ǎ]
+ON (Caron): a6→ǎ, e6→ě, o6→ǒ, ng6→nnǧ
+OFF (Acute): a6→á, e6→é, o6→ó, ng6→nnǵ
 
-=== Tonemark Position (ua→oa, ue→oe) ===
-TL tuà (live) → POJ tòa
-TL kué (rice pudding) → POJ kóe
-TL suí (pretty) → POJ suí
-TL uá (lean) → POJ òa
+=== 大寫模式 (ALL CAPS) ===
+[Toggle: 大寫模式]
+ON: TSUI→CHUI, TSHUT→CHHUT, OO→O͘
+OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉換)
 
-=== False Positives (Need Escape to preserved as-is) ===
-\\[cats] (cats)
-\\[book] (book)
-\\[Google] (Google)
-\\[Blue] sky (Blue sky)
-\\[Singing] (Singing)
-\\[Wiki] (Wiki)`
+=== 調位標記 (Vowel Priority) ===
+ua→oa: tuà→tòa (大), kuà→kòa (掛)
+ue→oe: kué→kóe (粿), pué→póe (飛)
+ui: suí→súi (水), kuí→kúi (鬼)
+
+=== 跳脫語法 kah 邊墘狀況 (Edge Cases) ===
+跳脫: \\[Tâi-uân] (保留原文), \\[ts]
+混合: 123 !@# $100 (tsu-pún) {tsuí}
+URL: https://example.com/page?id=tsa
+Eng: *\\[Google] vs Google  *\\[Boots] vs Boots  *\\[Nutshell] vs Nutshell
+     \\["I read a book about cats."] vs "I read a book about blue cats."`
         };
-
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
 
