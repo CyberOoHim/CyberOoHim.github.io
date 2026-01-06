@@ -1618,7 +1618,7 @@ Eng: *\\[Google] vs Google  *\\[Boots] vs Boots  *\\[Nutshell] vs Nutshell
 
         function TLtiau_2_POJtiau(tl_tiau) {
             // 0. Handle escape sequences: \[text] is preserved as-is
-            const escapeRegex = /\\\[([^\]]*)\]/g;
+            const escapeRegex = /\\\[([\s\S]*?)\]/g;
             const escapes = [];
             let processedInput = tl_tiau.replace(escapeRegex, (match, content) => {
                 escapes.push(content);
