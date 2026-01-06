@@ -1,11 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2c
+version: v0.2d
 permalink: /pages/tl_poj_converter.html
-updated: 2026-01-05
-note: 1. Enhanced file conversion feature with multiple file types support. 2. Added subtitle detection for .txt files. 3. fix some tonemark bugs
----
+updated: 2026-01-06
+note: 1. Enhance edge cases conversion 2. add settings/help tab
 <!DOCTYPE html>
 <!--
   Copyright (c) 2026 Cyber O͘-hîm ki-tē
@@ -85,23 +84,7 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
             justify-content: center;
         }
 
-        .tab-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+
 
         .tab-btn:hover {
             border-color: var(--text-primary);
@@ -409,6 +392,112 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
             line-height: 1.4;
         }
 
+        /* Toggle Switch Styles */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-label {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .switch-slider::before {
+            content: "";
+            position: absolute;
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .switch-input:checked+.switch-label .switch-slider {
+            background-color: var(--text-link);
+        }
+
+        .switch-input:checked+.switch-label .switch-slider::before {
+            transform: translateX(14px);
+        }
+
+        .switch-text {
+            user-select: none;
+            white-space: nowrap;
+            color: var(--text-primary);
+        }
+
+        /* Help Tab Specifics */
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            /* Changed to inline-flex for baseline alignment */
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        #ui-tab-help {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        #ui-tab-help svg {
+            display: block;
+            transform: translateY(3px);
+            /* Optical alignment with text baseline */
+        }
+
+        /* Help Content Styles */
+        .settings-section,
+        .help-section,
+        .about-section {
+            color: var(--text-primary);
+        }
+
+        .help-content h4 {
+            margin-top: 1rem;
+            color: var(--text-link);
+        }
+
+        .help-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
         #msg-specific-warning {
             color: #f0ad4e;
         }
@@ -425,12 +514,22 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
         <div class="tabs" style="justify-content: center; align-items: center;">
             <button class="tab-btn active" onclick="switchMode('realtime')" id="ui-tab-realtime"></button>
             <button class="tab-btn" onclick="switchMode('file')" id="ui-tab-file"></button>
-            <label
-                style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 1.1rem; margin-left: 2rem; color: var(--text-secondary);">
-                <input type="checkbox" id="nasal-superscript-toggle" checked
-                    style="accent-color: var(--text-link); width: 18px; height: 18px;">
-                <span id="ui-nasal-toggle-label"></span>
-            </label>
+            <button class="tab-btn" onclick="switchMode('help')" id="ui-tab-help">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="72" height="24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <g transform="translate(28, 8)">
+                        <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </g>
+                    <line x1="55" y1="32" x2="65" y2="8" stroke-width="2.5" />
+                    <g transform="translate(68, 8)">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                        <path d="M12 17h.01" />
+                    </g>
+                </svg>
+            </button>
         </div>
 
         <!-- Real-time Panel -->
@@ -638,6 +737,97 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
             </div>
         </div>
 
+        <!-- Help & Settings Panel -->
+        <div id="panel-help" class="panel">
+            <div class="settings-section" style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                <h3 id="ui-header-settings" style="margin-top: 0; font-size: 1.1rem; color: var(--text-primary);">
+                    Settings</h3>
+                <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="ui-lbl-nasal-toggle"
+                        style="color: var(--text-primary); font-family: var(--font-mono);">Nasal Superscript</span>
+                    <div class="switch-container">
+                        <input type="checkbox" id="nasal-superscript-toggle" class="switch-input" checked>
+                        <label for="nasal-superscript-toggle" class="switch-label">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-item"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <span id="ui-lbl-tone6-toggle"
+                        style="color: var(--text-primary); font-family: var(--font-mono);">Tone 6</span>
+                    <div class="switch-container">
+                        <input type="checkbox" id="tone6-toggle" class="switch-input">
+                        <label for="tone6-toggle" class="switch-label">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-item"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <span id="ui-lbl-allcaps-toggle"
+                        style="color: var(--text-primary); font-family: var(--font-mono);">All
+                        Caps</span>
+                    <div class="switch-container">
+                        <input type="checkbox" id="all-caps-toggle" class="switch-input" checked>
+                        <label for="all-caps-toggle" class="switch-label">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-item" style="margin-top: 1.5rem; text-align: center;">
+                    <button id="ui-btn-run-test" class="tool-btn" style="width: 100%; justify-content: center;">
+                        Run UI Test
+                    </button>
+                    <button id="ui-btn-reset-settings" class="tool-btn"
+                        style="width: 100%; justify-content: center; margin-top: 0.5rem; background-color: var(--border-color); color: var(--text-primary);">
+                        Reset to Default
+                    </button>
+                </div>
+            </div>
+
+            <div class="help-section" style="padding: 1rem;">
+                <h3 id="ui-header-help" style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;">Help
+                </h3>
+                <div class="help-content" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
+                    <h4 style="margin-bottom: 0.5rem;">1. 拍隨轉 (Real-time Mode)</h4>
+                    <p style="margin-top: 0; margin-bottom: 1rem;">
+                        Input TL or POJ with numeric tones.<br>
+                        - Input box: Type/Paste text.<br>
+                        - Output box: View converted POJ.<br>
+                    </p>
+
+                    <h4 style="margin-bottom: 0.5rem;">2. 轉書類 (File Mode)</h4>
+                    <p style="margin-top: 0; margin-bottom: 1rem;">
+                        Convert files in bulk.<br>
+                        - Supported: .txt, .md, .srt, .vtt, .csv, .tsv, .json, .pdf<br>
+                        - Preview and download converted results.
+                    </p>
+                </div>
+
+                <div class="about-section"
+                    style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                    <h4 id="ui-header-about" style="margin-bottom: 0.5rem;">About</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0;">
+                        TL -> POJ 隨時轉 Converter<br>
+                        Copyright © 2026 Cyber O͘-hîm ki-tē<br>
+                        Licensed under MIT License
+                    </p>
+
+                    <h5 style="margin-bottom: 0.25rem; font-size: 0.8rem; margin-top: 1rem;">Libraries & Assets</h5>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0;">
+                        <strong>PDF.js</strong> (Mozilla Foundation)<br>
+                        Licensed under Apache License 2.0<br><br>
+                        <strong>Huninn </strong> (justfont)<br>
+                        Licensed under SIL Open Font License 1.1<br><br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <div style="text-align: center; margin-top: var(--spacing-sm);">
             <button class="tool-btn" id="ui-btn-download-offline" onclick="downloadCleanVersion()"
                 style="padding: 10px 20px; display: inline-flex; border-style: dashed;">
@@ -750,8 +940,17 @@ note: 1. Enhanced file conversion feature with multiple file types support. 2. A
                 btnConvert: "開始轉字幕",
                 detectPrompt: "這份 .txt 看起來有字幕時標，kàm beh 用字幕模式轉？"
             },
-            nasalSuperscript: {
-                toggle: "N→sè ⁿ"
+
+            settings: {
+                tabName: "Help & Settings",
+                headerSettings: "設定 (Settings)",
+                headerHelp: "說明 (Help)",
+                headerAbout: "關於 (About)",
+                nasalLabel: '尾N→鼻化音"ⁿ"',
+                tone6Label: "第6調 (ǎ)",
+                allCapsLabel: "大寫模式 (ALL CAPS)",
+                btnRunTest: "看 TL->POJ ê 見本 a̍h-sī 測看覓",
+                btnReset: "恢復初設 (Reset Default)"
             },
             selectionButtons: {
                 selectAll: "總揀",
@@ -787,7 +986,8 @@ Chit8-hang7 tai7-chi3 chin-chiann3 ho2.
 POJ: Goa2 ai3 lim te5, i ai3 chiah8 png7.
 
 === Syllabic Nasals & Special Cases ===
-Nasal: sann, sinn, hnn
+Nasal: sann, sinn, a̍hnn
+Nasal h-stop: annh→ahⁿ(always), aNh→ahⁿ(toggle ON)/aNh(toggle OFF)
 Tone 4/8: a4, a8 (no stop), ah4, ah8 (stop)
 
 úi óo ông m̂ ǹg n̂g
@@ -796,6 +996,21 @@ m2 ng5 mh8 ngh8
 === Tone Number Tests (1-9) ===
 a1 a2 a3 ah4 a5 a6 a7 ah8 a9
 A1 A2 A3 AH4 A5 A6 A7 AH8 A9
+
+=== Settings Toggle Tests ===
+1. Nasal Toggle (尾N->ⁿ):
+   - annh -> ahⁿ (Always converted)
+   - aNh -> ahⁿ (Toggle ON) / aNh (Toggle OFF)
+   - inh -> ihⁿ (Toggle ON) / inh (Toggle OFF)
+
+2. Tone 6 Toggle (ǎ vs á):
+   - a6 -> ǎ (Caron ON) / á (Acute OFF)
+   - ng6 -> nnǧ (Caron ON) / nnǵ (Acute OFF)
+
+3. All Caps Toggle:
+   - TSUI -> CHUI (Toggle ON) / TSUI (Toggle OFF)
+   - TSHUT -> CHHUT (Toggle ON) / TSHUT (Toggle OFF)
+   - OO -> O͘ (Toggle ON) / OO (Toggle OFF)
 
 === Tonemark Position (ua→oa, ue→oe) ===
 TL tuà (live) → POJ tòa
@@ -835,8 +1050,17 @@ TL uá (lean) → POJ òa
             document.getElementById('ui-btn-quick-test').innerText = UI_STRINGS.buttons.quickTest;
             document.getElementById('ui-btn-download-offline-text').innerText = UI_STRINGS.buttons.downloadOffline;
             document.getElementById('ui-btn-clear').innerText = UI_STRINGS.buttons.clear;
-            document.getElementById('ui-nasal-toggle-label').innerText = UI_STRINGS.nasalSuperscript.toggle;
             document.getElementById('ui-footer').innerText = UI_STRINGS.footer;
+
+            // Help & Settings
+            document.getElementById('ui-header-settings').innerText = UI_STRINGS.settings.headerSettings;
+            document.getElementById('ui-lbl-nasal-toggle').innerText = UI_STRINGS.settings.nasalLabel;
+            document.getElementById('ui-lbl-tone6-toggle').innerText = UI_STRINGS.settings.tone6Label;
+            document.getElementById('ui-lbl-allcaps-toggle').innerText = UI_STRINGS.settings.allCapsLabel;
+            document.getElementById('ui-btn-run-test').innerText = UI_STRINGS.settings.btnRunTest;
+            document.getElementById('ui-btn-reset-settings').innerText = UI_STRINGS.settings.btnReset;
+            document.getElementById('ui-header-help').innerText = UI_STRINGS.settings.headerHelp;
+            document.getElementById('ui-header-about').innerText = UI_STRINGS.settings.headerAbout;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
 
@@ -894,18 +1118,68 @@ TL uá (lean) → POJ òa
         window.TL_USE_NASAL_SUPERSCRIPT = true; // Default ON
         document.getElementById('nasal-superscript-toggle')?.addEventListener('change', (e) => {
             window.TL_USE_NASAL_SUPERSCRIPT = e.target.checked;
-            // Re-trigger conversion if there's input
-            const rtInput = document.getElementById('rt-input');
-            if (rtInput && rtInput.value) {
-                document.getElementById('rt-output').value = TLtiau_2_POJtiau(rtInput.value);
-            }
+            triggerReconversion();
         });
 
         // --- Tone 6 Caron Flag (default OFF = use acute like tone 2) ---
         window.TL_TONE6_USE_CARON = false; // Set to true for caron (ǎ) instead of acute (á)
+        const tone6Toggle = document.getElementById('tone6-toggle');
+        if (tone6Toggle) {
+            tone6Toggle.checked = window.TL_TONE6_USE_CARON;
+            tone6Toggle.addEventListener('change', (e) => {
+                window.TL_TONE6_USE_CARON = e.target.checked;
+                triggerReconversion();
+            });
+        }
 
         // --- All-Caps Support Flag (default OFF) ---
         window.TL_ALL_CAPS_SUPPORT = true; // Set to true to enable all-caps conversion (OO→O͘, TS→CH, etc.)
+        const allCapsToggle = document.getElementById('all-caps-toggle');
+        if (allCapsToggle) {
+            allCapsToggle.checked = window.TL_ALL_CAPS_SUPPORT;
+            allCapsToggle.addEventListener('change', (e) => {
+                window.TL_ALL_CAPS_SUPPORT = e.target.checked;
+                triggerReconversion();
+            });
+        }
+
+        function triggerReconversion() {
+            const rtInput = document.getElementById('rt-input');
+            if (rtInput && rtInput.value) {
+                document.getElementById('rt-output').value = TLtiau_2_POJtiau(rtInput.value);
+            }
+        }
+
+        // --- Run UI Test Button ---
+        document.getElementById('ui-btn-run-test')?.addEventListener('click', () => {
+            const rtInput = document.getElementById('rt-input');
+            if (rtInput) {
+                rtInput.value = UI_STRINGS.testSample;
+                switchMode('realtime');
+                rtInput.dispatchEvent(new Event('input')); // Trigger conversion
+            }
+        });
+
+        // --- Reset Settings Button ---
+        document.getElementById('ui-btn-reset-settings')?.addEventListener('click', () => {
+            // Apply Defaults
+            window.TL_USE_NASAL_SUPERSCRIPT = true;
+            window.TL_TONE6_USE_CARON = false;
+            window.TL_ALL_CAPS_SUPPORT = true;
+
+            // Update Toggles
+            const nasalToggle = document.getElementById('nasal-superscript-toggle');
+            if (nasalToggle) nasalToggle.checked = true;
+
+            const tone6Toggle = document.getElementById('tone6-toggle');
+            if (tone6Toggle) tone6Toggle.checked = false;
+
+            const allCapsToggle = document.getElementById('all-caps-toggle');
+            if (allCapsToggle) allCapsToggle.checked = true;
+
+            // Trigger Reconversion
+            triggerReconversion();
+        });
 
         // --- CSV/JSON Select All / Deselect All ---
         document.getElementById('btn-csv-select-all')?.addEventListener('click', () => {
@@ -1097,7 +1371,9 @@ TL uá (lean) → POJ òa
                 ['oo', 'o͘'], ['Oo', 'O͘'],
                 ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
                 ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
-                ['nnh', 'hN'], ['Nh', 'hN'], ['hnn', 'hN']
+                // nnh → hnn (will always convert to hⁿ via nn rule)
+                // Nh is NOT converted here - handled in POJsoo_2_POJtiau (toggle-dependent)
+                ['nnh', 'hnn']
             ];
             // Add all-caps variants if flag enabled
             if (window.TL_ALL_CAPS_SUPPORT) {
@@ -1106,7 +1382,7 @@ TL uá (lean) → POJ òa
                     ['TS', 'CH'], ['OO', 'O͘'],
                     ['UA', 'OA'], ['UE', 'OE'],
                     ['ING', 'ENG'], ['IK', 'EK'],
-                    ['NNH', 'HN'], ['HNN', 'HN']
+                    ['NNH', 'HNN']
                 );
             }
 
@@ -1114,8 +1390,9 @@ TL uá (lean) → POJ òa
                 poj_soo = poj_soo.replace(new RegExp(k, 'g'), v); // Use regex for global replace
             }
 
-            const nn_2_N = /([aeiouAEIOU])(?:nn|N)(h?\d?)\b/g;
-            poj_soo = poj_soo.replace(nn_2_N, '$1N$2');
+            // Only normalize N patterns, don't convert nn to N here
+            // nn will be handled in POJsoo_2_POJtiau (always converts to ⁿ)
+            // N will be handled in POJsoo_2_POJtiau (toggle-dependent)
 
             return poj_soo;
         }
@@ -1125,12 +1402,22 @@ TL uá (lean) → POJ òa
             if (!poj_soo) return '';
             let poj_tiau = poj_soo;
 
-            // Conditionally convert N/nn to superscript ⁿ based on user preference
+            // Nasal superscript conversion:
+            // - nn at syllable tail (after vowel or vowel+h or m+h): ALWAYS convert to ⁿ
+            // - N at syllable tail (after vowel or vowel+h or m+h): Only convert when toggle is ON
+            // - Standalone nn/N (not after valid pattern): Preserve as-is
+            // Patterns: vowel+nn, vowel+h+nn, m+h+nn (and same for N)
+            const nn_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])nn(\d?)\b/g;
+            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ$2');
+
             const useNasalSuperscript = typeof window !== 'undefined' &&
                 window.TL_USE_NASAL_SUPERSCRIPT !== false;
             if (useNasalSuperscript) {
-                const N_2_n = /(?:N|nn)(\d?)\b/g;
-                poj_tiau = poj_tiau.replace(N_2_n, 'ⁿ$1');
+                const N_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])N(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ$2');
+                // Also handle Nh pattern (reorder and convert): aNh → ahⁿ
+                const Nh_to_superscript = /([aeiouAEIOUmM])Nh?(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(Nh_to_superscript, '$1hⁿ$2');
             }
 
             // Tone 6 character selection: caron (ǎ) or acute (á) like tone 2
@@ -1558,6 +1845,12 @@ TL uá (lean) → POJ òa
                 return headers.map(h => row[h] || '').join(separator);
             }).join('\n');
             return headerLine + '\n' + dataLines;
+        }
+
+        // Run tests on load if enabled
+        const ENABLE_SELF_TEST = false;
+        if (ENABLE_SELF_TEST) {
+            runTests();
         }
 
         // Render Table
@@ -2340,43 +2633,39 @@ TL uá (lean) → POJ òa
             URL.revokeObjectURL(url);
         }
 
-        // --- Tests (set DEBUG_TESTS = true to enable) ---
-        const DEBUG_TESTS = false;
+        // --- Comprehensive Self-Test ---
+        function runTests() {
+            console.log("Running comprehensive self-test...");
 
-        if (DEBUG_TESTS) {
-            console.log("Running self-test...");
-            const tests = [
+            const originalNasal = window.TL_USE_NASAL_SUPERSCRIPT;
+            const originalTone6 = window.TL_TONE6_USE_CARON;
+            const originalAllCaps = window.TL_ALL_CAPS_SUPPORT;
+
+            const runTestCase = (input, expected, config = {}) => {
+                // Apply config or defaults
+                window.TL_USE_NASAL_SUPERSCRIPT = config.nasal !== undefined ? config.nasal : true;
+                window.TL_TONE6_USE_CARON = config.tone6 !== undefined ? config.tone6 : false;
+                window.TL_ALL_CAPS_SUPPORT = config.allCaps !== undefined ? config.allCaps : true;
+
+                const result = TLtiau_2_POJtiau(input);
+                if (result !== expected) {
+                    console.error(`[FAIL] In: "${input}" | Expected: "${expected}" | Got: "${result}" | Config: ${JSON.stringify(config)}`);
+                    return false;
+                }
+                return true;
+            };
+
+            let passed = 0;
+            let total = 0;
+
+            const testCases = [
+                // 1. Basic Rules
                 { in: "phah", out: "phah" },
                 { in: "Tâi-uân", out: "Tâi-oân" },
                 { in: "tsuí", out: "chúi" },
                 { in: "tshuí", out: "chhúi" },
                 { in: "ing", out: "eng" },
-                { in: "óo", out: "ó͘" }, // Tricky oo case: TL óo -> POJ ó͘
-                { in: "Óo", out: "Ó͘" },
-                { in: "oo", out: "o͘" }, // Plain oo -> o͘
-                { in: "Oo", out: "O͘" }, // Capital Oo -> O͘
-                { in: "o͘", out: "o͘" }, // Already o͘ stays o͘
                 { in: "tsa", out: "cha" },
-                { in: "ua", out: "oa" }, // TL ua -> POJ oa
-                { in: "ue", out: "oe" }, // TL ue -> POJ oe
-                { in: "ik", out: "ek" }, // Robustness check
-                { in: "i̍k", out: "e̍k" },  // Robustness check
-                // Numeric Tone Tests
-                { in: "Tai5-uan5", out: "Tâi-oân" },
-                { in: "sui2", out: "súi" },
-                { in: "phah4", out: "phah" }, // Tone 4 (none)
-                { in: "tik8", out: "te̍k" }, // Tone 8 (vertical line)
-                { in: "oo7", out: "ō͘" }, // Numeric oo
-                { in: "m2", out: "ḿ" }, // Syllabic nasal m
-                { in: "ng5", out: "n̂g" }, // Syllabic nasal ng
-
-                // Comprehensive Tone Number Tests (1-9)
-                { in: "a1", out: "a" },
-                { in: "a2", out: "á" },
-                { in: "a3", out: "à" },
-                { in: "ah4", out: "ah" },
-                { in: "a5", out: "â" },
-                { in: "a6", out: "á" }, // Same as tone 2
                 { in: "a7", out: "ā" },
                 { in: "ah8", out: "a̍h" },
                 { in: "a9", out: "ă" },
