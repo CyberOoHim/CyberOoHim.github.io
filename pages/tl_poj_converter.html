@@ -5,6 +5,7 @@ version: v0.2d
 permalink: /pages/tl_poj_converter.html
 updated: 2026-01-06
 note: 1. Enhance edge cases conversion 2. add settings/help tab
+---
 <!DOCTYPE html>
 <!--
   Copyright (c) 2026 Cyber O͘-hîm ki-tē
@@ -793,15 +794,15 @@ note: 1. Enhance edge cases conversion 2. add settings/help tab
                 <h3 id="ui-header-help" style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;">Help
                 </h3>
                 <div class="help-content" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
-                    <h4 style="margin-bottom: 0.5rem;">1. 拍隨轉 (Real-time Mode)</h4>
-                    <p style="margin-top: 0; margin-bottom: 1rem;">
+                    <h4 id="help-title-1" style="margin-bottom: 0.5rem;">1. 拍隨轉 (Real-time Mode)</h4>
+                    <p id="help-text-1" style="margin-top: 0; margin-bottom: 1rem;">
                         Input TL or POJ with numeric tones.<br>
                         - Input box: Type/Paste text.<br>
                         - Output box: View converted POJ.<br>
                     </p>
 
-                    <h4 style="margin-bottom: 0.5rem;">2. 轉書類 (File Mode)</h4>
-                    <p style="margin-top: 0; margin-bottom: 1rem;">
+                    <h4 id="help-title-2" style="margin-bottom: 0.5rem;">2. 轉書類 (File Mode)</h4>
+                    <p id="help-text-2" style="margin-top: 0; margin-bottom: 1rem;">
                         Convert files in bulk.<br>
                         - Supported: .txt, .md, .srt, .vtt, .csv, .tsv, .json, .pdf<br>
                         - Preview and download converted results.
@@ -811,18 +812,14 @@ note: 1. Enhance edge cases conversion 2. add settings/help tab
                 <div class="about-section"
                     style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
                     <h4 id="ui-header-about" style="margin-bottom: 0.5rem;">About</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0;">
-                        TL -> POJ 隨時轉 Converter<br>
-                        Copyright © 2026 Cyber O͘-hîm ki-tē<br>
-                        Licensed under MIT License
+                    <p id="about-text" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0;">
+                        <!-- Injected -->
                     </p>
 
-                    <h5 style="margin-bottom: 0.25rem; font-size: 0.8rem; margin-top: 1rem;">Libraries & Assets</h5>
-                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0;">
-                        <strong>PDF.js</strong> (Mozilla Foundation)<br>
-                        Licensed under Apache License 2.0<br><br>
-                        <strong>Huninn </strong> (justfont)<br>
-                        Licensed under SIL Open Font License 1.1<br><br>
+                    <h5 id="assets-title" style="margin-bottom: 0.25rem; font-size: 0.8rem; margin-top: 1rem;">Libraries
+                        & Assets</h5>
+                    <p id="assets-text" style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0;">
+                        <!-- Injected -->
                     </p>
                 </div>
             </div>
@@ -952,6 +949,27 @@ note: 1. Enhance edge cases conversion 2. add settings/help tab
                 btnRunTest: "看 TL->POJ ê 見本 a̍h-sī 測看覓",
                 btnReset: "恢復初設 (Reset Default)"
             },
+            help: {
+                rtTitle: "1. 拍隨轉 (Real-time Mode)",
+                rtText: `Input TL or POJ with numeric tones.<br>
+- Input box: Type/Paste text.<br>
+- Output box: View converted POJ.`,
+                fileTitle: "2. 轉書類 (File Mode)",
+                fileText: `Convert files in bulk.<br>
+- Supported: .txt, .md, .srt, .vtt, .csv, .tsv, .json, .pdf<br>
+- Preview and download converted results.`
+            },
+            about: {
+                title: "About",
+                text: `TL -> POJ 隨時轉 Converter<br>
+Copyright © 2026 Cyber O͘-hîm ki-tē<br>
+Licensed under MIT License`,
+                assetsTitle: "Libraries & Assets",
+                assetsText: `<strong>PDF.js</strong> (Mozilla Foundation)<br>
+Licensed under Apache License 2.0<br><br>
+<strong>Huninn </strong> (justfont)<br>
+Licensed under SIL Open Font License 1.1`
+            },
             selectionButtons: {
                 selectAll: "總揀",
                 deselectAll: "總清"
@@ -1061,6 +1079,18 @@ TL uá (lean) → POJ òa
             document.getElementById('ui-btn-reset-settings').innerText = UI_STRINGS.settings.btnReset;
             document.getElementById('ui-header-help').innerText = UI_STRINGS.settings.headerHelp;
             document.getElementById('ui-header-about').innerText = UI_STRINGS.settings.headerAbout;
+
+            // Help Content
+            document.getElementById('help-title-1').innerText = UI_STRINGS.help.rtTitle;
+            document.getElementById('help-text-1').innerHTML = UI_STRINGS.help.rtText;
+            document.getElementById('help-title-2').innerText = UI_STRINGS.help.fileTitle;
+            document.getElementById('help-text-2').innerHTML = UI_STRINGS.help.fileText;
+
+            // About Content
+            document.getElementById('ui-header-about').innerText = UI_STRINGS.about.title;
+            document.getElementById('about-text').innerHTML = UI_STRINGS.about.text;
+            document.getElementById('assets-title').innerText = UI_STRINGS.about.assetsTitle;
+            document.getElementById('assets-text').innerHTML = UI_STRINGS.about.assetsText;
 
             document.getElementById('ui-drop-text').innerText = UI_STRINGS.dropZone.main;
 
