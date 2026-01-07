@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2d
+version: v0.2e
 permalink: /pages/tl_poj_converter.html
-updated: 2026-01-06
-note: 1. Enhance edge cases conversion 2. enhance help message and sample test text
+updated: 2026-01-07
+note: Enhance escape rule, testSample and help message
 ---
 <!DOCTYPE html>
 <!--
@@ -807,6 +807,11 @@ note: 1. Enhance edge cases conversion 2. enhance help message and sample test t
                         - Supported: .txt, .md, .srt, .vtt, .csv, .tsv, .json, .pdf<br>
                         - Preview and download converted results.
                     </p>
+
+                    <h4 id="help-title-3" style="margin-bottom: 0.5rem;">3. 設定 (Settings)</h4>
+                    <p id="help-text-3" style="margin-top: 0; margin-bottom: 1rem;">
+                        <!-- Content injected by JS -->
+                    </p>
                 </div>
 
                 <div class="about-section"
@@ -956,12 +961,21 @@ note: 1. Enhance edge cases conversion 2. enhance help message and sample test t
 • <strong>輸出</strong>: 右邊框á會隨顯示轉好 ê POJ。<br>`,
                 fileTitle: "2. 書類處理 (File Mode)",
                 fileText: `轉資料檔案。<br>
-• <strong>Ap-ló͘(Upload)</strong>: Kā 檔案 khiú--入來，a̍h-sī chhi̍h chhi̍h-liú-á 去 檔案窗á掠。<br>
-• <strong>格式</strong>: 支援 .txt (純文字), .md (Markdown 文字), .srt/.vtt/.txt (字幕), .csv/.tsc (表格), .json (JSON 資料), .pdf (PDF 文件)。<br>
-• <strong>Táng-ló͘(Download)</strong>: 轉好 ê 檔案會當 download， khiām--起來。<br><br>
+• <strong>Ap-ló͘(Upload)</strong>: Kā 檔案 giú--入來，a̍h-sī chhi̍h chhi̍h-liú-á 去 檔案窗á掠。<br>
+• <strong>格式</strong>: 支援 .txt, .md, .srt/.vtt (字幕), .csv/.tsv (表格), .json, .pdf。<br>
+• <strong>Táng-ló͘(Download)</strong>: 轉好 ê 檔案會當 download khiām--起來。<br><br>
+<strong>輸出設定:</strong><br>
+• <strong>CSV/TSV</strong>: 揀欲轉 ê 直逝(column)，會當揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原表格)。<br>
+• <strong>JSON</strong>: 揀欲轉 ê key，會當揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原JSON)。<br>
+• <strong>SRT/VTT</strong>: 若字幕有濟逝，會當揀欲轉佗一逝 (Lóng-chóng/頭逝/第2逝/第3+)。<br><br>
 <strong>註:</strong><br>
-1. 若是用 iPad ê 時，掠無 .srt，kā 副檔名改做 .vtt a̍h-sī .txt。<br>
-2. PDF 是直接用 browser 簡單發落，假使排版較複雜 ê 書類讀了無好勢，chiah 另外 kā 文字先 chhoân 好來轉。`
+1. iPad 掠無 .srt，改做 .vtt a̍h-sī .txt。<br>
+2. PDF 排版複雜 ê 讀了可能無好勢。`,
+                settingsTitle: "3. 設定 (Settings)",
+                settingsText: `三个開關 (Toggle)：<br>
+• <strong>尾N→ⁿ</strong>: ON=N轉ⁿ (saN→saⁿ)，OFF=N袂變 (saN→saN)。nn 一定轉。<br>
+• <strong>第6調 ǎ</strong>: ON=用 caron (ǎ)，OFF=用 acute (á) 親像第2調。<br>
+• <strong>大寫模式</strong>: ON=大寫 mā 轉 (TSUI→CHUI)，OFF=大寫袂變。`
             },
             about: {
                 title: "About",
@@ -997,8 +1011,8 @@ Licensed under SIL Open Font License 1.1`
             },
             testSample: `=== TL 符號調輸入 (Diacritics) ===
 Tâi-uân sī chi̍t-ê hó só͘-chāi. (台灣是一个好所在)
-Tsit-hāng tāi-tsì tsin-tsiànn hó. (這項代誌真正好)
-Góa ài lim tê, i ài chia̍h pn̄g. (我愛啉茶，伊愛食飯)
+Tsit-chân tāi-tsì tsin-tsiànn hó. (這層代誌真正好)
+POJ 帶符號調號無 koh 轉: Góa ài lim tê, i ài chia̍h pn̄g. (我愛啉茶，伊愛食飯)
 
 === TL/POJ 數字調輸入 (Numeric) ===
 Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
@@ -1011,39 +1025,54 @@ e1 e2 e3 eh4 e5 e6 e7 eh8 e9
 o1 o2 o3 oh4 o5 o6 o7 oh8 o9
 
 === TL→POJ 音素轉換 (Phonemes) ===
-ts→ch: tsuí→chúi (水), tsit→chit (這)
-tsh→chh: tshut→chhut (出), tshài→chhài (菜)
-oo→o͘: oo→o͘ (烏), hōo→hō͘ (予)
-j→j: jī→jī (字), jia̍t→jia̍t (熱) (無變)
+\\[ts\\]: tsuí (水), tsit (這)
+\\[tsh\\]: tshut (出), tshài (菜)
+\\[oo\\]: oo (烏), hōo (予)
+j: jī (字), jia̍t (熱) (無變)
 
-=== 鼻音 (nn / N) ===
-[Toggle: 尾N→ⁿ]
-nn尾 (lóng 轉): sann→saⁿ (三), sinn→siⁿ (鮮)
+\\[=== 鼻音 (nn / N) ===
+[尾N→ⁿ Toggle(切)]
+nn尾 (一定 lóng 轉): sann→saⁿ (三), sinn→siⁿ (生)
 N尾 ON: saN→saⁿ, siN→siⁿ, a̍hN→a̍hⁿ
-N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN
-(注意: 頭前 n 無變: na -> na)
+N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN\\]
+(頭前 ê nn / N 袂變: nng → nng, NG → NG)
 
-=== 第六調 (Tone 6) ===
-[Toggle: 第6調 ǎ]
-ON (Caron): a6→ǎ, e6→ě, o6→ǒ, ng6→nnǧ
-OFF (Acute): a6→á, e6→é, o6→ó, ng6→nnǵ
+\\[=== 第六調 (Tone 6) ===
+[第6調 ǎ Toggle(切)]
+ON (Caron): a6→ǎ, e6→ě, o6→ǒ, ng6→ňg
+OFF (Acute): a6→á, e6→é, o6→ó, ng6→ńg\\]
 
-=== 大寫模式 (ALL CAPS) ===
-[Toggle: 大寫模式]
+\\[=== 大寫 (ALL CAPS) ===
+[大寫模式 Toggle(切)]
 ON: TSUI→CHUI, TSHUT→CHHUT, OO→O͘
-OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉換)
+OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉)\\]
 
-=== 調位標記 (Vowel Priority) ===
+\\[=== 調位標記 (Vowel Priority) ===
 ua→oa: tuà→tòa (大), kuà→kòa (掛)
 ue→oe: kué→kóe (粿), pué→póe (飛)
-ui: suí→súi (水), kuí→kúi (鬼)
+ui: suí→súi (水), kuí→kúi (鬼)\\]
 
-=== 跳脫語法 kah 邊墘狀況 (Edge Cases) ===
-跳脫: \\[Tâi-uân] (保留原文), \\[ts]
+=== 走脫語法 (Escape Syntax) ===
+基本: \\[Tâi-uân\\] → Tâi-uân (原文保留)
+濟逝: \\[Thâu tsuā
+Jī tsuā\\] ← Hāⁿ 逝 mā lóng 袂轉
+
+相套 (Nested):
+\\[khí-thâu \\[ tē-jī\\] ← thâu-ê \\] 就收煞
+\\[(結果: "khí-thâu \\[ tē-jī" + 落尾照常轉)\\]
+
+英文: \\[Google\\] vs Google, \\[Boots\\] vs Boots
+     \\["I read a book about blue cats."\\] vs "I read a book about blue cats."
+URL: \\["https://example.com/page?id=tsing_tsha"\\] vs "https://example.com/page?id=tsing_tsha"
+
+=== 邊墘狀況 (Other Cases) ===
 混合: 123 !@# $100 (tsu-pún) {tsuí}
-URL: https://example.com/page?id=tsa
-Eng: *\\[Google] vs Google  *\\[Boots] vs Boots  *\\[Nutshell] vs Nutshell
-     \\["I read a book about cats."] vs "I read a book about blue cats."`
+月眉: (tsia̍h pn̄g) [tsia̍h pn̄g] {tsia̍h pn̄g}
+引句點: "tsuí" 'tsuí' 「tsuí」『tsuí』
+Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
+頭尾空白:"   tsuí   "(空白無變)
+Ài 有連字符: \\[Tâiuânlâng, tsabóogíná\\] → Tâiuânlâng, tsabóogíná (無連字符無保證著)
+數字調號相濫: Goa2 ài 啉 tê5, 伊 ai3 食 png7.`
         };
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
@@ -1085,6 +1114,8 @@ Eng: *\\[Google] vs Google  *\\[Boots] vs Boots  *\\[Nutshell] vs Nutshell
             document.getElementById('help-text-1').innerHTML = UI_STRINGS.help.rtText;
             document.getElementById('help-title-2').innerText = UI_STRINGS.help.fileTitle;
             document.getElementById('help-text-2').innerHTML = UI_STRINGS.help.fileText;
+            document.getElementById('help-title-3').innerText = UI_STRINGS.help.settingsTitle;
+            document.getElementById('help-text-3').innerHTML = UI_STRINGS.help.settingsText;
 
             // About Content
             document.getElementById('ui-header-about').innerText = UI_STRINGS.about.title;
@@ -1617,13 +1648,32 @@ Eng: *\\[Google] vs Google  *\\[Boots] vs Boots  *\\[Nutshell] vs Nutshell
         }
 
         function TLtiau_2_POJtiau(tl_tiau) {
-            // 0. Handle escape sequences: \[text] is preserved as-is
-            const escapeRegex = /\\\[([\s\S]*?)\]/g;
+            // 0. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
+            // Uses O(n) state machine scan instead of regex for robustness
+            // Delimiter: \[ opens, \] closes (allows regular ] inside)
             const escapes = [];
-            let processedInput = tl_tiau.replace(escapeRegex, (match, content) => {
-                escapes.push(content);
-                return `⟪ESC${escapes.length - 1}⟫`;
-            });
+            let processedInput = '';
+            let i = 0;
+            while (i < tl_tiau.length) {
+                if (tl_tiau[i] === '\\' && tl_tiau[i + 1] === '[') {
+                    // Found escape start \[
+                    let start = i + 2;
+                    let end = tl_tiau.indexOf('\\]', start);
+                    if (end === -1) {
+                        // No closing \] → escape everything to end of string
+                        escapes.push(tl_tiau.slice(start));
+                        processedInput += `⟪ESC${escapes.length - 1}⟫`;
+                        break;
+                    }
+                    // Found closing \]
+                    escapes.push(tl_tiau.slice(start, end));
+                    processedInput += `⟪ESC${escapes.length - 1}⟫`;
+                    i = end + 2; // Skip past \]
+                } else {
+                    processedInput += tl_tiau[i];
+                    i++;
+                }
+            }
 
             // 1. Convert TL-style tone marks to corresponding numbers
             const tl_soo = TLtiau_2_TLsoo(processedInput);
