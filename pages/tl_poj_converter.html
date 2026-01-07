@@ -4,7 +4,7 @@ title: TL to POJ Real-time Converter
 version: v0.2e
 permalink: /pages/tl_poj_converter.html
 updated: 2026-01-07
-note: Enhance escape rule, testSample and help message
+note: 1. Enhance escape rule, testSample and help message 2. clickable url in footer and help/about
 ---
 <!DOCTYPE html>
 <!--
@@ -844,7 +844,15 @@ note: Enhance escape rule, testSample and help message
 
         <footer
             style="text-align: center; margin-top: var(--spacing-md); color: var(--text-secondary); font-size: 0.9rem;">
-            <p id="ui-footer"></p>
+            <a href="https://cyberoohim.github.io/" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <p id="ui-footer" style="margin: 0; transition: opacity 0.2s;"></p>
+            </a>
+            <style>
+                footer a:hover p {
+                    opacity: 0.8;
+                    text-decoration: underline;
+                }
+            </style>
         </footer>
     </div>
 
@@ -980,7 +988,7 @@ note: Enhance escape rule, testSample and help message
             about: {
                 title: "About",
                 text: `TL -> POJ 隨時轉 Converter<br>
-Copyright © 2026 Cyber O͘-hîm ki-tē<br>
+Copyright © 2026 <a href="https://cyberoohim.github.io/" target="_blank" style="color: inherit; text-decoration: underline;">Cyber O͘-hîm ki-tē</a><br>
 Licensed under MIT License`,
                 assetsTitle: "Libraries & Assets",
                 assetsText: `<strong>PDF.js</strong> (Mozilla Foundation)<br>

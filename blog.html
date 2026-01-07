@@ -4,19 +4,161 @@ title: Blog
 permalink: /blog/
 ---
 
-<div class="container">
-    <h1>Blog Archive</h1>
-    <div class="posts">
-        {% for post in site.posts %}
-        <article class="post-card">
-            <h2 class="post-title">
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            </h2>
-            <div class="post-meta">{{ post.date | date: "%B %d, %Y" }}</div>
-            <div class="post-excerpt">
-                {{ post.excerpt }}
-            </div>
-        </article>
-        {% endfor %}
+<div class="container construction-page">
+    <div class="construction-content">
+        <div class="glitch-wrapper">
+            <h1 class="glitch-text" data-text="Under Construction">Under Construction</h1>
+        </div>
+        <p class="construction-message">
+            Our blog is currently being upgraded for a better Taigi AI experience.
+            <br>
+            <span class="status-code">[Status: DEVELOPING...]</span>
+        </p>
+        <div class="action-buttons">
+            <a href="{{ '/' | relative_url }}" class="btn-primary">/home</a>
+        </div>
     </div>
 </div>
+
+<style>
+    .construction-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+        text-align: center;
+    }
+
+    .construction-content {
+        max-width: 500px;
+    }
+
+    .glitch-wrapper {
+        margin-bottom: 2rem;
+    }
+
+    .glitch-text {
+        font-size: 3rem;
+        position: relative;
+        display: inline-block;
+        color: var(--text-primary);
+    }
+
+    /* Subtle glitch effect for construction page */
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    }
+
+    .glitch-text::before {
+        left: 2px;
+        text-shadow: -2px 0 #58a6ff;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    .glitch-text::after {
+        left: -2px;
+        text-shadow: -2px 0 #238636;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+        0% {
+            clip: rect(31px, 9999px, 94px, 0);
+        }
+
+        20% {
+            clip: rect(62px, 9999px, 42px, 0);
+        }
+
+        40% {
+            clip: rect(16px, 9999px, 78px, 0);
+        }
+
+        60% {
+            clip: rect(43px, 9999px, 11px, 0);
+        }
+
+        80% {
+            clip: rect(85px, 9999px, 63px, 0);
+        }
+
+        100% {
+            clip: rect(11px, 9999px, 89px, 0);
+        }
+    }
+
+    @keyframes glitch-anim2 {
+        0% {
+            clip: rect(65px, 9999px, 100px, 0);
+        }
+
+        20% {
+            clip: rect(12px, 9999px, 56px, 0);
+        }
+
+        40% {
+            clip: rect(82px, 9999px, 34px, 0);
+        }
+
+        60% {
+            clip: rect(21px, 9999px, 77px, 0);
+        }
+
+        80% {
+            clip: rect(54px, 9999px, 12px, 0);
+        }
+
+        100% {
+            clip: rect(96px, 9999px, 45px, 0);
+        }
+    }
+
+    .construction-message {
+        font-family: var(--font-mono);
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+        line-height: 1.8;
+    }
+
+    .status-code {
+        color: var(--text-link);
+        font-weight: bold;
+        display: block;
+        margin-top: 1rem;
+    }
+
+    .action-buttons {
+        margin-top: 2rem;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--text-link);
+        color: var(--text-link);
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+</style>
