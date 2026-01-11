@@ -16,11 +16,17 @@
   description: "台語白話字藝術產生器"
 
 # TOOLS
-- name: "TL to POJ Real-time Converter"
+- name: "TL -> POJ Real-time Converter"
   category: "tools"
   type: "internal"
   url: "/pages/tl_poj_converter.html"
-  description: "台羅-白話字即時轉換"
+  description: "台羅拼音->白話字隨時轉 線頂隨用"
+
+- name: "TL -> POJ Chrome Extension"
+  category: "tools"
+  type: "external"
+  url: "https://cyberoohim.github.io/tl_poj_extension/"
+  description: "台羅拼音->白話字隨時轉 Chrome 擴張機能"
 
 - name: "Gemini Watermark Remover"
   category: "tools"
