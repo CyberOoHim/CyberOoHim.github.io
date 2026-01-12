@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2e
+version: v0.2f
 permalink: /pages/tl_poj_converter.html
-updated: 2026-01-07
-note: 1. Enhance escape rule, testSample and help message 2. clickable url in footer and help/about
+updated: 2026-01-12
+note: 1. enhance POJ text Preservation
 ---
 <!DOCTYPE html>
 <!--
@@ -795,6 +795,7 @@ note: 1. Enhance escape rule, testSample and help message 2. clickable url in fo
                 <h3 id="ui-header-help" style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem;">Help
                 </h3>
                 <div class="help-content" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
+                    <p id="help-general-warnings" style="margin-bottom: 1rem; color: #f0ad4e;"></p>
                     <h4 id="help-title-1" style="margin-bottom: 0.5rem;">1. 拍隨轉 (Real-time Mode)</h4>
                     <p id="help-text-1" style="margin-top: 0; margin-bottom: 1rem;">
                         Input TL or POJ with numeric tones.<br>
@@ -965,27 +966,30 @@ note: 1. Enhance escape rule, testSample and help message 2. clickable url in fo
                 btnReset: "恢復初設 (Reset Default)"
             },
             help: {
+                generalWarnings: `<b>注意:</b> Lán 會用得拍 台羅數字調號 kap 符號調號 TL a̍h-sī POJ 數字調號 lóng-chóng 會轉做 POJ 符號調號。<br>
+<b>注意:</b> 假使有其他外語拄á好部份 chham 台羅 相siâng，會誤轉。這是 lán ê 使用限制。用走脫語法 thang 避免，chhi̍h <strong>頂懸頭1粒</strong> chhi̍h-liú 看例。<br>`,
                 rtTitle: "1. 拍隨轉 (Real-time Mode)",
                 rtText: `簡單 ê TL 轉 POJ ke-si，支援符號調號 TL 和數字調號 POJ。<br>
-• <strong>輸入</strong>: Tiàm 輸入框á拍字 (例: Tye5-uan5 / Tâi-uân)。<br>
-• <strong>輸出</strong>: POJ 輸出框á會隨顯示轉好 ê POJ。<br>`,
+• <strong>輸入</strong>: Tiàm 頂懸框á拍字 (例: Tye5-uan5 / Tâi-uân)。<br>
+• <strong>輸出</strong>: 下跤框á會隨顯示轉好 ê POJ。<br>`,
                 fileTitle: "2. 書類處理 (File Mode)",
                 fileText: `轉資料檔案。<br>
 • <strong>Ap-ló͘(Upload)</strong>: Kā 檔案 giú--入來，a̍h-sī chhi̍h chhi̍h-liú-á 去 檔案窗á掠。<br>
 • <strong>格式</strong>: 支援 .txt, .md, .srt/.vtt (字幕), .csv/.tsv (表格), .json, .pdf。<br>
-• <strong>Táng-ló͘(Download)</strong>: 轉好 ê 檔案會當 download khiām--起來。<br><br>
-<strong>輸出設定:</strong><br>
-• <strong>CSV/TSV</strong>: 揀欲轉 ê 直逝(column)，會當揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原表格)。<br>
-• <strong>JSON</strong>: 揀欲轉 ê key，會當揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原JSON)。<br>
-• <strong>SRT/VTT</strong>: 若字幕有濟逝，會當揀欲轉佗一逝 (Lóng-chóng/頭逝/第2逝/第3+)。<br><br>
-<strong>註:</strong><br>
-1. iPad 掠無 .srt，改做 .vtt a̍h-sī .txt。<br>
-2. PDF 排版複雜--ê 讀了可能無好勢。`,
+• <strong>Táng-ló͘(Download)</strong>: 轉好 ê 檔案會tàng táng-ló͘(download)khiām--起來。<br><br>
+<strong>轉書類設定:</strong><br>
+• <strong>CSV/TSV</strong>: 揀欲轉 ê 直逝(column)，會tàng揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原表格)。<br>
+• <strong>JSON</strong>: 揀欲轉 ê key，會tàng揀 output 模式 (kan-ta 轉好--ê/原+轉/插--入去原JSON)。<br>
+• <strong>SRT/VTT</strong>: 若字幕有濟逝，會tàng揀欲轉佗一逝 (Lóng-chóng/頭逝/第2逝/第3+)。<br>
+  • <strong>注意</strong>: iPad 掠無 .srt，改做 .vtt a̍h-sī .txt。<br>
+  • <strong>注意</strong>: PDF 排版複雜 ê 讀了可能無好勢。<br>`,
                 settingsTitle: "3. 設定 (Settings)",
-                settingsText: `三个開關 (Toggle)：<br>
+                settingsText: `三粒開關 (Toggle)：<br>
 • <strong>尾N→ⁿ</strong>: ON=N轉ⁿ (saN→saⁿ)，OFF=N袂變 (saN→saN)。nn 一定轉。<br>
 • <strong>第6調 ǎ</strong>: ON=用 caron (ǎ)，OFF=用 acute (á) 親像第2調。<br>
-• <strong>大寫模式</strong>: ON=大寫 mā 轉 (TSUI→CHUI)，OFF=大寫袂變。`
+• <strong>大寫模式</strong>: ON=大寫 mā 轉 (TSUI→CHUI)，OFF=大寫袂變。<br><br>
+• <strong>看 TL->POJ ê 見本 a̍h-sī 測看覓</strong>: Chhi̍h 這粒chhi̍h鈕，會自動掠測試例文去「拍字轉」分頁，內底有各種 TL 轉 POJ ê 例，會使參考各種用法，koh 設定是 án-chóaⁿ 用。<br>
+• <strong>恢復初設 (Reset Default)</strong>: Kā 設定 lóng-chóng 恢復做原底 ê 預設。`
             },
             about: {
                 title: "About",
@@ -995,7 +999,13 @@ Licensed under MIT License`,
                 assetsTitle: "Libraries & Assets",
                 assetsText: `<strong>PDF.js</strong> (Mozilla Foundation)<br>
 Licensed under Apache License 2.0<br><br>
-<strong>Huninn </strong> (justfont)<br>
+<strong>Readability.js</strong> (Mozilla Foundation)<br>
+Licensed under Apache License 2.0<br><br>
+<strong>Turndown.js</strong> (Dom Christie)<br>
+Licensed under MIT License<br><br>
+<strong>Huninn</strong> (justfont)<br>
+Licensed under SIL Open Font License 1.1<br><br>
+<strong>Chiayi City Font</strong> (Chiayi City Gov)<br>
 Licensed under SIL Open Font License 1.1`
             },
             selectionButtons: {
@@ -1082,7 +1092,14 @@ URL: \\["https://example.com/page?id=tsing_tsha"\\] vs "https://example.com/page
 Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
 頭尾空白:"   tsuí   "(空白無變)
 Ài 有連字符: \\[Tâiuânlâng, tsabóogíná\\] → Tâiuânlâng, tsabóogíná (無連字符無保證著)
-數字調號相濫: Goa2 ài 啉 tê5, 伊 ai3 食 png7.`
+數字調號相濫: Goa2 ài 啉 tê5, 伊 ai3 食 png7.
+
+=== POJ 保留 (POJ Preservation) ===
+POJ 鼻化「ⁿ」: chiâⁿ→chiâⁿ, siaⁿ→siaⁿ, koaⁿ→koaⁿ (袂變做 Tailo nn)
+POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo)
+混合輸入: chiâⁿ tsuí → chiâⁿ chúi (POJ 保留, TL 照常轉)
+混合輸入: hó͘ oo → hó͘ o͘ (POJ o͘ 保留, TL oo 轉做 POJ)
+大寫 POJ: Chiâⁿ→Chiâⁿ, Ô͘→Ô͘ (大寫 POJ mā 袂變)`
         };
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
@@ -1120,6 +1137,7 @@ Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
             document.getElementById('ui-header-about').innerText = UI_STRINGS.settings.headerAbout;
 
             // Help Content
+            document.getElementById('help-general-warnings').innerHTML = UI_STRINGS.help.generalWarnings;
             document.getElementById('help-title-1').innerText = UI_STRINGS.help.rtTitle;
             document.getElementById('help-text-1').innerHTML = UI_STRINGS.help.rtText;
             document.getElementById('help-title-2').innerText = UI_STRINGS.help.fileTitle;
@@ -1685,6 +1703,30 @@ Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
                 }
             }
 
+            // 0b. Preserve POJ text (syllables with POJ-specific markers)
+            // POJ-specific characters: ⁿ (superscript n), o͘/O͘ (o with dot above)
+            // Match words/syllables containing these POJ markers and preserve them
+            const pojPlaceholders = [];
+
+            // Pattern: match syllables ending with ⁿ
+            const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
+            // Pattern: match syllables with o͘/O͘
+            const pojOoPattern = /[\p{L}\p{M}]*[oO]͘[\p{L}\p{M}]*/gu;
+
+            // First pass: preserve syllables with ⁿ
+            processedInput = processedInput.replace(pojNasalEndPattern, (match) => {
+                pojPlaceholders.push(match);
+                return `⟪POJ${pojPlaceholders.length - 1}⟫`;
+            });
+
+            // Second pass: preserve syllables with o͘/O͘ (that weren't already captured)
+            processedInput = processedInput.replace(pojOoPattern, (match) => {
+                // Skip if already a placeholder
+                if (match.includes('⟪POJ')) return match;
+                pojPlaceholders.push(match);
+                return `⟪POJ${pojPlaceholders.length - 1}⟫`;
+            });
+
             // 1. Convert TL-style tone marks to corresponding numbers
             const tl_soo = TLtiau_2_TLsoo(processedInput);
             // 2. Convert TL number-style to POJ number-style
@@ -1692,9 +1734,14 @@ Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
             // 3. Convert POJ number-style to POJ tone marks
             let poj_tiau = POJsoo_2_POJtiau(poj_soo);
 
-            // 4. Restore escaped content
+            // 4a. Restore escaped content
             poj_tiau = poj_tiau.replace(/⟪ESC(\d+)⟫/g, (match, index) => {
                 return escapes[parseInt(index)];
+            });
+
+            // 4b. Restore POJ content (preserved syllables with POJ-specific markers)
+            poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
+                return pojPlaceholders[parseInt(index)];
             });
 
             return poj_tiau;
