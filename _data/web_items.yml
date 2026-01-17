@@ -22,6 +22,12 @@
   url: "/pages/tl_poj_converter.html"
   description: "台羅拼音->白話字隨時轉 線頂隨用"
 
+- name: " TL to POJ Real-time Converter - Simple"
+  category: "tools"
+  type: "internal"
+  url: "/pages/tl_poj_converter_simple.html"
+  description: "教育部臺灣台語輸入法 TL 拼音 現轉 POJ"
+
 - name: "TL -> POJ Chrome Extension"
   category: "tools"
   type: "external"

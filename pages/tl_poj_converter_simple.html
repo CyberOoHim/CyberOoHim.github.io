@@ -1,0 +1,629 @@
+---
+layout: apps
+title: TL to POJ Real-time Converter - Simple
+version: v0.1
+permalink: /pages/tl_poj_converter_simple.html
+updated: 2026-01-18
+note: 
+---
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 Cyber O͘-hîm ki-tē
+  Licensed under the MIT License
+  Simplified Version: Single Input In-Place Converter
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TL->POJ 現轉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-link: #58a6ff;
+            --border-color: #30363d;
+            --font-taigi: 'Huninn', 'Times New Roman', serif;
+            --spacing-md: 2rem;
+            --spacing-sm: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--spacing-md);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            color: var(--text-link);
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+        }
+
+        .btn:hover {
+            border-color: var(--text-link);
+            color: var(--text-link);
+        }
+
+        textarea {
+            flex: 1;
+            width: 100%;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-taigi);
+            font-size: 1.5rem;
+            line-height: 1.6;
+            padding: 1.5rem;
+            resize: none;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: var(--text-link);
+            box-shadow: 0 0 0 1px var(--text-link);
+        }
+
+        textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header-row">
+            <h1 id="ui-title"></h1>
+            <div class="toolbar-group">
+                <button class="btn" id="btn-copy"></button>
+                <button class="btn" id="btn-clear"></button>
+                <button class="btn" id="btn-help" title="Help">?</button>
+            </div>
+        </div>
+        <div id="help-box"
+            style="display:none; background: var(--bg-secondary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            <!-- Content injected by JS -->
+        </div>
+
+        <textarea id="input-area" placeholder=""></textarea>
+
+        <div class="footer" id="ui-footer"></div>
+    </div>
+
+    <script>
+        // --- Font Loading ---
+        const taigiCharsToLoad = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáàâāa̍éèêēe̍íìîīi̍óòôōo̍úùûūu̍ÁÀÂĀA̍ÉÈÊĒE̍ÍÌÎĪI̍ÓÒÔŌO̍ÚÙÛŪU̍o͘ó͘ò͘ô͘ō͘o̍͘O͘Ó͘Ò͘Ô͘Ō͘O̍͘aⁿeⁿiⁿoⁿuⁿo͘ⁿAⁿEⁿIⁿOⁿUⁿO̍͘ⁿáⁿàⁿâⁿāⁿa̍ⁿéⁿèⁿêⁿēe̍ⁿíⁿìⁿîⁿīi̍ⁿóⁿòⁿôⁿō͘ⁿo̍͘ⁿúⁿùⁿûⁿūⁿu̍ⁿó͘ⁿò͘ⁿô͘ⁿō͘ⁿo̍͘ⁿÁⁿÀⁿÂⁿĀⁿA̍ⁿÉⁿÈÊⁿĒⁿE̍ⁿÍÌÎĪI̍ⁿÓÒÔŌⁿO̍ⁿÚⁿÙⁿÛⁿŪⁿU̍ⁿÓ͘ⁿÒ͘ⁿÔ͘ⁿŌ͘ⁿO̍͘ⁿăĕĭŏŭŏ͘ĂĔĬŎŬŎ͘ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆-0123456789.,;:?!'\"()[]{}<>@#$%^&*_+=\\|/";
+        (function loadHuninnFont() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `https://fonts.googleapis.com/css2?family=Huninn&display=swap&text=${encodeURIComponent(taigiCharsToLoad)}`;
+            document.head.appendChild(link);
+        })();
+
+        // --- UI Constants ---
+        const UI_STRINGS = {
+            title: "TL->POJ 現轉",
+            buttons: {
+                copy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
+                clear: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
+                help: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+                copied: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+            },
+            placeholder: "對遮輸入... (e.g. Li2-ho2)",
+            footer: "臺灣台語輸入法 現轉 POJ<br><span style='font-size: 0.7rem; opacity: 0.7;'>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
+            helpContent: `
+                <p><strong>輸入格式:</strong></p>
+                <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>TL 拼音帶數字調號: <code>Tai5-uan5</code></li>
+                    <li>TL 拼音帶符號調號: <code>Tâi-uân</code></li>
+                    <li>POJ 帶數字調號: <code>Tai5-oan5</code></li>
+                </ul>`
+        };
+
+        function initUI() {
+            document.getElementById('ui-title').innerText = UI_STRINGS.title;
+            // Use innerHTML for icons
+            document.getElementById('btn-copy').innerHTML = UI_STRINGS.buttons.copy;
+            document.getElementById('btn-copy').title = "Copy to Clipboard"; // Add tooltips
+
+            document.getElementById('btn-clear').innerHTML = UI_STRINGS.buttons.clear;
+            document.getElementById('btn-clear').title = "Clear Text";
+
+            document.getElementById('btn-help').innerHTML = UI_STRINGS.buttons.help;
+            document.getElementById('input-area').placeholder = UI_STRINGS.placeholder;
+            document.getElementById('ui-footer').innerHTML = UI_STRINGS.footer;
+            document.getElementById('help-box').innerHTML = UI_STRINGS.helpContent;
+        }
+        document.addEventListener('DOMContentLoaded', initUI);
+
+        // --- Settings (Fixed as requested) ---
+        window.TL_USE_NASAL_SUPERSCRIPT = false;
+        window.TL_TONE6_USE_CARON = false;
+        window.TL_ALL_CAPS_SUPPORT = false;
+
+        // --- Logic extracted from tl_poj_converter.html ---
+        const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nnh|nn|ⁿ|N)?)';
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function createRC(char) {
+            return new RegExp(char + '([aAeEgGhHiIkKmMnNoOpPtTuU]*)', 'g');
+        }
+        function createRC1(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + TL_bue + lastChar, 'g');
+        }
+        function createRC2(tailo) {
+            return new RegExp(tailo[0] + '(u|i)((?:N|ⁿ|nn)?)' + tailo[1], 'g');
+        }
+        function createRC3_Regex(pattern) {
+            return new RegExp(pattern, 'g');
+        }
+        function createRC4(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar + '?', 'g');
+        }
+        function createRC8(tailo) {
+            const prefix = tailo.slice(0, -1);
+            const lastChar = tailo.slice(-1);
+            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar, 'g');
+        }
+
+        function TLtiau_2_TLsoo(tl_tiau, nasal = 'nn', use14 = false) {
+            let tl_soo = tl_tiau;
+            if (!tl_soo) return '';
+
+            const TL_T2S = [
+                { r: createRC('á'), s: 'a$12' }, { r: createRC('Á'), s: 'A$12' },
+                { r: createRC('à'), s: 'a$13' }, { r: createRC('À'), s: 'A$13' },
+                { r: createRC('â'), s: 'a$15' }, { r: createRC('Â'), s: 'A$15' },
+                { r: createRC('ǎ'), s: 'a$16' }, { r: createRC('Ǎ'), s: 'A$16' },
+                { r: createRC('ā'), s: 'a$17' }, { r: createRC('Ā'), s: 'A$17' },
+                { r: createRC('a̍'), s: 'a$18' }, { r: createRC('A̍'), s: 'A$18' },
+                { r: createRC('a̋'), s: 'a$19' }, { r: createRC('A̋'), s: 'A$19' },
+                { r: createRC('é'), s: 'e$12' }, { r: createRC('É'), s: 'E$12' },
+                { r: createRC('è'), s: 'e$13' }, { r: createRC('È'), s: 'E$13' },
+                { r: createRC('ê'), s: 'e$15' }, { r: createRC('Ê'), s: 'E$15' },
+                { r: createRC('ě'), s: 'e$16' }, { r: createRC('Ě'), s: 'E$16' },
+                { r: createRC('ē'), s: 'e$17' }, { r: createRC('Ē'), s: 'E$17' },
+                { r: createRC('e̍'), s: 'e$18' }, { r: createRC('E̍'), s: 'E$18' },
+                { r: createRC('e̋'), s: 'e$19' }, { r: createRC('E̋'), s: 'E$19' },
+                { r: createRC('í'), s: 'i$12' }, { r: createRC('Í'), s: 'I$12' },
+                { r: createRC('ì'), s: 'i$13' }, { r: createRC('Ì'), s: 'I$13' },
+                { r: createRC('î'), s: 'i$15' }, { r: createRC('Î'), s: 'I$15' },
+                { r: createRC('ǐ'), s: 'i$16' }, { r: createRC('Ǐ'), s: 'I$16' },
+                { r: createRC('ī'), s: 'i$17' }, { r: createRC('Ī'), s: 'I$17' },
+                { r: createRC('i̍'), s: 'i$18' }, { r: createRC('I̍'), s: 'I$18' },
+                { r: createRC('i̋'), s: 'i$19' }, { r: createRC('I̋'), s: 'I$19' },
+                { r: createRC('ó͘'), s: 'oo$12' }, { r: createRC('Ó͘'), s: 'Oo$12' },
+                { r: createRC('ò͘'), s: 'oo$13' }, { r: createRC('Ò͘'), s: 'Oo$13' },
+                { r: createRC('ô͘'), s: 'oo$15' }, { r: createRC('Ô͘'), s: 'Oo$15' },
+                { r: createRC('ǒ͘'), s: 'oo$16' }, { r: createRC('Ǒ͘'), s: 'Oo$16' },
+                { r: createRC('ō͘'), s: 'oo$17' }, { r: createRC('Ō͘'), s: 'Oo$17' },
+                { r: createRC('o̍͘'), s: 'oo$18' }, { r: createRC('O̍͘'), s: 'Oo$18' },
+                { r: createRC('ő͘'), s: 'oo$19' }, { r: createRC('Ő͘'), s: 'Oo$19' },
+                { r: createRC('ó'), s: 'o$12' }, { r: createRC('Ó'), s: 'O$12' },
+                { r: createRC('ò'), s: 'o$13' }, { r: createRC('Ò'), s: 'O$13' },
+                { r: createRC('ô'), s: 'o$15' }, { r: createRC('Ô'), s: 'O$15' },
+                { r: createRC('ǒ'), s: 'o$16' }, { r: createRC('Ǒ'), s: 'O$16' },
+                { r: createRC('ō'), s: 'o$17' }, { r: createRC('Ō'), s: 'O$17' },
+                { r: createRC('o̍'), s: 'o$18' }, { r: createRC('O̍'), s: 'O$18' },
+                { r: createRC('ő'), s: 'o$19' }, { r: createRC('Ő'), s: 'O$19' },
+                { r: createRC('ú'), s: 'u$12' }, { r: createRC('Ú'), s: 'U$12' },
+                { r: createRC('ù'), s: 'u$13' }, { r: createRC('Ù'), s: 'U$13' },
+                { r: createRC('û'), s: 'u$15' }, { r: createRC('Û'), s: 'U$15' },
+                { r: createRC('ǔ'), s: 'u$16' }, { r: createRC('Ǔ'), s: 'U$16' },
+                { r: createRC('ū'), s: 'u$17' }, { r: createRC('Ū'), s: 'U$17' },
+                { r: createRC('u̍'), s: 'u$18' }, { r: createRC('U̍'), s: 'U$18' },
+                { r: createRC('ű'), s: 'u$19' }, { r: createRC('Ű'), s: 'U$19' },
+                { r: createRC('ḿ'), s: 'm$12' }, { r: createRC('Ḿ'), s: 'M$12' },
+                { r: createRC('m̀'), s: 'm$13' }, { r: createRC('M̀'), s: 'M$13' },
+                { r: createRC('m̂'), s: 'm$15' }, { r: createRC('M̂'), s: 'M$15' },
+                { r: createRC('m̌'), s: 'm$16' }, { r: createRC('M̌'), s: 'M$16' },
+                { r: createRC('m̄'), s: 'm$17' }, { r: createRC('M̄'), s: 'M$17' },
+                { r: createRC('m̍'), s: 'm$18' }, { r: createRC('M̍'), s: 'M$18' },
+                { r: createRC('m̋'), s: 'm$19' }, { r: createRC('M̋'), s: 'M$19' },
+                { r: createRC('ń'), s: 'n$12' }, { r: createRC('Ń'), s: 'N$12' },
+                { r: createRC('ǹ'), s: 'n$13' }, { r: createRC('Ǹ'), s: 'N$13' },
+                { r: createRC('n̂'), s: 'n$15' }, { r: createRC('N̂'), s: 'N$15' },
+                { r: createRC('ň'), s: 'n$16' }, { r: createRC('N̋'), s: 'N$16' },
+                { r: createRC('n̄'), s: 'n$17' }, { r: createRC('N̄'), s: 'N$17' },
+                { r: createRC('n̍'), s: 'n$18' }, { r: createRC('N̍'), s: 'N$18' },
+                { r: createRC('n̋'), s: 'n$19' }, { r: createRC('N̋'), s: 'N$19' }
+            ];
+
+            for (const map of TL_T2S) {
+                tl_soo = tl_soo.replace(map.r, map.s);
+            }
+
+            tl_soo = tl_soo.replace(/o͘/g, 'oo');
+            tl_soo = tl_soo.replace(/O͘/g, 'Oo');
+            tl_soo = tl_soo.replace(/ⁿ/g, 'nn');
+
+            if (nasal === 'N') {
+                tl_soo = tl_soo.replace(/(?<=[aeiouAEIOU])nn/g, 'N');
+            }
+
+            if (use14) {
+                const add1 = /(a|A|e|E|i|I|o|O|u|U|m|M|ng|Ng|n)\b/g;
+                const add4 = /(h|H|p|P|t|T|k|K)\b/g;
+                tl_soo = tl_soo.replace(add1, '$11');
+                tl_soo = tl_soo.replace(add4, '$14');
+            }
+            return tl_soo;
+        }
+
+        function TLsoo_2_POJsoo(tailo_soo, keep14 = false) {
+            if (!tailo_soo) return '';
+            let poj_soo = tailo_soo;
+
+            if (!keep14) {
+                const remove1 = /([aeiouAEIOU](?:nn|N)?|[aeiouAEIOU](?:ng|n|m)|(?:p|P|ph|Ph|m|M|b|B|t|T|th|Th|n|N|l|L|k|K|kh|Kh|ng|Ng|g|G|s|S|h|H)?(?:ng|Ng|m|M))1/g;
+                poj_soo = poj_soo.replace(remove1, '$1');
+                const remove4 = /([aeiouAEIOU](?:(?:nn|N)?(?:h|H)|p|P|t|T|k|K)|(?:m|M|ng|Ng)(?:h|H))4/g;
+                poj_soo = poj_soo.replace(remove4, '$1');
+            }
+
+            const tailo2poj = [
+                ['oonn', 'o͘N'], ['Oonn', 'O͘N'], ['onn', 'o͘N'], ['Onn', 'O͘N'],
+                ['ts', 'ch'], ['Ts', 'Ch'], ['oo', 'o͘'], ['Oo', 'O͘'],
+                ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
+                ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
+                // Fix: nnh -> hnn must happen BEFORE tones are processed so that hnn + tone works
+                ['nnh', 'hnn']
+            ];
+
+            if (window.TL_ALL_CAPS_SUPPORT) {
+                tailo2poj.push(
+                    ['OONN', 'O͘N'], ['ONN', 'O͘N'], ['TS', 'CH'], ['OO', 'O͘'],
+                    ['UA', 'OA'], ['UE', 'OE'], ['ING', 'ENG'], ['IK', 'EK'],
+                    ['NNH', 'HNN']
+                );
+            }
+
+            for (const [k, v] of tailo2poj) {
+                poj_soo = poj_soo.replace(new RegExp(k, 'g'), v);
+            }
+            return poj_soo;
+        }
+
+        function POJsoo_2_POJtiau(poj_soo) {
+            if (!poj_soo) return '';
+            let poj_tiau = poj_soo;
+            if (window.TL_USE_NASAL_SUPERSCRIPT) {
+                const N_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])N(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ$2');
+                const Nh_to_superscript = /([aeiouAEIOUmM])Nh?(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(Nh_to_superscript, '$1hⁿ$2');
+            }
+
+            const useTone6Caron = window.TL_TONE6_USE_CARON;
+            const t6 = useTone6Caron
+                ? { a: 'ǎ', A: 'Ǎ', e: 'ě', E: 'Ě', i: 'ǐ', I: 'Ǐ', o: 'ǒ', O: 'Ǒ', u: 'ǔ', U: 'Ú', 'o͘': 'ǒ͘', 'O͘': 'Ǒ͘', m: 'm̌', M: 'M̌', n: 'ň', N: 'Ň' }
+                : { a: 'á', A: 'Á', e: 'é', E: 'É', i: 'í', I: 'Í', o: 'ó', O: 'Ó', u: 'ú', U: 'Ú', 'o͘': 'ó͘', 'O͘': 'Ó͘', m: 'ḿ', M: 'Ḿ', n: 'ń', N: 'Ń' };
+
+            const POJ_S2T = [
+                { r: createRC2('a1'), s: 'a$1$2' }, { r: createRC2('A1'), s: 'A$1$2' },
+                { r: createRC2('a2'), s: 'á$1$2' }, { r: createRC2('A2'), s: 'Á$1$2' },
+                { r: createRC2('a3'), s: 'à$1$2' }, { r: createRC2('A3'), s: 'À$1$2' },
+                { r: createRC3_Regex('a(i|u)((?:N|ⁿ|nn)?)h4'), s: 'a$1$2h' },
+                { r: createRC3_Regex('A(i|u)((?:N|ⁿ|nn)?)h4'), s: 'A$1$2h' },
+                { r: createRC2('a5'), s: 'â$1$2' }, { r: createRC2('A5'), s: 'Â$1$2' },
+                { r: createRC2('a6'), s: t6.a + '$1$2' }, { r: createRC2('A6'), s: t6.A + '$1$2' },
+                { r: createRC2('a7'), s: 'ā$1$2' }, { r: createRC2('A7'), s: 'Ā$1$2' },
+                { r: createRC3_Regex('a(i|u)h(?:N|ⁿ|nn)8'), s: 'a̍$1hⁿ' },
+                { r: createRC3_Regex('A(i|u)h(?:N|ⁿ|nn)8'), s: 'A̍$1hⁿ' },
+                { r: createRC3_Regex('a(i|u)h8'), s: 'a̍$1h' },
+                { r: createRC3_Regex('A(i|u)h8'), s: 'A̍$1h' },
+                { r: createRC2('a9'), s: 'ă$1$2' }, { r: createRC2('A9'), s: 'Ă$1$2' },
+
+                { r: createRC2('u1'), s: 'u$1$2' }, { r: createRC2('U1'), s: 'U$1$2' },
+                { r: createRC2('u2'), s: 'ú$1$2' }, { r: createRC2('U2'), s: 'Ú$1$2' },
+                { r: createRC2('u3'), s: 'ù$1$2' }, { r: createRC2('U3'), s: 'Ù$1$2' },
+                { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)4'), s: 'uih$1' },
+                { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)4'), s: 'Uih$1' },
+                { r: createRC2('u5'), s: 'û$1$2' }, { r: createRC2('U5'), s: 'Û$1$2' },
+                { r: createRC2('u6'), s: t6.u + '$1$2' }, { r: createRC2('U6'), s: t6.U + '$1$2' },
+                { r: createRC2('u7'), s: 'ū$1$2' }, { r: createRC2('U7'), s: 'Ū$1$2' },
+                { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)8'), s: 'u̍ih$1' },
+                { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)8'), s: 'U̍ih$1' },
+                { r: createRC2('u9'), s: 'ŭ$1$2' }, { r: createRC2('U9'), s: 'Ŭ$1$2' },
+
+                { r: createRC3_Regex('(o|O)([ae])((?:N|ⁿ|nn)?)1?\\b'), s: '$1$2$3' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'ó$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'Ó$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'ò$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)3\\b'), s: 'Ò$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'ô$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)5\\b'), s: 'Ô$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)6\\b'), s: t6.o + '$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)6\\b'), s: t6.O + '$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'ō$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'Ō$1$2' },
+                { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'ŏ$1$2' },
+                { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'Ŏ$1$2' },
+
+                { r: createRC1('a1'), s: 'a$1' }, { r: createRC1('A1'), s: 'A$1' },
+                { r: createRC1('a2'), s: 'á$1' }, { r: createRC1('A2'), s: 'Á$1' },
+                { r: createRC1('a3'), s: 'à$1' }, { r: createRC1('A3'), s: 'À$1' },
+                { r: createRC4('a4'), s: 'a$1' }, { r: createRC4('A4'), s: 'A$1' },
+                { r: createRC1('a5'), s: 'â$1' }, { r: createRC1('A5'), s: 'Â$1' },
+                { r: createRC1('a6'), s: t6.a + '$1' }, { r: createRC1('A6'), s: t6.A + '$1' },
+                { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
+                { r: createRC8('a8'), s: 'a̍$1' }, { r: createRC8('A8'), s: 'A̍$1' },
+                { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
+
+                { r: createRC1('e1'), s: 'e$1' }, { r: createRC1('E1'), s: 'E$1' },
+                { r: createRC1('e2'), s: 'é$1' }, { r: createRC1('E2'), s: 'É$1' },
+                { r: createRC1('e3'), s: 'è$1' }, { r: createRC1('E3'), s: 'È$1' },
+                { r: createRC4('e4'), s: 'e$1' }, { r: createRC4('E4'), s: 'E$1' },
+                { r: createRC1('e5'), s: 'ê$1' }, { r: createRC1('E5'), s: 'Ê$1' },
+                { r: createRC1('e6'), s: t6.e + '$1' }, { r: createRC1('E6'), s: t6.E + '$1' },
+                { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
+                { r: createRC8('e8'), s: 'e̍$1' }, { r: createRC8('E8'), s: 'E̍$1' },
+                { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
+
+                { r: createRC1('i1'), s: 'i$1' }, { r: createRC1('I1'), s: 'I$1' },
+                { r: createRC1('i2'), s: 'í$1' }, { r: createRC1('I2'), s: 'Í$1' },
+                { r: createRC1('i3'), s: 'ì$1' }, { r: createRC1('I3'), s: 'Ì$1' },
+                { r: createRC4('i4'), s: 'i$1' }, { r: createRC4('I4'), s: 'I$1' },
+                { r: createRC1('i5'), s: 'î$1' }, { r: createRC1('I5'), s: 'Î$1' },
+                { r: createRC1('i6'), s: t6.i + '$1' }, { r: createRC1('I6'), s: t6.I + '$1' },
+                { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
+                { r: createRC8('i8'), s: 'i̍$1' }, { r: createRC8('I8'), s: 'I̍$1' },
+                { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
+
+                { r: createRC1('o͘1'), s: 'o͘$1' }, { r: createRC1('O͘1'), s: 'O͘$1' },
+                { r: createRC1('o͘2'), s: 'ó͘$1' }, { r: createRC1('O͘2'), s: 'Ó͘$1' },
+                { r: createRC1('o͘3'), s: 'ò͘$1' }, { r: createRC1('O͘3'), s: 'Ò͘$1' },
+                { r: createRC4('o͘4'), s: 'o͘$1' }, { r: createRC4('O͘4'), s: 'O͘$1' },
+                { r: createRC1('o͘5'), s: 'ô͘$1' }, { r: createRC1('O͘5'), s: 'Ô͘$1' },
+                { r: createRC1('o͘6'), s: t6['o͘'] + '$1' }, { r: createRC1('O͘6'), s: t6['O͘'] + '$1' },
+                { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
+                { r: createRC8('o͘8'), s: 'o̍͘$1' }, { r: createRC8('O͘8'), s: 'O̍͘$1' },
+                { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
+
+                { r: createRC1('o1'), s: 'o$1' }, { r: createRC1('O1'), s: 'O$1' },
+                { r: createRC1('o2'), s: 'ó$1' }, { r: createRC1('O2'), s: 'Ó$1' },
+                { r: createRC1('o3'), s: 'ò$1' }, { r: createRC1('O3'), s: 'Ò$1' },
+                { r: createRC4('o4'), s: 'o$1' }, { r: createRC4('O4'), s: 'O$1' },
+                { r: createRC1('o5'), s: 'ô$1' }, { r: createRC1('O5'), s: 'Ô$1' },
+                { r: createRC1('o6'), s: t6.o + '$1' }, { r: createRC1('O6'), s: t6.O + '$1' },
+                { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
+                { r: createRC8('o8'), s: 'o̍$1' }, { r: createRC8('O8'), s: 'O̍$1' },
+                { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
+
+                { r: createRC1('u1'), s: 'u$1' }, { r: createRC1('U1'), s: 'U$1' },
+                { r: createRC1('u2'), s: 'ú$1' }, { r: createRC1('U2'), s: 'Ú$1' },
+                { r: createRC1('u3'), s: 'ù$1' }, { r: createRC1('U3'), s: 'Ù$1' },
+                { r: createRC4('u4'), s: 'u$1' }, { r: createRC4('U4'), s: 'U$1' },
+                { r: createRC1('u5'), s: 'û$1' }, { r: createRC1('U5'), s: 'Û$1' },
+                { r: createRC1('u6'), s: t6.u + '$1' }, { r: createRC1('U6'), s: t6.U + '$1' },
+                { r: createRC1('u7'), s: 'ū$1' }, { r: createRC1('U7'), s: 'Ū$1' },
+                { r: createRC8('u8'), s: 'u̍$1' }, { r: createRC8('U8'), s: 'U̍$1' },
+                { r: createRC1('u9'), s: 'ŭ$1' }, { r: createRC1('U9'), s: 'Ŭ$1' },
+
+                { r: createRC3_Regex('m1'), s: 'm' }, { r: createRC3_Regex('M1'), s: 'M' },
+                { r: createRC3_Regex('m2'), s: 'ḿ' }, { r: createRC3_Regex('M2'), s: 'Ḿ' },
+                { r: createRC3_Regex('m3'), s: 'm̀' }, { r: createRC3_Regex('M3'), s: 'M̀' },
+                { r: createRC3_Regex('mh4'), s: 'mh' }, { r: createRC3_Regex('Mh4'), s: 'Mh' },
+                { r: createRC3_Regex('m5'), s: 'm̂' }, { r: createRC3_Regex('M5'), s: 'M̂' },
+                { r: createRC3_Regex('m6'), s: t6.m }, { r: createRC3_Regex('M6'), s: t6.M },
+                { r: createRC3_Regex('m7'), s: 'm̄' }, { r: createRC3_Regex('M7'), s: 'M̄' },
+                { r: createRC3_Regex('mh8'), s: 'm̍h' }, { r: createRC3_Regex('Mh8'), s: 'M̍h' },
+                { r: createRC3_Regex('m9'), s: 'm̆' }, { r: createRC3_Regex('M9'), s: 'M̆' },
+
+                { r: createRC3_Regex('ng1'), s: 'ng' }, { r: createRC3_Regex('Ng1'), s: 'Ng' },
+                { r: createRC3_Regex('ng2'), s: 'ńg' }, { r: createRC3_Regex('Ng2'), s: 'Ńg' },
+                { r: createRC3_Regex('ng3'), s: 'ǹg' }, { r: createRC3_Regex('Ng3'), s: 'Ǹg' },
+                { r: createRC3_Regex('ngh4'), s: 'ngh' }, { r: createRC3_Regex('Ngh4'), s: 'Ngh' },
+                { r: createRC3_Regex('ng5'), s: 'n̂g' }, { r: createRC3_Regex('Ng5'), s: 'N̂g' },
+                { r: createRC3_Regex('ng6'), s: t6.n + 'g' }, { r: createRC3_Regex('Ng6'), s: t6.N + 'g' },
+                { r: createRC3_Regex('ng7'), s: 'n̄g' }, { r: createRC3_Regex('Ng7'), s: 'N̄g' },
+                { r: createRC3_Regex('ngh8'), s: 'n̍gh' }, { r: createRC3_Regex('Ngh8'), s: 'N̍gh' },
+                { r: createRC3_Regex('ng9'), s: 'n̆g' }, { r: createRC3_Regex('Ng9'), s: 'N̆g' }
+            ];
+
+            if (window.TL_ALL_CAPS_SUPPORT) {
+                POJ_S2T.push(
+                    { r: createRC3_Regex('NG1'), s: 'NG' },
+                    { r: createRC3_Regex('NG2'), s: t6.N + 'G' },
+                    { r: createRC3_Regex('NG3'), s: 'ǸG' },
+                    { r: createRC3_Regex('NGH4'), s: 'NGH' },
+                    { r: createRC3_Regex('NG5'), s: 'N̂G' },
+                    { r: createRC3_Regex('NG6'), s: t6.N + 'G' },
+                    { r: createRC3_Regex('NG7'), s: 'N̄G' },
+                    { r: createRC3_Regex('NGH8'), s: 'N̍GH' },
+                    { r: createRC3_Regex('NG9'), s: 'N̆G' }
+                );
+            }
+
+            for (const map of POJ_S2T) {
+                poj_tiau = poj_tiau.replace(map.r, map.s);
+            }
+
+            // Late Conversion for nn -> ⁿ (supescript)
+            // Perform this AFTER tone conversion so that "nn" can be matched by tone mappings (via TL_bue)
+            const vowelChars = "aeiouAEIOU" +
+                "áàâāa̍ăÁÀÂĀA̍Ă" +
+                "éèêēe̍ĕÉÈÊĒE̍Ĕ" +
+                "íìîīi̍ĭÍÌÎĪI̍Ĭ" +
+                "óòôōo̍ŏÓÒÔŌO̍Ŏ" +
+                "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
+                "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
+                "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
+            const nn_to_superscript = new RegExp(`([${vowelChars}]h?)nn`, 'g');
+            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
+
+            return poj_tiau;
+        }
+
+        function TLtiau_2_POJtiau(tl_tiau) {
+            let processedInput = tl_tiau;
+
+            const pojPlaceholders = [];
+            const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
+            const pojOoPattern = /[\p{L}\p{M}]*[oO]͘[\p{L}\p{M}]*/gu;
+
+            processedInput = processedInput.replace(pojNasalEndPattern, (match) => {
+                pojPlaceholders.push(match);
+                return `⟪POJ${pojPlaceholders.length - 1}⟫`;
+            });
+            processedInput = processedInput.replace(pojOoPattern, (match) => {
+                if (match.includes('⟪POJ')) return match;
+                pojPlaceholders.push(match);
+                return `⟪POJ${pojPlaceholders.length - 1}⟫`;
+            });
+
+            const tl_soo = TLtiau_2_TLsoo(processedInput);
+            const poj_soo = TLsoo_2_POJsoo(tl_soo);
+            let poj_tiau = POJsoo_2_POJtiau(poj_soo);
+
+            // Removed escape restoration block
+            poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
+                return pojPlaceholders[parseInt(index)];
+            });
+
+            return poj_tiau;
+        }
+
+        // --- Interaction Logic ---
+        const inputArea = document.getElementById('input-area');
+        const btnCopy = document.getElementById('btn-copy');
+        const btnClear = document.getElementById('btn-clear');
+
+        inputArea.addEventListener('input', (e) => {
+            const val = inputArea.value;
+            const cursorPos = inputArea.selectionStart;
+
+            // Only trigger if the last typed character is a "delimiter" or we are editing an existing word?
+            // "On the fly" usually means after we finish a syllable.
+            // Let's check if the character just before the cursor is a delimiter
+            const charBeforeCursor = val.slice(cursorPos - 1, cursorPos);
+            const isDelimiter = /[\s\.,;:?!'"\(\)\[\]\{\}<>@#\$%\^&\*_\+=\\\|\/\-]/.test(charBeforeCursor);
+
+            // If it's a delimiter, we try to convert what came before it.
+            // But simplifying: let's just convert the whole text if a delimiter was typed.
+            // This prevents "siann" -> "siaⁿ" immediately while typing siann2.
+            // Limitation: If user types "siann" and stops, it won't convert until they hit space.
+            // This is standard IME behavior.
+
+            if (isDelimiter || e.inputType === 'insertFromPaste' || e.inputType === 'deleteContentBackward') {
+                const oldLen = val.length;
+                const newVal = TLtiau_2_POJtiau(val);
+
+                if (newVal !== val) {
+                    inputArea.value = newVal;
+
+                    // Heuristic Cursor Restoration
+                    const newLen = newVal.length;
+                    const diff = newLen - oldLen;
+                    let newCursor = cursorPos + diff;
+
+                    // Safety clamps
+                    if (newCursor < 0) newCursor = 0;
+                    if (newCursor > newLen) newCursor = newLen;
+
+                    inputArea.setSelectionRange(newCursor, newCursor);
+                }
+            }
+        });
+
+        btnCopy.addEventListener('click', async () => {
+            await navigator.clipboard.writeText(inputArea.value);
+            const original = btnCopy.innerHTML; // Store HTML (icon)
+            btnCopy.innerHTML = UI_STRINGS.buttons.copied;
+            setTimeout(() => btnCopy.innerHTML = original, 1500);
+            inputArea.focus();
+        });
+
+        btnClear.addEventListener('click', () => {
+            inputArea.value = '';
+            inputArea.focus();
+        });
+
+        const btnHelp = document.getElementById('btn-help');
+        const helpBox = document.getElementById('help-box');
+        btnHelp.addEventListener('click', () => {
+            if (helpBox.style.display === 'none') {
+                helpBox.style.display = 'block';
+            } else {
+                helpBox.style.display = 'none';
+            }
+        });
+
+        inputArea.focus();
+
+    </script>
+</body>
+
+</html>
