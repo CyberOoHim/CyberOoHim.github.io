@@ -1454,8 +1454,8 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
 
             // String replacements
             const tailo2poj = [
-                ['oonn', 'o͘N'], ['Oonn', 'O͘N'],
-                ['onn', 'o͘N'], ['Onn', 'O͘N'],
+                ['oonn', 'o͘nn'], ['Oonn', 'O͘nn'],
+                /* ['onn', 'o͘N'], ['Onn', 'O͘N'], <-- REMOVED: onn should be oⁿ, not o͘N */
                 ['ts', 'ch'], ['Ts', 'Ch'],
                 ['oo', 'o͘'], ['Oo', 'O͘'],
                 ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
@@ -1467,7 +1467,7 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
             // Add all-caps variants if flag enabled
             if (window.TL_ALL_CAPS_SUPPORT) {
                 tailo2poj.push(
-                    ['OONN', 'O͘N'], ['ONN', 'O͘N'],
+                    ['OONN', 'O͘NN'], ['ONN', 'O͘NN'], /* Changed to O͘NN to become O͘ⁿ later */
                     ['TS', 'CH'], ['OO', 'O͘'],
                     ['UA', 'OA'], ['UE', 'OE'],
                     ['ING', 'ENG'], ['IK', 'EK'],
@@ -1496,16 +1496,26 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
             // - N at syllable tail (after vowel or vowel+h or m+h): Only convert when toggle is ON
             // - Standalone nn/N (not after valid pattern): Preserve as-is
             // Patterns: vowel+nn, vowel+h+nn, m+h+nn (and same for N)
-            const nn_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])nn(\d?)\b/g;
-            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ$2');
+            // Fix: Include combining dot \u0358 for o͘ handling
+            const vowelChars = "aeiouAEIOUmM" +
+                "áàâāa̍ăÁÀÂĀA̍Ă" +
+                "éèêēe̍ĕÉÈÊĒE̍Ĕ" +
+                "íìîīi̍ĭÍÌÎĪI̍Ĭ" +
+                "óòôōo̍ŏÓÒÔŌO̍Ŏ" +
+                "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
+                "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
+                "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
+            // Allow optional combining dot \u0358 after vowel match
+            const nn_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)nn\\b`, 'g');
+            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
 
             const useNasalSuperscript = typeof window !== 'undefined' &&
                 window.TL_USE_NASAL_SUPERSCRIPT !== false;
             if (useNasalSuperscript) {
-                const N_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])N(\d?)\b/g;
-                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ$2');
+                const N_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)N\\b`, 'g');
+                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ');
                 // Also handle Nh pattern (reorder and convert): aNh → ahⁿ
-                const Nh_to_superscript = /([aeiouAEIOUmM])Nh?(\d?)\b/g;
+                const Nh_to_superscript = new RegExp(`([${vowelChars}]\\u0358?)Nh?(\\d?)\\b`, 'g');
                 poj_tiau = poj_tiau.replace(Nh_to_superscript, '$1hⁿ$2');
             }
 

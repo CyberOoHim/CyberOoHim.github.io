@@ -45,11 +45,31 @@ note:
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: sans-serif;
-            height: 100vh;
+            height: 100dvh;
+            /* Use dynamic viewport height for mobile bars */
+            overflow: hidden;
+            /* Prevent page-level scroll */
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: var(--spacing-md);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: var(--spacing-sm);
+                /* Reduce padding on small screens */
+            }
+
+            .container {
+                gap: 0.5rem;
+            }
+
+            textarea {
+                padding: 1rem;
+                /* Slightly smaller padding in text area */
+            }
         }
 
         .container {
@@ -607,7 +627,8 @@ note:
             }
 
             const tailo2poj = [
-                ['oonn', 'o͘N'], ['Oonn', 'O͘N'], ['onn', 'o͘N'], ['Onn', 'O͘N'],
+                ['oonn', 'o͘nn'], ['Oonn', 'O͘nn'],
+                /* ['onn', 'o͘N'], ['Onn', 'O͘N'], <-- REMOVED: onn should be oⁿ, not o͘N */
                 ['ts', 'ch'], ['Ts', 'Ch'], ['oo', 'o͘'], ['Oo', 'O͘'],
                 ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
                 ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
@@ -617,8 +638,10 @@ note:
 
             if (window.TL_ALL_CAPS_SUPPORT) {
                 tailo2poj.push(
-                    ['OONN', 'O͘N'], ['ONN', 'O͘N'], ['TS', 'CH'], ['OO', 'O͘'],
-                    ['UA', 'OA'], ['UE', 'OE'], ['ING', 'ENG'], ['IK', 'EK'],
+                    ['OONN', 'O͘NN'], ['ONN', 'O͘NN'], /* Changed to O͘NN to become O͘ⁿ later */
+                    ['TS', 'CH'], ['OO', 'O͘'],
+                    ['UA', 'OA'], ['UE', 'OE'],
+                    ['ING', 'ENG'], ['IK', 'EK'],
                     ['NNH', 'HNN']
                 );
             }
@@ -794,7 +817,9 @@ note:
                 "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
                 "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
                 "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
-            const nn_to_superscript = new RegExp(`([${vowelChars}]h?)nn\\b`, 'g');
+            // Fix: Include combining dot \u0358 for o͘ handling
+            // Allow optional combining dot \u0358 after vowel match
+            const nn_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)nn\\b`, 'g');
             poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
 
             return poj_tiau;
