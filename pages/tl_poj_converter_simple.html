@@ -280,6 +280,37 @@ note:
             font-weight: bold;
         }
 
+        .view-toggle-btn.active {
+            background: var(--text-link);
+            color: var(--bg-primary);
+            font-weight: bold;
+        }
+
+        /* Text Zoom Levels */
+        html[data-text-zoom="0"] {
+            font-size: 100%;
+        }
+
+        html[data-text-zoom="1"] {
+            font-size: 110%;
+        }
+
+        html[data-text-zoom="2"] {
+            font-size: 120%;
+        }
+
+        html[data-text-zoom="3"] {
+            font-size: 130%;
+        }
+
+        html[data-text-zoom="4"] {
+            font-size: 140%;
+        }
+
+        html[data-text-zoom="5"] {
+            font-size: 150%;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 480px) {
             .container {
@@ -383,6 +414,17 @@ note:
                 </div>
             </div>
 
+
+            <div class="setting-item">
+                <span id="ui-lbl-text-size"></span>
+                <div class="switch-container" style="gap: 2px;">
+                    <button class="btn" id="btn-zoom-out" style="width: 32px; height: 32px; padding: 0;">-</button>
+                    <span id="zoom-level-indicator"
+                        style="width: 30px; text-align: center; font-weight: bold; display: inline-block;">A</span>
+                    <button class="btn" id="btn-zoom-in" style="width: 32px; height: 32px; padding: 0;">+</button>
+                </div>
+            </div>
+
             <div class="setting-item">
                 <span id="ui-lbl-scroll-lines" title="設定拍字時，頂懸欲留幾逝 context (建議 3-6 逝)"></span>
                 <div class="switch-container" style="justify-content: flex-end;">
@@ -466,7 +508,8 @@ note:
                 nasal: '尾N→鼻化音"ⁿ"',
                 tone6: "第6調 (ǎ)",
                 allcaps: "大寫模式 (ALL CAPS)",
-                scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)"
+                scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)",
+                textSize: "字型大小 (Text Size)"
             },
             placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )",
             footer: "<span>TL → POJ 現轉<br>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
@@ -519,6 +562,7 @@ note:
             document.getElementById('ui-lbl-nasal-toggle').innerText = UI_STRINGS.settings.nasal;
             document.getElementById('ui-lbl-tone6-toggle').innerText = UI_STRINGS.settings.tone6;
             document.getElementById('ui-lbl-allcaps-toggle').innerText = UI_STRINGS.settings.allcaps;
+            document.getElementById('ui-lbl-text-size').innerText = UI_STRINGS.settings.textSize;
             document.getElementById('ui-lbl-scroll-lines').innerText = UI_STRINGS.settings.scrollLines;
 
             document.getElementById('ui-btn-run-test').innerText = UI_STRINGS.tooltips.runTest;
@@ -534,8 +578,42 @@ note:
 
             loadSettings();
             updateSettings();
+
+            // Text Zoom Init
+            initTextZoom();
         }
         document.addEventListener('DOMContentLoaded', initUI);
+
+        // --- Text Zoom Logic ---
+        let currentZoomLevel = 0;
+        const MAX_ZOOM_LEVEL = 5;
+
+        function initTextZoom() {
+            const savedZoom = localStorage.getItem('tl_poj_converter_zoom');
+            if (savedZoom !== null) {
+                currentZoomLevel = parseInt(savedZoom, 10);
+            }
+            applyZoomLevel();
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                if (currentZoomLevel > 0) {
+                    currentZoomLevel--;
+                    applyZoomLevel();
+                }
+            });
+
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                if (currentZoomLevel < MAX_ZOOM_LEVEL) {
+                    currentZoomLevel++;
+                    applyZoomLevel();
+                }
+            });
+        }
+
+        function applyZoomLevel() {
+            document.documentElement.setAttribute('data-text-zoom', currentZoomLevel);
+            localStorage.setItem('tl_poj_converter_zoom', currentZoomLevel);
+        }
 
         // --- Settings (Fixed as requested) ---
         window.TL_USE_NASAL_SUPERSCRIPT = false;
