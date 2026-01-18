@@ -45,31 +45,11 @@ note:
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: sans-serif;
-            height: 100dvh;
-            /* Use dynamic viewport height for mobile bars */
-            overflow: hidden;
-            /* Prevent page-level scroll */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: var(--spacing-md);
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
-            body {
-                padding: var(--spacing-sm);
-                /* Reduce padding on small screens */
-            }
-
-            .container {
-                gap: 0.5rem;
-            }
-
-            textarea {
-                padding: 1rem;
-                /* Slightly smaller padding in text area */
-            }
         }
 
         .container {
@@ -124,19 +104,22 @@ note:
 
         textarea {
             flex: 1;
-            width: 100%;
-            background-color: var(--bg-secondary);
+            /* Take remaining space */
+            padding: var(--spacing-sm);
+            background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: var(--font-taigi);
-            font-size: 1.0rem;
-            line-height: 1.6;
-            padding: 1.5rem;
+            border-radius: 6px;
             resize: none;
+            font-family: var(--font-taigi);
+            font-size: 1.4rem;
+            line-height: 1.6;
             outline: none;
-            padding-bottom: 80vh;
-            /* Allow scrolling past end for typewriter effect */
+            width: 100%;
+            color: var(--text-primary);
+            box-sizing: border-box;
+            min-height: 0;
+            /* Crucial for flex child scroll */
+            overflow-y: auto;
         }
 
         textarea:focus {
