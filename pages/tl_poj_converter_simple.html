@@ -372,7 +372,7 @@ note:
 
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "TL → POJ",
+            title: "TL→POJ",
             config: {
                 downloadFilename: "tl_poj_converter_simple_output.txt"
             },
@@ -980,11 +980,13 @@ note:
 
                 // 2. Check for Trigger
                 const cursorPos = inputArea.selectionStart;
-                const charBeforeCursor = val.slice(cursorPos - 1, cursorPos);
-                const isDelimiter = /[\d\s\.,;:?!'"\(\)\[\]\{\}<>@#\$%\^&\*_\+=\\\|\/\-]/.test(charBeforeCursor);
 
-                if (isDelimiter || e.inputType === 'insertFromPaste' || e.inputType === 'deleteContentBackward') {
-                    // 3. Perform Conversion on RAW content
+
+                // 2. Perform Conversion on RAW content (Always, unless composing)
+                // Skip view update if composing (IME) to avoid breaking composition
+                if (e.isComposing) {
+                    previousVal = val;
+                } else {
                     const oldLen = val.length;
                     const newVal = TLtiau_2_POJtiau(rawContent); // Convert from SOURCE
 
@@ -1007,9 +1009,6 @@ note:
                         // No visual change, update tracker
                         previousVal = val;
                     }
-                } else {
-                    // No trigger, update tracker
-                    previousVal = val;
                 }
             }
 
