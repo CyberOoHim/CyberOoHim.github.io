@@ -35,6 +35,16 @@ note:
             --spacing-sm: 1rem;
         }
 
+        /* Light Mode Overrides */
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-link: #0969da;
+            --border-color: #d0d7de;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -385,6 +395,38 @@ note:
             <h3 id="ui-lbl-settings-title" style="margin-bottom: 0.5rem; color: var(--text-link);"></h3>
 
             <div class="setting-item">
+                <span id="ui-lbl-theme-toggle"></span>
+                <div class="switch-container">
+                    <!-- Sun Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        style="margin-right: 4px; opacity: 0.7;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+
+                    <input type="checkbox" id="theme-toggle" class="switch-input">
+                    <label for="theme-toggle" class="switch-label">
+                        <span class="switch-slider"></span>
+                    </label>
+
+                    <!-- Moon Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        style="margin-left: 4px; opacity: 0.7;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="setting-item">
                 <span id="ui-lbl-nasal-toggle"></span>
                 <div class="switch-container">
                     <input type="checkbox" id="nasal-superscript-toggle" class="switch-input" checked>
@@ -509,7 +551,8 @@ note:
                 tone6: "第6調 (ǎ)",
                 allcaps: "大寫模式 (ALL CAPS)",
                 scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)",
-                textSize: "字型大小 (Text Size)"
+                textSize: "字骨大細 (Text Size)",
+                theme: "外觀 (Theme)"
             },
             placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )",
             footer: "<span>TL → POJ 現轉<br>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
@@ -525,7 +568,7 @@ note:
                 <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
                     <li><strong>隨輸入隨轉</strong>: 拍字隨會轉做 POJ。</li>
                     <li><strong>原文/轉</strong>: 會使切欲看「原文」a̍h-sī「轉」結果。</li>
-                    <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式 kap 自動捲留幾逝。</li>
+                    <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式、自動捲 beh 留幾逝、koh 會當 chhiâu 外觀（光/暗）kap 字骨大細。</li>
                     <li><strong>Táng-ló͘</strong>: 轉好 ê 結果會使 táng-ló͘（download）做 .txt 檔。</li>
                 </ul>
                 <p style="margin-top: 1rem;"><strong>注意 (Note):</strong></p>
@@ -564,6 +607,7 @@ note:
             document.getElementById('ui-lbl-allcaps-toggle').innerText = UI_STRINGS.settings.allcaps;
             document.getElementById('ui-lbl-text-size').innerText = UI_STRINGS.settings.textSize;
             document.getElementById('ui-lbl-scroll-lines').innerText = UI_STRINGS.settings.scrollLines;
+            document.getElementById('ui-lbl-theme-toggle').innerText = UI_STRINGS.settings.theme;
 
             document.getElementById('ui-btn-run-test').innerText = UI_STRINGS.tooltips.runTest;
             document.getElementById('ui-btn-reset-settings').innerText = UI_STRINGS.tooltips.reset;
@@ -581,8 +625,38 @@ note:
 
             // Text Zoom Init
             initTextZoom();
+
+            // Theme Init
+            initTheme();
         }
         document.addEventListener('DOMContentLoaded', initUI);
+
+        // --- Theme Logic ---
+        function initTheme() {
+            const savedTheme = localStorage.getItem('tl_poj_converter_theme');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            // Default is Dark. If 'light' is saved, switch to Light.
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.checked = false; // Unchecked = Light (Sun)
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.checked = true; // Checked = Dark (Moon)
+            }
+
+            themeToggle.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    // Switch to Dark
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('tl_poj_converter_theme', 'dark');
+                } else {
+                    // Switch to Light
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('tl_poj_converter_theme', 'light');
+                }
+            });
+        }
 
         // --- Text Zoom Logic ---
         let currentZoomLevel = 1;
