@@ -128,6 +128,8 @@ note:
             min-height: 0;
             /* Crucial for flex child scroll */
             overflow-y: auto;
+            padding-bottom: 50vh;
+            /* Allow scrolling past end for typewriter effect */
         }
 
         textarea:focus {
@@ -332,9 +334,9 @@ note:
             </div>
 
             <div class="setting-item">
-                <span id="ui-lbl-scroll-lines" title="設定拍字時，頂懸欲留幾逝 context (建議 3-5 逝)"></span>
+                <span id="ui-lbl-scroll-lines" title="設定拍字時，頂懸欲留幾逝 context (建議 3-6 逝)"></span>
                 <div class="switch-container" style="justify-content: flex-end;">
-                    <input type="number" id="scroll-lines-input" min="1" max="15" value="5" class="input-number"
+                    <input type="number" id="scroll-lines-input" min="1" max="15" value="6" class="input-number"
                         style="width: 50px; padding: 5px; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; background: var(--bg-secondary); color: var(--text-primary);">
                 </div>
             </div>
@@ -378,7 +380,7 @@ note:
         })();
 
         // --- Configuration ---
-        let SCROLL_LOCK_LINES = 5; // Default n=5
+        let SCROLL_LOCK_LINES = 6; // Default n=6
 
 
         // --- UI Constants ---
@@ -414,7 +416,7 @@ note:
                 nasal: '尾N→鼻化音"ⁿ"',
                 tone6: "第6調 (ǎ)",
                 allcaps: "大寫模式 (ALL CAPS)",
-                scrollLines: "自動捲留幾逝 (Auto-scroll Lines)"
+                scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)"
             },
             placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )",
             footer: "<span>TL → POJ 現轉<br>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
