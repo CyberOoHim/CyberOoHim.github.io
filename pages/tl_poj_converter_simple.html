@@ -57,7 +57,7 @@ note:
             display: flex;
             flex-direction: column;
             margin: 0;
-            align-items: center;
+            /* align-items: center; <-- Removed to prevent left clipping on small screens */
         }
 
         .container {
@@ -68,6 +68,8 @@ note:
             flex-direction: column;
             gap: var(--spacing-sm);
             padding: var(--spacing-sm);
+            margin: 0 auto;
+            /* Safe centering */
             /* Restore padding here */
         }
 
@@ -276,6 +278,37 @@ note:
             background: var(--text-link);
             color: var(--bg-primary);
             font-weight: bold;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            /* .header-row {
+                 flex-wrap: wrap; 
+            } */
+
+            h1 {
+                font-size: 1rem;
+            }
+
+            .toolbar-group {
+                gap: 0.25rem;
+            }
+
+            .btn {
+                padding: 6px 8px;
+                /* More compact */
+                min-width: 32px;
+            }
+
+            /* Make text buttons smaller too */
+            .view-toggle-btn {
+                padding: 4px 8px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
