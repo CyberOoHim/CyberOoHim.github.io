@@ -44,12 +44,20 @@ note:
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            font-family: sans-serif;
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: var(--spacing-sm);
             height: 100vh;
+            overflow: hidden;
+            /* Prevent body scroll, let container handle it */
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            /* Ensure padding is included in width */
+            margin: 0;
+            /* Clear default browser margin */
             align-items: center;
-            padding: var(--spacing-md);
+            /* Horizontally center content */
         }
 
         .container {
