@@ -794,7 +794,7 @@ note:
                 "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
                 "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
                 "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
-            const nn_to_superscript = new RegExp(`([${vowelChars}]h?)nn`, 'g');
+            const nn_to_superscript = new RegExp(`([${vowelChars}]h?)nn\\b`, 'g');
             poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
 
             return poj_tiau;
