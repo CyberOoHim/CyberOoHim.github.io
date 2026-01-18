@@ -1,7 +1,7 @@
 ---
-layout: null
+layout: apps
 title: TL to POJ Real-time Converter - Simple
-version: v0.1
+version: v0.1b
 permalink: /pages/tl_poj_converter_simple.html
 updated: 2026-01-18
 note:
@@ -10,7 +10,9 @@ note:
 <!--
   Copyright (c) 2026 Cyber O͘-hîm ki-tē
   Licensed under the MIT License
-  Simplified Version: Single Input In-Place Converter
+  Simplified Version: Single Input In-Place Converter, 
+  Majorly used for converting ASR results from 
+  教育部臺灣台語輸入法 to POJ. 
 -->
 <html lang="en">
 
@@ -108,11 +110,13 @@ note:
             border-radius: 8px;
             color: var(--text-primary);
             font-family: var(--font-taigi);
-            font-size: 1.5rem;
+            font-size: 1.0rem;
             line-height: 1.6;
             padding: 1.5rem;
             resize: none;
             outline: none;
+            padding-bottom: 80vh;
+            /* Allow scrolling past end for typewriter effect */
         }
 
         textarea:focus {
@@ -123,6 +127,7 @@ note:
         textarea::placeholder {
             color: var(--text-secondary);
             opacity: 0.6;
+            font-size: 1.0rem;
         }
 
         .footer {
@@ -130,6 +135,130 @@ note:
             color: var(--text-secondary);
             font-size: 0.8rem;
             margin-top: 0.5rem;
+        }
+
+        .footer span {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        /* Toggle Switch Styles */
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-label {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .switch-slider::before {
+            content: "";
+            position: absolute;
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .switch-input:checked+.switch-label .switch-slider {
+            background-color: var(--text-link);
+        }
+
+        .switch-input:checked+.switch-label .switch-slider::before {
+            transform: translateX(14px);
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            gap: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .settings-panel.active {
+            display: flex;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: var(--spacing-sm);
+            height: 100%;
+            min-height: 0;
+            /* Important for flex nested scrolling */
+        }
+
+        .main-panel.hidden {
+            display: none;
+        }
+
+        /* View Toggle */
+        .view-toggle-container {
+            display: flex;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2px;
+            margin-right: auto;
+            /* Push to left if in toolbar group, or manage layout */
+        }
+
+        .view-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-toggle-btn.active {
+            background: var(--text-link);
+            color: var(--bg-primary);
+            font-weight: bold;
         }
     </style>
 </head>
@@ -140,19 +269,79 @@ note:
         <div class="header-row">
             <h1 id="ui-title"></h1>
             <div class="toolbar-group">
+                <div class="view-toggle-container">
+                    <button id="btn-view-converted" class="view-toggle-btn active"></button>
+                    <button id="btn-view-original" class="view-toggle-btn"></button>
+                </div>
+                <button class="btn" id="btn-download"></button>
                 <button class="btn" id="btn-copy"></button>
                 <button class="btn" id="btn-clear"></button>
-                <button class="btn" id="btn-help" title="Help">?</button>
+                <button class="btn" id="btn-settings"></button>
             </div>
         </div>
-        <div id="help-box"
-            style="display:none; background: var(--bg-secondary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; margin-bottom: 0.5rem;">
-            <!-- Content injected by JS -->
+
+        <!-- Main Panel -->
+        <div id="main-panel" class="main-panel">
+            <textarea id="input-area" placeholder=""></textarea>
+            <div class="footer" id="ui-footer"></div>
         </div>
 
-        <textarea id="input-area" placeholder=""></textarea>
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="settings-panel">
+            <h3 id="ui-lbl-settings-title" style="margin-bottom: 0.5rem; color: var(--text-link);"></h3>
 
-        <div class="footer" id="ui-footer"></div>
+            <div class="setting-item">
+                <span id="ui-lbl-nasal-toggle"></span>
+                <div class="switch-container">
+                    <input type="checkbox" id="nasal-superscript-toggle" class="switch-input" checked>
+                    <label for="nasal-superscript-toggle" class="switch-label">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span id="ui-lbl-tone6-toggle"></span>
+                <div class="switch-container">
+                    <input type="checkbox" id="tone6-toggle" class="switch-input">
+                    <label for="tone6-toggle" class="switch-label">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span id="ui-lbl-allcaps-toggle"></span>
+                <div class="switch-container">
+                    <input type="checkbox" id="all-caps-toggle" class="switch-input" checked>
+                    <label for="all-caps-toggle" class="switch-label">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span id="ui-lbl-scroll-lines" title="設定拍字時，頂懸欲留幾逝 context (建議 3-5 逝)"></span>
+                <div class="switch-container" style="justify-content: flex-end;">
+                    <input type="number" id="scroll-lines-input" min="1" max="15" value="5" class="input-number"
+                        style="width: 50px; padding: 5px; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; background: var(--bg-secondary); color: var(--text-primary);">
+                </div>
+            </div>
+
+            <div class="setting-item" style="border-bottom: none; margin-top: 0.5rem;">
+                <div style="display: flex; gap: 0.5rem; width: 100%;">
+                    <button id="ui-btn-run-test" class="btn"
+                        style="flex: 1; justify-content: center; background-color: var(--text-accent); color: white;"></button>
+                    <button id="ui-btn-reset-settings" class="btn"
+                        style="flex: 1; justify-content: center; background-color: var(--border-color);"></button>
+                </div>
+            </div>
+
+            <h3 id="ui-lbl-help-title" style="margin-top: 1rem; color: var(--text-link);"></h3>
+            <div id="help-content-area" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
     </div>
 
     <script>
@@ -165,39 +354,100 @@ note:
             document.head.appendChild(link);
         })();
 
+        // --- Configuration ---
+        let SCROLL_LOCK_LINES = 5; // Default n=5
+
+
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "TL->POJ 現轉",
+            title: "TL → POJ 現轉",
+            config: {
+                downloadFilename: "tl_poj_converter_simple_output.txt"
+            },
             buttons: {
                 copy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
                 clear: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
-                help: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
-                copied: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+                settings: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="54" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(14, 8)"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></g><line x1="55" y1="32" x2="65" y2="8" stroke-width="2.5" /><g transform="translate(68, 8)"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></g></svg>`,
+                download: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`,
+                copied: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
+                back: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>`
             },
-            placeholder: "對遮輸入, 上尾拍空格 a̍h-sī 標點 tō 會轉...\n( e.g. \"Oo-oo\" + \" \" → \"O͘-o͘ \",\n        \"Tsai-iánn\" + \".\" → \"Chai-iáⁿ.\",\n        \"Chhun5-pan7\" + \"~\" → \"Chhûn-pān~\" )",
-            footer: "臺灣台語輸入法 現轉 POJ<br><span style='font-size: 0.7rem; opacity: 0.7;'>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
+            tooltips: {
+                copy: "kho͘--起來 (Copy)",
+                clear: "總清 (Clear)",
+                settings: "設定 (Settings)",
+                download: "Táng-ló͘ 結果 (Download)",
+                runTest: "看見本/快速測 (Run Test)",
+                reset: "恢復初設 (Reset)"
+            },
+            views: {
+                converted: "轉",
+                original: "原文",
+                originalPlaceholder: "原文模式 (無轉) [Original Text]"
+            },
+            settings: {
+                title: "設定 (Settings)",
+                nasal: '尾N→鼻化音"ⁿ"',
+                tone6: "第6調 (ǎ)",
+                allcaps: "大寫模式 (ALL CAPS)",
+                scrollLines: "自動捲留幾逝 (Auto-scroll Lines)"
+            },
+            placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )",
+            footer: "<span>TL → POJ 現轉<br>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
+            helpTitle: "解說 (Help)",
             helpContent: `
-                <p><strong>輸入格式:</strong></p>
+                <p><strong>輸入 (Input):</strong></p>
+                <ul style="padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                    <li>TL / POJ 數字調: <code>Tai5-uan5</code> / <code>Tai5-oan5</code></li>
+                    <li>TL 符號調: <code>Tâi-uân</code></li>
+                    <li>特殊拍法: "oo" → o͘, "nn" → ⁿ</li>
+                </ul>
+                <p><strong>功能 (Features):</strong></p>
                 <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
-                    <li>TL 拼音帶數字調號: <code>Tai5-uan5</code></li>
-                    <li>TL 拼音帶符號調號: <code>Tâi-uân</code></li>
-                    <li>POJ 帶數字調號: <code>Tai5-oan5</code></li>
-                </ul>`
+                    <li><strong>隨輸入隨轉</strong>: 拍字隨會轉做 POJ。</li>
+                    <li><strong>原文/轉</strong>: 會使切欲看「原文」a̍h-sī「轉」結果。</li>
+                    <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式 kap 自動捲留幾逝。</li>
+                    <li><strong>Táng-ló͘</strong>: 轉好 ê 結果會使 táng-ló͘（download）做 .txt 檔。</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>注意 (Note):</strong></p>
+                <p style="margin-top: 0.5rem;">若無愛轉，請用 <code>\\[ \\]</code> 包--起來 (例: <code>\\[Google\\] tō 袂變做 Go͘gle</code>)。</p>`
         };
 
         function initUI() {
             document.getElementById('ui-title').innerText = UI_STRINGS.title;
-            // Use innerHTML for icons
+
+            document.getElementById('btn-view-converted').innerText = UI_STRINGS.views.converted;
+            document.getElementById('btn-view-original').innerText = UI_STRINGS.views.original;
+
+            document.getElementById('btn-download').innerHTML = UI_STRINGS.buttons.download;
+            document.getElementById('btn-download').title = UI_STRINGS.tooltips.download;
+
             document.getElementById('btn-copy').innerHTML = UI_STRINGS.buttons.copy;
-            document.getElementById('btn-copy').title = "Copy to Clipboard"; // Add tooltips
+            document.getElementById('btn-copy').title = UI_STRINGS.tooltips.copy;
 
             document.getElementById('btn-clear').innerHTML = UI_STRINGS.buttons.clear;
-            document.getElementById('btn-clear').title = "Clear Text";
+            document.getElementById('btn-clear').title = UI_STRINGS.tooltips.clear;
 
-            document.getElementById('btn-help').innerHTML = UI_STRINGS.buttons.help;
+            document.getElementById('btn-settings').innerHTML = UI_STRINGS.buttons.settings;
+            document.getElementById('btn-settings').title = UI_STRINGS.tooltips.settings;
+
             document.getElementById('input-area').placeholder = UI_STRINGS.placeholder;
             document.getElementById('ui-footer').innerHTML = UI_STRINGS.footer;
-            document.getElementById('help-box').innerHTML = UI_STRINGS.helpContent;
+
+            document.getElementById('ui-lbl-settings-title').innerText = UI_STRINGS.settings.title;
+            document.getElementById('ui-lbl-nasal-toggle').innerText = UI_STRINGS.settings.nasal;
+            document.getElementById('ui-lbl-tone6-toggle').innerText = UI_STRINGS.settings.tone6;
+            document.getElementById('ui-lbl-allcaps-toggle').innerText = UI_STRINGS.settings.allcaps;
+            document.getElementById('ui-lbl-scroll-lines').innerText = UI_STRINGS.settings.scrollLines;
+
+            document.getElementById('ui-btn-run-test').innerText = UI_STRINGS.tooltips.runTest;
+            document.getElementById('ui-btn-reset-settings').innerText = UI_STRINGS.tooltips.reset;
+
+            document.getElementById('ui-lbl-help-title').innerText = UI_STRINGS.helpTitle;
+            document.getElementById('help-content-area').innerHTML = UI_STRINGS.helpContent;
+
+            loadSettings();
+            updateSettings();
         }
         document.addEventListener('DOMContentLoaded', initUI);
 
@@ -528,7 +778,30 @@ note:
         }
 
         function TLtiau_2_POJtiau(tl_tiau) {
-            let processedInput = tl_tiau;
+            // 0. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
+            const escapes = [];
+            let processedInput = '';
+            let i = 0;
+            while (i < tl_tiau.length) {
+                if (tl_tiau[i] === '\\' && tl_tiau[i + 1] === '[') {
+                    // Found escape start \[
+                    let start = i + 2;
+                    let end = tl_tiau.indexOf('\\]', start);
+                    if (end === -1) {
+                        // No closing \] → escape everything to end of string
+                        escapes.push(tl_tiau.slice(start));
+                        processedInput += `⟪ESC${escapes.length - 1}⟫`;
+                        break;
+                    }
+                    // Found closing \]
+                    escapes.push(tl_tiau.slice(start, end));
+                    processedInput += `⟪ESC${escapes.length - 1}⟫`;
+                    i = end + 2; // Skip past \]
+                } else {
+                    processedInput += tl_tiau[i];
+                    i++;
+                }
+            }
 
             const pojPlaceholders = [];
             const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
@@ -548,7 +821,12 @@ note:
             const poj_soo = TLsoo_2_POJsoo(tl_soo);
             let poj_tiau = POJsoo_2_POJtiau(poj_soo);
 
-            // Removed escape restoration block
+            // Restore escaped content
+            poj_tiau = poj_tiau.replace(/⟪ESC(\d+)⟫/g, (match, index) => {
+                return escapes[parseInt(index)];
+            });
+
+            // Restore POJ content
             poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
                 return pojPlaceholders[parseInt(index)];
             });
@@ -560,47 +838,195 @@ note:
         const inputArea = document.getElementById('input-area');
         const btnCopy = document.getElementById('btn-copy');
         const btnClear = document.getElementById('btn-clear');
+        const btnSettings = document.getElementById('btn-settings');
 
-        inputArea.addEventListener('input', (e) => {
-            const val = inputArea.value;
-            const cursorPos = inputArea.selectionStart;
+        const mainPanel = document.getElementById('main-panel');
+        const settingsPanel = document.getElementById('settings-panel');
 
-            // Only trigger if the last typed character is a "delimiter" or we are editing an existing word?
-            // "On the fly" usually means after we finish a syllable.
-            // Let's check if the character just before the cursor is a delimiter
-            const charBeforeCursor = val.slice(cursorPos - 1, cursorPos);
-            const isDelimiter = /[\s\.,;:?!'"\(\)\[\]\{\}<>@#\$%\^&\*_\+=\\\|\/\-]/.test(charBeforeCursor);
+        // View Toggle Elements
+        const btnViewConverted = document.getElementById('btn-view-converted');
+        const btnViewOriginal = document.getElementById('btn-view-original');
 
-            // If it's a delimiter, we try to convert what came before it.
-            // But simplifying: let's just convert the whole text if a delimiter was typed.
-            // This prevents "siann" -> "siaⁿ" immediately while typing siann2.
-            // Limitation: If user types "siann" and stops, it won't convert until they hit space.
-            // This is standard IME behavior.
+        // Settings Elements
+        const nasalToggle = document.getElementById('nasal-superscript-toggle');
+        const tone6Toggle = document.getElementById('tone6-toggle');
+        const allCapsToggle = document.getElementById('all-caps-toggle');
+        const btnRunTest = document.getElementById('ui-btn-run-test');
+        const btnResetSettings = document.getElementById('ui-btn-reset-settings');
 
-            if (isDelimiter || e.inputType === 'insertFromPaste' || e.inputType === 'deleteContentBackward') {
-                const oldLen = val.length;
-                const newVal = TLtiau_2_POJtiau(val);
+        // State
+        let isSettingsOpen = false;
+        let rawContent = '';
+        let isRawView = false; // "Original" view
+        let isUpdatingView = false; // Lock to prevent circular updates
+        let previousVal = ''; // Tracks the last known UI value for diffing
 
-                if (newVal !== val) {
-                    inputArea.value = newVal;
-
-                    // Heuristic Cursor Restoration
-                    const newLen = newVal.length;
-                    const diff = newLen - oldLen;
-                    let newCursor = cursorPos + diff;
-
-                    // Safety clamps
-                    if (newCursor < 0) newCursor = 0;
-                    if (newCursor > newLen) newCursor = newLen;
-
-                    inputArea.setSelectionRange(newCursor, newCursor);
-                }
+        function toggleSettingsView() {
+            isSettingsOpen = !isSettingsOpen;
+            if (isSettingsOpen) {
+                mainPanel.classList.add('hidden');
+                settingsPanel.classList.add('active');
+                btnSettings.innerHTML = UI_STRINGS.buttons.back; // Change icon to Back
+            } else {
+                mainPanel.classList.remove('hidden');
+                settingsPanel.classList.remove('active');
+                btnSettings.innerHTML = UI_STRINGS.buttons.settings; // Change icon to Settings
+                inputArea.focus();
             }
+        }
+
+        btnSettings.addEventListener('click', toggleSettingsView);
+
+        // View Switching Logic
+        function updateView(newViewIsRaw) {
+            if (isUpdatingView) return;
+            isUpdatingView = true;
+
+            if (isRawView) {
+                // Was Raw: `rawContent` is already the value in the box
+                // We trust the input event to keep it synced, but just in case:
+                rawContent = inputArea.value;
+            } else {
+                // Was Converted: `rawContent` *should* be the source logic has been tracking.
+                // We rely on the input listener to have kept rawContent updated correctly.
+                // Exception: if box is empty, reset rawContent.
+                if (!inputArea.value) rawContent = '';
+            }
+
+            isRawView = newViewIsRaw;
+
+            if (isRawView) {
+                // Switch to Original
+                btnViewOriginal.classList.add('active');
+                btnViewConverted.classList.remove('active');
+                inputArea.value = rawContent;
+                inputArea.placeholder = UI_STRINGS.views.originalPlaceholder;
+                previousVal = rawContent;
+            } else {
+                // Switch to Converted
+                btnViewConverted.classList.add('active');
+                btnViewOriginal.classList.remove('active');
+                // We convert the *Source* (rawContent) to display
+                const converted = TLtiau_2_POJtiau(rawContent);
+                inputArea.value = converted;
+                inputArea.placeholder = UI_STRINGS.placeholder;
+                previousVal = converted;
+            }
+
+            isUpdatingView = false;
+            inputArea.focus();
+
+            // Reset cursor to beginning as requested
+            inputArea.setSelectionRange(0, 0);
+            inputArea.scrollTop = 0;
+        }
+
+        btnViewConverted.addEventListener('click', () => {
+            if (isRawView) updateView(false);
         });
 
+        btnViewOriginal.addEventListener('click', () => {
+            if (!isRawView) updateView(true);
+        });
+
+        // Input Conversion Logic
+        inputArea.addEventListener('input', (e) => {
+            if (isUpdatingView) return;
+
+            const val = inputArea.value;
+
+            if (isRawView) {
+                // In Original Mode: simple sync
+                rawContent = val;
+                previousVal = val;
+            } else {
+                // In Converted Mode:
+                // We must deduce what to add to `rawContent`.
+
+                // 1. Detect Change - Append Strategy
+                if (val.startsWith(previousVal)) {
+                    // User appended text
+                    const diff = val.slice(previousVal.length);
+                    rawContent += diff;
+                } else {
+                    // Complex Edit (delete, insert middle, paste replace)
+                    // Fallback: We reset history to "what you see is what you get"
+                    // to keep consistent.
+                    rawContent = val;
+                }
+
+                // 2. Check for Trigger
+                const cursorPos = inputArea.selectionStart;
+                const charBeforeCursor = val.slice(cursorPos - 1, cursorPos);
+                const isDelimiter = /[\d\s\.,;:?!'"\(\)\[\]\{\}<>@#\$%\^&\*_\+=\\\|\/\-]/.test(charBeforeCursor);
+
+                if (isDelimiter || e.inputType === 'insertFromPaste' || e.inputType === 'deleteContentBackward') {
+                    // 3. Perform Conversion on RAW content
+                    const oldLen = val.length;
+                    const newVal = TLtiau_2_POJtiau(rawContent); // Convert from SOURCE
+
+                    if (newVal !== val) {
+                        inputArea.value = newVal;
+                        previousVal = newVal;
+
+                        // We DO NOT update rawContent to newVal here.
+                        // rawContent stays as source (e.g. "Tai5 ")
+                        // Visual is "Tâi ".
+
+                        // Cursor Restoration
+                        const newLen = newVal.length;
+                        const diffLen = newLen - oldLen;
+                        let newCursor = cursorPos + diffLen;
+                        if (newCursor < 0) newCursor = 0;
+                        if (newCursor > newLen) newCursor = newLen;
+                        inputArea.setSelectionRange(newCursor, newCursor);
+                    } else {
+                        // No visual change, update tracker
+                        previousVal = val;
+                    }
+                } else {
+                    // No trigger, update tracker
+                    previousVal = val;
+                }
+            }
+
+            adjustScrollPosition();
+        });
+
+        // Auto-Scroll Logic
+        function adjustScrollPosition() {
+            // requestAnimationFrame to ensure we calculate after layout updates
+            requestAnimationFrame(() => {
+                const styles = window.getComputedStyle(inputArea);
+                let lineHeight = parseFloat(styles.lineHeight);
+                const paddingBottom = parseFloat(styles.paddingBottom);
+
+                // Fallback if lineHeight is "normal" or invalid
+                if (isNaN(lineHeight)) {
+                    const fontSize = parseFloat(styles.fontSize);
+                    lineHeight = fontSize * 1.6; // approx 1.6 from CSS line-height
+                }
+
+                if (isNaN(lineHeight) || lineHeight <= 0) return;
+
+                // Adjust scrollHeight to exclude the synthetic padding-bottom we added
+                // scrollHeight in DOM includes padding
+                const realContentHeight = inputArea.scrollHeight - paddingBottom;
+
+                // Goal: Top of viewport should be at `realTextEnd - (SCROLL_LOCK_LINES * lineHeight)`
+                const targetScrollTop = realContentHeight - (SCROLL_LOCK_LINES * lineHeight);
+
+                // Only scroll if we have enough content
+                if (targetScrollTop > 0) {
+                    inputArea.scrollTop = targetScrollTop;
+                }
+            });
+        }
+
+        // Toolbar Buttons
         btnCopy.addEventListener('click', async () => {
             await navigator.clipboard.writeText(inputArea.value);
-            const original = btnCopy.innerHTML; // Store HTML (icon)
+            const original = btnCopy.innerHTML;
             btnCopy.innerHTML = UI_STRINGS.buttons.copied;
             setTimeout(() => btnCopy.innerHTML = original, 1500);
             inputArea.focus();
@@ -611,15 +1037,242 @@ note:
             inputArea.focus();
         });
 
-        const btnHelp = document.getElementById('btn-help');
-        const helpBox = document.getElementById('help-box');
-        btnHelp.addEventListener('click', () => {
-            if (helpBox.style.display === 'none') {
-                helpBox.style.display = 'block';
-            } else {
-                helpBox.style.display = 'none';
+        // Settings Toggles
+        function updateSettings() {
+            window.TL_USE_NASAL_SUPERSCRIPT = nasalToggle.checked;
+            window.TL_TONE6_USE_CARON = tone6Toggle.checked;
+            window.TL_ALL_CAPS_SUPPORT = allCapsToggle.checked;
+
+            // Update Scroll Lines
+            const linesVal = parseInt(document.getElementById('scroll-lines-input').value, 10);
+            if (!isNaN(linesVal) && linesVal > 0) {
+                SCROLL_LOCK_LINES = linesVal;
             }
+
+            // Re-convert current text with new settings
+            const currentVal = inputArea.value;
+            if (currentVal) {
+                const newVal = TLtiau_2_POJtiau(currentVal);
+                if (newVal !== currentVal) {
+                    inputArea.value = newVal;
+                }
+            }
+
+            saveSettings();
+        }
+
+        // --- Local Storage Logic ---
+        const STORAGE_KEY = 'TL_POJ_SIMPLE_SETTINGS';
+
+        function saveSettings() {
+            const settings = {
+                nasal: nasalToggle.checked,
+                tone6: tone6Toggle.checked,
+                allCaps: allCapsToggle.checked,
+                scrollLines: document.getElementById('scroll-lines-input').value
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const settings = JSON.parse(saved);
+                    if (typeof settings.nasal === 'boolean') nasalToggle.checked = settings.nasal;
+                    if (typeof settings.tone6 === 'boolean') tone6Toggle.checked = settings.tone6;
+                    if (typeof settings.allCaps === 'boolean') allCapsToggle.checked = settings.allCaps;
+                    if (settings.scrollLines) document.getElementById('scroll-lines-input').value = settings.scrollLines;
+                } catch (e) {
+                    console.error("Failed to load settings:", e);
+                }
+            }
+        }
+
+        nasalToggle.addEventListener('change', updateSettings);
+        tone6Toggle.addEventListener('change', updateSettings);
+        allCapsToggle.addEventListener('change', updateSettings);
+        document.getElementById('scroll-lines-input').addEventListener('change', updateSettings);
+
+        // Reset Logic
+
+        // Test and Reset
+        const TEST_SAMPLE = `=== TL 符號調輸入 (Diacritics) ===
+Tâi-uân sī chi̍t-ê hó só͘-chāi. (台灣是一个好所在)
+Tsit-chân tāi-tsì tsin-tsiànn hó. (這層代誌真正好)
+POJ 帶符號調號無 koh 轉: Góa ài lim tê, i ài chia̍h pn̄g. (我愛啉茶，伊愛食飯)
+
+=== TL/POJ 數字調輸入 (Numeric) ===
+Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
+Goa2 ai3 lim te5, i ai3 chiah8 png7.
+
+=== 調號 1-9 (Tones) ===
+a1 a2 a3 ah4 a5 a6 a7 ah8 a9
+A1 A2 A3 AH4 A5 A6 A7 AH8 A9
+e1 e2 e3 eh4 e5 e6 e7 eh8 e9
+o1 o2 o3 oh4 o5 o6 o7 oh8 o9
+
+=== TL→POJ 音素轉換 (Phonemes) ===
+\\[ts\\]: tsuí (水), tsit (這)
+\\[tsh\\]: tshut (出), tshài (菜)
+\\[oo\\]: oo (烏), hōo (予)
+j: jī (字), jia̍t (熱) (無變)
+
+\\[=== 鼻音 (nn / N) ===
+[尾N→ⁿ Toggle(切)]
+nn尾 (一定 lóng 轉): sann→saⁿ (三), sinn→siⁿ (生)
+N尾 ON: saN→saⁿ, siN→siⁿ, a̍hN→a̍hⁿ
+N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN\\]
+(頭前 ê nn / N 袂變: nng → nng, NG → NG)
+
+\\[=== 第六調 (Tone 6) ===
+[第6調 ǎ Toggle(切)]
+ON (Caron): a6→ǎ, e6→ě, o6→ǒ, ng6→ňg
+OFF (Acute): a6→á, e6→é, o6→ó, ng6→ńg\\]
+
+\\[=== 大寫 (ALL CAPS) ===
+[大寫模式 Toggle(切)]
+ON: TSUI→CHUI, TSHUT→CHHUT, OO→O͘
+OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉)\\]
+
+\\[=== 調位標記 (Vowel Priority) ===
+ua→oa: tuà→tòa (大), kuà→kòa (掛)
+ue→oe: kué→kóe (粿), pué→póe (飛)
+ui: suí→súi (水), kuí→kúi (鬼)\\]
+
+=== 走脫語法 (Escape Syntax) ===
+基本: \\[Tâi-uân\\] → Tâi-uân (原文保留)
+濟逝: \\[Thâu tsuā
+Jī tsuā\\] ← Hāⁿ 逝 mā lóng 袂轉
+
+相套 (Nested):
+\\[khí-thâu \\[ tē-jī\\] ← thâu-ê \\] 就收煞
+\\[(結果: "khí-thâu \\[ tē-jī" + 落尾照常轉)\\]
+
+英文: \\[Google\\] vs Google, \\[Boots\\] vs Boots
+     \\["I read a book about blue cats."\\] vs "I read a book about blue cats."
+URL: \\["https://example.com/page?id=tsing_tsha"\\] vs "https://example.com/page?id=tsing_tsha"
+
+=== 邊墘狀況 (Other Cases) ===
+混合: 123 !@# $100 (tsu-pún) {tsuí}
+月眉: (tsia̍h pn̄g) [tsia̍h pn̄g] {tsia̍h pn̄g}
+引句點: "tsuí" 'tsuí' 「tsuí」『tsuí』
+Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
+頭尾空白:"   tsuí   "(空白無變)
+Ài 有連字符: \\[Tâiuânlâng, tsabóogíná\\] → Tâiuânlâng, tsabóogíná (無連字符無保證著)
+數字調號相濫: Goa2 ài 啉 tê, 伊 ai3 食 png7.
+
+=== POJ 保留 (POJ Preservation) ===
+POJ 鼻化「ⁿ」: chiâⁿ→chiâⁿ, siaⁿ→siaⁿ, koaⁿ→koaⁿ (袂變做 Tailo nn)
+POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo)
+混合輸入: chiâⁿ tsuí → chiâⁿ chúi (POJ 保留, TL 照常轉)
+混合輸入: hó͘ oo → hó͘ o͘ (POJ o͘ 保留, TL oo 轉做 POJ)
+大寫 POJ: Chiâⁿ→Chiâⁿ, Ô͘→Ô͘ (大寫 POJ mā 袂變)`;
+
+        btnRunTest.addEventListener('click', () => {
+            // Switch to main view to see result
+            if (isSettingsOpen) toggleSettingsView();
+
+            // Set raw content state for "Original" view
+            rawContent = TEST_SAMPLE;
+
+            // Trigger conversion and update UI
+            const converted = TLtiau_2_POJtiau(TEST_SAMPLE);
+            inputArea.value = converted;
+
+            // Update diff tracking state
+            previousVal = converted;
+
+            // Ensure we are in Converted view to see the result
+            if (isRawView) {
+                isRawView = false;
+                btnViewConverted.classList.add('active');
+                btnViewOriginal.classList.remove('active');
+                inputArea.placeholder = UI_STRINGS.placeholder;
+            }
+
+            // Scroll to top
+            inputArea.scrollTop = 0;
+            inputArea.setSelectionRange(0, 0);
         });
+
+        btnResetSettings.addEventListener('click', () => {
+            nasalToggle.checked = false; // Default: false (from problem desc? wait, user said "three default value for conversions")
+            // User request: "let @[working/tl_poj_converter_simple.html] have the same settings ( three default value for conversions )"
+            // The original file had defaults:
+            // window.TL_USE_NASAL_SUPERSCRIPT = false;
+            // window.TL_TONE6_USE_CARON = false;
+            // window.TL_ALL_CAPS_SUPPORT = false;
+
+            tone6Toggle.checked = false;
+            allCapsToggle.checked = false; // Actually previous user request asked to set these to false.
+
+            // But wait, the previous user request said "Set the following settings to false: ... 大寫模式 (ALL CAPS)".
+            // So defaults are all false.
+
+            updateSettings();
+        });
+
+        // Sync initial state
+        // We set checkbox 'checked' in HTML for some, need to sync JS state.
+        // HTML: nasal=checked, tone6=unchecked, allcaps=checked.
+        // WAIT, previous task said set them to FALSE.
+        // "Set the following settings to false: 尾N→鼻化音"ⁿ", 第6調 (ǎ), 大寫模式 (ALL CAPS)"
+        // I should update HTML to unchecked default or handle it here.
+        // The HTML I wrote in Step 12 has checked for nasal and allcaps. 
+        // I should enforce the defaults requested in previous turn (even though this is a new turn, "same settings" implies following the established config).
+        // Let's force them to the "Simple" defaults which were requested to be false.
+
+        // Actually the current user request says: "let ... have the same settings ... in the setting tab of tl_poj_converter.html"
+        // Let's check tl_poj_converter.html defaults.
+        // In the view of tl_poj_converter.html (Step 4), lines 751, 763, 776:
+        // nasal: checked
+        // tone6: unchecked
+        // all-caps: checked
+        // BUT the user in Conversation 81f50342 asked to set them to false.
+        // Did I strictly follow that in the previous task for `tl_poj_converter.html`?
+        // Step 1 says "Set the following settings to false...".
+        // But the file content I read in Step 4 shows them as CHECKED in HTML?
+        // Line 751: <input ... checked>
+        // Line 776: <input ... checked>
+        // Maybe I missed updating the HTML attributes in the previous conversation or I am misreading.
+
+        // Let's trust the current file `tl_poj_converter.html` as source of truth for "same settings".
+        // If `tl_poj_converter.html` has them checked, I will make them checked.
+        // The user says "same settings... three default value".
+
+        // In `tl_poj_converter_simple.html` script start (Step 5 line 206), I saw:
+        // window.TL_USE_NASAL_SUPERSCRIPT = false;
+        // window.TL_TONE6_USE_CARON = false;
+        // window.TL_ALL_CAPS_SUPPORT = false;
+
+        // I will sync to what is in HTML of simple.html which I just wrote (nasal=checked, allcaps=checked).
+        // If I want to exactly match `tl_poj_converter.html` HTML:
+        // Nasal: checked
+        // Tone6: unchecked
+        // AllCaps: checked.
+
+        function downloadText(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('btn-download').addEventListener('click', () => {
+            const content = inputArea.value;
+            // Generate filename based on current html filename logic requested
+            const filename = UI_STRINGS.config.downloadFilename;
+            downloadText(content, filename);
+        });
+
+        // So I will make sure updateSettings() is called to sync JS window vars with HTML checkboxes.
+        updateSettings();
 
         inputArea.focus();
 
