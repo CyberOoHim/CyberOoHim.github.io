@@ -8,3 +8,5 @@ _site/
 _downloads/
 
 diff.txt
+
+*.code-workspace
