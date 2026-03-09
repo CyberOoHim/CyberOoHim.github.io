@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter - Simple
-version: v0.1d
+version: v0.1e
 permalink: /pages/tl_poj_converter_simple.html
-updated: 2026-03-09
-note: remove all escape logic 
+updated: 2026-03-9
+note: adjust text box width in handset vertical mode
 ---
 <!DOCTYPE html>
 <!--
@@ -281,6 +281,49 @@ note: remove all escape logic
             background: var(--text-link);
             color: var(--bg-primary);
             font-weight: bold;
+        }
+
+        /* Mobile Adjustments to Prevent Clipping */
+        @media (max-width: 500px) {
+            .container {
+                padding: 0.5rem;
+                gap: 0.5rem;
+            }
+
+            .header-row {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .toolbar-group {
+                flex-wrap: wrap;
+                gap: 0.25rem;
+                justify-content: flex-end;
+            }
+
+            .btn {
+                min-width: 32px;
+                height: 32px;
+                padding: 4px 6px;
+            }
+
+            .view-toggle-btn {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+
+            h1 {
+                font-size: 1rem;
+            }
+
+            textarea {
+                padding: 0.5rem;
+                font-size: 1.1rem;
+            }
+
+            .settings-panel {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
