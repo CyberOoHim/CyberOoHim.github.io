@@ -1,15 +1,16 @@
 ---
 layout: apps
 title: Taigi POJ art
-version: v0b
+version: v0c
 permalink: /pages/taigi_poj_art.html
-note: 
+note: refined by Grok 2.0
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>POJ bûn-jī gē-su̍t</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>POJ bûn-jī gē-su̍t • Optimized</title>
     <style>
         @font-face {
             font-family: 'ChiayiCity';
@@ -20,336 +21,396 @@ note:
             src: url('/assets/fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
         }
         canvas {
-            border: 1px solid black;
+            border: 2px solid #00008b;
             max-width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            background-color: #fffacd; /* Light yellow background */
+            background-color: #fffacd;
+            font-family: 'Noto Sans', system-ui, sans-serif;
+            margin: 0;
         }
+        h2 {
+            color: #00008b;
+            margin-bottom: 10px;
+        }
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            padding: 14px 28px;
+            font-size: 18px;
+            background-color: #00008b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover { background-color: #1e3a8a; }
+        button:disabled { background-color: #64748b; cursor: not-allowed; }
         .controls {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            max-width: 420px;
+            width: 100%;
         }
         .slider-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         label {
-            width: 160px; /* Increased for larger text */
-            font-size: 20px; /* Larger font size for sliders */
+            width: 180px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e2937;
         }
-        .slider-container span {
-            font-size: 20px; /* Larger font size for slider values */
+        input[type="range"] {
+            flex: 1;
+            min-width: 180px;
         }
-        .button-container {
-            display: flex;
-            justify-content: center; /* Center buttons with equal spacing */
-            width: 100%; /* Full width of the container */
-            max-width: 350px; /* Optional: limits the total width */
-            margin: 10px 0; /* Space above and below */
-            gap: 20px; /* Consistent spacing between buttons */
+        span {
+            font-size: 17px;
+            font-family: monospace;
+            min-width: 50px;
+            text-align: right;
         }
-        #uploadButton, #renderButton {
-            width: 160px; /* Fixed width for both buttons */
-            padding: 15px 0; /* Consistent height via padding */
-            font-size: 18px;
-            background-color: #00008b; /* Dark blue */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
-        }
-        #uploadButton:hover, #renderButton:hover {
-            background-color: #ADD8E6; /* Pale calming blue on hover */
-        }
-        #imageInput {
-            display: none;
-        }
-        /* No more checkbox-container */
-        #customTextInput {
-            width: 300px;
-            height: 100px;
+        select, textarea {
             font-size: 16px;
-            padding: 5px;
+            padding: 6px 10px;
+        }
+        #customTextInput {
+            width: 100%;
+            height: 90px;
+            font-size: 15px;
+            padding: 8px;
             resize: vertical;
+            border: 1px solid #64748b;
+            border-radius: 6px;
         }
-        /* Style for the new pulldown */
-        #customTextDelimiter {
-          font-size: 16px;
-          padding: 5px;
+        .status {
+            font-size: 15px;
+            color: #334155;
+            margin-top: 8px;
         }
-
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <h2>POJ bûn-jī gē-su̍t</h2>
-    <input type="file" id="imageInput" accept="image/*">
-    <canvas id="canvas"></canvas>
+    <p style="margin:0 0 15px; color:#475569; font-size:15px;">Taigi text art from your photo • v0c optimized</p>
+
+    <input type="file" id="imageInput" accept="image/*" style="display:none">
+    
+    <canvas id="canvas" width="800" height="600"></canvas>
+
     <div class="button-container">
         <label for="imageInput">
             <button id="uploadButton">Choose Image</button>
         </label>
-        <button id="renderButton">Render</button>
+        <button id="renderButton">Render Art</button>
+        <button id="downloadButton" style="display:none">Download PNG</button>
     </div>
+
+    <div class="status" id="status">Ready</div>
+
     <div class="controls">
         <div class="slider-container">
-            <label for="gridSize">Grid Size (2-20, even):</label>
-            <input type="range" id="gridSize" min="2" max="20" step="2" value="16">
-            <span id="gridSizeValue">16</span>
+            <label for="gridSize">Grid Size (2-20 even):</label>
+            <input type="range" id="gridSize" min="2" max="20" step="2" value="12">
+            <span id="gridSizeValue">12</span>
         </div>
         <div class="slider-container">
-            <label for="wordsPerCell">Words per Cell (1-10):</label>
-            <input type="range" id="wordsPerCell" min="1" max="10" value="3">
-            <span id="wordsPerCellValue">3</span>
+            <label for="wordsPerCell">Words per Cell:</label>
+            <input type="range" id="wordsPerCell" min="1" max="12" value="4">
+            <span id="wordsPerCellValue">4</span>
         </div>
         <div class="slider-container">
-            <label for="offset">Offset (0-30):</label>
-            <input type="range" id="offset" min="0" max="30" value="10">
-            <span id="offsetValue">10</span>
+            <label for="offset">Offset (px):</label>
+            <input type="range" id="offset" min="0" max="40" value="12">
+            <span id="offsetValue">12</span>
         </div>
         <div class="slider-container">
-            <label for="fontSize">Font Size (1-128):</label>
-            <input type="range" id="fontSize" min="1" max="128" value="20">
-            <span id="fontSizeValue">20</span>
+            <label for="fontSize">Base Font Size:</label>
+            <input type="range" id="fontSize" min="8" max="72" value="24">
+            <span id="fontSizeValue">24</span>
         </div>
         <div class="slider-container">
-            <label for="sizeVariation">Size Variation (0-50%):</label>
-            <input type="range" id="sizeVariation" min="0" max="50" value="20">
-            <span id="sizeVariationValue">20%</span>
+            <label for="sizeVariation">Size Variation %:</label>
+            <input type="range" id="sizeVariation" min="0" max="60" value="25">
+            <span id="sizeVariationValue">25%</span>
         </div>
         <div class="slider-container">
-            <label for="variationMethod">Variation Method:</label>
+            <label for="rotationAmount">Rotation ° (new):</label>
+            <input type="range" id="rotationAmount" min="0" max="18" value="7">
+            <span id="rotationValue">7°</span>
+        </div>
+        <div class="slider-container">
+            <label for="bgOpacity">Original Bg Opacity % (new):</label>
+            <input type="range" id="bgOpacity" min="0" max="35" value="14">
+            <span id="bgOpacityValue">14%</span>
+        </div>
+        <div class="slider-container">
+            <label for="strokeWidth">Stroke Width (new):</label>
+            <input type="range" id="strokeWidth" min="0" max="7" value="3">
+            <span id="strokeValue">3</span>
+        </div>
+
+        <div class="slider-container">
+            <label for="variationMethod">Variation:</label>
             <select id="variationMethod">
                 <option value="none">None</option>
                 <option value="brightness">Brightness</option>
                 <option value="randomness">Randomness</option>
-                <option value="brightnessRandom" selected>Brightness + Randomness</option>
+                <option value="brightnessRandom" selected>Brightness + Random</option>
             </select>
-        </div>
-        <div class="slider-container">
-            <label for="charLength">Max Char Length (1-20):</label>
-            <input type="range" id="charLength" min="1" max="20" value="5">
-            <span id="charLengthValue">5</span>
-        </div>
-        <div class="slider-container">
-            <label for="fontFamily">Font Family:</label>
-            <select id="fontFamily">
-                <option value="ChiayiCity" selected>ChiayiCity</option>
-                <option value="ChenYuluoyan-2.0">ChenYuluoyan-2.0</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Noto Sans">Noto Sans</option>
-            </select>
-        </div>
-        <!-- Pulldown for delimiter selection -->
-        <div class="slider-container">
-          <label for="customTextDelimiter">Custom Text Delimiter:</label>
-          <select id="customTextDelimiter">
-            <option value="space">Spaces/Newlines</option>
-            <option value="comma">Commas</option>
-            <option value="none" selected>None (Use Default Words)</option>
-          </select>
         </div>
 
-        <textarea id="customTextInput" placeholder="Enter words separated by spaces (e.g., hello world) or commas (e.g., chi̍t, Lōa Hô, Saⁿ) depending on the selected delimiter."></textarea>
+        <div class="slider-container">
+            <label for="charLength">Max POJ Length:</label>
+            <input type="range" id="charLength" min="1" max="18" value="6">
+            <span id="charLengthValue">6</span>
+        </div>
+
+        <div class="slider-container">
+            <label for="fontFamily">Font:</label>
+            <select id="fontFamily">
+                <option value="ChiayiCity" selected>ChiayiCity (best)</option>
+                <option value="ChenYuluoyan-2.0">ChenYuluoyan</option>
+                <option value="Noto Sans">Noto Sans</option>
+                <option value="Georgia">Georgia</option>
+            </select>
+        </div>
+
+        <div class="slider-container">
+            <label for="customTextDelimiter">Custom Text Delimiter:</label>
+            <select id="customTextDelimiter">
+                <option value="space">Spaces / Newlines</option>
+                <option value="comma">Commas</option>
+                <option value="none" selected>None (use built-in Taigi)</option>
+            </select>
+        </div>
+
+        <textarea id="customTextInput" placeholder="Paste your own Taigi words here..."></textarea>
     </div>
 
     <script>
-        const defaultTaigiWords = [
-            'a', 'lán', 'sī', 'súi', 'ē', 'hó', 'niā', 'gún', 'lí', 'chîⁿ',
-            'ba̍k', 'o͘-pe̍h', 'iăn-jín', 'Tâi-oân', 'Tâi-gí',
-            'Tai-bûn', 'Tâi-oân-ōe', 'tì-sek', 'jîn-kang tì-lêng', 'bí-lē-tó', 'âng-âng-âng'
-        ];
+        // ==================== CONSTANTS & CONFIG ====================
+        const MAX_DIM = 1400;
+        const MAX_FILE_SIZE = 12 * 1024 * 1024; // 12 MB
+        const MAX_TOTAL_WORDS = 65000;
+
+        const defaultTaigiWords = ['a','lán','sī','súi','ē','hó','niā','gún','lí','chîⁿ','ba̍k','o͘-pe̍h','iăn-jín','Tâi-oân','Tâi-gí','Tai-bûn','Tâi-oân-ōe','tì-sek','bí-lē-tó','âng-âng-âng'];
+        
         const ASSET_PATH = '/assets/taigi_space_catch/';
-
-        const taigiFiles = [
-            'taigi_1280_of_700_漢字_羅馬字_v0d.csv',
-            'kautian_詞目_20250116_hanji_poj_poj.csv',
-            'another_file.csv',
-        ];
-
-        let selectedIndex = 0;
-        const TAIGI_WORDS = taigiFiles[selectedIndex];
+        const TAIGI_WORDS = 'taigi_1280_of_700_漢字_羅馬字_v0d.csv';
 
         let taigiWords = [];
         let fontsLoaded = false;
+        let imageData = null;
+        let originalImg = null;
+        let cellColors = [];
+        let wordPool = [];
+        let imgWidth = 0, imgHeight = 0;
+        let overallColor = [255, 245, 220];
 
-        const uploadButton = document.getElementById('uploadButton');
-        const input = document.getElementById('imageInput');
+        const hanjiRegex = /[\u4E00-\u9FFF]/;
+
+        // DOM elements
         const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const uploadButton = document.getElementById('uploadButton');
         const renderButton = document.getElementById('renderButton');
+        const downloadButton = document.getElementById('downloadButton');
+        const imageInput = document.getElementById('imageInput');
+        const statusEl = document.getElementById('status');
+
+        // Sliders
         const gridSizeSlider = document.getElementById('gridSize');
         const wordsPerCellSlider = document.getElementById('wordsPerCell');
         const offsetSlider = document.getElementById('offset');
         const fontSizeSlider = document.getElementById('fontSize');
         const sizeVariationSlider = document.getElementById('sizeVariation');
+        const rotationSlider = document.getElementById('rotationAmount');
+        const bgOpacitySlider = document.getElementById('bgOpacity');
+        const strokeSlider = document.getElementById('strokeWidth');
         const charLengthSlider = document.getElementById('charLength');
+        const variationMethodSelect = document.getElementById('variationMethod');
+        const fontFamilySelect = document.getElementById('fontFamily');
+        const customTextDelimiterSelect = document.getElementById('customTextDelimiter');
+        const customTextInput = document.getElementById('customTextInput');
+
+        // Value displays
         const gridSizeValue = document.getElementById('gridSizeValue');
         const wordsPerCellValue = document.getElementById('wordsPerCellValue');
         const offsetValue = document.getElementById('offsetValue');
         const fontSizeValue = document.getElementById('fontSizeValue');
         const sizeVariationValue = document.getElementById('sizeVariationValue');
+        const rotationValue = document.getElementById('rotationValue');
+        const bgOpacityValue = document.getElementById('bgOpacityValue');
+        const strokeValue = document.getElementById('strokeValue');
         const charLengthValue = document.getElementById('charLengthValue');
-        // Remove checkbox references
-        const customTextInput = document.getElementById('customTextInput');
-        const fontFamilySelect = document.getElementById('fontFamily');
-        const variationMethodSelect = document.getElementById('variationMethod');
-        // New pulldown reference
-        const customTextDelimiterSelect = document.getElementById('customTextDelimiter');
 
-        let imageData = null;
-        let imgWidth = 0;
-        let imgHeight = 0;
-        let overallColor = null;
-
-        const hanjiRegex = /[\u4E00-\u9FFF]/;
-
+        // ==================== FONT LOADING ====================
         async function loadCustomFonts() {
-            const chiayiFont = new FontFace('ChiayiCity', 'url(/assets/fonts/ChiayiCity.ttf)');
-            const chenFont = new FontFace('ChenYuluoyan-2.0', 'url(/assets/fonts/ChenYuluoyan-2.0-Thin.ttf)');
-
+            if (fontsLoaded) return;
+            statusEl.textContent = 'Loading beautiful Taigi fonts...';
             try {
-                const [chiayiLoaded, chenLoaded] = await Promise.all([
-                    chiayiFont.load(),
-                    chenFont.load()
+                const fonts = await Promise.all([
+                    new FontFace('ChiayiCity', 'url(/assets/fonts/ChiayiCity.ttf)').load(),
+                    new FontFace('ChenYuluoyan-2.0', 'url(/assets/fonts/ChenYuluoyan-2.0-Thin.ttf)').load()
                 ]);
-                document.fonts.add(chiayiLoaded);
-                document.fonts.add(chenLoaded);
-                console.log('Custom fonts loaded successfully');
+                fonts.forEach(f => document.fonts.add(f));
                 fontsLoaded = true;
-            } catch (error) {
-                console.warn('Failed to load custom fonts:', error);
-                fontsLoaded = true;
+                console.log('✓ Custom Taigi fonts loaded');
+            } catch (e) {
+                console.warn('Font load failed, using system fonts');
+            }
+            statusEl.textContent = 'Ready';
+        }
+
+        // ==================== DATA LOADING ====================
+        async function loadTaigiWords() {
+            try {
+                const res = await fetch(ASSET_PATH + TAIGI_WORDS);
+                if (!res.ok) throw new Error('CSV missing');
+                const text = await res.text();
+                taigiWords = text.split('\n').slice(1)
+                    .map(row => {
+                        const cols = row.split(',').map(s => s.trim().replace(/^"|"$/g,''));
+                        return cols[1] || '';
+                    })
+                    .filter(w => w && w.length <= 18 && !hanjiRegex.test(w));
+                console.log(`✓ Loaded ${taigiWords.length} Taigi words`);
+            } catch (e) {
+                taigiWords = defaultTaigiWords;
+                console.warn('Using fallback words');
             }
         }
 
-        function loadTaigiWords(callback) {
-            fetch(ASSET_PATH + TAIGI_WORDS)
-                .then(response => {
-                    if (!response.ok) throw new Error('CSV load failed');
-                    return response.text();
-                })
-                .then(data => {
-                    taigiWords = [];
-                    const rows = data.split('\n').slice(1);
-                    const maxLength = parseInt(charLengthSlider.value);
-                    rows.forEach(row => {
-                        const cols = row.split(',').map(str => str.trim().replace(/^"|"$/g, ''));
-                        const poj = cols[1];
-                        if (poj && poj.length <= maxLength && !hanjiRegex.test(poj)) {
-                            taigiWords.push(poj);
-                        }
-                    });
-                    callback(true);
-                })
-                .catch(error => {
-                    console.warn('Failed to load CSV, using default Taigi words:', error);
-                    taigiWords = defaultTaigiWords.filter(word => !hanjiRegex.test(word));
-                    callback(false);
-                });
-        }
-
-        function getRandomWord() {
-            const maxLength = parseInt(charLengthSlider.value);
-            let wordList;
-            const delimiter = customTextDelimiterSelect.value;
-
-            if (delimiter !== "none" && customTextInput.value.trim()) {
-                if (delimiter === "comma") {
-                    wordList = customTextInput.value
-                        .split(',')
-                        .map(w => w.trim())
-                        .filter(w => w.length > 0 && !hanjiRegex.test(w));
-                } else { // delimiter === "space"
-                    wordList = customTextInput.value
-                        .split(/[\s\n]+/)
-                        .map(w => w.trim())
-                        .filter(w => w.length > 0 && !hanjiRegex.test(w));
-                }
-            } else {
-                wordList = taigiWords.length > 0 ? taigiWords : defaultTaigiWords;
-            }
-
-            const filtered = wordList.filter(w => w.length <= maxLength && !hanjiRegex.test(w));
-            return filtered[Math.floor(Math.random() * filtered.length)] || 'a'; // Fallback to 'a' if empty
-        }
-
-        function getAverageColor(x, y, w, h, data) {
-            let r = 0, g = 0, b = 0, count = 0;
-            const maxX = Math.min(x + w, data.width);
-            const maxY = Math.min(y + h, data.height);
-            for (let i = Math.max(0, x); i < maxX; i++) {
-                for (let j = Math.max(0, y); j < maxY; j++) {
-                    const index = (j * data.width + i) * 4;
-                    r += data.data[index];
-                    g += data.data[index + 1];
-                    b += data.data[index + 2];
-                    count++;
-                }
-            }
-            if (count === 0) return [0, 0, 0];
-            return [
-                Math.floor(r / count),
-                Math.floor(g / count),
-                Math.floor(b / count)
-            ];
-        }
-
+        // ==================== UTILITIES ====================
         function getLuminance(r, g, b) {
             return 0.299 * r + 0.587 * g + 0.114 * b;
         }
 
-        function calculateFontSize(baseSize, variationPercent, luminance = null) {
-            const variationMethod = variationMethodSelect.value;
-            if (variationMethod === 'none') return baseSize;
+        function resizeImage(img) {
+            let { width, height } = img;
+            if (width <= MAX_DIM && height <= MAX_DIM) return img;
 
-            const minFactor = 1 - (variationPercent / 100);
-            const maxFactor = 1 + (variationPercent / 100);
-            const minSize = baseSize * minFactor;
-            const maxSize = baseSize * maxFactor;
+            const ratio = MAX_DIM / Math.max(width, height);
+            width = Math.round(width * ratio);
+            height = Math.round(height * ratio);
 
-            let fontSize;
-            if (variationMethod === 'brightness' && luminance !== null) {
-                const normalizedLuminance = luminance / 255;
-                fontSize = minSize + (maxSize - minSize) * normalizedLuminance;
-            } else if (variationMethod === 'randomness') {
-                fontSize = minSize + Math.random() * (maxSize - minSize);
-            } else if (variationMethod === 'brightnessRandom' && luminance !== null) {
-                const normalizedLuminance = luminance / 255;
-                const baseBrightnessSize = minSize + (maxSize - minSize) * normalizedLuminance;
-                const randomOffset = (Math.random() - 0.5) * (maxSize - minSize) * 0.2;
-                fontSize = baseBrightnessSize + randomOffset;
-            } else {
-                fontSize = baseSize;
-            }
-
-            return Math.max(1, Math.min(fontSize, baseSize * 1.5));
+            const temp = document.createElement('canvas');
+            temp.width = width; temp.height = height;
+            const tctx = temp.getContext('2d');
+            tctx.drawImage(img, 0, 0, width, height);
+            
+            const newImg = new Image();
+            newImg.src = temp.toDataURL('image/jpeg', 0.92);
+            return newImg;
         }
 
-        function drawWord(ctx, word, baseColor, x, y, fontSize, fontFamily) {
-            const [r, g, b] = baseColor;
-            const dr = Math.floor(Math.random() * 21) - 10;
-            const dg = Math.floor(Math.random() * 21) - 10;
-            const db = Math.floor(Math.random() * 21) - 10;
-            const newR = Math.min(255, Math.max(0, r + dr));
-            const newG = Math.min(255, Math.max(0, g + dg));
-            const newB = Math.min(255, Math.max(0, b + db));
-            ctx.fillStyle = `rgb(${newR},${newG},${newB})`;
+        function precomputeCellColors(gridSize) {
+            const cols = Math.ceil(imgWidth / gridSize);
+            const rows = Math.ceil(imgHeight / gridSize);
+            
+            const temp = document.createElement('canvas');
+            temp.width = cols; temp.height = rows;
+            const tctx = temp.getContext('2d', { willReadFrequently: true });
+            tctx.drawImage(originalImg, 0, 0, cols, rows);
+            
+            const data = tctx.getImageData(0, 0, cols, rows).data;
+            cellColors = [];
+            
+            for (let j = 0; j < rows; j++) {
+                for (let i = 0; i < cols; i++) {
+                    const idx = (j * cols + i) * 4;
+                    cellColors.push([
+                        data[idx],
+                        data[idx + 1],
+                        data[idx + 2]
+                    ]);
+                }
+            }
+        }
+
+        function buildWordPool() {
+            const maxLen = parseInt(charLengthSlider.value);
+            let list = [];
+            
+            if (customTextDelimiterSelect.value !== "none" && customTextInput.value.trim()) {
+                const delim = customTextDelimiterSelect.value === "comma" ? /,/ : /[\s\n]+/;
+                list = customTextInput.value.split(delim)
+                    .map(w => w.trim())
+                    .filter(w => w.length > 0 && !hanjiRegex.test(w));
+            } else {
+                list = taigiWords.length ? taigiWords : defaultTaigiWords;
+            }
+            
+            wordPool = list.filter(w => w.length <= maxLen);
+            if (wordPool.length === 0) wordPool = ['a', 'lán', 'sī'];
+        }
+
+        function getRandomWord() {
+            return wordPool[Math.floor(Math.random() * wordPool.length)] || 'a';
+        }
+
+        function calculateFontSize(base, variation, luminance, method) {
+            if (method === 'none') return base;
+            
+            const minFactor = 1 - variation / 100;
+            const maxFactor = 1 + variation / 100;
+            const minS = base * minFactor;
+            const maxS = base * maxFactor;
+
+            let size;
+            if (method === 'brightness' && luminance !== null) {
+                size = minS + (maxS - minS) * (luminance / 255);
+            } else if (method === 'randomness') {
+                size = minS + Math.random() * (maxS - minS);
+            } else { // brightnessRandom
+                const baseBright = minS + (maxS - minS) * (luminance / 255);
+                size = baseBright + (Math.random() - 0.5) * (maxS - minS) * 0.25;
+            }
+            return Math.max(6, Math.min(Math.round(size), base * 1.6));
+        }
+
+        function drawWord(word, color, x, y, fontSize, fontFamily, rotationDeg, strokeW) {
+            const lum = getLuminance(...color);
+            const textColor = lum > 130 ? '#0f172a' : '#f8fafc';
+            const strokeColor = lum > 130 ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.75)';
+
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotationDeg * Math.PI / 180);
+
             ctx.font = `${fontSize}px "${fontFamily}", "Noto Sans", sans-serif`;
-            ctx.fillText(word, x, y);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            if (strokeW > 0) {
+                ctx.strokeStyle = strokeColor;
+                ctx.lineWidth = strokeW;
+                ctx.lineJoin = 'round';
+                ctx.strokeText(word, 0, 0);
+            }
+
+            ctx.fillStyle = textColor;
+            ctx.fillText(word, 0, 0);
+            ctx.restore();
         }
 
         function shuffle(array) {
@@ -359,143 +420,219 @@ note:
             }
         }
 
-        function renderCanvas() {
-            if (!imageData) return;
+        // ==================== MAIN RENDER ====================
+        async function renderCanvas(autoDownload = true) {
+            if (!originalImg) {
+                alert('請先上傳圖片 / Please upload an image first');
+                return;
+            }
 
             const gridSize = parseInt(gridSizeSlider.value);
             const wordsPerCell = parseInt(wordsPerCellSlider.value);
             const offset = parseInt(offsetSlider.value);
             const baseFontSize = parseInt(fontSizeSlider.value);
             const variationPercent = parseInt(sizeVariationSlider.value);
+            const rotationMax = parseInt(rotationSlider.value);
+            const bgOpacity = parseInt(bgOpacitySlider.value) / 100;
+            const strokeW = parseInt(strokeSlider.value);
             const fontFamily = fontFamilySelect.value;
+            const variationMethod = variationMethodSelect.value;
 
+            // Safety cap
+            const cols = Math.ceil(imgWidth / gridSize);
+            const rows = Math.ceil(imgHeight / gridSize);
+            const totalWords = cols * rows * wordsPerCell;
+            if (totalWords > MAX_TOTAL_WORDS) {
+                const newWPC = Math.max(1, Math.floor(MAX_TOTAL_WORDS / (cols * rows)));
+                wordsPerCellSlider.value = newWPC;
+                wordsPerCellValue.textContent = newWPC;
+                statusEl.textContent = `Too many words → auto-reduced to ${newWPC}/cell`;
+            }
+
+            statusEl.textContent = 'Building word pool...';
+            buildWordPool();
+            precomputeCellColors(gridSize);
+
+            // Clear & background
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = `rgb(${overallColor[0]},${overallColor[1]},${overallColor[2]})`;
+            
+            // Faint original image
+            if (bgOpacity > 0) {
+                ctx.globalAlpha = bgOpacity;
+                ctx.drawImage(originalImg, 0, 0, canvas.width, canvas.height);
+                ctx.globalAlpha = 1;
+            }
+
+            // Light tint
+            ctx.fillStyle = `rgba(${overallColor[0]},${overallColor[1]},${overallColor[2]},0.68)`;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            statusEl.textContent = 'Rendering Taigi art... (this is fast now!)';
+
             const wordList = [];
+            let cellIndex = 0;
+
             for (let y = 0; y < imgHeight; y += gridSize) {
                 for (let x = 0; x < imgWidth; x += gridSize) {
-                    const color = getAverageColor(x, y, gridSize, gridSize, imageData);
-                    const luminance = getLuminance(color[0], color[1], color[2]);
+                    const color = cellColors[cellIndex++] || [128,128,128];
+                    const lum = getLuminance(...color);
+
                     for (let i = 0; i < wordsPerCell; i++) {
                         const word = getRandomWord();
-                        const fontSize = calculateFontSize(baseFontSize, variationPercent, luminance);
+                        const fSize = calculateFontSize(baseFontSize, variationPercent, lum, variationMethod);
                         const baseX = x + gridSize / 2;
                         const baseY = y + gridSize / 2;
-                        const posX = baseX + (Math.random() * offset * 2 - offset) * (fontSize / baseFontSize);
-                        const posY = baseY + (Math.random() * offset * 2 - offset) * (fontSize / baseFontSize);
-                        wordList.push({ word, color, x: posX, y: posY, fontSize });
+                        const posX = baseX + (Math.random() * offset * 2 - offset);
+                        const posY = baseY + (Math.random() * offset * 2 - offset);
+                        const rot = (Math.random() * rotationMax * 2 - rotationMax);
+
+                        wordList.push({
+                            word, color, x: posX, y: posY,
+                            fontSize: fSize,
+                            rotation: rot,
+                            stroke: strokeW
+                        });
                     }
                 }
             }
 
             shuffle(wordList);
+            
             for (const item of wordList) {
-                drawWord(ctx, item.word, item.color, item.x, item.y, item.fontSize, fontFamily);
+                drawWord(
+                    item.word, item.color, item.x, item.y,
+                    item.fontSize, fontFamily, item.rotation, item.stroke
+                );
             }
 
-            downloadImage();
+            statusEl.textContent = '✓ Done! Beautiful Taigi art ready';
+
+            if (autoDownload) {
+                downloadImage();
+            } else {
+                downloadButton.style.display = 'inline-block';
+            }
         }
 
         function downloadImage() {
-            canvas.toBlob(function(blob) {
-                if (!blob) {
-                    console.error('Failed to create blob from canvas');
-                    return;
-                }
-                const blobUrl = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.download = 'poj_bunji_gesut.png';
-                link.href = blobUrl;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `poj_bunji_gesut_${Date.now()}.png`;
+                document.body.appendChild(a);
+                a.click();
                 setTimeout(() => {
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
                 }, 100);
-            }, 'image/png');
+            }, 'image/png', 0.95);
         }
 
-        uploadButton.addEventListener('click', () => input.click());
-        input.addEventListener('change', async function(e) {
+        // ==================== EVENT HANDLERS ====================
+        function updateSlider(slider, display, suffix = '') {
+            slider.addEventListener('input', () => {
+                display.textContent = slider.value + suffix;
+            });
+        }
+
+        uploadButton.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', async e => {
             const file = e.target.files[0];
             if (!file) return;
 
-            if (!fontsLoaded) {
-                uploadButton.disabled = true;
-                uploadButton.textContent = 'Loading Fonts...';
-                await loadCustomFonts();
-                uploadButton.disabled = false;
-                uploadButton.textContent = 'Choose Image';
+            if (file.size > MAX_FILE_SIZE) {
+                alert(`檔案太大！最大 ${MAX_FILE_SIZE/1024/1024} MB`);
+                return;
             }
 
+            statusEl.textContent = 'Loading image...';
+            renderButton.disabled = true;
+            uploadButton.disabled = true;
+
+            if (!fontsLoaded) await loadCustomFonts();
+
             const img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                imgWidth = img.width;
-                imgHeight = img.height;
+            img.onload = async () => {
+                originalImg = resizeImage(img); // auto-resize
 
-                ctx.drawImage(img, 0, 0);
-                imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                overallColor = getAverageColor(0, 0, canvas.width, canvas.height, imageData);
+                canvas.width = originalImg.width;
+                canvas.height = originalImg.height;
+                imgWidth = canvas.width;
+                imgHeight = canvas.height;
 
-                renderCanvas();
-            };
-            img.onerror = function() {
-                alert('Failed to load the image. Please try another file.');
+                ctx.drawImage(originalImg, 0, 0);
+                const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                imageData = data;
+
+                let r=0, g=0, b=0, count=0;
+                for (let i = 0; i < data.data.length; i += 4) {
+                    r += data.data[i]; g += data.data[i+1]; b += data.data[i+2];
+                    count++;
+                }
+                overallColor = [
+                    Math.floor(r / count),
+                    Math.floor(g / count),
+                    Math.floor(b / count)
+                ];
+
+                statusEl.textContent = `Image loaded (${canvas.width}×${canvas.height})`;
+                renderButton.disabled = false;
+                uploadButton.disabled = false;
+
+                // Auto render once
+                setTimeout(() => renderCanvas(true), 180);
             };
             img.src = URL.createObjectURL(file);
         });
 
-        renderButton.addEventListener('click', function() {
-            if (!imageData) {
-                alert('Please upload an image first.');
-                return;
-            }
+        renderButton.addEventListener('click', () => {
             renderButton.disabled = true;
             renderButton.textContent = 'Rendering...';
-            renderCanvas();
+            renderCanvas(false);
             setTimeout(() => {
                 renderButton.disabled = false;
-                renderButton.textContent = 'Render';
-            }, 500);
+                renderButton.textContent = 'Render Again';
+            }, 800);
         });
 
-        function updateSlider(slider, display, suffix = '') {
-            slider.addEventListener('input', () => {
-                display.textContent = slider.value + suffix;
-                if (slider === charLengthSlider) {
-                    loadTaigiWords((success) => {
-                        console.log(success ? 'Taigi words updated' : 'Using default Taigi words');
-                    });
-                }
-            });
-        }
+        downloadButton.addEventListener('click', downloadImage);
 
+        // Slider live updates
         updateSlider(gridSizeSlider, gridSizeValue);
         updateSlider(wordsPerCellSlider, wordsPerCellValue);
         updateSlider(offsetSlider, offsetValue);
         updateSlider(fontSizeSlider, fontSizeValue);
         updateSlider(sizeVariationSlider, sizeVariationValue, '%');
+        updateSlider(rotationSlider, rotationValue, '°');
+        updateSlider(bgOpacitySlider, bgOpacityValue, '%');
+        updateSlider(strokeSlider, strokeValue);
         updateSlider(charLengthSlider, charLengthValue);
 
-        // Removed checkbox event listeners
-        customTextInput.addEventListener('input', () => {});
-        fontFamilySelect.addEventListener('change', () => {});
-        variationMethodSelect.addEventListener('change', () => {});
-        // Add event listener for the pulldown
+        // Trigger reload on some changes
+        charLengthSlider.addEventListener('change', loadTaigiWords);
         customTextDelimiterSelect.addEventListener('change', () => {});
+        customTextInput.addEventListener('input', () => {});
 
+        // Keyboard shortcut: Ctrl/Cmd + Enter = render
+        document.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                if (!renderButton.disabled) renderCanvas(false);
+            }
+        });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadTaigiWords((success) => {
-                console.log(success ? 'CSV loaded successfully' : 'Using default Taigi words');
-            });
-            sizeVariationValue.textContent = sizeVariationSlider.value + '%';
-            loadCustomFonts();
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTaigiWords();
+            await loadCustomFonts();
+            
+            // Initial value displays
+            sizeVariationValue.textContent = '25%';
+            rotationValue.textContent = '7°';
+            bgOpacityValue.textContent = '14%';
+
+            statusEl.textContent = '✓ Everything ready — upload a photo!';
         });
     </script>
 </body>
