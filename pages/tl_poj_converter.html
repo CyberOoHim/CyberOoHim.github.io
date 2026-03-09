@@ -1,6 +1,6 @@
 ---
 layout: apps
-title: TL to POJ Real-time Converter
+title: TL 拼音 to POJ Real-time Converter
 version: v0.2g
 permalink: /pages/tl_poj_converter.html
 updated: 2026-03-09
@@ -17,7 +17,7 @@ note: 1. enhance POJ text Preservation
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TL to POJ Real-time Converter</title>
+    <title>TL 拼音 to POJ Real-time Converter</title>
     <!-- Google Fonts: Huninn will be loaded dynamically with specific characters -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -798,7 +798,7 @@ note: 1. enhance POJ text Preservation
                     <p id="help-general-warnings" style="margin-bottom: 1rem; color: #f0ad4e;"></p>
                     <h4 id="help-title-1" style="margin-bottom: 0.5rem;">1. 拍隨轉 (Real-time Mode)</h4>
                     <p id="help-text-1" style="margin-top: 0; margin-bottom: 1rem;">
-                        Input TL or POJ with numeric tones.<br>
+                        Input TL 拼音 or POJ with numeric tones.<br>
                         - Input box: Type/Paste text.<br>
                         - Output box: View converted POJ.<br>
                     </p>
@@ -872,13 +872,13 @@ note: 1. enhance POJ text Preservation
 
         // --- UI Constants ---
         const UI_STRINGS = {
-            title: "TL -> POJ 隨時轉",
+            title: "TL 拼音 -> POJ 隨時轉",
             tabs: {
                 realtime: "拍隨轉",
                 file: "轉書類"
             },
             labels: {
-                input: "TL / TL & POJ 帶數字調號",
+                input: "TL 拼音 / TL & POJ 帶數字調號",
                 output: "POJ 輸出",
                 result: "轉soah結果"
             },
@@ -895,7 +895,7 @@ note: 1. enhance POJ text Preservation
             },
             placeholders: {
                 input: `說明：
-1. 拍/貼 TL he̍k-chiá TL/POJ 標數字調號...(e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 
+1. 拍/貼 TL 拼音 he̍k-chiá TL 拼音/POJ 標數字調號...(e.g. Tâi-uân，Tai5-uan5，ia̍h-sī Tai5-oan5). 
 2. 無 beh 轉 ê 文字 kā 用 \\[ ... ] 包--起來。
 3. 看見本 ia̍h-sī 快速測，chhi̍h 下跤 chhi̍h-liú。
 4. Táng-ló͘(download) 這支 App，上下跤有 chhi̍h-liú。
@@ -962,14 +962,14 @@ note: 1. enhance POJ text Preservation
                 nasalLabel: '尾N→鼻化音"ⁿ"',
                 tone6Label: "第6調 (ǎ)",
                 allCapsLabel: "大寫模式 (ALL CAPS)",
-                btnRunTest: "看 TL->POJ ê 見本 a̍h-sī 測看覓",
+                btnRunTest: "看 TL 拼音->POJ ê 見本 a̍h-sī 測看覓",
                 btnReset: "恢復初設 (Reset Default)"
             },
             help: {
-                generalWarnings: `<b>注意:</b> Lán 會用得拍 台羅數字調號 kap 符號調號 TL a̍h-sī POJ 數字調號 lóng-chóng 會轉做 POJ 符號調號。<br>
+                generalWarnings: `<b>注意:</b> Lán 會用得拍 台羅數字調號 kap 符號調號 TL 拼音 a̍h-sī POJ 數字調號 lóng-chóng 會轉做 POJ 符號調號。<br>
 <b>注意:</b> 假使有其他外語拄á好部份 chham 台羅 相siâng，會誤轉。這是 lán ê 使用限制。用走脫語法 thang 避免，chhi̍h <strong>頂懸頭1粒</strong> chhi̍h-liú 看例。<br>`,
                 rtTitle: "1. 拍隨轉 (Real-time Mode)",
-                rtText: `簡單 ê TL 轉 POJ ke-si，支援符號調號 TL 和數字調號 POJ。<br>
+                rtText: `簡單 ê TL 拼音 轉 POJ ke-si，支援符號調號 TL 拼音 和數字調號 POJ。<br>
 • <strong>輸入</strong>: Tiàm 頂懸框á拍字 (例: Tye5-uan5 / Tâi-uân)。<br>
 • <strong>輸出</strong>: 下跤框á會隨顯示轉好 ê POJ。<br>`,
                 fileTitle: "2. 書類處理 (File Mode)",
@@ -988,12 +988,12 @@ note: 1. enhance POJ text Preservation
 • <strong>尾N→ⁿ</strong>: ON=N轉ⁿ (saN→saⁿ)，OFF=N袂變 (saN→saN)。nn 一定轉。<br>
 • <strong>第6調 ǎ</strong>: ON=用 caron (ǎ)，OFF=用 acute (á) 親像第2調。<br>
 • <strong>大寫模式</strong>: ON=大寫 mā 轉 (TSUI→CHUI)，OFF=大寫袂變。<br><br>
-• <strong>看 TL->POJ ê 見本 a̍h-sī 測看覓</strong>: Chhi̍h 這粒chhi̍h鈕，會自動掠測試例文去「拍字轉」分頁，內底有各種 TL 轉 POJ ê 例，會使參考各種用法，koh 設定是 án-chóaⁿ 用。<br>
+• <strong>看 TL 拼音->POJ ê 見本 a̍h-sī 測看覓</strong>: Chhi̍h 這粒chhi̍h鈕，會自動掠測試例文去「拍字轉」分頁，內底有各種 TL 拼音 轉 POJ ê 例，會使參考各種用法，koh 設定是 án-chóaⁿ 用。<br>
 • <strong>恢復初設 (Reset Default)</strong>: Kā 設定 lóng-chóng 恢復做原底 ê 預設。`
             },
             about: {
                 title: "About",
-                text: `TL -> POJ 隨時轉 Converter<br>
+                text: `TL 拼音 -> POJ 隨時轉 Converter<br>
 Copyright © 2026 <a href="https://cyberoohim.github.io/" target="_blank" style="color: inherit; text-decoration: underline;">Cyber O͘-hîm ki-tē</a><br>
 Licensed under MIT License`,
                 assetsTitle: "Libraries & Assets",
@@ -1029,12 +1029,12 @@ Licensed under SIL Open Font License 1.1`
                 downloadFailed: "Táng-ló͘ 失敗。koh 試看覓。",
                 downloading: "Tng teh táng-ló͘ ..."
             },
-            testSample: `=== TL 符號調輸入 (Diacritics) ===
+            testSample: `=== TL 拼音 符號調輸入 (Diacritics) ===
 Tâi-uân sī chi̍t-ê hó só͘-chāi. (台灣是一个好所在)
 Tsit-chân tāi-tsì tsin-tsiànn hó. (這層代誌真正好)
 POJ 帶符號調號無 koh 轉: Góa ài lim tê, i ài chia̍h pn̄g. (我愛啉茶，伊愛食飯)
 
-=== TL/POJ 數字調輸入 (Numeric) ===
+=== TL 拼音/POJ 數字調輸入 (Numeric) ===
 Tai5-uan5 si7 chit8-e5 ho2 so2-chai7.
 Goa2 ai3 lim te5, i ai3 chiah8 png7.
 
@@ -1047,7 +1047,7 @@ o1 o2 o3 oh4 o5 o6 o7 oh8 o9
 oo1 oo2 oo3 ooh4 oo5 oo6 oo7 ooh8 oo9
 m1 m2 m3 mh4 m5 m6 m7 mh8 m9
 
-=== TL→POJ 音素轉換 (Phonemes) ===
+=== TL 拼音→POJ 音素轉換 (Phonemes) ===
 \\[ts\\]: tsuí (水), tsit (這)
 \\[tsh\\]: tshut (出), tshài (菜)
 \\[oo\\]: oo (烏), hōo (予)
@@ -1100,8 +1100,8 @@ Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
 === POJ 保留 (POJ Preservation) ===
 POJ 鼻化「ⁿ」: chiâⁿ→chiâⁿ, siaⁿ→siaⁿ, koaⁿ→koaⁿ (袂變做 Tailo nn)
 POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo)
-混合輸入: chiâⁿ tsuí → chiâⁿ chúi (POJ 保留, TL 照常轉)
-混合輸入: hó͘ oo → hó͘ o͘ (POJ o͘ 保留, TL oo 轉做 POJ)
+混合輸入: chiâⁿ tsuí → chiâⁿ chúi (POJ 保留, TL 拼音 照常轉)
+混合輸入: hó͘ oo → hó͘ o͘ (POJ o͘ 保留, TL 拼音 oo 轉做 POJ)
 大寫 POJ: Chiâⁿ→Chiâⁿ, Ô͘→Ô͘ (大寫 POJ mā 袂變)`
         };
         function initUI() {
