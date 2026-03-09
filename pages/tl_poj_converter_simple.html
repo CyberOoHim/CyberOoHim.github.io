@@ -1,10 +1,10 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter - Simple
-version: v0.1c
+version: v0.1d
 permalink: /pages/tl_poj_converter_simple.html
 updated: 2026-03-09
-note:
+note: remove all escape logic 
 ---
 <!DOCTYPE html>
 <!--
@@ -443,9 +443,7 @@ note:
                     <li><strong>原文/轉</strong>: 會使切欲看「原文」a̍h-sī「轉」結果。</li>
                     <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式 kap 自動捲留幾逝。</li>
                     <li><strong>Táng-ló͘</strong>: 轉好 ê 結果會使 táng-ló͘（download）做 .txt 檔。</li>
-                </ul>
-                <p style="margin-top: 1rem;"><strong>注意 (Note):</strong></p>
-                <p style="margin-top: 0.5rem;">若無愛轉，請用 <code>\\[ \\]</code> 包--起來 (例: <code>\\[Google\\] tō 袂變做 Go͘gle</code>)。</p>`,
+                </ul>`,
             messages: {
                 downloadConfirm: "Kám 有確定 beh táng-ló͘ tī 家己電腦用？",
                 downloading: "Tng teh táng-ló͘ ...",
@@ -811,56 +809,24 @@ note:
                 return `⟪URL${urlPlaceholders.length - 1}⟫`;
             });
 
-            // 0b. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
-            // Uses O(n) state machine scan instead of regex for robustness
-            // Delimiter: \[ opens, \] closes (allows regular ] inside)
-            const escapes = [];
-            let processedInput = '';
-            let i = 0;
-            while (i < tl_tiau.length) {
-                if (tl_tiau[i] === '\\' && tl_tiau[i + 1] === '[') {
-                    // Found escape start \[
-                    let start = i + 2;
-                    let end = tl_tiau.indexOf('\\]', start);
-                    if (end === -1) {
-                        // No closing \] → escape everything to end of string
-                        escapes.push(tl_tiau.slice(start));
-                        processedInput += `⟪ESC${escapes.length - 1}⟫`;
-                        break;
-                    }
-                    // Found closing \]
-                    escapes.push(tl_tiau.slice(start, end));
-                    processedInput += `⟪ESC${escapes.length - 1}⟫`;
-                    i = end + 2; // Skip past \]
-                } else {
-                    processedInput += tl_tiau[i];
-                    i++;
-                }
-            }
-
-            // 0c. Preserve POJ text (syllables with POJ-specific markers)
+            // 0b. Preserve POJ text (syllables with POJ-specific markers)
             // POJ-specific characters: ⁿ (superscript n), o͘/O͘ (o with dot above)
             // Match words/syllables containing these POJ markers and preserve them
             const pojPlaceholders = [];
 
-            // Pattern explanation:
-            // - Word boundaries containing ⁿ or o͘/O͘ (POJ-specific characters)
-            // - Match the whole "word" (sequence of romanization characters with diacritics)
-            // - Romanization chars: letters, tone marks (combining diacritics), hyphens within words
-            const pojSyllablePattern = /[\p{L}\p{M}]+(?:ⁿ|o͘|O͘)[\p{L}\p{M}]*/gu;
             // Also match syllables ending with ⁿ that might not be caught above
             const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
             // And match standalone o͘/O͘ syllables  
             const pojOoPattern = /[\p{L}\p{M}]*[oO]͘[\p{L}\p{M}]*/gu;
 
             // First pass: preserve syllables with ⁿ
-            processedInput = processedInput.replace(pojNasalEndPattern, (match) => {
+            tl_tiau = tl_tiau.replace(pojNasalEndPattern, (match) => {
                 pojPlaceholders.push(match);
                 return `⟪POJ${pojPlaceholders.length - 1}⟫`;
             });
 
             // Second pass: preserve syllables with o͘/O͘ (that weren't already captured)
-            processedInput = processedInput.replace(pojOoPattern, (match) => {
+            tl_tiau = tl_tiau.replace(pojOoPattern, (match) => {
                 // Skip if already a placeholder
                 if (match.includes('⟪POJ')) return match;
                 pojPlaceholders.push(match);
@@ -868,23 +834,18 @@ note:
             });
 
             // 1. Convert TL-style tone marks to corresponding numbers
-            const tl_soo = TLtiau_2_TLsoo(processedInput);
+            const tl_soo = TLtiau_2_TLsoo(tl_tiau);
             // 2. Convert TL number-style to POJ number-style
             const poj_soo = TLsoo_2_POJsoo(tl_soo);
             // 3. Convert POJ number-style to POJ tone marks
             let poj_tiau = POJsoo_2_POJtiau(poj_soo);
 
-            // 4a. Restore escaped content
-            poj_tiau = poj_tiau.replace(/⟪ESC(\d+)⟫/g, (match, index) => {
-                return escapes[parseInt(index)];
-            });
-
-            // 4b. Restore POJ content (preserved syllables with POJ-specific markers)
+            // 4a. Restore POJ content (preserved syllables with POJ-specific markers)
             poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
                 return pojPlaceholders[parseInt(index)];
             });
 
-            // 5. Restore URL/markdown link placeholders
+            // 4b. Restore URL/markdown link placeholders
             poj_tiau = poj_tiau.replace(/⟪URL(\d+)⟫/g, (match, index) => {
                 return urlPlaceholders[parseInt(index)];
             });
@@ -935,10 +896,58 @@ note:
 
         btnSettings.addEventListener('click', toggleSettingsView);
 
+        function mapCursorPosition(oldText, newText, oldCursor) {
+            if (oldCursor === 0) return 0;
+            if (oldText === newText) return oldCursor;
+
+            // Group by contiguous letters/numbers/marks vs everything else (spaces, punctuation, newlines)
+            // Uses Unicode property escapes to match all letters, combining marks, and numbers
+            const tokenize = (text) => text.match(/[\p{L}\p{M}\p{N}ⁿ]+|[^\p{L}\p{M}\p{N}ⁿ]+/gu) || [];
+
+            const oldTokens = tokenize(oldText);
+            const newTokens = tokenize(newText);
+
+            let oldPos = 0;
+            let newPos = 0;
+
+            for (let i = 0; i < oldTokens.length; i++) {
+                const oldToken = oldTokens[i];
+                const newToken = newTokens[i] || ""; // Match token pair
+
+                const oldTokenStart = oldPos;
+                const oldTokenEnd = oldPos + oldToken.length;
+
+                // Stop when cursor falls inside this token
+                if (oldCursor >= oldTokenStart && oldCursor <= oldTokenEnd) {
+                    if (oldCursor === oldTokenStart) return newPos;
+                    if (oldCursor === oldTokenEnd) return newPos + newToken.length;
+
+                    const isWord = /^[\p{L}\p{M}\p{N}ⁿ]/u.test(oldToken);
+                    if (!isWord) {
+                        // Non-word tokens (spaces, punctuation, newlines) are identical
+                        // between original and converted text, so 1:1 mapping is safe.
+                        return newPos + Math.min(oldCursor - oldTokenStart, newToken.length);
+                    }
+
+                    // Proportional mapping for word tokens (e.g. "Tai5" -> "Tâi")
+                    const ratio = (oldCursor - oldTokenStart) / oldToken.length;
+                    return newPos + Math.round(ratio * newToken.length);
+                }
+
+                oldPos += oldToken.length;
+                newPos += newToken.length;
+            }
+
+            return newText.length;
+        }
+
         // View Switching Logic
         function updateView(newViewIsRaw) {
             if (isUpdatingView) return;
             isUpdatingView = true;
+
+            const oldCursor = inputArea.selectionStart;
+            const oldText = inputArea.value;
 
             if (isRawView) {
                 // Was Raw: `rawContent` is already the value in the box
@@ -952,31 +961,53 @@ note:
             }
 
             isRawView = newViewIsRaw;
+            let newText = "";
 
             if (isRawView) {
                 // Switch to Original
                 btnViewOriginal.classList.add('active');
                 btnViewConverted.classList.remove('active');
-                inputArea.value = rawContent;
+                newText = rawContent;
+                inputArea.value = newText;
                 inputArea.placeholder = UI_STRINGS.views.originalPlaceholder;
-                previousVal = rawContent;
+                previousVal = newText;
             } else {
                 // Switch to Converted
                 btnViewConverted.classList.add('active');
                 btnViewOriginal.classList.remove('active');
                 // We convert the *Source* (rawContent) to display
-                const converted = TLtiau_2_POJtiau(rawContent);
-                inputArea.value = converted;
+                newText = TLtiau_2_POJtiau(rawContent);
+                inputArea.value = newText;
                 inputArea.placeholder = UI_STRINGS.placeholder;
-                previousVal = converted;
+                previousVal = newText;
             }
 
-            isUpdatingView = false;
-            inputArea.focus();
+            // Calculate the old line's vertical distance from the *top of the visible scrolling box*
+            const oldTextBeforeCursor = oldText.substring(0, oldCursor);
+            const oldLineNumber = oldTextBeforeCursor.split('\n').length - 1;
+            const styles = window.getComputedStyle(inputArea);
+            let lineHeight = parseFloat(styles.lineHeight);
+            if (isNaN(lineHeight)) lineHeight = parseFloat(styles.fontSize) * 1.6;
 
-            // Reset cursor to beginning as requested
-            inputArea.setSelectionRange(0, 0);
-            inputArea.scrollTop = 0;
+            const oldPixelOffsetFromTop = (oldLineNumber * lineHeight) - inputArea.scrollTop;
+
+            const newCursor = mapCursorPosition(oldText, newText, oldCursor);
+
+            isUpdatingView = false;
+
+            // Defer focus + cursor restoration so the browser doesn't
+            // reset selectionStart to 0 during the focus event.
+            requestAnimationFrame(() => {
+                inputArea.focus();
+                inputArea.setSelectionRange(newCursor, newCursor);
+
+                // Scroll so the cursor line maintains the EXACT same visual distance from the top
+                const textBeforeCursor = newText.substring(0, newCursor);
+                const newLineNumber = textBeforeCursor.split('\n').length - 1;
+
+                // We place the new line text at the exact same pixel offset from the viewport top
+                inputArea.scrollTop = Math.max(0, (newLineNumber * lineHeight) - oldPixelOffsetFromTop);
+            });
         }
 
         btnViewConverted.addEventListener('click', () => {
@@ -987,7 +1018,22 @@ note:
             if (!isRawView) updateView(true);
         });
 
-        // Input Conversion Logic
+        // Capture scroll offset BEFORE any edit changes the content.
+        // 'beforeinput' fires reliably on both desktop and mobile (iPad/Android virtual keyboards),
+        // unlike 'keydown' which may not fire or returns keyCode 229 on mobile IMEs.
+        inputArea.addEventListener('beforeinput', () => {
+            if (isUpdatingView) return;
+            const oldCursor = inputArea.selectionStart;
+            const oldTextBeforeCursor = inputArea.value.substring(0, oldCursor);
+            const oldLineNumber = oldTextBeforeCursor.split('\n').length - 1;
+            const styles = window.getComputedStyle(inputArea);
+            let lineHeight = parseFloat(styles.lineHeight);
+            if (isNaN(lineHeight)) lineHeight = parseFloat(styles.fontSize) * 1.6;
+
+            inputArea._lastTargetScrollOffset = (oldLineNumber * lineHeight) - inputArea.scrollTop;
+            if (isNaN(inputArea._lastTargetScrollOffset)) inputArea._lastTargetScrollOffset = 0;
+        });
+
         inputArea.addEventListener('input', (e) => {
             if (isUpdatingView) return;
 
@@ -1015,7 +1061,6 @@ note:
 
                 // 2. Check for Trigger
                 const cursorPos = inputArea.selectionStart;
-
 
                 // 2. Perform Conversion on RAW content (Always, unless composing)
                 // Skip view update if composing (IME) to avoid breaking composition
@@ -1054,29 +1099,25 @@ note:
         function adjustScrollPosition() {
             // requestAnimationFrame to ensure we calculate after layout updates
             requestAnimationFrame(() => {
+                const cursor = inputArea.selectionStart;
+                const textBeforeCursor = inputArea.value.substring(0, cursor);
+                const lineNumber = textBeforeCursor.split('\n').length - 1;
+
                 const styles = window.getComputedStyle(inputArea);
                 let lineHeight = parseFloat(styles.lineHeight);
-                const paddingBottom = parseFloat(styles.paddingBottom);
+                if (isNaN(lineHeight)) lineHeight = parseFloat(styles.fontSize) * 1.6;
 
-                // Fallback if lineHeight is "normal" or invalid
-                if (isNaN(lineHeight)) {
-                    const fontSize = parseFloat(styles.fontSize);
-                    lineHeight = fontSize * 1.6; // approx 1.6 from CSS line-height
+                // Recover the target offset captured during beforeinput, fallback to centering if unavailable
+                let targetOffset = inputArea._lastTargetScrollOffset;
+                if (typeof targetOffset !== 'number' || isNaN(targetOffset)) {
+                    targetOffset = inputArea.clientHeight / 2;
                 }
 
-                if (isNaN(lineHeight) || lineHeight <= 0) return;
+                // Maintain the EXACT same pixel distance from the top bounds
+                const targetScrollTop = (lineNumber * lineHeight) - targetOffset;
 
-                // Adjust scrollHeight to exclude the synthetic padding-bottom we added
-                // scrollHeight in DOM includes padding
-                const realContentHeight = inputArea.scrollHeight - paddingBottom;
-
-                // Goal: Top of viewport should be at `realTextEnd - (SCROLL_LOCK_LINES * lineHeight)`
-                const targetScrollTop = realContentHeight - (SCROLL_LOCK_LINES * lineHeight);
-
-                // Only scroll if we have enough content
-                if (targetScrollTop > 0) {
-                    inputArea.scrollTop = targetScrollTop;
-                }
+                // For extreme bounds, browser will clamp scrollTop to [0, maxScroll] natively
+                inputArea.scrollTop = Math.max(0, targetScrollTop);
             });
         }
 
@@ -1173,45 +1214,29 @@ oo1 oo2 oo3 ooh4 oo5 oo6 oo7 ooh8 oo9
 m1 m2 m3 mh4 m5 m6 m7 mh8 m9
 
 === TL→POJ 音素轉換 (Phonemes) ===
-\\[ts\\]: tsuí (水), tsit (這)
-\\[tsh\\]: tshut (出), tshài (菜)
-\\[oo\\]: oo (烏), hōo (予)
+ts: tsuí (水), tsit (這)
+tsh: tshut (出), tshài (菜)
+oo: oo (烏), hōo (予)
 j: jī (字), jia̍t (熱) (無變)
 
-\\[=== 鼻音 (nn / N) ===
-[尾N→ⁿ Toggle(切)]
+=== 鼻音 (nn / N) ===
 nn尾 (一定 lóng 轉): sann→saⁿ (三), sinn→siⁿ (生)
 N尾 ON: saN→saⁿ, siN→siⁿ, a̍hN→a̍hⁿ
-N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN\\]
+N尾 OFF: saN→saN, siN→siN, a̍hN→a̍hN
 (頭前 ê nn / N 袂變: nng → nng, NG → NG)
 
-\\[=== 第六調 (Tone 6) ===
-[第6調 ǎ Toggle(切)]
+=== 第六調 (Tone 6) ===
 ON (Caron): a6→ǎ, e6→ě, o6→ǒ, ng6→ňg
-OFF (Acute): a6→á, e6→é, o6→ó, ng6→ńg\\]
+OFF (Acute): a6→á, e6→é, o6→ó, ng6→ńg
 
-\\[=== 大寫 (ALL CAPS) ===
-[大寫模式 Toggle(切)]
+=== 大寫 (ALL CAPS) ===
 ON: TSUI→CHUI, TSHUT→CHHUT, OO→O͘
-OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉)\\]
+OFF: TSUI→TSUI, TSHUT→TSHUT, OO→OO (無轉)
 
-\\[=== 調位標記 (Vowel Priority) ===
+=== 調位標記 (Vowel Priority) ===
 ua→oa: tuà→tòa (大), kuà→kòa (掛)
 ue→oe: kué→kóe (粿), pué→póe (飛)
-ui: suí→súi (水), kuí→kúi (鬼)\\]
-
-=== 走脫語法 (Escape Syntax) ===
-基本: \[Tâi-uân\]  (原文保留) → Tâi-uân
-濟逝: \\[Thâu tsuā
-Jī tsuā\\] ← Hāⁿ 逝 mā lóng 袂轉
-
-相套 (Nested):
-\\[khí-thâu \\[ tē-jī\\] ← thâu-ê \\] 就收煞
-\\[(結果: "khí-thâu \\[ tē-jī" + 落尾照常轉)\\]
-
-英文: \\[Google\\] vs Google, \\[Boots\\] vs Boots
-     \\["I read a book about blue cats."\\] vs "I read a book about blue cats."
-URL: \\["https://example.com/page?id=tsing_tsha"\\] vs "https://example.com/page?id=tsing_tsha"
+ui: suí→súi (水), kuí→kúi (鬼)
 
 === 邊墘狀況 (Other Cases) ===
 混合: 123 !@# $100 (tsu-pún) {tsuí}
@@ -1219,7 +1244,7 @@ URL: \\["https://example.com/page?id=tsing_tsha"\\] vs "https://example.com/page
 引句點: "tsuí" 'tsuí' 「tsuí」『tsuí』
 Han-jī 相濫: 台灣 Tâi-uân 是 sī 好 hó 所在 só͘-chāi
 頭尾空白:"   tsuí   "(空白無變)
-Ài 有連字符: \\[Tâiuânlâng, tsabóogíná\\] → Tâiuânlâng, tsabóogíná (無連字符無保證著)
+Ài 有連字符: Tâi-uân-lâng, tsa-bó͘-gín-á (有連字符較好)
 數字調號相濫: Goa2 ài 啉 tê, 伊 ai3 食 png7.
 
 === POJ 保留 (POJ Preservation) ===
