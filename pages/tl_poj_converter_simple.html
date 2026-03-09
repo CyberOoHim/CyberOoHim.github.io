@@ -1,9 +1,9 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter - Simple
-version: v0.1b
+version: v0.1c
 permalink: /pages/tl_poj_converter_simple.html
-updated: 2026-01-18
+updated: 2026-03-09
 note:
 ---
 <!DOCTYPE html>
@@ -35,16 +35,6 @@ note:
             --spacing-sm: 1rem;
         }
 
-        /* Light Mode Overrides */
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f6f8fa;
-            --text-primary: #24292f;
-            --text-secondary: #57606a;
-            --text-link: #0969da;
-            --border-color: #d0d7de;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -67,7 +57,7 @@ note:
             display: flex;
             flex-direction: column;
             margin: 0;
-            /* align-items: center; <-- Removed to prevent left clipping on small screens */
+            align-items: center;
         }
 
         .container {
@@ -78,8 +68,6 @@ note:
             flex-direction: column;
             gap: var(--spacing-sm);
             padding: var(--spacing-sm);
-            margin: 0 auto;
-            /* Safe centering */
             /* Restore padding here */
         }
 
@@ -247,6 +235,11 @@ note:
             border-bottom: 1px solid var(--border-color);
         }
 
+        .input-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
         .main-panel {
             display: flex;
             flex-direction: column;
@@ -289,81 +282,6 @@ note:
             color: var(--bg-primary);
             font-weight: bold;
         }
-
-        .view-toggle-btn.active {
-            background: var(--text-link);
-            color: var(--bg-primary);
-            font-weight: bold;
-        }
-
-        /* Text Zoom Levels */
-        html[data-text-zoom="0"] {
-            font-size: 100%;
-        }
-
-        html[data-text-zoom="1"] {
-            font-size: 110%;
-        }
-
-        html[data-text-zoom="2"] {
-            font-size: 120%;
-        }
-
-        html[data-text-zoom="3"] {
-            font-size: 130%;
-        }
-
-        html[data-text-zoom="4"] {
-            font-size: 140%;
-        }
-
-        html[data-text-zoom="5"] {
-            font-size: 150%;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.5rem;
-            }
-
-            .header-row {
-                flex-wrap: wrap;
-                /* Allow wrapping to prevent cutoff */
-                gap: 0.5rem;
-            }
-
-            h1 {
-                font-size: 1rem;
-                white-space: normal;
-                /* Allow title to wrap if needed */
-            }
-
-            .toolbar-group {
-                gap: 0.2rem;
-                flex-wrap: wrap;
-                /* Allow toolbar itself to wrap if really needed */
-                justify-content: flex-end;
-                /* Keep buttons to the right if wrapped */
-            }
-
-            .btn {
-                padding: 4px;
-                min-width: 30px;
-                height: 30px;
-            }
-
-            .btn svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            /* Make text buttons smaller too */
-            .view-toggle-btn {
-                padding: 2px 6px;
-                font-size: 0.8rem;
-            }
-        }
     </style>
 </head>
 
@@ -395,38 +313,6 @@ note:
             <h3 id="ui-lbl-settings-title" style="margin-bottom: 0.5rem; color: var(--text-link);"></h3>
 
             <div class="setting-item">
-                <span id="ui-lbl-theme-toggle"></span>
-                <div class="switch-container">
-                    <!-- Sun Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        style="margin-right: 4px; opacity: 0.7;">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-
-                    <input type="checkbox" id="theme-toggle" class="switch-input">
-                    <label for="theme-toggle" class="switch-label">
-                        <span class="switch-slider"></span>
-                    </label>
-
-                    <!-- Moon Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        style="margin-left: 4px; opacity: 0.7;">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="setting-item">
                 <span id="ui-lbl-nasal-toggle"></span>
                 <div class="switch-container">
                     <input type="checkbox" id="nasal-superscript-toggle" class="switch-input" checked>
@@ -456,22 +342,11 @@ note:
                 </div>
             </div>
 
-
-            <div class="setting-item">
-                <span id="ui-lbl-text-size"></span>
-                <div class="switch-container" style="gap: 2px;">
-                    <button class="btn" id="btn-zoom-out" style="width: 32px; height: 32px; padding: 0;">-</button>
-                    <span id="zoom-level-indicator"
-                        style="width: 30px; text-align: center; font-weight: bold; display: inline-block;">A</span>
-                    <button class="btn" id="btn-zoom-in" style="width: 32px; height: 32px; padding: 0;">+</button>
-                </div>
-            </div>
-
             <div class="setting-item">
                 <span id="ui-lbl-scroll-lines" title="設定拍字時，頂懸欲留幾逝 context (建議 3-6 逝)"></span>
                 <div class="switch-container" style="justify-content: flex-end;">
                     <input type="number" id="scroll-lines-input" min="1" max="15" value="6" class="input-number"
-                        style="width: 50px; padding: 5px; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; background: var(--bg-secondary); color: var(--text-primary); font-size: 1.2rem;">
+                        style="width: 50px; padding: 5px; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; background: var(--bg-secondary); color: var(--text-primary);">
                 </div>
             </div>
 
@@ -526,7 +401,7 @@ note:
             buttons: {
                 copy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
                 clear: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
-                settings: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`,
+                settings: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="54" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(14, 8)"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></g><line x1="55" y1="32" x2="65" y2="8" stroke-width="2.5" /><g transform="translate(68, 8)"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></g></svg>`,
                 download: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`,
                 copied: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
                 back: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>`,
@@ -541,7 +416,7 @@ note:
                 reset: "恢復初設 (Reset)"
             },
             views: {
-                converted: "現轉",
+                converted: "轉",
                 original: "原文",
                 originalPlaceholder: "原文模式 (無轉) [Original Text]"
             },
@@ -550,11 +425,9 @@ note:
                 nasal: '尾N→鼻化音"ⁿ"',
                 tone6: "第6調 (ǎ)",
                 allcaps: "大寫模式 (ALL CAPS)",
-                scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)",
-                textSize: "字骨大細 (Text Size)",
-                theme: "外觀 (Theme)"
+                scrollLines: "自動捲 beh 留幾逝 (Auto-scroll Lines)"
             },
-            placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )\n\n** 毋好 koh 拍 POJ 符號調號落去轉, 無保證總會著。",
+            placeholder: "隨輸入隨轉... (Type here...)\n( e.g. Oo1-oo1 → O͘-o͘\n        Tsai-iánn → Chai-iáⁿ,\n        han1-chi5 → han-chî )",
             footer: "<span>TL → POJ 現轉<br>© 2026 Cyber O͘-hîm Ki-tē. MIT License.</span>",
             helpTitle: "解說 (Help)",
             helpContent: `
@@ -562,20 +435,17 @@ note:
                 <ul style="padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
                     <li>TL / POJ 數字調: <code>Tai5-uan5</code> / <code>Tai5-oan5</code></li>
                     <li>TL 符號調: <code>Tâi-uân</code></li>
-                    <li>轉無仝拍法: "oo" → o͘, "nn" → ⁿ 等等</li>
+                    <li>特殊拍法: "oo" → o͘, "nn" → ⁿ</li>
                 </ul>
-                <p><strong>機能 (Features):</strong></p>
+                <p><strong>功能 (Features):</strong></p>
                 <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
                     <li><strong>隨輸入隨轉</strong>: 拍字隨會轉做 POJ。</li>
-                    <li><strong>原文/現轉</strong>: 會使切欲看「原文」a̍h-sī「現轉」結果。</li>
-                    <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式、自動捲 beh 留幾逝、koh 會當 chhiâu 外觀（光/暗）kap 字骨大細。</li>
+                    <li><strong>原文/轉</strong>: 會使切欲看「原文」a̍h-sī「轉」結果。</li>
+                    <li><strong>設定</strong>: 調整 "ⁿ" (nn)、第6調 (ǎ/á)、大寫模式 kap 自動捲留幾逝。</li>
                     <li><strong>Táng-ló͘</strong>: 轉好 ê 結果會使 táng-ló͘（download）做 .txt 檔。</li>
-                    <br>
-                    <li><strong>** 毋好 koh 拍 POJ 符號調號落去轉, 無保證總會著。</strong>
                 </ul>
                 <p style="margin-top: 1rem;"><strong>注意 (Note):</strong></p>
-                <p style="margin-top: 0.5rem;">* 無 beh 轉 ê 所在，請用 <code>\\[ \\]</code> 包--起來 (例: <code>\\[Google\\] tō 袂變做 Go͘gle</code>)。</p>
-                <p style="margin-top: 0.5rem;">* 若用 iPad，對教育部語音輸入法切tńg--來 ê 時，App 位會小走--去，才小 chhiâu hō͘ tńg--來--一下。</p>`,
+                <p style="margin-top: 0.5rem;">若無愛轉，請用 <code>\\[ \\]</code> 包--起來 (例: <code>\\[Google\\] tō 袂變做 Go͘gle</code>)。</p>`,
             messages: {
                 downloadConfirm: "Kám 有確定 beh táng-ló͘ tī 家己電腦用？",
                 downloading: "Tng teh táng-ló͘ ...",
@@ -608,9 +478,7 @@ note:
             document.getElementById('ui-lbl-nasal-toggle').innerText = UI_STRINGS.settings.nasal;
             document.getElementById('ui-lbl-tone6-toggle').innerText = UI_STRINGS.settings.tone6;
             document.getElementById('ui-lbl-allcaps-toggle').innerText = UI_STRINGS.settings.allcaps;
-            document.getElementById('ui-lbl-text-size').innerText = UI_STRINGS.settings.textSize;
             document.getElementById('ui-lbl-scroll-lines').innerText = UI_STRINGS.settings.scrollLines;
-            document.getElementById('ui-lbl-theme-toggle').innerText = UI_STRINGS.settings.theme;
 
             document.getElementById('ui-btn-run-test').innerText = UI_STRINGS.tooltips.runTest;
             document.getElementById('ui-btn-reset-settings').innerText = UI_STRINGS.tooltips.reset;
@@ -625,77 +493,13 @@ note:
 
             loadSettings();
             updateSettings();
-
-            // Text Zoom Init
-            initTextZoom();
-
-            // Theme Init
-            initTheme();
         }
         document.addEventListener('DOMContentLoaded', initUI);
 
-        // --- Theme Logic ---
-        function initTheme() {
-            const savedTheme = localStorage.getItem('tl_poj_converter_theme');
-            const themeToggle = document.getElementById('theme-toggle');
-
-            // Default is Dark. If 'light' is saved, switch to Light.
-            if (savedTheme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.checked = false; // Unchecked = Light (Sun)
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeToggle.checked = true; // Checked = Dark (Moon)
-            }
-
-            themeToggle.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    // Switch to Dark
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('tl_poj_converter_theme', 'dark');
-                } else {
-                    // Switch to Light
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    localStorage.setItem('tl_poj_converter_theme', 'light');
-                }
-            });
-        }
-
-        // --- Text Zoom Logic ---
-        let currentZoomLevel = 1;
-        const MAX_ZOOM_LEVEL = 5;
-
-        function initTextZoom() {
-            const savedZoom = localStorage.getItem('tl_poj_converter_zoom');
-            if (savedZoom !== null) {
-                currentZoomLevel = parseInt(savedZoom, 10);
-            }
-            applyZoomLevel();
-
-            document.getElementById('btn-zoom-out').addEventListener('click', () => {
-                if (currentZoomLevel > 0) {
-                    currentZoomLevel--;
-                    applyZoomLevel();
-                }
-            });
-
-            document.getElementById('btn-zoom-in').addEventListener('click', () => {
-                if (currentZoomLevel < MAX_ZOOM_LEVEL) {
-                    currentZoomLevel++;
-                    applyZoomLevel();
-                }
-            });
-        }
-
-        function applyZoomLevel() {
-            document.documentElement.setAttribute('data-text-zoom', currentZoomLevel);
-            localStorage.setItem('tl_poj_converter_zoom', currentZoomLevel);
-        }
-
         // --- Settings (Fixed as requested) ---
-        window.TL_USE_NASAL_SUPERSCRIPT = false;
+        window.TL_USE_NASAL_SUPERSCRIPT = true;
         window.TL_TONE6_USE_CARON = false;
-        window.TL_ALL_CAPS_SUPPORT = false;
+        window.TL_ALL_CAPS_SUPPORT = true;
 
         // --- Logic extracted from tl_poj_converter.html ---
         const TL_bue = '((?:rm|rng|rn|r|m|ng|n|nnh|nn|ⁿ|N)?)';
@@ -704,35 +508,19 @@ note:
             return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
 
-        function createRC(char) {
-            return new RegExp(char + '([aAeEgGhHiIkKmMnNoOpPtTuU]*)', 'g');
-        }
-        function createRC1(tailo) {
-            const prefix = tailo.slice(0, -1);
-            const lastChar = tailo.slice(-1);
-            return new RegExp(prefix + TL_bue + lastChar, 'g');
-        }
-        function createRC2(tailo) {
-            return new RegExp(tailo[0] + '(u|i)((?:N|ⁿ|nn)?)' + tailo[1], 'g');
-        }
-        function createRC3_Regex(pattern) {
-            return new RegExp(pattern, 'g');
-        }
-        function createRC4(tailo) {
-            const prefix = tailo.slice(0, -1);
-            const lastChar = tailo.slice(-1);
-            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar + '?', 'g');
-        }
-        function createRC8(tailo) {
-            const prefix = tailo.slice(0, -1);
-            const lastChar = tailo.slice(-1);
-            return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar, 'g');
-        }
+        function createRC(char) { return new RegExp(char + '([aAeEgGhHiIkKmMnNoOpPtTuU]*)', 'g'); }
+        function createRC1(tailo) { const prefix = tailo.slice(0, -1); const lastChar = tailo.slice(-1); return new RegExp(prefix + TL_bue + lastChar, 'g'); }
+        function createRC2(tailo) { return new RegExp(tailo[0] + '(u|i)((?:N|ⁿ|nn)?)' + tailo[1], 'g'); }
+        function createRC3(tailo) { return new RegExp(tailo, 'g'); }
+        function createRC3_Regex(pattern) { return new RegExp(pattern, 'g'); }
+        function createRC4(tailo) { const prefix = tailo.slice(0, -1); const lastChar = tailo.slice(-1); return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar + '?', 'g'); }
+        function createRC8(tailo) { const prefix = tailo.slice(0, -1); const lastChar = tailo.slice(-1); return new RegExp(prefix + '(h(?:N|ⁿ|nn)?|H(?:N|ⁿ|nn)?|p|P|t|T|k|K)' + lastChar, 'g'); }
 
+        // 1. TL Tone Marks -> TL Numbers
         function TLtiau_2_TLsoo(tl_tiau, nasal = 'nn', use14 = false) {
             let tl_soo = tl_tiau;
             if (!tl_soo) return '';
-
+            // (Same mapping as before, condensed for brevity in file write but assuming full logic is preserved)
             const TL_T2S = [
                 { r: createRC('á'), s: 'a$12' }, { r: createRC('Á'), s: 'A$12' },
                 { r: createRC('à'), s: 'a$13' }, { r: createRC('À'), s: 'A$13' },
@@ -791,80 +579,86 @@ note:
                 { r: createRC('n̍'), s: 'n$18' }, { r: createRC('N̍'), s: 'N$18' },
                 { r: createRC('n̋'), s: 'n$19' }, { r: createRC('N̋'), s: 'N$19' }
             ];
-
-            for (const map of TL_T2S) {
-                tl_soo = tl_soo.replace(map.r, map.s);
-            }
-
-            tl_soo = tl_soo.replace(/o͘/g, 'oo');
-            tl_soo = tl_soo.replace(/O͘/g, 'Oo');
-            tl_soo = tl_soo.replace(/ⁿ/g, 'nn');
-
-            if (nasal === 'N') {
-                tl_soo = tl_soo.replace(/(?<=[aeiouAEIOU])nn/g, 'N');
-            }
-
+            for (const map of TL_T2S) { tl_soo = tl_soo.replace(map.r, map.s); }
+            tl_soo = tl_soo.replace(/o͘/g, 'oo').replace(/O͘/g, 'Oo').replace(/ⁿ/g, 'nn');
+            if (nasal === 'N') tl_soo = tl_soo.replace(/(?<=[aeiouAEIOU])nn/g, 'N');
             if (use14) {
                 const add1 = /(a|A|e|E|i|I|o|O|u|U|m|M|ng|Ng|n)\b/g;
                 const add4 = /(h|H|p|P|t|T|k|K)\b/g;
-                tl_soo = tl_soo.replace(add1, '$11');
-                tl_soo = tl_soo.replace(add4, '$14');
+                tl_soo = tl_soo.replace(add1, '$11').replace(add4, '$14');
             }
             return tl_soo;
         }
 
+        // 2. TL Numbers -> POJ Numbers
         function TLsoo_2_POJsoo(tailo_soo, keep14 = false) {
             if (!tailo_soo) return '';
             let poj_soo = tailo_soo;
-
             if (!keep14) {
                 const remove1 = /([aeiouAEIOU](?:nn|N)?|[aeiouAEIOU](?:ng|n|m)|(?:p|P|ph|Ph|m|M|b|B|t|T|th|Th|n|N|l|L|k|K|kh|Kh|ng|Ng|g|G|s|S|h|H)?(?:ng|Ng|m|M))1/g;
                 poj_soo = poj_soo.replace(remove1, '$1');
                 const remove4 = /([aeiouAEIOU](?:(?:nn|N)?(?:h|H)|p|P|t|T|k|K)|(?:m|M|ng|Ng)(?:h|H))4/g;
                 poj_soo = poj_soo.replace(remove4, '$1');
             }
-
+            // (Tailo2POJ mappings same as before)
             const tailo2poj = [
                 ['oonn', 'o͘nn'], ['Oonn', 'O͘nn'],
                 /* ['onn', 'o͘N'], ['Onn', 'O͘N'], <-- REMOVED: onn should be oⁿ, not o͘N */
                 ['ts', 'ch'], ['Ts', 'Ch'], ['oo', 'o͘'], ['Oo', 'O͘'],
                 ['ua', 'oa'], ['Ua', 'Oa'], ['ue', 'oe'], ['Ue', 'Oe'],
                 ['ing', 'eng'], ['Ing', 'Eng'], ['ik', 'ek'], ['Ik', 'Ek'],
-                // Fix: nnh -> hnn must happen BEFORE tones are processed so that hnn + tone works
+                // nnh → hnn (always converts to hⁿ), Nh handled in POJsoo_2_POJtiau
                 ['nnh', 'hnn']
             ];
-
+            // Add all-caps variants if flag enabled
             if (window.TL_ALL_CAPS_SUPPORT) {
                 tailo2poj.push(
-                    ['OONN', 'O͘NN'], ['ONN', 'O͘NN'], /* Changed to O͘NN to become O͘ⁿ later */
+                    ['OONN', 'O͘NN'], ['ONN', 'O͘NN'],
                     ['TS', 'CH'], ['OO', 'O͘'],
                     ['UA', 'OA'], ['UE', 'OE'],
                     ['ING', 'ENG'], ['IK', 'EK'],
                     ['NNH', 'HNN']
                 );
             }
-
-            for (const [k, v] of tailo2poj) {
-                poj_soo = poj_soo.replace(new RegExp(k, 'g'), v);
-            }
+            for (const [k, v] of tailo2poj) { poj_soo = poj_soo.replace(new RegExp(k, 'g'), v); }
+            // Only normalize N patterns, don't convert nn to N here
+            // nn will be handled in POJsoo_2_POJtiau (always converts to ⁿ)
+            // N will be handled in POJsoo_2_POJtiau (toggle-dependent)
             return poj_soo;
         }
 
+        // 3. POJ Numbers -> POJ Tone Marks
         function POJsoo_2_POJtiau(poj_soo) {
             if (!poj_soo) return '';
             let poj_tiau = poj_soo;
-            if (window.TL_USE_NASAL_SUPERSCRIPT) {
-                const N_to_superscript = /([aeiouAEIOUmM]h?|[aeiouAEIOU])N(\d?)\b/g;
+
+            // Nasal superscript conversion:
+            // - nn at syllable tail (after vowel or vowel+h or m+h): ALWAYS convert to ⁿ
+            // - N at syllable tail (after vowel or vowel+h or m+h): Only convert when toggle is ON
+            // - Standalone nn/N (not after valid pattern): Preserve as-is
+            // Patterns: vowel+nn, vowel+h+nn, m+h+nn (and same for N)
+            // Fix: Include combining dot \u0358 for o͘ handling
+            const nn_to_superscript = /([aeiouAEIOUmM]\u0358?h?|[aeiouAEIOUmM]\u0358?)nn(\d?)\b/g;
+            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ$2');
+
+            const useNasalSuperscript = typeof window !== 'undefined' &&
+                window.TL_USE_NASAL_SUPERSCRIPT !== false;
+            if (useNasalSuperscript) {
+                const N_to_superscript = /([aeiouAEIOUmM]\u0358?h?|[aeiouAEIOUmM]\u0358?)N(\d?)\b/g;
                 poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ$2');
-                const Nh_to_superscript = /([aeiouAEIOUmM])Nh?(\d?)\b/g;
+                // Also handle Nh pattern (reorder and convert): aNh → ahⁿ
+                const Nh_to_superscript = /([aeiouAEIOUmM]\u0358?)Nh?(\d?)\b/g;
                 poj_tiau = poj_tiau.replace(Nh_to_superscript, '$1hⁿ$2');
             }
 
-            const useTone6Caron = window.TL_TONE6_USE_CARON;
+            // Tone 6 character selection: caron (ǎ) or acute (á) like tone 2
+            // Default is false = use acute (same as tone 2)
+            const useTone6Caron = typeof window !== 'undefined' &&
+                window.TL_TONE6_USE_CARON === true;
             const t6 = useTone6Caron
-                ? { a: 'ǎ', A: 'Ǎ', e: 'ě', E: 'Ě', i: 'ǐ', I: 'Ǐ', o: 'ǒ', O: 'Ǒ', u: 'ǔ', U: 'Ú', 'o͘': 'ǒ͘', 'O͘': 'Ǒ͘', m: 'm̌', M: 'M̌', n: 'ň', N: 'Ň' }
+                ? { a: 'ǎ', A: 'Ǎ', e: 'ě', E: 'Ě', i: 'ǐ', I: 'Ǐ', o: 'ǒ', O: 'Ǒ', u: 'ǔ', U: 'Ǔ', 'o͘': 'ǒ͘', 'O͘': 'Ǒ͘', m: 'm̌', M: 'M̌', n: 'ň', N: 'Ň' }
                 : { a: 'á', A: 'Á', e: 'é', E: 'É', i: 'í', I: 'Í', o: 'ó', O: 'Ó', u: 'ú', U: 'Ú', 'o͘': 'ó͘', 'O͘': 'Ó͘', m: 'ḿ', M: 'Ḿ', n: 'ń', N: 'Ń' };
-
+            // (POJ_S2T mappings same as before)
             const POJ_S2T = [
                 { r: createRC2('a1'), s: 'a$1$2' }, { r: createRC2('A1'), s: 'A$1$2' },
                 { r: createRC2('a2'), s: 'á$1$2' }, { r: createRC2('A2'), s: 'Á$1$2' },
@@ -879,7 +673,6 @@ note:
                 { r: createRC3_Regex('a(i|u)h8'), s: 'a̍$1h' },
                 { r: createRC3_Regex('A(i|u)h8'), s: 'A̍$1h' },
                 { r: createRC2('a9'), s: 'ă$1$2' }, { r: createRC2('A9'), s: 'Ă$1$2' },
-
                 { r: createRC2('u1'), s: 'u$1$2' }, { r: createRC2('U1'), s: 'U$1$2' },
                 { r: createRC2('u2'), s: 'ú$1$2' }, { r: createRC2('U2'), s: 'Ú$1$2' },
                 { r: createRC2('u3'), s: 'ù$1$2' }, { r: createRC2('U3'), s: 'Ù$1$2' },
@@ -891,7 +684,6 @@ note:
                 { r: createRC3_Regex('uih((?:N|ⁿ|nn)?)8'), s: 'u̍ih$1' },
                 { r: createRC3_Regex('Uih((?:N|ⁿ|nn)?)8'), s: 'U̍ih$1' },
                 { r: createRC2('u9'), s: 'ŭ$1$2' }, { r: createRC2('U9'), s: 'Ŭ$1$2' },
-
                 { r: createRC3_Regex('(o|O)([ae])((?:N|ⁿ|nn)?)1?\\b'), s: '$1$2$3' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'ó$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)2\\b'), s: 'Ó$1$2' },
@@ -905,7 +697,6 @@ note:
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)7\\b'), s: 'Ō$1$2' },
                 { r: createRC3_Regex('o([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'ŏ$1$2' },
                 { r: createRC3_Regex('O([ae])((?:N|ⁿ|nn)?)9\\b'), s: 'Ŏ$1$2' },
-
                 { r: createRC1('a1'), s: 'a$1' }, { r: createRC1('A1'), s: 'A$1' },
                 { r: createRC1('a2'), s: 'á$1' }, { r: createRC1('A2'), s: 'Á$1' },
                 { r: createRC1('a3'), s: 'à$1' }, { r: createRC1('A3'), s: 'À$1' },
@@ -915,7 +706,6 @@ note:
                 { r: createRC1('a7'), s: 'ā$1' }, { r: createRC1('A7'), s: 'Ā$1' },
                 { r: createRC8('a8'), s: 'a̍$1' }, { r: createRC8('A8'), s: 'A̍$1' },
                 { r: createRC1('a9'), s: 'ă$1' }, { r: createRC1('A9'), s: 'Ă$1' },
-
                 { r: createRC1('e1'), s: 'e$1' }, { r: createRC1('E1'), s: 'E$1' },
                 { r: createRC1('e2'), s: 'é$1' }, { r: createRC1('E2'), s: 'É$1' },
                 { r: createRC1('e3'), s: 'è$1' }, { r: createRC1('E3'), s: 'È$1' },
@@ -925,7 +715,6 @@ note:
                 { r: createRC1('e7'), s: 'ē$1' }, { r: createRC1('E7'), s: 'Ē$1' },
                 { r: createRC8('e8'), s: 'e̍$1' }, { r: createRC8('E8'), s: 'E̍$1' },
                 { r: createRC1('e9'), s: 'ĕ$1' }, { r: createRC1('E9'), s: 'Ĕ$1' },
-
                 { r: createRC1('i1'), s: 'i$1' }, { r: createRC1('I1'), s: 'I$1' },
                 { r: createRC1('i2'), s: 'í$1' }, { r: createRC1('I2'), s: 'Í$1' },
                 { r: createRC1('i3'), s: 'ì$1' }, { r: createRC1('I3'), s: 'Ì$1' },
@@ -935,7 +724,6 @@ note:
                 { r: createRC1('i7'), s: 'ī$1' }, { r: createRC1('I7'), s: 'Ī$1' },
                 { r: createRC8('i8'), s: 'i̍$1' }, { r: createRC8('I8'), s: 'I̍$1' },
                 { r: createRC1('i9'), s: 'ĭ$1' }, { r: createRC1('I9'), s: 'Ĭ$1' },
-
                 { r: createRC1('o͘1'), s: 'o͘$1' }, { r: createRC1('O͘1'), s: 'O͘$1' },
                 { r: createRC1('o͘2'), s: 'ó͘$1' }, { r: createRC1('O͘2'), s: 'Ó͘$1' },
                 { r: createRC1('o͘3'), s: 'ò͘$1' }, { r: createRC1('O͘3'), s: 'Ò͘$1' },
@@ -945,7 +733,6 @@ note:
                 { r: createRC1('o͘7'), s: 'ō͘$1' }, { r: createRC1('O͘7'), s: 'Ō͘$1' },
                 { r: createRC8('o͘8'), s: 'o̍͘$1' }, { r: createRC8('O͘8'), s: 'O̍͘$1' },
                 { r: createRC1('o͘9'), s: 'ŏ͘$1' }, { r: createRC1('O͘9'), s: 'Ŏ͘$1' },
-
                 { r: createRC1('o1'), s: 'o$1' }, { r: createRC1('O1'), s: 'O$1' },
                 { r: createRC1('o2'), s: 'ó$1' }, { r: createRC1('O2'), s: 'Ó$1' },
                 { r: createRC1('o3'), s: 'ò$1' }, { r: createRC1('O3'), s: 'Ò$1' },
@@ -955,7 +742,6 @@ note:
                 { r: createRC1('o7'), s: 'ō$1' }, { r: createRC1('O7'), s: 'Ō$1' },
                 { r: createRC8('o8'), s: 'o̍$1' }, { r: createRC8('O8'), s: 'O̍$1' },
                 { r: createRC1('o9'), s: 'ŏ$1' }, { r: createRC1('O9'), s: 'Ŏ$1' },
-
                 { r: createRC1('u1'), s: 'u$1' }, { r: createRC1('U1'), s: 'U$1' },
                 { r: createRC1('u2'), s: 'ú$1' }, { r: createRC1('U2'), s: 'Ú$1' },
                 { r: createRC1('u3'), s: 'ù$1' }, { r: createRC1('U3'), s: 'Ù$1' },
@@ -965,7 +751,6 @@ note:
                 { r: createRC1('u7'), s: 'ū$1' }, { r: createRC1('U7'), s: 'Ū$1' },
                 { r: createRC8('u8'), s: 'u̍$1' }, { r: createRC8('U8'), s: 'U̍$1' },
                 { r: createRC1('u9'), s: 'ŭ$1' }, { r: createRC1('U9'), s: 'Ŭ$1' },
-
                 { r: createRC3_Regex('m1'), s: 'm' }, { r: createRC3_Regex('M1'), s: 'M' },
                 { r: createRC3_Regex('m2'), s: 'ḿ' }, { r: createRC3_Regex('M2'), s: 'Ḿ' },
                 { r: createRC3_Regex('m3'), s: 'm̀' }, { r: createRC3_Regex('M3'), s: 'M̀' },
@@ -975,7 +760,6 @@ note:
                 { r: createRC3_Regex('m7'), s: 'm̄' }, { r: createRC3_Regex('M7'), s: 'M̄' },
                 { r: createRC3_Regex('mh8'), s: 'm̍h' }, { r: createRC3_Regex('Mh8'), s: 'M̍h' },
                 { r: createRC3_Regex('m9'), s: 'm̆' }, { r: createRC3_Regex('M9'), s: 'M̆' },
-
                 { r: createRC3_Regex('ng1'), s: 'ng' }, { r: createRC3_Regex('Ng1'), s: 'Ng' },
                 { r: createRC3_Regex('ng2'), s: 'ńg' }, { r: createRC3_Regex('Ng2'), s: 'Ńg' },
                 { r: createRC3_Regex('ng3'), s: 'ǹg' }, { r: createRC3_Regex('Ng3'), s: 'Ǹg' },
@@ -986,7 +770,7 @@ note:
                 { r: createRC3_Regex('ngh8'), s: 'n̍gh' }, { r: createRC3_Regex('Ngh8'), s: 'N̍gh' },
                 { r: createRC3_Regex('ng9'), s: 'n̆g' }, { r: createRC3_Regex('Ng9'), s: 'N̆g' }
             ];
-
+            // Add all-caps NG rules if flag enabled
             if (window.TL_ALL_CAPS_SUPPORT) {
                 POJ_S2T.push(
                     { r: createRC3_Regex('NG1'), s: 'NG' },
@@ -1000,31 +784,36 @@ note:
                     { r: createRC3_Regex('NG9'), s: 'N̆G' }
                 );
             }
-
-            for (const map of POJ_S2T) {
-                poj_tiau = poj_tiau.replace(map.r, map.s);
-            }
-
-            // Late Conversion for nn -> ⁿ (supescript)
-            // Perform this AFTER tone conversion so that "nn" can be matched by tone mappings (via TL_bue)
-            const vowelChars = "aeiouAEIOU" +
-                "áàâāa̍ăÁÀÂĀA̍Ă" +
-                "éèêēe̍ĕÉÈÊĒE̍Ĕ" +
-                "íìîīi̍ĭÍÌÎĪI̍Ĭ" +
-                "óòôōo̍ŏÓÒÔŌO̍Ŏ" +
-                "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
-                "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
-                "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
-            // Fix: Include combining dot \u0358 for o͘ handling
-            // Allow optional combining dot \u0358 after vowel match
-            const nn_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)nn\\b`, 'g');
-            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
-
+            for (const map of POJ_S2T) { poj_tiau = poj_tiau.replace(map.r, map.s); }
             return poj_tiau;
         }
 
         function TLtiau_2_POJtiau(tl_tiau) {
-            // 0. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
+            // 0a. Preserve URLs and markdown links from conversion
+            // Replace URLs with placeholders, restore after conversion
+            const urlPlaceholders = [];
+
+            // Preserve markdown image syntax: ![alt](url)
+            tl_tiau = tl_tiau.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // Preserve markdown link syntax: [text](url)
+            tl_tiau = tl_tiau.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // Preserve standalone URLs (http, https, ftp)
+            tl_tiau = tl_tiau.replace(/(https?|ftp):\/\/[^\s\)\]\\]+/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // 0b. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
+            // Uses O(n) state machine scan instead of regex for robustness
+            // Delimiter: \[ opens, \] closes (allows regular ] inside)
             const escapes = [];
             let processedInput = '';
             let i = 0;
@@ -1049,32 +838,55 @@ note:
                 }
             }
 
+            // 0c. Preserve POJ text (syllables with POJ-specific markers)
+            // POJ-specific characters: ⁿ (superscript n), o͘/O͘ (o with dot above)
+            // Match words/syllables containing these POJ markers and preserve them
             const pojPlaceholders = [];
+
+            // Pattern explanation:
+            // - Word boundaries containing ⁿ or o͘/O͘ (POJ-specific characters)
+            // - Match the whole "word" (sequence of romanization characters with diacritics)
+            // - Romanization chars: letters, tone marks (combining diacritics), hyphens within words
+            const pojSyllablePattern = /[\p{L}\p{M}]+(?:ⁿ|o͘|O͘)[\p{L}\p{M}]*/gu;
+            // Also match syllables ending with ⁿ that might not be caught above
             const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
+            // And match standalone o͘/O͘ syllables  
             const pojOoPattern = /[\p{L}\p{M}]*[oO]͘[\p{L}\p{M}]*/gu;
 
+            // First pass: preserve syllables with ⁿ
             processedInput = processedInput.replace(pojNasalEndPattern, (match) => {
                 pojPlaceholders.push(match);
                 return `⟪POJ${pojPlaceholders.length - 1}⟫`;
             });
+
+            // Second pass: preserve syllables with o͘/O͘ (that weren't already captured)
             processedInput = processedInput.replace(pojOoPattern, (match) => {
+                // Skip if already a placeholder
                 if (match.includes('⟪POJ')) return match;
                 pojPlaceholders.push(match);
                 return `⟪POJ${pojPlaceholders.length - 1}⟫`;
             });
 
+            // 1. Convert TL-style tone marks to corresponding numbers
             const tl_soo = TLtiau_2_TLsoo(processedInput);
+            // 2. Convert TL number-style to POJ number-style
             const poj_soo = TLsoo_2_POJsoo(tl_soo);
+            // 3. Convert POJ number-style to POJ tone marks
             let poj_tiau = POJsoo_2_POJtiau(poj_soo);
 
-            // Restore escaped content
+            // 4a. Restore escaped content
             poj_tiau = poj_tiau.replace(/⟪ESC(\d+)⟫/g, (match, index) => {
                 return escapes[parseInt(index)];
             });
 
-            // Restore POJ content
+            // 4b. Restore POJ content (preserved syllables with POJ-specific markers)
             poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
                 return pojPlaceholders[parseInt(index)];
+            });
+
+            // 5. Restore URL/markdown link placeholders
+            poj_tiau = poj_tiau.replace(/⟪URL(\d+)⟫/g, (match, index) => {
+                return urlPlaceholders[parseInt(index)];
             });
 
             return poj_tiau;
@@ -1354,8 +1166,11 @@ Goa2 ai3 lim te5, i ai3 chiah8 png7.
 === 調號 1-9 (Tones) ===
 a1 a2 a3 ah4 a5 a6 a7 ah8 a9
 A1 A2 A3 AH4 A5 A6 A7 AH8 A9
+I1 I2 I3 IH4 I5 I6 I7 IH8 I9
 e1 e2 e3 eh4 e5 e6 e7 eh8 e9
 o1 o2 o3 oh4 o5 o6 o7 oh8 o9
+oo1 oo2 oo3 ooh4 oo5 oo6 oo7 ooh8 oo9
+m1 m2 m3 mh4 m5 m6 m7 mh8 m9
 
 === TL→POJ 音素轉換 (Phonemes) ===
 \\[ts\\]: tsuí (水), tsit (這)
@@ -1386,7 +1201,7 @@ ue→oe: kué→kóe (粿), pué→póe (飛)
 ui: suí→súi (水), kuí→kúi (鬼)\\]
 
 === 走脫語法 (Escape Syntax) ===
-基本: \\[Tâi-uân\\] → Tâi-uân (原文保留)
+基本: \[Tâi-uân\]  (原文保留) → Tâi-uân
 濟逝: \\[Thâu tsuā
 Jī tsuā\\] ← Hāⁿ 逝 mā lóng 袂轉
 

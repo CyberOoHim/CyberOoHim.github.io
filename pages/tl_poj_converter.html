@@ -1,9 +1,9 @@
 ---
 layout: apps
 title: TL to POJ Real-time Converter
-version: v0.2f
+version: v0.2g
 permalink: /pages/tl_poj_converter.html
-updated: 2026-01-12
+updated: 2026-03-09
 note: 1. enhance POJ text Preservation
 ---
 <!DOCTYPE html>
@@ -1041,8 +1041,11 @@ Goa2 ai3 lim te5, i ai3 chiah8 png7.
 === 調號 1-9 (Tones) ===
 a1 a2 a3 ah4 a5 a6 a7 ah8 a9
 A1 A2 A3 AH4 A5 A6 A7 AH8 A9
+I1 I2 I3 IH4 I5 I6 I7 IH8 I9
 e1 e2 e3 eh4 e5 e6 e7 eh8 e9
 o1 o2 o3 oh4 o5 o6 o7 oh8 o9
+oo1 oo2 oo3 ooh4 oo5 oo6 oo7 ooh8 oo9
+m1 m2 m3 mh4 m5 m6 m7 mh8 m9
 
 === TL→POJ 音素轉換 (Phonemes) ===
 \\[ts\\]: tsuí (水), tsit (這)
@@ -1073,7 +1076,7 @@ ue→oe: kué→kóe (粿), pué→póe (飛)
 ui: suí→súi (水), kuí→kúi (鬼)\\]
 
 === 走脫語法 (Escape Syntax) ===
-基本: \\[Tâi-uân\\] → Tâi-uân (原文保留)
+基本: \[Tâi-uân\]  (原文保留) → Tâi-uân
 濟逝: \\[Thâu tsuā
 Jī tsuā\\] ← Hāⁿ 逝 mā lóng 袂轉
 
@@ -1497,25 +1500,16 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
             // - Standalone nn/N (not after valid pattern): Preserve as-is
             // Patterns: vowel+nn, vowel+h+nn, m+h+nn (and same for N)
             // Fix: Include combining dot \u0358 for o͘ handling
-            const vowelChars = "aeiouAEIOUmM" +
-                "áàâāa̍ăÁÀÂĀA̍Ă" +
-                "éèêēe̍ĕÉÈÊĒE̍Ĕ" +
-                "íìîīi̍ĭÍÌÎĪI̍Ĭ" +
-                "óòôōo̍ŏÓÒÔŌO̍Ŏ" +
-                "úùûūu̍ŭÚÙÛŪU̍Ŭ" +
-                "ḿm̀m̂m̄m̍m̆ḾM̀M̂M̄M̍M̆" +
-                "ńǹn̂n̄n̍n̆ŃǸN̂N̄N̍N̆";
-            // Allow optional combining dot \u0358 after vowel match
-            const nn_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)nn\\b`, 'g');
-            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ');
+            const nn_to_superscript = /([aeiouAEIOUmM]\u0358?h?|[aeiouAEIOUmM]\u0358?)nn(\d?)\b/g;
+            poj_tiau = poj_tiau.replace(nn_to_superscript, '$1ⁿ$2');
 
             const useNasalSuperscript = typeof window !== 'undefined' &&
                 window.TL_USE_NASAL_SUPERSCRIPT !== false;
             if (useNasalSuperscript) {
-                const N_to_superscript = new RegExp(`([${vowelChars}]\\u0358?h?)N\\b`, 'g');
-                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ');
+                const N_to_superscript = /([aeiouAEIOUmM]\u0358?h?|[aeiouAEIOUmM]\u0358?)N(\d?)\b/g;
+                poj_tiau = poj_tiau.replace(N_to_superscript, '$1ⁿ$2');
                 // Also handle Nh pattern (reorder and convert): aNh → ahⁿ
-                const Nh_to_superscript = new RegExp(`([${vowelChars}]\\u0358?)Nh?(\\d?)\\b`, 'g');
+                const Nh_to_superscript = /([aeiouAEIOUmM]\u0358?)Nh?(\d?)\b/g;
                 poj_tiau = poj_tiau.replace(Nh_to_superscript, '$1hⁿ$2');
             }
 
@@ -1686,7 +1680,29 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
         }
 
         function TLtiau_2_POJtiau(tl_tiau) {
-            // 0. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
+            // 0a. Preserve URLs and markdown links from conversion
+            // Replace URLs with placeholders, restore after conversion
+            const urlPlaceholders = [];
+
+            // Preserve markdown image syntax: ![alt](url)
+            tl_tiau = tl_tiau.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // Preserve markdown link syntax: [text](url)
+            tl_tiau = tl_tiau.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // Preserve standalone URLs (http, https, ftp)
+            tl_tiau = tl_tiau.replace(/(https?|ftp):\/\/[^\s\)\]\\]+/g, (match) => {
+                urlPlaceholders.push(match);
+                return `⟪URL${urlPlaceholders.length - 1}⟫`;
+            });
+
+            // 0b. Handle escape sequences: \[text\] is preserved as-is (supports multi-line)
             // Uses O(n) state machine scan instead of regex for robustness
             // Delimiter: \[ opens, \] closes (allows regular ] inside)
             const escapes = [];
@@ -1713,14 +1729,19 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
                 }
             }
 
-            // 0b. Preserve POJ text (syllables with POJ-specific markers)
+            // 0c. Preserve POJ text (syllables with POJ-specific markers)
             // POJ-specific characters: ⁿ (superscript n), o͘/O͘ (o with dot above)
             // Match words/syllables containing these POJ markers and preserve them
             const pojPlaceholders = [];
 
-            // Pattern: match syllables ending with ⁿ
+            // Pattern explanation:
+            // - Word boundaries containing ⁿ or o͘/O͘ (POJ-specific characters)
+            // - Match the whole "word" (sequence of romanization characters with diacritics)
+            // - Romanization chars: letters, tone marks (combining diacritics), hyphens within words
+            const pojSyllablePattern = /[\p{L}\p{M}]+(?:ⁿ|o͘|O͘)[\p{L}\p{M}]*/gu;
+            // Also match syllables ending with ⁿ that might not be caught above
             const pojNasalEndPattern = /[\p{L}\p{M}]+ⁿ/gu;
-            // Pattern: match syllables with o͘/O͘
+            // And match standalone o͘/O͘ syllables  
             const pojOoPattern = /[\p{L}\p{M}]*[oO]͘[\p{L}\p{M}]*/gu;
 
             // First pass: preserve syllables with ⁿ
@@ -1752,6 +1773,11 @@ POJ O͘點「o͘」: hó͘→hó͘, gô͘→gô͘, o͘→o͘ (袂變做 Tailo oo
             // 4b. Restore POJ content (preserved syllables with POJ-specific markers)
             poj_tiau = poj_tiau.replace(/⟪POJ(\d+)⟫/g, (match, index) => {
                 return pojPlaceholders[parseInt(index)];
+            });
+
+            // 5. Restore URL/markdown link placeholders
+            poj_tiau = poj_tiau.replace(/⟪URL(\d+)⟫/g, (match, index) => {
+                return urlPlaceholders[parseInt(index)];
             });
 
             return poj_tiau;
