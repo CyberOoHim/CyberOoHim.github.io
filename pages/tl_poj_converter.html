@@ -1,9 +1,9 @@
 ---
 layout: apps
 title: TL 拼音 to POJ Real-time Converter
-version: v0.2h
+version: v0.2i
 permalink: /pages/tl_poj_converter.html
-updated: 2026-03-10
+updated: 2026-03-11
 note: 1. enhance POJ text Preservation
 ---
 <!DOCTYPE html>
@@ -53,6 +53,7 @@ note: 1. enhance POJ text Preservation
         body {
             height: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
         }
 
         body {
@@ -74,6 +75,7 @@ note: 1. enhance POJ text Preservation
             gap: var(--spacing-xs);
             flex: 1;
             min-height: 0;
+            height: 100%;
         }
 
         header {
@@ -128,6 +130,7 @@ note: 1. enhance POJ text Preservation
             flex-direction: column;
             flex: 1;
             min-height: 0;
+            height: 100%;
         }
 
         /* Real-time Mode Styles */
@@ -166,8 +169,8 @@ note: 1. enhance POJ text Preservation
                 grid-template-columns: 1fr;
                 grid-template-rows: auto 1fr auto 1fr;
                 gap: var(--spacing-xs);
-                height: auto;
-                flex: none;
+                /* height: auto;
+                   flex: none; */
             }
 
             .toolbar-left {
@@ -178,8 +181,7 @@ note: 1. enhance POJ text Preservation
             .textarea-left {
                 grid-column: 1;
                 grid-row: 2;
-                height: 40vh;
-                min-height: 200px;
+                min-height: 150px;
             }
 
             .toolbar-right {
@@ -190,8 +192,7 @@ note: 1. enhance POJ text Preservation
             .textarea-right {
                 grid-column: 1;
                 grid-row: 4;
-                height: 40vh;
-                min-height: 200px;
+                min-height: 150px;
             }
         }
 
