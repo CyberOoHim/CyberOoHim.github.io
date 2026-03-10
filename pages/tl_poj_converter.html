@@ -3,7 +3,7 @@ layout: apps
 title: TL 拼音 to POJ Real-time Converter
 version: v0.2h
 permalink: /pages/tl_poj_converter.html
-updated: 2026-03-09
+updated: 2026-03-10
 note: 1. enhance POJ text Preservation
 ---
 <!DOCTYPE html>
@@ -49,7 +49,8 @@ note: 1. enhance POJ text Preservation
             padding: 0;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             min-height: 100vh;
         }
@@ -140,10 +141,25 @@ note: 1. enhance POJ text Preservation
             height: 100%;
         }
 
-        .toolbar-left { grid-column: 1; grid-row: 1; }
-        .textarea-left { grid-column: 1; grid-row: 2; }
-        .toolbar-right { grid-column: 2; grid-row: 1; }
-        .textarea-right { grid-column: 2; grid-row: 2; }
+        .toolbar-left {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .textarea-left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .toolbar-right {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .textarea-right {
+            grid-column: 2;
+            grid-row: 2;
+        }
 
         @media (max-width: 768px) {
             .split-view {
@@ -153,10 +169,30 @@ note: 1. enhance POJ text Preservation
                 height: auto;
                 flex: none;
             }
-            .toolbar-left { grid-column: 1; grid-row: 1; }
-            .textarea-left { grid-column: 1; grid-row: 2; height: 40vh; min-height: 200px; }
-            .toolbar-right { grid-column: 1; grid-row: 3; }
-            .textarea-right { grid-column: 1; grid-row: 4; height: 40vh; min-height: 200px; }
+
+            .toolbar-left {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .textarea-left {
+                grid-column: 1;
+                grid-row: 2;
+                height: 40vh;
+                min-height: 200px;
+            }
+
+            .toolbar-right {
+                grid-column: 1;
+                grid-row: 3;
+            }
+
+            .textarea-right {
+                grid-column: 1;
+                grid-row: 4;
+                height: 40vh;
+                min-height: 200px;
+            }
         }
 
         /* Handset Vertical Optimization */
@@ -166,10 +202,12 @@ note: 1. enhance POJ text Preservation
                 height: 100%;
                 flex: 1;
             }
+
             .textarea-left {
                 height: 120px;
                 min-height: 120px;
             }
+
             .textarea-right {
                 height: 100%;
                 min-height: 200px;
@@ -598,7 +636,7 @@ note: 1. enhance POJ text Preservation
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="toolbar toolbar-right">
                     <label for="rt-output" id="ui-label-output"></label>
                     <div style="display: flex; gap: 0.5rem;">
